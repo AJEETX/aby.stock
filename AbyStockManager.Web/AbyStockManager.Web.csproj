@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\upload\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Common\Message\CommonMessages.Designer.cs">
+      <DependentUpon>CommonMessages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Common\Message\CommonMessages.resx">
+      <LastGenOutput>CommonMessages.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
