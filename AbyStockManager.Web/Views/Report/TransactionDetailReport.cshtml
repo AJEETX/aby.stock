@@ -127,6 +127,19 @@
     <script src="~/plugins/moment/moment.min.js"></script>
     <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
     <script src="~/pages/report/transaction-deatil-report.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.datepicker').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                "locale": {
+                    "format": "DD/MM/YYYY"
+                }
+            });
+            $('.datepicker').val('');
+        });
+
+    </script>
 }
 
 

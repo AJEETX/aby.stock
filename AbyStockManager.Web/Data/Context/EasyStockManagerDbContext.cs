@@ -24,7 +24,7 @@ namespace Aby.StockManager.Data.Context
         public DbSet<UnitOfMeasure> UnitOfMeasure { get; set; }
         public DbSet<User> User { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
@@ -37,10 +37,10 @@ namespace Aby.StockManager.Data.Context
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionTypeSeed());
             modelBuilder.ApplyConfiguration(new UnitOfMeasureSeed());
+            modelBuilder.ApplyConfiguration(new CategorySeed());
             modelBuilder.ApplyConfiguration(new UserSeed());
             modelBuilder.ApplyConfiguration(new StoreSeed());
             modelBuilder.ApplyConfiguration(new ProductSeed());
         }
-
     }
 }
