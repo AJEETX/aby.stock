@@ -35,32 +35,6 @@ namespace Aby.StockManager.Web.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Print()
-        {
-            string[] args = null;
-            Parameters parameters = new Parameters(null, "Content//Receipt" + DateTime.Now.ToString("yyyymmdd") + ".pdf");
-            if (!PrepareParameters(parameters, args))
-            {
-                return BadRequest();
-            }
-            try
-            {
-                ReceiptRunner.Run().Build(parameters.file);
-            }
-            catch (Exception e)
-            {
-                Console.Error.WriteLine(e.ToString());
-                return BadRequest();
-            }
-            Console.WriteLine("\"" + Path.GetFullPath(parameters.file) +
-                              "\" document has been successfully built");
-            if (parameters.appToView != null)
-            {
-                Start(parameters.file, parameters.appToView);
-            }
-            return Ok();
-        }
-
         public async Task<IActionResult> Index()
         {
             SearchTransactionViewModel model = new SearchTransactionViewModel();
@@ -249,55 +223,30 @@ namespace Aby.StockManager.Web.Controllers
             return string.Empty;
         }
 
-        private static bool PrepareParameters(Parameters parameters, string[] args)
+        public IActionResult Print(int id = 0)
         {
-            if (args != null && args.Length > 0)
+            string fileName = "Content//Receipt" + DateTime.Now.ToString("yyyymmdd") + ".pdf";
+            Parameters parameters = new Parameters(null, fileName);
+
+            try
             {
-                if (args[0].Equals("?")
-                    || args[0].Equals("-h")
-                    || args[0].Equals("-help")
-                    || args[0].Equals("--h")
-                    || args[0].Equals("--help")
-                    )
-                {
-                    Usage();
-                    return false;
-                }
-                parameters.file = args[0];
-                if (args.Length > 1)
-                {
-                    parameters.appToView = args[1];
-                }
+                ReceiptRunner.Run().Build(parameters.file);
             }
-
-            if (System.IO.File.Exists(parameters.file))
+            catch (Exception e)
             {
-                try
-                {
-                    System.IO.File.Delete(parameters.file);
-                }
-                catch (Exception e)
-                {
-                    Console.Error.WriteLine("Can't delete file: " +
-                        Path.GetFullPath(parameters.file));
-                    Console.Error.WriteLine(e.Message);
-                    return false;
-                }
+                Console.Error.WriteLine(e.ToString());
+                return BadRequest();
             }
-            return true;
-        }
+            Console.WriteLine("\"" + Path.GetFullPath(parameters.file) +
+                              "\" document has been successfully built");
 
-        private static void Usage()
-        {
-            Console.WriteLine("Usage: dotnet run [fullPathToOutFile] [appToView]");
-            Console.WriteLine("Where: fullPathToOutFile - a path to the result file, 'Receipt.pdf' by default");
-            Console.WriteLine("appToView - the name of an application to view the file immediately after preparing, by default none app starts");
-        }
+            var fileInfo = new System.IO.FileInfo(fileName);
+            Response.ContentType = "application/pdf";
+            Response.Headers.Add("Content-Disposition", "attachment;filename=\"" + fileInfo.Name + "\"");
+            Response.Headers.Add("Content-Length", fileInfo.Length.ToString());
 
-        private static void Start(string file, string appToView)
-        {
-            var psi = new ProcessStartInfo("cmd", @"/c start " + appToView + " " + file);
-            Process.Start(psi);
+            // Send the file to the client
+            return File(System.IO.File.ReadAllBytes(fileName), "application/pdf", fileInfo.Name);
         }
 
         internal class Parameters
