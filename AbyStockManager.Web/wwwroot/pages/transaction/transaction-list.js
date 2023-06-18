@@ -47,10 +47,10 @@ $(document).ready(function () {
                     mDataProp: "TransactionDate"
                 },
                 {
-                    mDataProp: "StoreName"
+                    mDataProp: "StoreName", bVisible: false 
                 },
                 {
-                    mDataProp: "ToStoreName"
+                    mDataProp: "ToStoreName", bVisible: false 
                 },
                 {
                     "sDefaultContent": "",

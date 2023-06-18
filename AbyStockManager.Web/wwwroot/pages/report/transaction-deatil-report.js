@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var datatable = $('#datatable').dataTable({
         "dom": 'lBfrtip',
         "searching": false,
@@ -40,7 +39,7 @@ $(document).ready(function () {
         aoColumns:
             [
                 {
-                    mDataProp: "TransactionCode"
+                    mDataProp: "TransactionCode", bVisible: false
                 },
                 {
                     mDataProp: "TransactionTypeName"
@@ -49,10 +48,10 @@ $(document).ready(function () {
                     mDataProp: "ProductFullName"
                 },
                 {
-                    mDataProp: "StoreFullName"
+                    mDataProp: "StoreFullName", bVisible: false
                 },
                 {
-                    mDataProp: "ToStoreFullName"
+                    mDataProp: "ToStoreFullName", bVisible: false
                 },
                 {
                     mDataProp: "Amount"
@@ -78,7 +77,6 @@ $(document).ready(function () {
         $("#ProductId").val(null).trigger('change');
         datatable.fnFilter();
     });
-
 
     $('.enter-keyup').keypress(function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -111,10 +109,4 @@ $(document).ready(function () {
             }
         }
     });
-
 });
-
-
-
-
-
