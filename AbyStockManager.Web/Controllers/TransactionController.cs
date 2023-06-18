@@ -50,13 +50,14 @@ namespace Aby.StockManager.Web.Controllers
             if (typeId == (int)TransactionType.Invoice)
             {
                 model.TransactionCode = TransactionType.Invoice.ToString();
+                model.InvoiceNumber = DateTime.Now.ToString("yyyyMMMddhhmmss").ToUpper() + "SALES-INV";
             }
             if (typeId == (int)TransactionType.StockIn)
             {
                 model.TransactionCode = TransactionType.StockIn.ToString();
+                model.InvoiceNumber = DateTime.Now.ToString("yyyyMMMddhhmmss").ToUpper() + "STOCK-INV";
             }
             var serviceResult = await _storeService.GetAll();
-            model.InvoiceNumber = DateTime.Now.ToString("yyyyMMMddhhmmss");
             model.StoreId = serviceResult.TransactionResult.FirstOrDefault().Id.Value;
             return View(model);
         }

@@ -89,12 +89,12 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label asp-for="TransactionCode"></label>
-                                        <input disabled asp-for="TransactionCode" type="text" value="@Model.TransactionCode" class="form-control">
+                                        <input readonly asp-for="TransactionCode" type="text" value="@Model.TransactionCode" class="form-control">
                                         <span asp-validation-for="TransactionCode" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <label asp-for="InvoiceNumber"></label>
-                                        <input disabled asp-for="InvoiceNumber" type="text" value="@Model.InvoiceNumber" class="form-control">
+                                        <input readonly asp-for="InvoiceNumber" type="text" value="@Model.InvoiceNumber" class="form-control">
                                         <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
                                     </div>
                                     

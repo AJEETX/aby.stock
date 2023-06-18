@@ -41,6 +41,9 @@ $(document).ready(function () {
                     mDataProp: "TransactionCode"
                 },
                 {
+                    mDataProp: "InvoiceNumber"
+                },
+                {
                     mDataProp: "TransactionTypeName"
                 },
                 {

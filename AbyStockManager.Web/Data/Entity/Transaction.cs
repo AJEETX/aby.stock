@@ -7,6 +7,7 @@ namespace Aby.StockManager.Data.Entity
     public class Transaction : BaseEntity
     {
         public string TransactionCode { get; set; }
+        public string InvoiceNumber { get; set; }
         public int StoreId { get; set; }
         public int? ToStoreId { get; set; }
         public int TransactionTypeId { get; set; }

@@ -23,6 +23,7 @@ namespace Aby.StockManager.Model.Domain
         public string UnitOfMeasureName { get; set; }
         public string UnitOfMeasureShortName { get; set; }
         public string TransactionCode { get; set; }
+        public string InvoiceNumber { get; set; }
         public string TransactionTypeName { get; set; }
         public DateTime TransactionDate { get; set; }
     }
