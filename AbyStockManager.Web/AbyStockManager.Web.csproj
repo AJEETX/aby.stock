@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\Receipt\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="images\Receipt\receipt.jpg" />
   </ItemGroup>
 
@@ -35,11 +39,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\Receipt\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Common\Message\CommonMessages.Designer.cs">
       <DependentUpon>CommonMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\Content\receipt.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
