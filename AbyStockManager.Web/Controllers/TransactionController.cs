@@ -235,7 +235,7 @@ namespace Aby.StockManager.Web.Controllers
             catch (Exception e)
             {
                 Console.Error.WriteLine(e.ToString());
-                return BadRequest();
+                return BadRequest(e.Message);
             }
             Console.WriteLine("\"" + Path.GetFullPath(parameters.file) +
                               "\" document has been successfully built");
