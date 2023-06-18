@@ -151,8 +151,8 @@ namespace AbyStockManager.Web.Migrations
                     Image = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
                     Price = table.Column<double>(type: "decimal(18,2)", nullable: true),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: true),
-                    UnitOfMeasureId = table.Column<int>(type: "INTEGER", nullable: false),
                     TaxId = table.Column<int>(type: "INTEGER", nullable: true),
+                    UnitOfMeasureId = table.Column<int>(type: "INTEGER", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -229,25 +229,25 @@ namespace AbyStockManager.Web.Migrations
             migrationBuilder.InsertData(
                 table: "Category",
                 columns: new[] { "Id", "CategoryName", "CreateDate" },
-                values: new object[] { 1, "TYRES", new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1189) });
+                values: new object[] { 1, "TYRES", new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1816) });
 
             migrationBuilder.InsertData(
                 table: "Store",
                 columns: new[] { "Id", "CreateDate", "StoreCode", "StoreName" },
-                values: new object[] { 1, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2176), "SDA", "SDA CEAT Tyres" });
+                values: new object[] { 1, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(3043), "SDA", "SDA CEAT Tyres" });
 
             migrationBuilder.InsertData(
                 table: "Tax",
                 columns: new[] { "Id", "CreateDate", "Name", "Rate" },
-                values: new object[] { 1, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1262), "FIRST", 18.0 });
+                values: new object[] { 1, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1914), "FIRST", 18.0 });
 
             migrationBuilder.InsertData(
                 table: "TransactionType",
                 columns: new[] { "Id", "CreateDate", "TransactionTypeName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(894), "Stock Receipt" },
-                    { 2, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(945), "Stock Out" }
+                    { 1, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1450), "Stock Receipt" },
+                    { 2, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1521), "Stock Out" }
                 });
 
             migrationBuilder.InsertData(
@@ -255,25 +255,25 @@ namespace AbyStockManager.Web.Migrations
                 columns: new[] { "Id", "CreateDate", "Isocode", "UnitOfMeasureName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1119), "pc", "Piece" },
-                    { 2, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1124), "kg", "Kilogram" },
-                    { 3, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1128), "m", "Meter" }
+                    { 1, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1722), "pc", "Piece" },
+                    { 2, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1730), "kg", "Kilogram" },
+                    { 3, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1735), "m", "Meter" }
                 });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "CreateDate", "Email", "Name", "Password", "Surname" },
-                values: new object[] { 1, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2081), "jag@sda.com", "Jagdeesh", "2cbe7f341eb6aca638a32b77ddedfd4c", "Tiwari" });
+                values: new object[] { 1, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(2921), "jag@sda.com", "Jagdeesh", "2cbe7f341eb6aca638a32b77ddedfd4c", "Tiwari" });
 
             migrationBuilder.InsertData(
                 table: "Product",
                 columns: new[] { "Id", "Barcode", "CategoryId", "CreateDate", "Description", "Image", "Price", "ProductName", "TaxId", "UnitOfMeasureId" },
                 values: new object[,]
                 {
-                    { 1, "145R12 MILAZE LT TL 8PR", null, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2237), null, null, 2661.0, "145R12 MILAZE LT TL 8PR", null, 1 },
-                    { 2, "145/80R12 X3 TT", null, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2244), null, null, 2568.0, "145/80R12 X3 TT", null, 1 },
-                    { 3, "145/80R12 X3 TL", null, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2246), null, null, 2510.0, "145/80R12 X3 TL", null, 1 },
-                    { 4, "145/80R13 MILAZE X3 TL", null, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2248), null, null, 2782.0, "145/80R13 MILAZE X3 TL", null, 1 }
+                    { 1, "145R12 MILAZE LT TL 8PR", null, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(3130), null, null, 2661.0, "145R12 MILAZE LT TL 8PR", null, 1 },
+                    { 2, "145/80R12 X3 TT", null, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(3139), null, null, 2568.0, "145/80R12 X3 TT", null, 1 },
+                    { 3, "145/80R12 X3 TL", null, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(3142), null, null, 2510.0, "145/80R12 X3 TL", null, 1 },
+                    { 4, "145/80R13 MILAZE X3 TL", null, new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(3144), null, null, 2782.0, "145/80R13 MILAZE X3 TL", null, 1 }
                 });
 
             migrationBuilder.CreateIndex(

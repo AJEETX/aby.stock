@@ -11,6 +11,7 @@ using Aby.StockManager.Model.Service;
 using Aby.StockManager.Model.ViewModel.JsonResult;
 using Aby.StockManager.Model.ViewModel.Report.StoreStock;
 using Aby.StockManager.Model.ViewModel.Report.TransactionDetail;
+using System.Collections;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -56,9 +57,11 @@ namespace Aby.StockManager.Web.Controllers
                 if (serviceCountResult.IsSucceeded && serviceListResult.IsSucceeded)
                 {
                     List<ListStoreStockReportViewModel> listVM = _mapper.Map<List<ListStoreStockReportViewModel>>(serviceListResult.TransactionResult);
+                    double total = listVM.Sum(item => double.Parse(item.ProductTotalPrice));
                     jsonDataTableModel.aaData = listVM;
                     jsonDataTableModel.iTotalDisplayRecords = serviceCountResult.TransactionResult;
                     jsonDataTableModel.iTotalRecords = serviceCountResult.TransactionResult;
+                    jsonDataTableModel.iAllProductTotalPrice = total;
                 }
                 else
                 {

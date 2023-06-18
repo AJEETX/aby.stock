@@ -44,7 +44,7 @@ namespace AbyStockManager.Web.Migrations
                         {
                             Id = 1,
                             CategoryName = "TYRES",
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1189)
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1816)
                         });
                 });
 
@@ -103,7 +103,7 @@ namespace AbyStockManager.Web.Migrations
                         {
                             Id = 1,
                             Barcode = "145R12 MILAZE LT TL 8PR",
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2237),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(3130),
                             Price = 2661.0,
                             ProductName = "145R12 MILAZE LT TL 8PR",
                             UnitOfMeasureId = 1
@@ -112,7 +112,7 @@ namespace AbyStockManager.Web.Migrations
                         {
                             Id = 2,
                             Barcode = "145/80R12 X3 TT",
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2244),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(3139),
                             Price = 2568.0,
                             ProductName = "145/80R12 X3 TT",
                             UnitOfMeasureId = 1
@@ -121,7 +121,7 @@ namespace AbyStockManager.Web.Migrations
                         {
                             Id = 3,
                             Barcode = "145/80R12 X3 TL",
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2246),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(3142),
                             Price = 2510.0,
                             ProductName = "145/80R12 X3 TL",
                             UnitOfMeasureId = 1
@@ -130,7 +130,7 @@ namespace AbyStockManager.Web.Migrations
                         {
                             Id = 4,
                             Barcode = "145/80R13 MILAZE X3 TL",
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2248),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(3144),
                             Price = 2782.0,
                             ProductName = "145/80R13 MILAZE X3 TL",
                             UnitOfMeasureId = 1
@@ -167,7 +167,7 @@ namespace AbyStockManager.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2176),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(3043),
                             StoreCode = "SDA",
                             StoreName = "SDA CEAT Tyres"
                         });
@@ -220,7 +220,7 @@ namespace AbyStockManager.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1262),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1914),
                             Name = "FIRST",
                             Rate = 18.0
                         });
@@ -308,13 +308,13 @@ namespace AbyStockManager.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(894),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1450),
                             TransactionTypeName = "Stock Receipt"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(945),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1521),
                             TransactionTypeName = "Stock Out"
                         });
                 });
@@ -349,21 +349,21 @@ namespace AbyStockManager.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1119),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1722),
                             Isocode = "pc",
                             UnitOfMeasureName = "Piece"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1124),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1730),
                             Isocode = "kg",
                             UnitOfMeasureName = "Kilogram"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1128),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(1735),
                             Isocode = "m",
                             UnitOfMeasureName = "Meter"
                         });
@@ -412,7 +412,7 @@ namespace AbyStockManager.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2081),
+                            CreateDate = new DateTime(2023, 6, 18, 15, 20, 40, 373, DateTimeKind.Local).AddTicks(2921),
                             Email = "jag@sda.com",
                             Name = "Jagdeesh",
                             Password = "2cbe7f341eb6aca638a32b77ddedfd4c",

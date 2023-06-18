@@ -96,6 +96,8 @@ namespace Aby.StockManager.Mapper
             CreateMap<ProductDTO, ListProductViewModel>()
                  .ForMember(dm => dm.ImageDisplay, vm => vm.MapFrom(vmf => !string.IsNullOrEmpty(vmf.Image) ? "/upload/" + vmf.Image : "/dist/img/no-image.png"))
                  .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Price.HasValue ? string.Format("{0:c}", vmf.Price.Value) : "-"));
+            CreateMap<ProductDTO, CreateProductViewModel>();
+            CreateMap<CreateProductViewModel, ProductDTO>();
             CreateMap<ProductDTO, EditProductViewModel>();
             CreateMap<EditProductViewModel, ProductDTO>();
             CreateMap<ProductDTO, SelectListItem>()

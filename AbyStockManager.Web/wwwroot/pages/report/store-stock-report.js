@@ -23,6 +23,7 @@
                 "data": aoData,
                 "success": function (data) {
                     if (data.IsSucceeded == true) {
+                        $('#total-price').html(data.iAllProductTotalPrice);
                         fnCallback(data);
                     }
                     else {

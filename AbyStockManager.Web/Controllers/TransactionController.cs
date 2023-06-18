@@ -47,9 +47,9 @@ namespace Aby.StockManager.Web.Controllers
             model.PageName = GetPageName(typeId);
             model.StoreList = await GetStoreList();
 
-            if (typeId == (int)TransactionType.StockOut)
+            if (typeId == (int)TransactionType.Invoice)
             {
-                model.TransactionCode = TransactionType.StockOut.ToString();
+                model.TransactionCode = TransactionType.Invoice.ToString();
             }
             if (typeId == (int)TransactionType.StockIn)
             {
@@ -68,9 +68,9 @@ namespace Aby.StockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
-                if (model.TransactionTypeId == (int)TransactionType.StockOut)
+                if (model.TransactionTypeId == (int)TransactionType.Invoice)
                 {
-                    model.TransactionCode = TransactionType.StockOut.ToString();
+                    model.TransactionCode = TransactionType.Invoice.ToString();
                 }
                 if (model.TransactionTypeId == (int)TransactionType.StockIn)
                 {
@@ -213,9 +213,10 @@ namespace Aby.StockManager.Web.Controllers
         private string GetPageName(int transactionTypeId)
         {
             if ((int)TransactionType.StockIn == transactionTypeId)
-                return "Stock Receipt";
-            else
-                return "Stock Out";
+                return "Stock In";
+            else if ((int)TransactionType.Invoice == transactionTypeId)
+                return "Create Invoice";
+            return string.Empty;
         }
     }
 }
