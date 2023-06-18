@@ -12,6 +12,8 @@ namespace Aby.StockManager.Model.ViewModel.Report.TransactionDetail
         public string ToStoreFullName { get; set; }
         public string Amount { get; set; }
         public string ProductFullName { get; set; }
+        public string ProductPrice { get; set; }
+        public string ProductTotalPrice { get; set; }
         public string TransactionCode { get; set; }
         public string TransactionTypeName { get; set; }
         public string TransactionDate { get; set; }

@@ -58,6 +58,12 @@ $(document).ready(function () {
                     mDataProp: "Amount"
                 },
                 {
+                    mDataProp: "ProductPrice"
+                },
+                {
+                    mDataProp: "ProductTotalPrice"
+                },
+                {
                     mDataProp: "TransactionDate"
                 }
             ]
