@@ -14,6 +14,7 @@ namespace Aby.StockManager.Data.Entity
         public int? CategoryId { get; set; }
         public int UnitOfMeasureId { get; set; }
         public virtual Category Category { get; set; }
+        public virtual Tax Tax { get; set; }
         public virtual UnitOfMeasure UnitOfMeasure { get; set; }
         public virtual ICollection<StoreStock> StoreStock { get; set; }
         public virtual ICollection<TransactionDetail> TransactionDetail { get; set; }

@@ -24,6 +24,7 @@ using Aby.StockManager.Service.StoreStock;
 using Aby.StockManager.Service.Transaction;
 using Aby.StockManager.Service.UnitOfMeasure;
 using Aby.StockManager.Service.User;
+using AbyStockManager.Web.Service.Tax;
 
 namespace Aby.StockManager.Web
 {
@@ -50,6 +51,7 @@ namespace Aby.StockManager.Web
             services.AddAutoMapper(c => c.AddProfile<Aby.StockManager.Mapper.MapProfile>(), typeof(Startup));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ITaxService, TaxService>();
             services.AddScoped<IUnitOfMeasureService, UnitOfMeasureService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStoreService, StoreService>();

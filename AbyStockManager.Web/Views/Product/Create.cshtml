@@ -38,6 +38,13 @@
                                 <span asp-validation-for="CategoryId" class="text-danger"></span>
                             </div>
                             <div class="form-group">
+                                <label asp-for="TaxId"></label>
+                                <select asp-for="TaxId" class="form-control" asp-items="Model.TaxList">
+                                    <option value="">Select GST</option>
+                                </select>
+                                <span asp-validation-for="TaxId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
                                 <label asp-for="UnitOfMeasureId"></label>
                                 <select asp-for="UnitOfMeasureId" class="form-control" asp-items="Model.UnitOfMeasureList">
                                     <option value="">Select Unit Of Measure</option>

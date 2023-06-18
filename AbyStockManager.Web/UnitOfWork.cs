@@ -15,6 +15,7 @@ using Aby.StockManager.Repository.TransactionDetail;
 using Aby.StockManager.Repository.TransactionType;
 using Aby.StockManager.Repository.UnitOfMeasure;
 using Aby.StockManager.Repository.User;
+using AbyStockManager.Web.Repository.Tax;
 
 namespace Aby.StockManager.UnitOfWork
 {
@@ -28,7 +29,9 @@ namespace Aby.StockManager.UnitOfWork
         {
             _context = easyStockManagerDbContext;
         }
+
         private ICategoryRepository iCategoryRepository;
+        private ITaxRepository iTaxRepository;
         private IProductRepository iProductRepository;
         private IStoreRepository iStoreRepository;
         private IStoreStockRepository iStoreStockRepository;
@@ -55,6 +58,16 @@ namespace Aby.StockManager.UnitOfWork
                 if (iCategoryRepository == null)
                     iCategoryRepository = new CategoryRepository(_context);
                 return iCategoryRepository;
+            }
+        }
+
+        public ITaxRepository TaxRepository
+        {
+            get
+            {
+                if (iTaxRepository == null)
+                    iTaxRepository = new TaxRepository(_context);
+                return iTaxRepository;
             }
         }
 
@@ -87,6 +100,7 @@ namespace Aby.StockManager.UnitOfWork
                 return iTransactionDetailRepository;
             }
         }
+
         public ITransactionRepository TransactionRepository
         {
             get
@@ -96,6 +110,7 @@ namespace Aby.StockManager.UnitOfWork
                 return iTransactionRepository;
             }
         }
+
         public ITransactionTypeRepository TransactionTypeRepository
         {
             get
@@ -115,6 +130,7 @@ namespace Aby.StockManager.UnitOfWork
                 return iUnitOfMeasureRepository;
             }
         }
+
         public IUserRepository UserRepository
         {
             get
@@ -150,7 +166,7 @@ namespace Aby.StockManager.UnitOfWork
 
         public async Task SaveAsync()
         {
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         protected virtual void Dispose(bool disposing)
@@ -167,6 +183,7 @@ namespace Aby.StockManager.UnitOfWork
             }
             this._disposed = true;
         }
+
         public void Dispose()
         {
             Dispose(true);

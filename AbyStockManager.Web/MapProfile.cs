@@ -17,6 +17,7 @@ using Aby.StockManager.Model.ViewModel.UnitOfMeasure;
 using Aby.StockManager.Model.ViewModel.User;
 using Elfie.Serialization;
 using System.Globalization;
+using AbyStockManager.Web.Model.ViewModel.Tax;
 
 namespace Aby.StockManager.Mapper
 {
@@ -29,9 +30,28 @@ namespace Aby.StockManager.Mapper
             CreateMap<ServiceResult, JsonResultModel>();
 
             CreateMap<CreateCategoryViewModel, CategoryDTO>();
+
             CreateMap<SearchCategoryViewModel, CategoryDTO>()
                     .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
                     .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
+
+            CreateMap<CreateTaxViewModel, TaxDTO>()
+                .ForMember(dm => dm.Name, vm => vm.MapFrom(vmf => vmf.Name))
+                .ForMember(dm => dm.Rate, vm => vm.MapFrom(vmf => vmf.Rate))
+                ;
+
+            CreateMap<SearchTaxViewModel, TaxDTO>()
+                    .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
+                    .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
+
+            CreateMap<TaxDTO, ListTaxViewModel>();
+            CreateMap<TaxDTO, EditTaxViewModel>();
+            CreateMap<EditTaxViewModel, TaxDTO>();
+
+            CreateMap<TaxDTO, SelectListItem>()
+                   .ForMember(dm => dm.Value, vm => vm.MapFrom(vmf => vmf.Id.ToString()))
+                   .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => vmf.Rate));
+
             CreateMap<CategoryDTO, ListCategoryViewModel>();
             CreateMap<CategoryDTO, EditCategoryViewModel>();
             CreateMap<EditCategoryViewModel, CategoryDTO>();
@@ -128,6 +148,8 @@ namespace Aby.StockManager.Mapper
             CreateMap<Category, CategoryDTO>();
             CreateMap<CategoryDTO, Category>();
 
+            CreateMap<TaxDTO, Tax>();
+            CreateMap<Tax, TaxDTO>();
             CreateMap<UnitOfMeasure, UnitOfMeasureDTO>();
             CreateMap<UnitOfMeasureDTO, UnitOfMeasure>();
 

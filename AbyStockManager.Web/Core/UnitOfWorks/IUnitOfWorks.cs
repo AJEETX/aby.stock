@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+
 using Aby.StockManager.Core.Repository;
 
 namespace Aby.StockManager.Core.UnitOfWorks
 {
     public interface IUnitOfWorks : IDisposable
     {
+        ITaxRepository TaxRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
         IStoreRepository StoreRepository { get; }
@@ -17,11 +19,15 @@ namespace Aby.StockManager.Core.UnitOfWorks
         ITransactionTypeRepository TransactionTypeRepository { get; }
         IUnitOfMeasureRepository UnitOfMeasureRepository { get; }
         IUserRepository UserRepository { get; }
-        Task SaveAsync();
-        void Save();
-        void Commit();
-        void RollBack();
-        void CreateTransaction();
 
+        Task SaveAsync();
+
+        void Save();
+
+        void Commit();
+
+        void RollBack();
+
+        void CreateTransaction();
     }
 }

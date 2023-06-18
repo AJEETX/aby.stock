@@ -10,7 +10,6 @@ namespace Aby.StockManager.Model.ViewModel.Product
 {
     public class CreateProductViewModel : BaseViewModel
     {
-
         [Required]
         [MaxLength(100)]
         [Display(Name = "Product Name")]
@@ -36,11 +35,15 @@ namespace Aby.StockManager.Model.ViewModel.Product
         [Display(Name = "Category")]
         public int? CategoryId { get; set; }
 
+        [Display(Name = "Tax")]
+        public int? TaxId { get; set; }
+
         [Required]
         [Display(Name = "Unit Of Measure")]
         public int UnitOfMeasureId { get; set; }
 
         public IEnumerable<SelectListItem> CategoryList { get; set; }
+        public IEnumerable<SelectListItem> TaxList { get; set; }
         public IEnumerable<SelectListItem> UnitOfMeasureList { get; set; }
     }
 }

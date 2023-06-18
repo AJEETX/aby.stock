@@ -43,6 +43,21 @@ namespace AbyStockManager.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tax",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
+                    Rate = table.Column<double>(type: "REAL", maxLength: 6, nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tax", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TransactionType",
                 columns: table => new
                 {
@@ -137,6 +152,7 @@ namespace AbyStockManager.Web.Migrations
                     Price = table.Column<double>(type: "decimal(18,2)", nullable: true),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: true),
                     UnitOfMeasureId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TaxId = table.Column<int>(type: "INTEGER", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -146,6 +162,11 @@ namespace AbyStockManager.Web.Migrations
                         name: "FK_Product_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Product_Tax_TaxId",
+                        column: x => x.TaxId,
+                        principalTable: "Tax",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Product_UnitOfMeasure_UnitOfMeasureId",
@@ -208,20 +229,25 @@ namespace AbyStockManager.Web.Migrations
             migrationBuilder.InsertData(
                 table: "Category",
                 columns: new[] { "Id", "CategoryName", "CreateDate" },
-                values: new object[] { 1, "TYRES", new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(4258) });
+                values: new object[] { 1, "TYRES", new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1189) });
 
             migrationBuilder.InsertData(
                 table: "Store",
                 columns: new[] { "Id", "CreateDate", "StoreCode", "StoreName" },
-                values: new object[] { 1, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(5089), "SDA", "SDA CEAT Tyres" });
+                values: new object[] { 1, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2176), "SDA", "SDA CEAT Tyres" });
+
+            migrationBuilder.InsertData(
+                table: "Tax",
+                columns: new[] { "Id", "CreateDate", "Name", "Rate" },
+                values: new object[] { 1, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1262), "FIRST", 18.0 });
 
             migrationBuilder.InsertData(
                 table: "TransactionType",
                 columns: new[] { "Id", "CreateDate", "TransactionTypeName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(3974), "Stock Receipt" },
-                    { 2, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(4020), "Stock Out" }
+                    { 1, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(894), "Stock Receipt" },
+                    { 2, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(945), "Stock Out" }
                 });
 
             migrationBuilder.InsertData(
@@ -229,31 +255,36 @@ namespace AbyStockManager.Web.Migrations
                 columns: new[] { "Id", "CreateDate", "Isocode", "UnitOfMeasureName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(4179), "pc", "Piece" },
-                    { 2, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(4185), "kg", "Kilogram" },
-                    { 3, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(4189), "m", "Meter" }
+                    { 1, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1119), "pc", "Piece" },
+                    { 2, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1124), "kg", "Kilogram" },
+                    { 3, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(1128), "m", "Meter" }
                 });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "CreateDate", "Email", "Name", "Password", "Surname" },
-                values: new object[] { 1, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(4999), "jag@sda.com", "Jagdeesh", "2cbe7f341eb6aca638a32b77ddedfd4c", "Tiwari" });
+                values: new object[] { 1, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2081), "jag@sda.com", "Jagdeesh", "2cbe7f341eb6aca638a32b77ddedfd4c", "Tiwari" });
 
             migrationBuilder.InsertData(
                 table: "Product",
-                columns: new[] { "Id", "Barcode", "CategoryId", "CreateDate", "Description", "Image", "Price", "ProductName", "UnitOfMeasureId" },
+                columns: new[] { "Id", "Barcode", "CategoryId", "CreateDate", "Description", "Image", "Price", "ProductName", "TaxId", "UnitOfMeasureId" },
                 values: new object[,]
                 {
-                    { 1, "145R12 MILAZE LT TL 8PR", null, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(5196), null, null, 2661.0, "145R12 MILAZE LT TL 8PR", 1 },
-                    { 2, "145/80R12 X3 TT", null, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(5202), null, null, 2568.0, "145/80R12 X3 TT", 1 },
-                    { 3, "145/80R12 X3 TL", null, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(5204), null, null, 2510.0, "145/80R12 X3 TL", 1 },
-                    { 4, "145/80R13 MILAZE X3 TL", null, new DateTime(2023, 6, 17, 16, 24, 38, 653, DateTimeKind.Local).AddTicks(5206), null, null, 2782.0, "145/80R13 MILAZE X3 TL", 1 }
+                    { 1, "145R12 MILAZE LT TL 8PR", null, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2237), null, null, 2661.0, "145R12 MILAZE LT TL 8PR", null, 1 },
+                    { 2, "145/80R12 X3 TT", null, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2244), null, null, 2568.0, "145/80R12 X3 TT", null, 1 },
+                    { 3, "145/80R12 X3 TL", null, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2246), null, null, 2510.0, "145/80R12 X3 TL", null, 1 },
+                    { 4, "145/80R13 MILAZE X3 TL", null, new DateTime(2023, 6, 18, 13, 45, 51, 273, DateTimeKind.Local).AddTicks(2248), null, null, 2782.0, "145/80R13 MILAZE X3 TL", null, 1 }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",
                 table: "Product",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Product_TaxId",
+                table: "Product",
+                column: "TaxId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_UnitOfMeasureId",
@@ -312,6 +343,9 @@ namespace AbyStockManager.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "Tax");
 
             migrationBuilder.DropTable(
                 name: "UnitOfMeasure");

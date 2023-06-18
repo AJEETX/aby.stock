@@ -28,6 +28,7 @@ namespace Aby.StockManager.Model.ViewModel.Product
         [Display(Name = "Image")]
         [RegularExpression(@"^.*\.(jpg|JPG|png|PNG|jpeg|JPEG)$")]
         public IFormFile ImageFile { get; set; }
+
         public string ImageDisplayURL { get; set; }
 
         [Display(Name = "Price")]
@@ -36,11 +37,15 @@ namespace Aby.StockManager.Model.ViewModel.Product
         [Display(Name = "Category")]
         public int? CategoryId { get; set; }
 
+        [Display(Name = "Tax")]
+        public int? TaxId { get; set; }
+
         [Required]
         [Display(Name = "Unit Of Measure")]
         public int UnitOfMeasureId { get; set; }
 
         public IEnumerable<SelectListItem> CategoryList { get; set; }
+        public IEnumerable<SelectListItem> TaxList { get; set; }
         public IEnumerable<SelectListItem> UnitOfMeasureList { get; set; }
     }
 }

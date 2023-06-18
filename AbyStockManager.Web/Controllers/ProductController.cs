@@ -20,6 +20,7 @@ namespace Aby.StockManager.Web.Controllers
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
+        private readonly ITaxService _taxService;
         private readonly IUnitOfMeasureService _unitOfMeasureService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
@@ -27,25 +28,31 @@ namespace Aby.StockManager.Web.Controllers
                                  ICategoryService categoryService,
                                  IUnitOfMeasureService unitOfMeasureService,
                                  IWebHostEnvironment webHostEnvironment,
+                                 ITaxService taxService,
                                  IMapper mapper)
         {
             _productService = productService;
             _categoryService = categoryService;
             _unitOfMeasureService = unitOfMeasureService;
             _webHostEnvironment = webHostEnvironment;
+            _taxService = taxService;
             _mapper = mapper;
         }
+
         public async Task<IActionResult> Index()
         {
             SearchProductViewModel model = new SearchProductViewModel();
             model.CategoryList = await GetCategoryList();
+            model.TaxList = await GetTaxList();
             model.UnitOfMeasureList = await GetUnitOfMeasureList();
             return View(model);
         }
+
         public async Task<IActionResult> Create()
         {
             CreateProductViewModel model = new CreateProductViewModel();
             model.CategoryList = await GetCategoryList();
+            model.TaxList = await GetTaxList();
             model.UnitOfMeasureList = await GetUnitOfMeasureList();
             return View(model);
         }
@@ -84,6 +91,7 @@ namespace Aby.StockManager.Web.Controllers
             EditProductViewModel model = new EditProductViewModel();
             var serviceResult = await _productService.GetById(id);
             model = _mapper.Map<EditProductViewModel>(serviceResult.TransactionResult);
+            model.TaxList = await GetTaxList();
             model.CategoryList = await GetCategoryList();
             model.UnitOfMeasureList = await GetUnitOfMeasureList();
 
@@ -107,7 +115,6 @@ namespace Aby.StockManager.Web.Controllers
                     var upload = Path.Combine(_webHostEnvironment.WebRootPath, "upload", newFileName);
                     model.ImageFile.CopyTo(new FileStream(upload, FileMode.Create));
                     model.Image = newFileName;
-
                 }
                 ProductDTO productDTO = _mapper.Map<ProductDTO>(model);
                 var serviceResult = await _productService.Update(productDTO);
@@ -192,19 +199,26 @@ namespace Aby.StockManager.Web.Controllers
             }
             return Json(jsonResultModel);
         }
+
         private async Task<IEnumerable<SelectListItem>> GetCategoryList()
         {
             ServiceResult<IEnumerable<CategoryDTO>> serviceResult = await _categoryService.GetAll();
             IEnumerable<SelectListItem> drpCategoryList = _mapper.Map<IEnumerable<SelectListItem>>(serviceResult.TransactionResult);
             return drpCategoryList;
         }
+
+        private async Task<IEnumerable<SelectListItem>> GetTaxList()
+        {
+            ServiceResult<IEnumerable<TaxDTO>> serviceResult = await _taxService.GetAll();
+            IEnumerable<SelectListItem> drpCategoryList = _mapper.Map<IEnumerable<SelectListItem>>(serviceResult.TransactionResult);
+            return drpCategoryList;
+        }
+
         private async Task<IEnumerable<SelectListItem>> GetUnitOfMeasureList()
         {
             ServiceResult<IEnumerable<UnitOfMeasureDTO>> serviceResult = await _unitOfMeasureService.GetAll();
             IEnumerable<SelectListItem> drpUnitOfMeasureList = _mapper.Map<IEnumerable<SelectListItem>>(serviceResult.TransactionResult);
             return drpUnitOfMeasureList;
         }
-
-
     }
 }

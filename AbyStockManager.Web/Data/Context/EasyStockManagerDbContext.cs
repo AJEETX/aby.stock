@@ -15,6 +15,7 @@ namespace Aby.StockManager.Data.Context
         }
 
         public DbSet<Category> Category { get; set; }
+        public DbSet<Tax> Tax { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<StoreStock> StoreStock { get; set; }
@@ -27,6 +28,7 @@ namespace Aby.StockManager.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new TaxConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new StoreConfiguration());
             modelBuilder.ApplyConfiguration(new StoreStockConfiguration());
@@ -38,6 +40,7 @@ namespace Aby.StockManager.Data.Context
             modelBuilder.ApplyConfiguration(new TransactionTypeSeed());
             modelBuilder.ApplyConfiguration(new UnitOfMeasureSeed());
             modelBuilder.ApplyConfiguration(new CategorySeed());
+            modelBuilder.ApplyConfiguration(new TaxSeed());
             modelBuilder.ApplyConfiguration(new UserSeed());
             modelBuilder.ApplyConfiguration(new StoreSeed());
             modelBuilder.ApplyConfiguration(new ProductSeed());
