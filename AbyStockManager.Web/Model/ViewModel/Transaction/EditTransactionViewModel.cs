@@ -17,18 +17,25 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         public string TransactionCode { get; set; }
 
         [Required]
+        [MaxLength(30)]
+        [Display(Name = "Invoice Number")]
+        public string InvoiceNumber { get; set; }
+
+        [Required]
         [Display(Name = "Store")]
         public int StoreId { get; set; }
 
         [Required]
         [Display(Name = "To Store")]
         public int? ToStoreId { get; set; }
+
         public int TransactionTypeId { get; set; }
 
         [Required]
         [Display(Name = "Date")]
         public string TransactionDate { get; set; }
 
+        [Display(Name = "Description")]
         public string Description { get; set; }
 
         public IList<TransactionDetailViewModel> TransactionDetail { get; set; }

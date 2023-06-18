@@ -12,6 +12,7 @@ namespace Aby.StockManager.Model.Domain
         }
 
         public string TransactionCode { get; set; }
+        public string InvoiceNumber { get; set; }
         public int? StoreId { get; set; }
         public int? ToStoreId { get; set; }
         public int? TransactionTypeId { get; set; }

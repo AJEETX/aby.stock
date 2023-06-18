@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 using Aby.StockManager.Model.ViewModel.Base;
 
 namespace Aby.StockManager.Model.ViewModel.Transaction
@@ -8,6 +9,7 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
     public class ListTransactionViewModel : BaseViewModel
     {
         public string TransactionCode { get; set; }
+        public string InvoiceNumber { get; set; }
         public int? TransactionTypeId { get; set; }
         public string TransactionDate { get; set; }
         public string Description { get; set; }

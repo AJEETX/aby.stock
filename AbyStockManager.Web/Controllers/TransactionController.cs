@@ -56,7 +56,7 @@ namespace Aby.StockManager.Web.Controllers
                 model.TransactionCode = TransactionType.StockIn.ToString();
             }
             var serviceResult = await _storeService.GetAll();
-
+            model.InvoiceNumber = DateTime.Now.ToString("yyyyMMMddhhmmss");
             model.StoreId = serviceResult.TransactionResult.FirstOrDefault().Id.Value;
             return View(model);
         }
