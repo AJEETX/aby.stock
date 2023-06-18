@@ -15,12 +15,6 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label asp-for="TransactionCode"></label>
-                                    <input asp-for="TransactionCode" type="text" class="form-control-sm form-control enter-keyup">
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
                                     <label asp-for="ProductId"></label>
                                     <select asp-for="ProductId" class="form-control form-control-sm">
                                     </select>
@@ -44,22 +38,6 @@
                                 <div class="form-group">
                                     <label asp-for="SearchEndDate"></label>
                                     <input asp-for="SearchEndDate" type="text" class="form-control-sm form-control enter-keyup datepicker">
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="StoreId"></label>
-                                    <select asp-for="StoreId" class="form-control form-control-sm" asp-items="Model.StoreList">
-                                        <option value="">Select Store</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="ToStoreId"></label>
-                                    <select asp-for="ToStoreId" class="form-control form-control-sm" asp-items="Model.ToStoreList">
-                                        <option value="">Select To Store</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>

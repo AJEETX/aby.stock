@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var datatable = $('#datatable').dataTable({
         "dom": 'lBfrtip',
         "searching": false,
@@ -41,8 +40,15 @@ $(document).ready(function () {
                     mDataProp: "ProductFullName"
                 },
                 {
+                    mDataProp: "ProductPrice"
+                },
+                {
                     mDataProp: "QTY"
-                }
+                },
+                {
+                    mDataProp: "ProductTotalPrice"
+                },
+
             ]
     });
 
@@ -55,7 +61,6 @@ $(document).ready(function () {
         $("#ProductId").val(null).trigger('change');
         datatable.fnFilter();
     });
-
 
     $('.enter-keyup').keypress(function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -88,10 +93,4 @@ $(document).ready(function () {
             }
         }
     });
-
 });
-
-
-
-
-

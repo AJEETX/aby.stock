@@ -9,6 +9,8 @@ namespace Aby.StockManager.Model.Domain
         public int? StoreId { get; set; }
         public int? ProductId { get; set; }
         public double? Stock { get; set; }
+        public double? Price { get; set; }
+        public double? TotalPrice { get; set; }
         public string StoreName { get; set; }
         public string ProductName { get; set; }
         public string Barcode { get; set; }

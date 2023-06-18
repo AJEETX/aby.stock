@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 using Aby.StockManager.Model.ViewModel.Base;
 
 namespace Aby.StockManager.Model.ViewModel.Report.StoreStock
@@ -10,5 +11,7 @@ namespace Aby.StockManager.Model.ViewModel.Report.StoreStock
         public string QTY { get; set; }
         public string StoreFullName { get; set; }
         public string ProductFullName { get; set; }
+        public string ProductPrice { get; set; }
+        public string ProductTotalPrice { get; set; }
     }
 }
