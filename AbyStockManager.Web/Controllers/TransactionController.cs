@@ -11,6 +11,9 @@ using Aby.StockManager.Model.Domain;
 using Aby.StockManager.Model.Service;
 using Aby.StockManager.Model.ViewModel.JsonResult;
 using Aby.StockManager.Model.ViewModel.Transaction;
+using System.Diagnostics;
+using System.IO;
+using Receipt;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -30,6 +33,32 @@ namespace Aby.StockManager.Web.Controllers
             _productService = productService;
             _transactionService = transactionService;
             _mapper = mapper;
+        }
+
+        public IActionResult Print()
+        {
+            string[] args = null;
+            Parameters parameters = new Parameters(null, "Content//Receipt" + DateTime.Now.ToString("yyyymmdd") + ".pdf");
+            if (!PrepareParameters(parameters, args))
+            {
+                return BadRequest();
+            }
+            try
+            {
+                ReceiptRunner.Run().Build(parameters.file);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.ToString());
+                return BadRequest();
+            }
+            Console.WriteLine("\"" + Path.GetFullPath(parameters.file) +
+                              "\" document has been successfully built");
+            if (parameters.appToView != null)
+            {
+                Start(parameters.file, parameters.appToView);
+            }
+            return Ok();
         }
 
         public async Task<IActionResult> Index()
@@ -218,6 +247,69 @@ namespace Aby.StockManager.Web.Controllers
             else if ((int)TransactionType.Invoice == transactionTypeId)
                 return "Create Invoice";
             return string.Empty;
+        }
+
+        private static bool PrepareParameters(Parameters parameters, string[] args)
+        {
+            if (args != null && args.Length > 0)
+            {
+                if (args[0].Equals("?")
+                    || args[0].Equals("-h")
+                    || args[0].Equals("-help")
+                    || args[0].Equals("--h")
+                    || args[0].Equals("--help")
+                    )
+                {
+                    Usage();
+                    return false;
+                }
+                parameters.file = args[0];
+                if (args.Length > 1)
+                {
+                    parameters.appToView = args[1];
+                }
+            }
+
+            if (System.IO.File.Exists(parameters.file))
+            {
+                try
+                {
+                    System.IO.File.Delete(parameters.file);
+                }
+                catch (Exception e)
+                {
+                    Console.Error.WriteLine("Can't delete file: " +
+                        Path.GetFullPath(parameters.file));
+                    Console.Error.WriteLine(e.Message);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private static void Usage()
+        {
+            Console.WriteLine("Usage: dotnet run [fullPathToOutFile] [appToView]");
+            Console.WriteLine("Where: fullPathToOutFile - a path to the result file, 'Receipt.pdf' by default");
+            Console.WriteLine("appToView - the name of an application to view the file immediately after preparing, by default none app starts");
+        }
+
+        private static void Start(string file, string appToView)
+        {
+            var psi = new ProcessStartInfo("cmd", @"/c start " + appToView + " " + file);
+            Process.Start(psi);
+        }
+
+        internal class Parameters
+        {
+            public string appToView;
+            public string file;
+
+            public Parameters(string appToView, string file)
+            {
+                this.appToView = appToView;
+                this.file = file;
+            }
         }
     }
 }

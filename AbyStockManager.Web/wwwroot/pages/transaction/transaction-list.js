@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var datatable = $('#datatable').dataTable({
         "searching": false,
         "iDisplayLength": 10,
@@ -50,17 +49,17 @@ $(document).ready(function () {
                     mDataProp: "TransactionDate"
                 },
                 {
-                    mDataProp: "StoreName", bVisible: false 
+                    mDataProp: "StoreName", bVisible: false
                 },
                 {
-                    mDataProp: "ToStoreName", bVisible: false 
+                    mDataProp: "ToStoreName", bVisible: false
                 },
                 {
                     "sDefaultContent": "",
                     "bSortable": false,
                     "mRender": function (data, type, row) {
                         var buttons = "";
-                        buttons += '<a onclick="detailShow(this,' + row.Id + ')"  class="btn btn-xs btn-default"><i class="fas fa-list"></i> Detail</a>&nbsp;'
+                        buttons += '<a onclick="detailShow(this,' + row.Id + ')"  class="btn btn-xs btn-default"><i class="fas fa-list"></i> Print</a>&nbsp;'
                         buttons += '<a href="/Transaction/Edit/' + row.Id + '?typeId=' + row.TransactionTypeId + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
                         buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> Delete</a>'
                         return buttons;
@@ -78,18 +77,15 @@ $(document).ready(function () {
         datatable.fnFilter();
     });
 
-
     $('.enter-keyup').keypress(function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
             datatable.fnFilter();
         }
     });
-
 });
 
 function deleteRow(row, id) {
-
     $.ajax({
         url: '/Transaction/Delete/' + id,
         type: "POST",
@@ -117,8 +113,11 @@ function detailShow(row, id) {
             if (data.IsSucceeded) {
                 $.each(data.Data, function (i, item) {
                     str += '<tr>';
+                    str += '<td>' + item.Description + ' </td>';
                     str += '<td>' + item.Barcode + "-" + item.ProductName + ' </td>';
                     str += '<td>' + item.Amount + ' </td>';
+                    str += '<td>' + item.Tax + ' </td>';
+                    str += '<td>' + item.Price + ' </td>';
                     str += '<td>' + item.UnitOfMeasureName + "-" + item.UnitOfMeasureShortName + ' </td>';
                     str += '</tr>';
                 });
@@ -132,4 +131,3 @@ function detailShow(row, id) {
 
     $('#modal-detail').modal('show');
 }
-

@@ -13,6 +13,7 @@ namespace Aby.StockManager.Repository.TransactionDetail
     public class TransactionDetailRepository : Repository<Aby.StockManager.Data.Entity.TransactionDetail>, ITransactionDetailRepository
     {
         private EasyStockManagerDbContext dbContext { get => _context as EasyStockManagerDbContext; }
+
         public TransactionDetailRepository(DbContext context) : base(context)
         {
         }
@@ -24,7 +25,13 @@ namespace Aby.StockManager.Repository.TransactionDetail
 
         public async Task<IEnumerable<Aby.StockManager.Data.Entity.TransactionDetail>> GetByTransactionId(int transactionId)
         {
-            return await dbContext.TransactionDetail.Include(x => x.Product).ThenInclude(x=> x.UnitOfMeasure).Where(x => x.TransactionId == transactionId).ToListAsync();
+            return await dbContext.TransactionDetail
+                .Include(x => x.Transaction)
+                .Include(x => x.Product)
+                .ThenInclude(x => x.Tax)
+                .Include(x => x.Product)
+                .ThenInclude(x => x.UnitOfMeasure)
+                .Where(x => x.TransactionId == transactionId).ToListAsync();
         }
     }
 }
