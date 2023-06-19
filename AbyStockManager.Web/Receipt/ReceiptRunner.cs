@@ -27,10 +27,10 @@ namespace Receipt
         static ReceiptRunner()
         {
             DocumentFont = Fonts.Helvetica(14f);
-            ItalicFont = FontBuilder.New().SetSize(14f).SetName("Courier").SetItalic();
+            ItalicFont = FontBuilder.New().SetSize(14f).SetName("Helvetica").SetItalic();
             FooterFont = Fonts.Times(12f).SetItalic().SetColor(new Color(0x01, 0x61, 0xAB));
             BoldFont = FontBuilder.New().SetSize(14f).SetName("Courier").SetBold();
-            TitleFont = FontBuilder.New().SetSize(28f).SetName("Courier").SetBold();
+            TitleFont = FontBuilder.New().SetSize(28f).SetName("Helvetica").SetBold();
             HiddenFont = Fonts.Courier(0.01f).SetColor(Color.White);
 
             ReceiptText = new[]
@@ -61,8 +61,8 @@ namespace Receipt
                 .AddSection()
                 .SetSectionSettings()
                 .AddReceiptTitle()
-                .AddReceiptText()
                 .AddReceiptTable()
+                .AddReceiptText()
                 .AddFooter();
             return builder;
         }
@@ -75,19 +75,21 @@ namespace Receipt
 
         private static SectionBuilder AddReceiptTitle(this SectionBuilder s)
         {
-            s.AddImage(ImageUrl).SetScale(ScalingMode.OriginalSize).SetAlignment(HorizontalAlignment.Center);
-            s.AddParagraph("Payment Receipt").SetMargins(0, 20, 0, 10).SetFont(TitleFont).SetAlignment(HorizontalAlignment.Center);
+            s.AddImage(ImageUrl).SetScale(ScalingMode.OriginalSize).SetAlignment(HorizontalAlignment.Left);
+            s.AddParagraph("Invoice / Receipt").SetMargins(0, 20, 0, 10).SetFont(TitleFont).SetAlignment(HorizontalAlignment.Right);
             s.AddLine().SetColor(Color.FromRgba(106.0 / 255.0, 85.0 / 255.9, 189.0 / 255.0)).SetStroke(Stroke.Solid).SetWidth(2);
             return s;
         }
 
         private static SectionBuilder AddReceiptText(this SectionBuilder s)
         {
+            s.AddLine().SetColor(Color.FromRgba(106.0 / 255.0, 85.0 / 255.9, 189.0 / 255.0)).SetStroke(Stroke.Solid).SetWidth(2);
+
             ParagraphBuilder p = s.AddParagraph()
                 .SetMargins(0, 20, 0, 10)
                 .SetFont(DocumentFont);
             p.AddText(ReceiptText);
-            p.AddUrl("jagdeesh@sda.com");
+            p.AddUrl("0999999999 / jagdeesh@sda.com");
             return s;
         }
 
@@ -123,7 +125,7 @@ namespace Receipt
                 .SetFont(FooterFont)
                 .AddTextToParagraph("SDA Chandauli, Inc.")
                 .AddTabSymbol()
-                .AddUrlToParagraph("jagdeesh@sda.com")
+                .AddUrlToParagraph("0999999999 / jagdeesh@sda.com")
                 .AddTabulation(280);
             footer
                 .AddParagraph()
@@ -131,7 +133,7 @@ namespace Receipt
                 .SetFont(FooterFont)
                 .AddTextToParagraph("200 GT Road Chandauli, UP")
                 .AddTabSymbol()
-                .AddUrlToParagraph("https://itsaby.com.au")
+                .AddUrlToParagraph("https://sda.com.au")
                 .AddTabulation(280);
             footer
                 .AddParagraph()
