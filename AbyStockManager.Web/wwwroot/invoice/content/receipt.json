@@ -12,11 +12,23 @@
     "Value": "Ram Lal"
   },
   {
-    "Field": "Product ::  Qty",
-    "Value": "Scooter tyre 110/80-17ZOOM TL ::  2"
+    "Field": "Product",
+    "Value": "Scooter tyre 110/80-17ZOOM TL"
   },
   {
-    "Field": "Price",
+    "Field": "Qty",
+    "Value": "2"
+  },
+  {
+    "Field": "Service",
+    "Value": "Vehicle alignment"
+  },
+  {
+    "Field": "Type",
+    "Value": "basic"
+  },
+  {
+    "Field": "Price [without GST]",
     "Value": "230.00 INR*"
   },
   {
@@ -24,7 +36,7 @@
     "Value": "23.00 INR*"
   },
   {
-    "Field": "Total payment",
+    "Field": "Total Price [without GST]",
     "Value": "253.00 INR*"
   },
   {

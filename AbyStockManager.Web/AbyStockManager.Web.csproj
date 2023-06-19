@@ -37,7 +37,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\images\Receipt\logo.png" />
-    <None Include="wwwroot\invoice\img\logo1.png" />
   </ItemGroup>
 
   <ItemGroup>

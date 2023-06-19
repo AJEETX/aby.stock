@@ -27,8 +27,8 @@ namespace Receipt
         static ReceiptRunner()
         {
             DocumentFont = Fonts.Helvetica(14f);
-            ItalicFont = FontBuilder.New().SetSize(14f).SetName("Helvetica").SetItalic();
-            FooterFont = Fonts.Times(12f).SetItalic().SetColor(new Color(0x01, 0x61, 0xAB));
+            ItalicFont = FontBuilder.New().SetSize(14f).SetName("Courier");
+            FooterFont = Fonts.Times(12f).SetColor(Color.FromRgba(106.0 / 255.0, 85.0 / 255.9, 189.0 / 255.0));
             BoldFont = FontBuilder.New().SetSize(14f).SetName("Courier").SetBold();
             TitleFont = FontBuilder.New().SetSize(18f).SetName("Helvetica").SetBold();
             HiddenFont = Fonts.Courier(0.01f).SetColor(Color.White);
@@ -111,21 +111,20 @@ namespace Receipt
 
             footer
                 .AddLine()
-                .SetColor(new Color(0x01, 0x61, 0xAB))
                 .SetStroke(Stroke.Solid)
                 .SetWidth(2);
             footer
                 .AddParagraph()
                 .SetMargins(0, 20, 0, 10)
-                .AddText("CEAT Tyres")
+                .AddText("SDA Chandauli, Inc")
                 .SetFont(BoldFont);
             footer
                 .AddParagraph()
                 .SetMargins(0, 0, 0, 0)
                 .SetFont(FooterFont)
-                .AddTextToParagraph("SDA Chandauli, Inc.")
+                .AddTextToParagraph("CEAT Tyres agency")
                 .AddTabSymbol()
-                .AddUrlToParagraph("Contact: 0999999999 ")
+                .AddTextToParagraph("[                                 ] ")
                 .AddTabulation(280);
             footer
                 .AddParagraph()
@@ -133,19 +132,30 @@ namespace Receipt
                 .SetFont(FooterFont)
                 .AddTextToParagraph("200 GT Road Chandauli, UP")
                 .AddTabSymbol()
-                .AddUrlToParagraph("Contact: 0999999999 ")
+                .AddTextToParagraph("Signature / Proprieter")
                 .AddTabulation(280);
             footer
                 .AddParagraph()
                 .SetMargins(0, 0, 0, 0)
                 .SetFont(FooterFont)
-                .AddText(new[] { "GSTN : JKHHNMJYH53636373", "India" });
+                .AddTextToParagraph("GSTN : JKHHNMJYH53636373")
+                .AddTabSymbol()
+                .AddUrlToParagraph("")
+                .AddTabulation(280);
+
             footer
                 .AddParagraph()
                 .SetMargins(0, 0, 0, 0)
                 .SetFont(FooterFont)
                 .AddText("*GST paid directly by SDA Chandauli, Inc., where applicable");
-
+            footer
+                .AddParagraph()
+                .SetMargins(0, 0, 0, 0)
+                .AddTextToParagraph("Contact: 0999999999 ")
+                .AddTabSymbol()
+                .SetFont(BoldFont)
+                .AddUrlToParagraph("")
+                .AddTabulation(280);
             return s;
         }
     }
