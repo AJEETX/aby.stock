@@ -28,7 +28,7 @@ namespace Receipt
         {
             DocumentFont = Fonts.Helvetica(14f);
             ItalicFont = FontBuilder.New().SetSize(14f).SetName("Courier");
-            FooterFont = Fonts.Times(12f).SetColor(Color.FromRgba(106.0 / 255.0, 85.0 / 255.9, 189.0 / 255.0));
+            FooterFont = Fonts.Helvetica(12f).SetColor(Color.FromRgba(106.0 / 255.0, 85.0 / 255.9, 189.0 / 255.0));
             BoldFont = FontBuilder.New().SetSize(14f).SetName("Courier").SetBold();
             TitleFont = FontBuilder.New().SetSize(18f).SetName("Helvetica").SetBold();
             HiddenFont = Fonts.Courier(0.01f).SetColor(Color.White);
