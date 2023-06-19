@@ -41,12 +41,12 @@ namespace Receipt
             };
         }
 
-        public static DocumentBuilder Run(string path)
+        public static DocumentBuilder Run(string path, List<ReceiptData> receiptDatas)
         {
             ProjectDir = path;
             ReceiptJsonFile = Path.Combine(ProjectDir, "content", "receipt.json");
             ReceiptJsonContent = File.ReadAllText(ReceiptJsonFile);
-            ReceiptData = JsonConvert.DeserializeObject<List<ReceiptData>>(ReceiptJsonContent);
+            ReceiptData = receiptDatas;
             ImageUrl = Path.Combine(ProjectDir, "img", "logo.png");
 
             return DocumentBuilder

@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.IO;
 using Receipt;
 using Microsoft.AspNetCore.Hosting;
+using AbyStockManager.Web.Model.ViewModel.Invoice;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -233,11 +234,78 @@ namespace Aby.StockManager.Web.Controllers
 
             var data = await _transactionService.GetTransactionDetailByTransactionId(id);
 
+            var receiptDataList = new List<ReceiptData>();
+
+            foreach (var item in data.TransactionResult)
+            {
+                var invnData = new ReceiptData
+                {
+                    Field = "Invoice Number",
+                    Value = item.InvoiceNumber
+                };
+
+                var invDateData = new ReceiptData
+                {
+                    Field = "Date",
+                    Value = DateTime.Now.ToString("dd-MMM-yyyy HH:mm")
+                };
+                var descriptionData = new ReceiptData
+                {
+                    Field = "Bill Detailed",
+                    Value = item.Description
+                };
+
+                var productData = new ReceiptData
+                {
+                    Field = "Product name",
+                    Value = item.ProductName
+                };
+
+                var priceData = new ReceiptData
+                {
+                    Field = "Price",
+                    Value = "Rs. " + item.Price.ToString("#,###.00")
+                };
+
+                var qtyData = new ReceiptData
+                {
+                    Field = "Qty",
+                    Value = item.Amount.ToString()
+                };
+                var taxData = new ReceiptData
+                {
+                    Field = "GST",
+                    Value = item.Tax.ToString("##.00") + " %"
+                };
+
+                var totalData = new ReceiptData
+                {
+                    Field = "Total Price",
+                    Value = "Rs. " + ((item.Amount * item.Price) + (item.Amount * item.Price * (item.Tax) / 100)).ToString()
+                };
+
+                var payData = new ReceiptData
+                {
+                    Field = "Payment mode",
+                    Value = "Cash / online"
+                };
+
+                receiptDataList.Add(invnData);
+                receiptDataList.Add(invDateData);
+                receiptDataList.Add(descriptionData);
+                receiptDataList.Add(productData);
+                receiptDataList.Add(priceData);
+                receiptDataList.Add(qtyData);
+                receiptDataList.Add(taxData);
+                receiptDataList.Add(totalData);
+                receiptDataList.Add(payData);
+            }
+
             try
             {
                 var invoiceFilePath = Path.Combine(webHostEnvironment.WebRootPath, "invoice");
 
-                ReceiptRunner.Run(invoiceFilePath).Build(fName);
+                ReceiptRunner.Run(invoiceFilePath, receiptDataList).Build(fName);
 
                 Console.WriteLine("\"" + Path.GetFullPath(fName) +
                               "\" document has been successfully built");
