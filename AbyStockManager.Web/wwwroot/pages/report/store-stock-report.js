@@ -35,10 +35,10 @@
         aoColumns:
             [
                 {
-                    mDataProp: "StoreFullName"
+                    mDataProp: "ProductFullName"
                 },
                 {
-                    mDataProp: "ProductFullName"
+                    mDataProp: "StoreFullName", bVisible: false
                 },
                 {
                     mDataProp: "ProductPrice"
