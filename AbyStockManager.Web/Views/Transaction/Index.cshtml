@@ -123,6 +123,11 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
+                        <span style="visibility:hidden" id="txn-id"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <table class="table table-sm" id="tbl-transaction-detail">
                             <thead>
                                 <tr>
@@ -142,7 +147,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a href="Transaction/Print?id=1" class="btn btn-warning">Print </a>
+                <a id="print-invoice" href="#" class="btn btn-warning">Print </a>
             </div>
         </div>
     </div>
@@ -172,7 +177,6 @@
             });
             $('.datepicker').val('');
         });
-
     </script>
 }
 
