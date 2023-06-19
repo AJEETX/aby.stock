@@ -229,7 +229,7 @@ namespace Aby.StockManager.Web.Controllers
 
         public async Task<IActionResult> Print(int id = 0)
         {
-            string fName = Path.Combine(webHostEnvironment.WebRootPath, "invoice", "Receipt" + DateTime.Now.ToString("yyyymmddhhmmss") + ".pdf");
+            string fName = Path.Combine(webHostEnvironment.WebRootPath, "invoice", "receipt", DateTime.Now.ToString("yyyymmddhhmmss") + ".pdf");
 
             var data = await _transactionService.GetTransactionDetailByTransactionId(id);
 
