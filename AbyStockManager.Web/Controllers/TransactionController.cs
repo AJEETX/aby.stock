@@ -229,14 +229,14 @@ namespace Aby.StockManager.Web.Controllers
 
         public IActionResult Print(int id = 0)
         {
-            string fileName = "Receipt" + DateTime.Now.ToString("yyyymmdd") + ".pdf";
+            string fileName = Path.Combine(webHostEnvironment.WebRootPath, "invoice", "Receipt" + DateTime.Now.ToString("yyyymmddhhmmss") + ".pdf");
             Parameters parameters = new Parameters(null, fileName);
 
             try
             {
                 var invoiceFilePath = Path.Combine(webHostEnvironment.WebRootPath, "invoice");
 
-                ReceiptRunner.Run(invoiceFilePath, fileName).Build(parameters.file);
+                ReceiptRunner.Run(invoiceFilePath).Build(parameters.file);
             }
             catch (Exception e)
             {
@@ -252,7 +252,7 @@ namespace Aby.StockManager.Web.Controllers
             Response.Headers.Add("Content-Length", fileInfo.Length.ToString());
 
             // Send the file to the client
-            return File(System.IO.File.ReadAllBytes(fileName), "application/pdf", fileInfo.Name);
+            return File(System.IO.File.ReadAllBytes(parameters.file), "application/pdf", fileInfo.Name);
         }
 
         internal class Parameters

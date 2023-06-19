@@ -41,7 +41,7 @@ namespace Receipt
             };
         }
 
-        public static DocumentBuilder Run(string path, string filename)
+        public static DocumentBuilder Run(string path)
         {
             ProjectDir = path;
             ReceiptJsonFile = Path.Combine(ProjectDir, "content", "receipt.json");
