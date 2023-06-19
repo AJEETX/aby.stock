@@ -6,10 +6,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\images\Receipt\logo.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="images\Receipt\receipt.jpg" />
+    <Content Remove="wwwroot\invoice\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +37,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\images\Receipt\logo.png" />
+    <None Include="wwwroot\invoice\img\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\Content\receipt.json">
+    <Content Update="wwwroot\invoice\content\receipt.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -14,6 +14,7 @@ using Aby.StockManager.Model.ViewModel.Transaction;
 using System.Diagnostics;
 using System.IO;
 using Receipt;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -22,16 +23,19 @@ namespace Aby.StockManager.Web.Controllers
         private readonly IStoreService _storeService;
         private readonly IProductService _productService;
         private readonly ITransactionService _transactionService;
+        private readonly IWebHostEnvironment webHostEnvironment;
         private readonly IMapper _mapper;
 
         public TransactionController(IStoreService storeService,
                                      IProductService productService,
                                      ITransactionService transactionService,
+                                     IWebHostEnvironment webHostEnvironment,
                                      IMapper mapper)
         {
             _storeService = storeService;
             _productService = productService;
             _transactionService = transactionService;
+            this.webHostEnvironment = webHostEnvironment;
             _mapper = mapper;
         }
 
@@ -225,12 +229,14 @@ namespace Aby.StockManager.Web.Controllers
 
         public IActionResult Print(int id = 0)
         {
-            string fileName = "Content//Receipt" + DateTime.Now.ToString("yyyymmdd") + ".pdf";
+            string fileName = "Receipt" + DateTime.Now.ToString("yyyymmdd") + ".pdf";
             Parameters parameters = new Parameters(null, fileName);
 
             try
             {
-                ReceiptRunner.Run().Build(parameters.file);
+                var invoiceFilePath = Path.Combine(webHostEnvironment.WebRootPath, "invoice");
+
+                ReceiptRunner.Run(invoiceFilePath, fileName).Build(parameters.file);
             }
             catch (Exception e)
             {
@@ -240,7 +246,7 @@ namespace Aby.StockManager.Web.Controllers
             Console.WriteLine("\"" + Path.GetFullPath(parameters.file) +
                               "\" document has been successfully built");
 
-            var fileInfo = new System.IO.FileInfo(fileName);
+            var fileInfo = new System.IO.FileInfo(parameters.file);
             Response.ContentType = "application/pdf";
             Response.Headers.Add("Content-Disposition", "attachment;filename=\"" + fileInfo.Name + "\"");
             Response.Headers.Add("Content-Length", fileInfo.Length.ToString());

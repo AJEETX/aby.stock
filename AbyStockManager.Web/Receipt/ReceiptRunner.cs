@@ -11,11 +11,11 @@ namespace Receipt
 {
     public static class ReceiptRunner
     {
-        private static readonly string ProjectDir;
-        private static readonly string ReceiptJsonFile;
-        private static readonly string ReceiptJsonContent;
-        private static readonly string ImageUrl;
-        public static List<ReceiptData> ReceiptData { get; }
+        private static string ProjectDir;
+        private static string ReceiptJsonFile;
+        private static string ReceiptJsonContent;
+        private static string ImageUrl;
+        public static List<ReceiptData> ReceiptData { get; set; }
         private static readonly string[] ReceiptText;
         private static readonly FontBuilder DocumentFont;
         private static readonly FontBuilder ItalicFont;
@@ -26,12 +26,6 @@ namespace Receipt
 
         static ReceiptRunner()
         {
-            ProjectDir = Directory.GetCurrentDirectory();
-            ReceiptJsonFile = Path.Combine(ProjectDir, "Content", "receipt.json");
-            ReceiptJsonContent = File.ReadAllText(ReceiptJsonFile);
-            ReceiptData = JsonConvert.DeserializeObject<List<ReceiptData>>(ReceiptJsonContent);
-            ImageUrl = Path.Combine(ProjectDir, "images", "Receipt", "logo.png");
-
             DocumentFont = Fonts.Courier(14f);
             ItalicFont = FontBuilder.New().SetSize(14f).SetName("Times").SetItalic();
             FooterFont = Fonts.Times(12f).SetItalic().SetColor(Color.FromRgba(106.0 / 255.0, 85.0 / 255.9, 189.0 / 255.0));
@@ -47,8 +41,14 @@ namespace Receipt
             };
         }
 
-        public static DocumentBuilder Run()
+        public static DocumentBuilder Run(string path, string filename)
         {
+            ProjectDir = path;
+            ReceiptJsonFile = Path.Combine(ProjectDir, "content", "receipt.json");
+            ReceiptJsonContent = File.ReadAllText(ReceiptJsonFile);
+            ReceiptData = JsonConvert.DeserializeObject<List<ReceiptData>>(ReceiptJsonContent);
+            ImageUrl = Path.Combine(ProjectDir, "img", "logo.png");
+
             return DocumentBuilder
                 .New()
                 .ApplyStyle(StyleBuilder.New().SetLineSpacing(1.2f))
