@@ -260,11 +260,11 @@ namespace Aby.StockManager.Web.Controllers
                     Field = "Product name",
                     Value = item.ProductName
                 };
-
+                var price = (item.Price) * (100 / (100 + item.Tax));
                 var priceData = new ReceiptData
                 {
                     Field = "Price",
-                    Value = "Rs. " + item.Price.ToString("#,###.00")
+                    Value = "Rs. " + price.ToString("#,###.00")
                 };
 
                 var qtyData = new ReceiptData
@@ -274,14 +274,14 @@ namespace Aby.StockManager.Web.Controllers
                 };
                 var taxData = new ReceiptData
                 {
-                    Field = "GST",
-                    Value = item.Tax.ToString("##.00") + " %"
+                    Field = "GST [ %]",
+                    Value = (item.Price - price).ToString("#,###.00") + " [" + item.Tax.ToString("##.00") + " % ]"
                 };
 
                 var totalData = new ReceiptData
                 {
                     Field = "Total Price",
-                    Value = "Rs. " + ((item.Amount * item.Price) + (item.Amount * item.Price * (item.Tax) / 100)).ToString()
+                    Value = "Rs. " + item.Price.ToString("#,###.00")
                 };
 
                 var payData = new ReceiptData

@@ -122,8 +122,8 @@ function detailShow(row, id) {
                     str += '</tr>';
                 });
                 $("#tbl-transaction-detail tbody").append(str);
-                $("#txn-id").append(id);
                 $('#print-invoice').attr('href', 'Transaction/Print?id=' + id);
+                $('#invoice-css').attr('href', 'invoice/content/style.css');
             }
             else {
                 toastr.error(data.UserMessage);
