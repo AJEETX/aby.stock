@@ -227,43 +227,33 @@ namespace Aby.StockManager.Web.Controllers
             return string.Empty;
         }
 
-        public IActionResult Print(int id = 0)
+        public async Task<IActionResult> Print(int id = 0)
         {
-            string fileName = Path.Combine(webHostEnvironment.WebRootPath, "invoice", "Receipt" + DateTime.Now.ToString("yyyymmddhhmmss") + ".pdf");
-            Parameters parameters = new Parameters(null, fileName);
+            string fName = Path.Combine(webHostEnvironment.WebRootPath, "invoice", "Receipt" + DateTime.Now.ToString("yyyymmddhhmmss") + ".pdf");
+
+            var data = await _transactionService.GetTransactionDetailByTransactionId(id);
 
             try
             {
                 var invoiceFilePath = Path.Combine(webHostEnvironment.WebRootPath, "invoice");
 
-                ReceiptRunner.Run(invoiceFilePath).Build(parameters.file);
+                ReceiptRunner.Run(invoiceFilePath).Build(fName);
+
+                Console.WriteLine("\"" + Path.GetFullPath(fName) +
+                              "\" document has been successfully built");
+
+                var fileInfo = new System.IO.FileInfo(fName);
+                Response.ContentType = "application/pdf";
+                Response.Headers.Add("Content-Disposition", "attachment;filename=\"" + fileInfo.Name + "\"");
+                Response.Headers.Add("Content-Length", fileInfo.Length.ToString());
+
+                // Send the file to the client
+                return File(System.IO.File.ReadAllBytes(fName), "application/pdf", fileInfo.Name);
             }
             catch (Exception e)
             {
                 Console.Error.WriteLine(e.ToString());
                 return BadRequest(e.Message);
-            }
-            Console.WriteLine("\"" + Path.GetFullPath(parameters.file) +
-                              "\" document has been successfully built");
-
-            var fileInfo = new System.IO.FileInfo(parameters.file);
-            Response.ContentType = "application/pdf";
-            Response.Headers.Add("Content-Disposition", "attachment;filename=\"" + fileInfo.Name + "\"");
-            Response.Headers.Add("Content-Length", fileInfo.Length.ToString());
-
-            // Send the file to the client
-            return File(System.IO.File.ReadAllBytes(parameters.file), "application/pdf", fileInfo.Name);
-        }
-
-        internal class Parameters
-        {
-            public string appToView;
-            public string file;
-
-            public Parameters(string appToView, string file)
-            {
-                this.appToView = appToView;
-                this.file = file;
             }
         }
     }

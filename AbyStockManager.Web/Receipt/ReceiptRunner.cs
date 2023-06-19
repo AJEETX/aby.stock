@@ -26,9 +26,9 @@ namespace Receipt
 
         static ReceiptRunner()
         {
-            DocumentFont = Fonts.Courier(14f);
-            ItalicFont = FontBuilder.New().SetSize(14f).SetName("Times").SetItalic();
-            FooterFont = Fonts.Times(12f).SetItalic().SetColor(Color.FromRgba(106.0 / 255.0, 85.0 / 255.9, 189.0 / 255.0));
+            DocumentFont = Fonts.Helvetica(14f);
+            ItalicFont = FontBuilder.New().SetSize(14f).SetName("Courier").SetItalic();
+            FooterFont = Fonts.Times(12f).SetItalic().SetColor(new Color(0x01, 0x61, 0xAB));
             BoldFont = FontBuilder.New().SetSize(14f).SetName("Courier").SetBold();
             TitleFont = FontBuilder.New().SetSize(28f).SetName("Courier").SetBold();
             HiddenFont = Fonts.Courier(0.01f).SetColor(Color.White);
@@ -109,7 +109,7 @@ namespace Receipt
 
             footer
                 .AddLine()
-                .SetColor(Color.FromRgba(106.0 / 255.0, 85.0 / 255.0, 189.0 / 255.0))
+                .SetColor(new Color(0x01, 0x61, 0xAB))
                 .SetStroke(Stroke.Solid)
                 .SetWidth(2);
             footer
