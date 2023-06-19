@@ -1,7 +1,7 @@
 [
   {
     "Field": "Invoice Number",
-    "Value": "2023JUNE18349382-INV"
+    "Value": "INV-00001"
   },
   {
     "Field": "Date",
@@ -9,11 +9,11 @@
   },
   {
     "Field": "Account billed to:",
-    "Value": "Ram Lal"
+    "Value": "Pyaare Lal"
   },
   {
     "Field": "Product",
-    "Value": "Scooter tyre 110/80-17ZOOM TL"
+    "Value": "110/80-17ZOOM TL"
   },
   {
     "Field": "Qty",
@@ -36,12 +36,12 @@
     "Value": "23.00 INR*"
   },
   {
-    "Field": "Total Price [without GST]",
+    "Field": "Total Price [with GST]",
     "Value": "253.00 INR*"
   },
   {
     "Field": "Payment",
-    "Value": "cash"
+    "Value": "cash / online"
   },
   {
     "Field": "purchase valid:",
