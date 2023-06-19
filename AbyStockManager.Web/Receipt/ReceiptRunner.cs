@@ -30,7 +30,7 @@ namespace Receipt
             ItalicFont = FontBuilder.New().SetSize(14f).SetName("Helvetica").SetItalic();
             FooterFont = Fonts.Times(12f).SetItalic().SetColor(new Color(0x01, 0x61, 0xAB));
             BoldFont = FontBuilder.New().SetSize(14f).SetName("Courier").SetBold();
-            TitleFont = FontBuilder.New().SetSize(28f).SetName("Helvetica").SetBold();
+            TitleFont = FontBuilder.New().SetSize(18f).SetName("Helvetica").SetBold();
             HiddenFont = Fonts.Courier(0.01f).SetColor(Color.White);
 
             ReceiptText = new[]
@@ -89,7 +89,7 @@ namespace Receipt
                 .SetMargins(0, 20, 0, 10)
                 .SetFont(DocumentFont);
             p.AddText(ReceiptText);
-            p.AddUrl("0999999999 / jagdeesh@sda.com");
+            p.AddUrl("0999999999 ");
             return s;
         }
 
@@ -125,7 +125,7 @@ namespace Receipt
                 .SetFont(FooterFont)
                 .AddTextToParagraph("SDA Chandauli, Inc.")
                 .AddTabSymbol()
-                .AddUrlToParagraph("0999999999 / jagdeesh@sda.com")
+                .AddUrlToParagraph("Contact: 0999999999 ")
                 .AddTabulation(280);
             footer
                 .AddParagraph()
@@ -133,7 +133,7 @@ namespace Receipt
                 .SetFont(FooterFont)
                 .AddTextToParagraph("200 GT Road Chandauli, UP")
                 .AddTabSymbol()
-                .AddUrlToParagraph("https://sda.com.au")
+                .AddUrlToParagraph("Contact: 0999999999 ")
                 .AddTabulation(280);
             footer
                 .AddParagraph()
