@@ -105,7 +105,7 @@ function deleteRow(row, id) {
 }
 
 function detailShow(row, id) {
-    $("#tbl-transaction-detail tbody").empty();
+    $("#invoice-table tbody").empty();
     var str = '';
     $.ajax({
         url: '/Transaction/GetTransactionDetail/' + id,
@@ -115,19 +115,20 @@ function detailShow(row, id) {
                 $.each(data.Data, function (i, item) {
                     $('#invoice-description').text(item.Description);
                     $('#invoice-number').text(item.InvoiceNumber);
+                    $('#invoice-date').text(item.TransactionDate);
+                    $('#invoice-due-date').text(item.TransactionDueDate);
                     var count = i + 1;
                     str += '<tr>';
-                    str += '<td class="no"> #' + i + ' </td>';
+                    str += '<td class="no"> ' + count + ' </td>';
                     str += '<td class="desc">' + item.ProductName + ' </td>';
                     str += '<td class="unit">' + item.Price + ' </td>';
                     str += '<td  class="qty">' + item.Amount + ' </td>';
-                    str += '<td  class="qty">' + item.Tax + ' </td>';
-                    str += '<td  class="total">' + item.UnitOfMeasureName + ' </td>';
+                    str += '<td  class="tax">' + item.Tax + ' </td>';
+                    str += '<td  class="total">' + item.TotalPrice + ' </td>';
                     str += '</tr>';
                 });
                 $("#invoice-table tbody").append(str);
-                $('#print-invoice').attr('href', 'Transaction/Print?id=' + id);
-                
+                //$('#print-invoice').attr('href', 'Transaction/Print?id=' + id);
             }
             else {
                 toastr.error(data.UserMessage);

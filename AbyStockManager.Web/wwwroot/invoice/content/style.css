@@ -145,32 +145,45 @@
 .modal table .no {
     font-size: .8em;
     background: #DDDDDD;
+    font-weight: bold;
+    text-align: right;
 }
 
 .modal table .desc {
     text-align: left;
     font-size: .8em;
+    font-weight: bold;
 }
 
 .modal table .unit {
     background: #DDDDDD;
     font-size: .8em;
+    text-align: right;
+    font-weight: bold;
 }
 
-.modal table .qty {
+.modal table .qty, .modal table .tax {
     font-size: .8em;
+    text-align: right;
+    font-weight: bold;
 }
-
-.modal table .total {
+.modal table .tax {
     background: #DDDDDD;
-    font-size: .8em;
 }
+.modal table .total {
+        font-size: .8em;
+        text-align: right;
+        font-weight: bold;
+    }
 
+.modal table td.no,
+.modal table td.desc,
 .modal table td.unit,
 .modal table td.qty,
+.modal table td.tax,
 .modal table td.total {
-    font-size: 1em;
     font-size: .8em;
+    font-weight: normal;
 }
 
 .modal table tbody tr:last-child td {
@@ -178,10 +191,9 @@
 }
 
 .modal table tfoot td {
-    padding: 10px 20px;
     background: #FFFFFF;
     border-bottom: none;
-    font-size: 1em;
+    font-size: .8em;
     white-space: nowrap;
     border-top: 1px solid #AAAAAA;
 }
@@ -229,6 +241,8 @@
     margin-top:40px;
 }
 .invoice-description{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style:italic;
 }
 #invoice-number {
     font-style: italic;

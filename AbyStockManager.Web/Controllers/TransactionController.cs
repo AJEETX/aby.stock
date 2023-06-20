@@ -55,16 +55,15 @@ namespace Aby.StockManager.Web.Controllers
             model.TransactionTypeId = typeId;
             model.PageName = GetPageName(typeId);
             model.StoreList = await GetStoreList();
+            model.InvoiceNumber = string.Format("INV-" + DateTime.Now.ToString("yyyyMMddhhmm"));
 
             if (typeId == (int)TransactionType.Invoice)
             {
                 model.TransactionCode = TransactionType.Invoice.ToString();
-                model.InvoiceNumber = "SALES-INV" + DateTime.Now.ToString("yyyyMMMddhhmmss").ToUpper();
             }
             if (typeId == (int)TransactionType.StockIn)
             {
                 model.TransactionCode = TransactionType.StockIn.ToString();
-                model.InvoiceNumber = "STOCK-INV" + DateTime.Now.ToString("yyyyMMMddhhmmss").ToUpper();
             }
             var serviceResult = await _storeService.GetAll();
             model.StoreId = serviceResult.TransactionResult.FirstOrDefault().Id.Value;
@@ -192,7 +191,7 @@ namespace Aby.StockManager.Web.Controllers
                 var serviceResult = await _transactionService.GetTransactionDetailByTransactionId(id);
                 if (serviceResult.IsSucceeded)
                 {
-                    IEnumerable<TransactionDetailViewModel> transactionDetailViewModel = _mapper.Map<IEnumerable<TransactionDetailViewModel>>(serviceResult.TransactionResult);
+                    //IEnumerable<TransactionDetailViewModel> transactionDetailViewModel = _mapper.Map<IEnumerable<TransactionDetailViewModel>>(serviceResult.TransactionResult);
                     jsonResultModel.Data = serviceResult.TransactionResult;
                 }
             }
@@ -270,11 +269,11 @@ namespace Aby.StockManager.Web.Controllers
                     Field = "Product name",
                     Value = item.ProductName
                 };
-                var price = (item.Price) * (100 / (100 + item.Tax));
+                //var price = (item.Price) * (100 / (100 + item.Tax));
                 var priceData = new ReceiptData
                 {
                     Field = "Price",
-                    Value = "Rs. " + price.ToString("#,###.00")
+                    //Value = "Rs. " + price.ToString("#,###.00")
                 };
 
                 var qtyData = new ReceiptData
@@ -285,13 +284,13 @@ namespace Aby.StockManager.Web.Controllers
                 var taxData = new ReceiptData
                 {
                     Field = "GST [ %]",
-                    Value = (item.Price - price).ToString("#,###.00") + " [" + item.Tax.ToString("##.00") + " % ]"
+                    //Value = (item.Price - price).ToString("#,###.00") + " [" + item.Tax.ToString("##.00") + " % ]"
                 };
 
                 var totalData = new ReceiptData
                 {
                     Field = "Total Price",
-                    Value = "Rs. " + item.Price.ToString("#,###.00")
+                    //Value = "Rs. " + item.Price.ToString("#,###.00")
                 };
 
                 var payData = new ReceiptData

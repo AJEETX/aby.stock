@@ -10,10 +10,14 @@ namespace Aby.StockManager.Model.Domain
         public int? TransactionId { get; set; }
         public int? Amount { get; set; }
         public string ProductName { get; set; }
+        public string TransactionDate { get; set; }
+        public string TransactionDueDate { get; set; }
         public string Barcode { get; set; }
         public string InvoiceNumber { get; set; }
-        public double Tax { get; set; }
-        public double Price { get; set; }
+        public string Tax { get; set; }
+        public string Price { get; set; }
+
+        public string TotalPrice { get; set; }
         public string Description { get; set; }
         public string UnitOfMeasureName { get; set; }
         public string UnitOfMeasureShortName { get; set; }

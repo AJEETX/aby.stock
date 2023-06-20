@@ -11,10 +11,12 @@ namespace Aby.StockManager.Model.ViewModel.JsonResult
             IsSucceeded = true;
             IsRedirect = false;
         }
+
         public bool IsSucceeded { get; set; }
         public bool IsRedirect { get; set; }
         public string UserMessage { get; set; }
         public string RedirectUrl { get; set; }
         public object Data { get; set; }
+        public double GrandTotal { get; set; }
     }
 }
