@@ -193,7 +193,7 @@ namespace Aby.StockManager.Web.Controllers
                 if (serviceResult.IsSucceeded)
                 {
                     IEnumerable<TransactionDetailViewModel> transactionDetailViewModel = _mapper.Map<IEnumerable<TransactionDetailViewModel>>(serviceResult.TransactionResult);
-                    jsonResultModel.Data = transactionDetailViewModel;
+                    jsonResultModel.Data = serviceResult.TransactionResult;
                 }
             }
             catch (Exception ex)

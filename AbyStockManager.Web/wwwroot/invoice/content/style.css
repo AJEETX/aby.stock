@@ -59,32 +59,32 @@
     border-bottom: 1px solid #AAAAAA;
 }
 
-.modal#logo {
+.modal #logo {
     float: left;
     margin-top: 8px;
 }
 
-    .modal#logo img {
-        height: 70px;z
+    .modal #logo img {
+        height: 70px;
     }
 
-.modal#company {
+.modal #company {
     float: right;
     text-align: right;
 }
 
 
-.modal#details {
+.modal #details {
     margin-bottom: 50px;
 }
 
-.modal#client {
+.modal #client {
     padding-left: 6px;
     border-left: 6px solid #0087C3;
     float: left;
 }
 
-    .modal#client .to {
+    .modal #client .to {
         color: #777777;
     }
 
@@ -94,12 +94,12 @@
     margin: 0;
 }
 
-.modal#invoice {
+.modal #invoice {
     float: right;
     text-align: right;
 }
 
-    .modal#invoice h1 {
+    .modal #invoice h1 {
         color: #0087C3;
         font-size: 2em;
         line-height: 1em;
@@ -107,12 +107,12 @@
         margin: 0 0 10px 0;
     }
 
-    .modal#invoice .date {
+    .modal #invoice .date {
         font-size: 1em;
         color: #777777;
     }
 
-.modal.modaltable {
+.modal .invoice-table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
@@ -137,38 +137,40 @@
 }
 
 .modal table td h3 {
-    color: #57B223;
-    font-size: 1em;
+    font-size: .9em;
     font-weight: normal;
     margin: 0 0 0.2em 0;
 }
 
 .modal table .no {
-    color: #FFFFFF;
     font-size: .8em;
-    background: #57B223;
+    background: #DDDDDD;
 }
 
 .modal table .desc {
     text-align: left;
+    font-size: .8em;
 }
 
 .modal table .unit {
     background: #DDDDDD;
+    font-size: .8em;
 }
 
-t.modal able .qty {
+.modal table .qty {
+    font-size: .8em;
 }
 
 .modal table .total {
-    background: #57B223;
-    color: #FFFFFF;
+    background: #DDDDDD;
+    font-size: .8em;
 }
 
 .modal table td.unit,
 .modal table td.qty,
 .modal table td.total {
     font-size: 1em;
+    font-size: .8em;
 }
 
 .modal table tbody tr:last-child td {
@@ -189,8 +191,9 @@ t.modal able .qty {
 }
 
 .modal table tfoot tr:last-child td {
-    color: #57B223;
+    font-family:'Franklin Gothic'
     font-size: 1em;
+    font-weight:bold;
     border-top: 1px solid #57B223;
 }
 
@@ -198,18 +201,18 @@ t.modal able .qty {
     border: none;
 }
 
-.modal#thanks {
+.modal #thanks {
     font-size: 1.1em;
     margin-bottom: 50px;
 }
 
-.modal#notices {
+.modal #notices {
     padding-left: 6px;
     border-left: 6px solid #0087C3;
 }
 
-    .modal#notices .notice {
-        font-size: 1em;
+    .modal #notices .notice {
+        font-size: .8em;
     }
 
 .modal footer {
@@ -225,4 +228,8 @@ t.modal able .qty {
 .modal .modal-footer {
     margin-top:40px;
 }
-
+.invoice-description{
+}
+#invoice-number {
+    font-style: italic;
+}

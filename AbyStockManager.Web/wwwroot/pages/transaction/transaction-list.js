@@ -113,18 +113,21 @@ function detailShow(row, id) {
         success: function (data) {
             if (data.IsSucceeded) {
                 $.each(data.Data, function (i, item) {
+                    $('#invoice-description').text(item.Description);
+                    $('#invoice-number').text(item.InvoiceNumber);
+                    var count = i + 1;
                     str += '<tr>';
-                    str += '<td>' + item.Description + ' </td>';
-                    str += '<td>' + item.Barcode + "-" + item.ProductName + ' </td>';
-                    str += '<td>' + item.Amount + ' </td>';
-                    str += '<td>' + item.Tax + ' </td>';
-                    str += '<td>' + item.Price + ' </td>';
-                    str += '<td>' + item.UnitOfMeasureName + "-" + item.UnitOfMeasureShortName + ' </td>';
+                    str += '<td class="no"> #' + i + ' </td>';
+                    str += '<td class="desc">' + item.ProductName + ' </td>';
+                    str += '<td class="unit">' + item.Price + ' </td>';
+                    str += '<td  class="qty">' + item.Amount + ' </td>';
+                    str += '<td  class="qty">' + item.Tax + ' </td>';
+                    str += '<td  class="total">' + item.UnitOfMeasureName + ' </td>';
                     str += '</tr>';
                 });
-                $("#tbl-transaction-detail tbody").append(str);
+                $("#invoice-table tbody").append(str);
                 $('#print-invoice').attr('href', 'Transaction/Print?id=' + id);
-                $('#invoice-css').attr('href', 'invoice/content/style.css');
+                
             }
             else {
                 toastr.error(data.UserMessage);
