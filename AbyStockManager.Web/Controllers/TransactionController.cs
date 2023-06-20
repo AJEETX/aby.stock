@@ -16,6 +16,7 @@ using System.IO;
 using Receipt;
 using Microsoft.AspNetCore.Hosting;
 using AbyStockManager.Web.Model.ViewModel.Invoice;
+using Microsoft.CodeAnalysis;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -225,10 +226,19 @@ namespace Aby.StockManager.Web.Controllers
                 return "Stock In";
             else if ((int)TransactionType.Invoice == transactionTypeId)
                 return "Create Invoice";
-            return string.Empty;
+            return "Create Invoice";
         }
 
         public async Task<IActionResult> Print(int id = 0)
+        {
+            CreateTransactionViewModel model = new CreateTransactionViewModel();
+            model.StoreList = await GetStoreList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DoPrint(int id = 0)
         {
             string fName = Path.Combine(webHostEnvironment.WebRootPath, "invoice", "Receipt" + DateTime.Now.ToString("yyyymmddhhmmss") + ".pdf");
 
