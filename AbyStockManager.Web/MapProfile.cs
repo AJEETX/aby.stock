@@ -118,7 +118,8 @@ namespace Aby.StockManager.Mapper
             CreateMap<TransactionDTO, ListTransactionViewModel>()
                  .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.TransactionDate)));
             CreateMap<TransactionDTO, EditTransactionViewModel>();
-            CreateMap<EditTransactionViewModel, TransactionDTO>();
+            CreateMap<EditTransactionViewModel, TransactionDTO>()
+                .ForMember(x => x.TransactionDate, y => y.MapFrom(z => DateTime.ParseExact(z.TransactionDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)));
 
             CreateMap<SearchStoreStockReportViewModel, StoreStockDTO>()
                     .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
