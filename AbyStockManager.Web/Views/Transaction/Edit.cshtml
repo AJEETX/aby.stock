@@ -61,7 +61,7 @@
                                         <thead>
                                             <tr>
                                                 <td>Product</td>
-                                                <td>Amount</td>
+                                                <td>Quantity</td>
                                                 <td></td>
                                             </tr>
                                         </thead>
@@ -82,7 +82,7 @@
                                                     <td class="col-md-2">
                                                         @if (i > 0)
                                                         {
-                                                        <input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete">
+                                                        <input type="button" class="ibtnDel btn btn-sm btn-danger" value="x">
                                                         }
                                                     </td>
                                                 </tr>
@@ -91,7 +91,7 @@
                                         <tfoot>
                                             <tr>
                                                 <td colspan="5" style="text-align: left;">
-                                                    <input type="button" class="btn btn-lg btn-block btn-success" id="addrow" value="Add Row" />
+                                                    <input type="button" class="btn btn-lg btn-block btn-success" id="addrow" value="Add Product" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -170,7 +170,7 @@
                 var cols = "";
                 cols += '<td><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"></select></td>';
                 cols += '<td><input type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" /></td>';
-                cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger"  value="Delete"></td>';
+                cols += '<td><input type="button" class="ibtnDel btn btn-sm btn-danger"  value="x"></td>';
                 newRow.append(cols);
                 $("table#table-detail").append(newRow);
                 setSelect2("#ProductId" + counter);
