@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\dist\img\logo.png" />
     <Content Remove="wwwroot\images\Receipt\logo.png" />
     <Content Remove="wwwroot\invoice\logo.png" />
   </ItemGroup>
@@ -37,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\dist\img\logo.png" />
     <None Include="wwwroot\images\Receipt\logo.png" />
   </ItemGroup>
 

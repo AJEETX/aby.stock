@@ -17,6 +17,7 @@ using Receipt;
 using Microsoft.AspNetCore.Hosting;
 using AbyStockManager.Web.Model.ViewModel.Invoice;
 using Microsoft.CodeAnalysis;
+using AbyStockManager.Web.Common.Extensions;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -55,7 +56,7 @@ namespace Aby.StockManager.Web.Controllers
             model.TransactionTypeId = typeId;
             model.PageName = GetPageName(typeId);
             model.StoreList = await GetStoreList();
-            model.InvoiceNumber = string.Format("INV-" + DateTime.Now.ToString("yyyyMMddhhmm"));
+            model.InvoiceNumber = InvoiceNumberGenerator.GenerateInvoiceNumber();
 
             if (typeId == (int)TransactionType.Invoice)
             {
