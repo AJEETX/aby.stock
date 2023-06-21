@@ -11,7 +11,7 @@ namespace Aby.StockManager.Data.Seed
     {
         public void Configure(EntityTypeBuilder<Tax> builder)
         {
-            builder.HasData(new Tax { Id = 1, Name = "FIRST", Rate = 18, CreateDate = DateTime.Now });
+            builder.HasData(new Tax { Id = 1, Name = "FIRST", Rate = 18.00D, CreateDate = DateTime.Now });
         }
     }
 }

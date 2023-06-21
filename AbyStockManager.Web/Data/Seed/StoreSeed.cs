@@ -11,7 +11,7 @@ namespace Aby.StockManager.Data.Seed
     {
         public void Configure(EntityTypeBuilder<Store> builder)
         {
-            builder.HasData(new Store { Id = 1, StoreCode = "SDA", StoreName = "SDA CEAT Tyres", CreateDate = DateTime.Now });
+            builder.HasData(new Store { Id = 1, StoreCode = "SDA", StoreName = "CEAT Tyres", CreateDate = DateTime.Now });
         }
     }
 }

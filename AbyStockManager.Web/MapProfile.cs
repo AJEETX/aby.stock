@@ -116,7 +116,8 @@ namespace Aby.StockManager.Mapper
                     .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
             CreateMap<TransactionDTO, ListTransactionViewModel>()
                  .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.TransactionDate)));
-            CreateMap<TransactionDTO, EditTransactionViewModel>();
+            CreateMap<TransactionDTO, EditTransactionViewModel>()
+                 .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.TransactionDate)));
             CreateMap<EditTransactionViewModel, TransactionDTO>();
 
             CreateMap<SearchStoreStockReportViewModel, StoreStockDTO>()
@@ -163,6 +164,7 @@ namespace Aby.StockManager.Mapper
 
             CreateMap<Product, ProductDTO>()
                  .ForMember(dm => dm.CategoryName, vm => vm.MapFrom(vmf => vmf.Category != null ? vmf.Category.CategoryName : "-"))
+                 .ForMember(dm => dm.Tax, vm => vm.MapFrom(vmf => vmf.Tax != null ? string.Format("{0:C}", vmf.Tax.Rate) : "-"))
                  .ForMember(dm => dm.UnitOfMeasureName, vm => vm.MapFrom(vmf => vmf.UnitOfMeasure != null ? vmf.UnitOfMeasure.Isocode : "-"));
             CreateMap<ProductDTO, Product>();
 
