@@ -203,7 +203,7 @@ namespace Aby.StockManager.Web.Controllers
                     jsonResultModel.SgstTotal = "SGST:" + string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
                     jsonResultModel.TaxTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax);
 
-                    jsonResultModel.GrandPlainTotal = "Rs. " + string.Format("{0:0.00}", GrandTotal);
+                    jsonResultModel.GrandPlainTotal = "Rs. " + NumberToWords.ConvertAmount(GrandTotal);
                     jsonResultModel.GrandTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", GrandTotal);
                     jsonResultModel.SubTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", serviceResult.TransactionResult.Sum(r => r.Price * (100 / (100 + r.TaxRate)) * r.Amount).Value);
                 }
