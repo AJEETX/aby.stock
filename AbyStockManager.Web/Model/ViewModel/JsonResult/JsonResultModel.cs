@@ -17,6 +17,8 @@ namespace Aby.StockManager.Model.ViewModel.JsonResult
         public string UserMessage { get; set; }
         public string RedirectUrl { get; set; }
         public object Data { get; set; }
-        public double GrandTotal { get; set; }
+        public string SubTotal { get; set; }
+        public string GrandTotal { get; set; }
+        public string TaxTotal { get; set; }
     }
 }

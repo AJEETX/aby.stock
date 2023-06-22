@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Hosting;
 using AbyStockManager.Web.Model.ViewModel.Invoice;
 using Microsoft.CodeAnalysis;
 using AbyStockManager.Web.Common.Extensions;
+using System.Globalization;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -194,6 +195,14 @@ namespace Aby.StockManager.Web.Controllers
                 {
                     //IEnumerable<TransactionDetailViewModel> transactionDetailViewModel = _mapper.Map<IEnumerable<TransactionDetailViewModel>>(serviceResult.TransactionResult);
                     jsonResultModel.Data = serviceResult.TransactionResult;
+
+                    var subTotal = serviceResult.TransactionResult.Sum(r => r.Price * (100 / (100 + r.TaxRate)) * r.Amount).Value;
+                    var GrandTotal = serviceResult.TransactionResult.Sum(r => r.Price * r.Amount).Value;
+                    var totaltax = GrandTotal - subTotal;
+                    jsonResultModel.TaxTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totaltax);
+
+                    jsonResultModel.GrandTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", GrandTotal);
+                    jsonResultModel.SubTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", serviceResult.TransactionResult.Sum(r => r.Price * (100 / (100 + r.TaxRate)) * r.Amount).Value);
                 }
             }
             catch (Exception ex)

@@ -112,6 +112,9 @@ function detailShow(row, id) {
         type: "GET",
         success: function (data) {
             if (data.IsSucceeded) {
+                $('#amount-total').text(data.SubTotal);
+                $('#grand-total').text(data.GrandTotal);
+                $('#tax-total').text(data.TaxTotal);
                 $.each(data.Data, function (i, item) {
                     $('#invoice-description').text(item.Description);
                     $('#invoice-number').text(item.InvoiceNumber);
@@ -121,10 +124,10 @@ function detailShow(row, id) {
                     str += '<tr>';
                     str += '<td class="no"> ' + count + ' </td>';
                     str += '<td class="desc">' + item.ProductName + ' </td>';
-                    str += '<td class="unit">' + item.Price + ' </td>';
+                    str += '<td class="unit">' + item.UnitPrice + ' </td>';
                     str += '<td  class="qty">' + item.Amount + ' </td>';
                     str += '<td  class="tax">' + item.Tax + ' </td>';
-                    str += '<td  class="total">' + item.TotalPrice + ' </td>';
+                    str += '<td  class="total">' + item.SubTotalPrice + ' </td>';
                     str += '</tr>';
                 });
                 $("#invoice-table tbody").append(str);

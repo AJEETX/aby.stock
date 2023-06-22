@@ -15,9 +15,11 @@ namespace Aby.StockManager.Model.Domain
         public string Barcode { get; set; }
         public string InvoiceNumber { get; set; }
         public string Tax { get; set; }
-        public string Price { get; set; }
+        public string UnitPrice { get; set; }
+        public double Price { get; set; }
+        public double TaxRate { get; set; }
 
-        public string TotalPrice { get; set; }
+        public string SubTotalPrice { get; set; }
         public string Description { get; set; }
         public string UnitOfMeasureName { get; set; }
         public string UnitOfMeasureShortName { get; set; }
