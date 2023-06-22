@@ -12,6 +12,7 @@ using Aby.StockManager.Model.ViewModel.JsonResult;
 using Aby.StockManager.Model.ViewModel.Report.StoreStock;
 using Aby.StockManager.Model.ViewModel.Report.TransactionDetail;
 using System.Collections;
+using System.Globalization;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -61,7 +62,7 @@ namespace Aby.StockManager.Web.Controllers
                     jsonDataTableModel.aaData = listVM;
                     jsonDataTableModel.iTotalDisplayRecords = serviceCountResult.TransactionResult;
                     jsonDataTableModel.iTotalRecords = serviceCountResult.TransactionResult;
-                    jsonDataTableModel.iAllProductTotalPrice = total;
+                    jsonDataTableModel.iAllProductTotalPrice = string.Format(new CultureInfo("hi-IN"), "{0:c}", total);
                 }
                 else
                 {

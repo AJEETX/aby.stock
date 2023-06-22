@@ -8,7 +8,7 @@ namespace Aby.StockManager.Model.ViewModel.JsonResult
     {
         public int iTotalRecords { get; set; }
         public int iTotalDisplayRecords { get; set; }
-        public double? iAllProductTotalPrice { get; set; }
+        public string? iAllProductTotalPrice { get; set; }
         public object aaData { get; set; }
     }
 }
