@@ -37,14 +37,16 @@ namespace Aby.StockManager.Mapper
 
             CreateMap<CreateTaxViewModel, TaxDTO>()
                 .ForMember(dm => dm.Name, vm => vm.MapFrom(vmf => vmf.Name))
-                .ForMember(dm => dm.Rate, vm => vm.MapFrom(vmf => vmf.Rate))
+                .ForMember(dm => dm.Rate, vm => vm.MapFrom(vmf => double.Parse(vmf.Rate)))
                 ;
 
             CreateMap<SearchTaxViewModel, TaxDTO>()
                     .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
                     .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
 
-            CreateMap<TaxDTO, ListTaxViewModel>();
+            CreateMap<TaxDTO, ListTaxViewModel>()
+                .ForMember(dm => dm.Rate, vm => vm.MapFrom(vmf => string.Format("{0:P2}", vmf.Rate / 100)))
+                ;
             CreateMap<TaxDTO, EditTaxViewModel>();
             CreateMap<EditTaxViewModel, TaxDTO>();
 
@@ -95,8 +97,8 @@ namespace Aby.StockManager.Mapper
                     .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
             CreateMap<ProductDTO, ListProductViewModel>()
                  .ForMember(dm => dm.ImageDisplay, vm => vm.MapFrom(vmf => !string.IsNullOrEmpty(vmf.Image) ? "/upload/" + vmf.Image : "/dist/img/no-image.png"))
-                 .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Price.HasValue ? string.Format("{0:c}", vmf.Price.Value) : "-"))
-                 .ForMember(dm => dm.Tax, vm => vm.MapFrom(vmf => vmf.TaxRate != null ? string.Format("{0:P}", vmf.TaxRate / 100) : "-"))
+                 .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Price.HasValue ? string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Price.Value) : "-"))
+                 .ForMember(dm => dm.Tax, vm => vm.MapFrom(vmf => vmf.TaxRate != null ? string.Format("{0:P2}", vmf.TaxRate / 100) : "-"))
                  ;
 
             CreateMap<ProductDTO, CreateProductViewModel>();

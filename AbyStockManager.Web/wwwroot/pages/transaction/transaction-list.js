@@ -114,7 +114,11 @@ function detailShow(row, id) {
             if (data.IsSucceeded) {
                 $('#amount-total').text(data.SubTotal);
                 $('#grand-total').text(data.GrandTotal);
+                $('#grand-plain-total').text(data.GrandPlainTotal);
                 $('#tax-total').text(data.TaxTotal);
+                $('#sgst-total').text(data.SgstTotal);
+                $('#cgst-total').text(data.CgstTotal);
+
                 $.each(data.Data, function (i, item) {
                     $('#invoice-description').text(item.Description);
                     $('#invoice-number').text(item.InvoiceNumber);

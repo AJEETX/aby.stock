@@ -116,7 +116,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Invoice</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button id="close-btn" type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -124,6 +124,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="body">
+                                <p id="print-title">.</p>
+                                <p id="print-title">.</p>
                                 <div class="header clearfix">
                                     <div id="logo">
                                         <img src="~/invoice/img/logo.png">
@@ -171,8 +173,10 @@
                                                 <td id="amount-total"> </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3"></td>
-                                                <td colspan="2">Tax total</td>
+                                                <td colspan="2"></td>
+                                                <td colspan="1">Tax total</td>
+                                                <td id="sgst-total"> </td>
+                                                <td id="cgst-total"> </td>
                                                 <td id="tax-total"> </td>
                                             </tr>
                                             <tr>
@@ -182,6 +186,7 @@
                                             </tr>
                                         </tfoot>
                                     </table>
+                                    <div id="grand-plain-total"> </div>
                                     <div id="thanks">Thank you!</div>
                                     <div id="notices">
                                         <div>NOTICE:</div>
@@ -195,7 +200,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div id="print-section" class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-outline-primary" onclick="printElement()" data-dismiss="modal">Print</button>
                         @*<a id="print-invoice" href="#" on class="btn btn-warning">Print </a>*@

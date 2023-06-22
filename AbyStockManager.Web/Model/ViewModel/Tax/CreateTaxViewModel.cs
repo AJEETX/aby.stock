@@ -11,6 +11,6 @@ namespace AbyStockManager.Web.Model.ViewModel.Tax
         [Display(Name = "Name")]
         public string Name { get; set; }
 
-        public double Rate { get; set; }
+        public string Rate { get; set; }
     }
 }

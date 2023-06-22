@@ -19,6 +19,9 @@ namespace Aby.StockManager.Model.ViewModel.JsonResult
         public object Data { get; set; }
         public string SubTotal { get; set; }
         public string GrandTotal { get; set; }
+        public string GrandPlainTotal { get; set; }
+        public string SgstTotal { get; set; }
+        public string CgstTotal { get; set; }
         public string TaxTotal { get; set; }
     }
 }
