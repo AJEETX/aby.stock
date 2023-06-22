@@ -95,7 +95,10 @@ namespace Aby.StockManager.Mapper
                     .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
             CreateMap<ProductDTO, ListProductViewModel>()
                  .ForMember(dm => dm.ImageDisplay, vm => vm.MapFrom(vmf => !string.IsNullOrEmpty(vmf.Image) ? "/upload/" + vmf.Image : "/dist/img/no-image.png"))
-                 .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Price.HasValue ? string.Format("{0:c}", vmf.Price.Value) : "-"));
+                 .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Price.HasValue ? string.Format("{0:c}", vmf.Price.Value) : "-"))
+                 .ForMember(dm => dm.Tax, vm => vm.MapFrom(vmf => vmf.TaxRate != null ? string.Format("{0:P}", vmf.TaxRate / 100) : "-"))
+                 ;
+
             CreateMap<ProductDTO, CreateProductViewModel>();
             CreateMap<CreateProductViewModel, ProductDTO>();
             CreateMap<ProductDTO, EditProductViewModel>();
@@ -167,6 +170,7 @@ namespace Aby.StockManager.Mapper
             CreateMap<Product, ProductDTO>()
                  .ForMember(dm => dm.CategoryName, vm => vm.MapFrom(vmf => vmf.Category != null ? vmf.Category.CategoryName : "-"))
                  .ForMember(dm => dm.Tax, vm => vm.MapFrom(vmf => vmf.Tax != null ? string.Format("{0:C}", vmf.Tax.Rate) : "-"))
+                 .ForMember(dm => dm.TaxRate, vm => vm.MapFrom(vmf => vmf.Tax != null ? vmf.Tax.Rate : 0.0D))
                  .ForMember(dm => dm.UnitOfMeasureName, vm => vm.MapFrom(vmf => vmf.UnitOfMeasure != null ? vmf.UnitOfMeasure.Isocode : "-"));
             CreateMap<ProductDTO, Product>();
 

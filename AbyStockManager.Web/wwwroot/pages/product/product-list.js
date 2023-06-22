@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var datatable = $('#datatable').dataTable({
         "searching": false,
         "iDisplayLength": 10,
@@ -47,16 +46,20 @@ $(document).ready(function () {
                     mDataProp: "ProductName"
                 },
                 {
-                    mDataProp: "Barcode"
-                },
-                {
                     mDataProp: "Price"
+                },
+
+                {
+                    mDataProp: "Tax"
                 },
                 {
                     mDataProp: "CategoryName"
                 },
                 {
                     mDataProp: "UnitOfMeasureName"
+                },
+                {
+                    mDataProp: "Barcode", bVisible: false
                 },
                 {
                     "sDefaultContent": "",
@@ -80,20 +83,15 @@ $(document).ready(function () {
         datatable.fnFilter();
     });
 
-
     $('.enter-keyup').keypress(function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
             datatable.fnFilter();
         }
     });
-
 });
 
-
-
 function deleteRow(row, id) {
-
     $.ajax({
         url: '/Product/Delete/' + id,
         type: "POST",
@@ -110,4 +108,3 @@ function deleteRow(row, id) {
         }
     });
 }
-

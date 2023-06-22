@@ -59,7 +59,7 @@ namespace Aby.StockManager.Service.Product
                                                                                         (string.IsNullOrEmpty(criteria.Barcode) || x.Barcode.Contains(criteria.Barcode)) &&
                                                                                         (criteria.CategoryId == null || x.CategoryId == criteria.CategoryId) &&
                                                                                         (criteria.UnitOfMeasureId == null || x.UnitOfMeasureId == criteria.UnitOfMeasureId),
-                                                                           includes: new List<string>() { "UnitOfMeasure", "Category" },
+                                                                           includes: new List<string>() { "UnitOfMeasure", "Category", "Tax" },
                                                                            orderByDesc: x => x.Id,
                                                                            skip: criteria.PageNumber,
                                                                            take: criteria.RecordCount);
