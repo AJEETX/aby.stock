@@ -18,8 +18,8 @@ Stock Manager is ASP.NET Core (7.0), C#, EF code first web applications that hel
 
 # How to Run Project
 - Step 1: Unzip the downloaded folder
-- Step 2: Open TSEasyStockManager.sln file with Visual Studio 2022
-- Step 3: Set as Startup Project "aby.StockManager.Web"
+- Step 2: Open AbyStockManager.sln file with Visual Studio 2022
+- Step 3: Set as Startup Project "abyStockManager.Web"
 - Step 4: Update database connection: appsettings.json
 - Step 5: Open Package Manager Console and Go to application root directory.<br>
 Run Code <br>
