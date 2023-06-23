@@ -229,5 +229,25 @@ namespace Aby.StockManager.Service.User
             }
             return result;
         }
+
+        public async Task<ServiceResult> DeleteProductImage(int id)
+        {
+            ServiceResult result = new ServiceResult();
+            try
+            {
+                using (_unitOfWork)
+                {
+                    await _unitOfWork.UserRepository.DeleteProductImage(id);
+                    await _unitOfWork.SaveAsync();
+                    result.UserMessage = CommonMessages.MSG0001;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.IsSucceeded = false;
+                result.UserMessage = string.Format(CommonMessages.MSG0002, ex.Message);
+            }
+            return result;
+        }
     }
 }

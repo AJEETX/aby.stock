@@ -76,7 +76,9 @@ namespace Aby.StockManager.Mapper
             CreateMap<SearchUserViewModel, UserDTO>()
                     .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
                     .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
-            CreateMap<UserDTO, ListUserViewModel>();
+            CreateMap<UserDTO, ListUserViewModel>()
+                 .ForMember(dm => dm.ImageDisplay, vm => vm.MapFrom(vmf => !string.IsNullOrEmpty(vmf.Image) ? "/upload/" + vmf.Image : "/dist/img/no-image.png"));
+
             CreateMap<UserDTO, EditUserViewModel>();
             CreateMap<EditUserViewModel, UserDTO>();
 

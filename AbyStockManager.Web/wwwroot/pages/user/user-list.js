@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var datatable = $('#datatable').dataTable({
         "searching": false,
         "iDisplayLength": 10,
@@ -35,6 +34,14 @@ $(document).ready(function () {
         aoColumns:
             [
                 {
+                    "sDefaultContent": "",
+                    "bSortable": false,
+                    "mRender": function (data, type, row) {
+                        var img = '<img src="' + row.ImageDisplay + '" src height="60" />';
+                        return img;
+                    }
+                },
+                {
                     mDataProp: "Email"
                 },
                 {
@@ -65,20 +72,15 @@ $(document).ready(function () {
         datatable.fnFilter();
     });
 
-
     $('.enter-keyup').keypress(function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
             datatable.fnFilter();
         }
     });
-
 });
 
-
-
 function deleteRow(row, id) {
-
     $.ajax({
         url: '/User/Delete/' + id,
         type: "POST",
@@ -95,4 +97,3 @@ function deleteRow(row, id) {
         }
     });
 }
-

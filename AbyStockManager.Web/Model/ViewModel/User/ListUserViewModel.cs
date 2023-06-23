@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 using Aby.StockManager.Model.ViewModel.Base;
 
 namespace Aby.StockManager.Model.ViewModel.User
@@ -10,5 +11,6 @@ namespace Aby.StockManager.Model.ViewModel.User
         public string Email { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string ImageDisplay { get; set; }
     }
 }

@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\invoice\receipt\" />
+    <Folder Include="wwwroot\user\" />
     <Folder Include="wwwroot\upload\" />
   </ItemGroup>
 

@@ -17,6 +17,7 @@ namespace Aby.StockManager.Data.Configurations
             builder.Property(x => x.Surname).IsRequired().HasMaxLength(30);
             builder.Property(x => x.Password).IsRequired().HasMaxLength(40);
             builder.Property(x => x.Email).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Image).HasMaxLength(50);
             builder.HasIndex(u => u.Email).IsUnique();
             builder.ToTable("User");
         }

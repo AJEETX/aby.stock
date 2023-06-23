@@ -98,7 +98,7 @@ namespace Aby.StockManager.Service.Transaction
                                                                            orderByDesc: x => x.Id,
                                                                            skip: criteria.PageNumber,
                                                                            take: criteria.RecordCount,
-                                                                           includes: new List<string>() { "TransactionType", "Store", "ToStore" });
+                                                                           includes: new List<string>() { "TransactionType", "Store", "ToStore", "TransactionDetail" });
 
                     result.TransactionResult = _mapper.Map<IEnumerable<TransactionDTO>>(list);
                 }
