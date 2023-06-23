@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+
 using Aby.StockManager.Model.ViewModel.Base;
 
 namespace Aby.StockManager.Model.ViewModel.UnitOfMeasure
 {
-    public class CreateUnitOfMeasureViewModel: BaseViewModel
+    public class CreateUnitOfMeasureViewModel : BaseViewModel
     {
         [Required]
         [MaxLength(30)]
-        [Display(Name = "Unit of Measure Name")]
+        [Display(Name = "Measurement type Name")]
         public string UnitOfMeasureName { get; set; }
-
 
         [Required]
         [MaxLength(3)]
-        [Display(Name = "Unit of Measure Short Code")]
+        [Display(Name = "Measurement type Code")]
         public string Isocode { get; set; }
-
     }
 }

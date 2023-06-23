@@ -22,7 +22,7 @@ namespace Aby.StockManager.Model.ViewModel.Product
         [Display(Name = "Tax")]
         public int? TaxId { get; set; }
 
-        [Display(Name = "Unit Of Measure")]
+        [Display(Name = "Measurement type")]
         public int? UnitOfMeasureId { get; set; }
 
         public IEnumerable<SelectListItem> CategoryList { get; set; }
