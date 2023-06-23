@@ -31,7 +31,7 @@ namespace Aby.StockManager.Repository.Product
 
         public async Task<IEnumerable<Data.Entity.Product>> GetProductsByBarcodeAndName(string term)
         {
-            return await dbContext.Product.Where(x => x.ProductName.Contains(term) || x.Barcode.Contains(term)).AsNoTracking().ToListAsync();
+            return await dbContext.Product.Where(x => x.ProductName.ToLower().Contains(term) || x.Barcode.ToLower().Contains(term)).AsNoTracking().ToListAsync();
         }
     }
 }

@@ -227,6 +227,10 @@ namespace Aby.StockManager.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProduct(string search)
         {
+            if (!string.IsNullOrEmpty(search))
+            {
+                search = search.ToLower();
+            }
             ServiceResult<IEnumerable<ProductDTO>> serviceResult = await _productService.GetProductsByBarcodeAndName(search);
             IEnumerable<SelectListItem> drpProductList = _mapper.Map<IEnumerable<SelectListItem>>(serviceResult.TransactionResult);
             return Json(drpProductList);
