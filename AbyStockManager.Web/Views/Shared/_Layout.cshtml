@@ -15,12 +15,13 @@
 
 <body class="hold-transition sidebar-mini">
     @{
-        string userName = "Unknown", userImage = string.Empty;
+        string userName = "User", userImage = string.Empty;
         Claim userNameClaim = User.Claims.FirstOrDefault(x=>x.Type == ClaimTypes.Name);
         if (userNameClaim != null)
         {
             userName = userNameClaim.Value;
         }
+        userName = "Hi " + userName;
         Claim userImageClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData);
         if (userImageClaim != null)
         {
@@ -45,8 +46,8 @@
             </a>
             <!-- User Logo -->
             <a href="/" class="brand-link">
-                <img src="@userImage" alt="user" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">@userName</span>
+                <img src="@userImage" alt="user" class="brand-image img-circle elevation-3" style="opacity: .8;">
+                <span style="font-family:'Arial Narrow', Arial, sans-serif;font-size:.9em;" class="">@userName</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
