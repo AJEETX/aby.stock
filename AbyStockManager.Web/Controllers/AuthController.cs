@@ -41,7 +41,7 @@ namespace Aby.StockManager.Web.Controllers
                 if (result.IsSucceeded)
                 {
                     var user = await _userService.GetById(result.Id);
-                    var userImage = "/dist/img/user-profile.png";
+                    var userImage = "/dist/img/no-user-image.png";
                     if (user.TransactionResult?.Image != null)
                     {
                         userImage = "/user/" + user.TransactionResult.Image;
