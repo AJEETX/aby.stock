@@ -11,7 +11,7 @@ namespace Aby.StockManager.Core.Repository
 
         Task<bool> EmailValidationUpdateUser(string email, int Id);
 
-        Task<bool> Login(string email, string password);
+        Task<Data.Entity.User> Login(string email, string password);
 
         Task DeleteProductImage(int id);
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Aby.StockManager.Core.Repository;
 using Aby.StockManager.Data.Context;
 using Aby.StockManager.Repository.Base;
+using Aby.StockManager.Data.Entity;
 
 namespace Aby.StockManager.Repository.User
 {
@@ -27,9 +28,14 @@ namespace Aby.StockManager.Repository.User
             return await dbContext.User.AnyAsync(x => x.Email == email && x.Id != Id);
         }
 
-        public async Task<bool> Login(string email, string password)
+        public async Task<Data.Entity.User> Login(string email, string password)
         {
-            return await dbContext.User.AnyAsync(x => x.Email == email && x.Password == password);
+            var user = await dbContext.User.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+            if (user != null)
+            {
+                return user;
+            }
+            return null;
         }
 
         public async Task DeleteProductImage(int id)

@@ -40,7 +40,12 @@ namespace Aby.StockManager.Web.Controllers
                 ServiceResult result = await _userService.Login(model.Email, model.Password);
                 if (result.IsSucceeded)
                 {
-                    var claims = new List<Claim> { new Claim(ClaimTypes.Name, model.Email) };
+                    var user = await _userService.GetById(result.Id);
+                    var claims = new List<Claim> {
+                        new Claim(ClaimTypes.Name, user.TransactionResult.Name) ,
+                        new Claim(ClaimTypes.UserData, user.TransactionResult.Image) ,
+                        new Claim(ClaimTypes.Email, model.Email)
+                    };
                     var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);

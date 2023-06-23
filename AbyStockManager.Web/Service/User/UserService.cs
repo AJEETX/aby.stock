@@ -150,9 +150,12 @@ namespace Aby.StockManager.Service.User
             {
                 using (_unitOfWork)
                 {
-                    bool login = await _unitOfWork.UserRepository.Login(email, password.MD5Hash());
-                    if (login)
+                    var login = await _unitOfWork.UserRepository.Login(email, password.MD5Hash());
+                    if (login != null)
+                    {
+                        result.Id = login.Id;
                         result.IsSucceeded = true;
+                    }
                     else
                     {
                         result.IsSucceeded = false;
