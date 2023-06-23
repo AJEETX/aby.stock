@@ -41,9 +41,15 @@ namespace Aby.StockManager.Web.Controllers
                 if (result.IsSucceeded)
                 {
                     var user = await _userService.GetById(result.Id);
+                    var userImage = "/dist/img/user-profile.png";
+                    if (user.TransactionResult?.Image != null)
+                    {
+                        userImage = "/user/" + user.TransactionResult.Image;
+                    }
+
                     var claims = new List<Claim> {
                         new Claim(ClaimTypes.Name, user.TransactionResult.Name) ,
-                        new Claim(ClaimTypes.UserData, user.TransactionResult.Image) ,
+                        new Claim(ClaimTypes.UserData, userImage) ,
                         new Claim(ClaimTypes.Email, model.Email)
                     };
                     var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

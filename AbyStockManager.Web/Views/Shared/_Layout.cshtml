@@ -15,7 +15,7 @@
 
 <body class="hold-transition sidebar-mini">
     @{
-        string userName = "Unknown", userImage = "/dist/img/no-image.png";
+        string userName = "Unknown", userImage = string.Empty;
         Claim userNameClaim = User.Claims.FirstOrDefault(x=>x.Type == ClaimTypes.Name);
         if (userNameClaim != null)
         {
@@ -24,7 +24,7 @@
         Claim userImageClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData);
         if (userImageClaim != null)
         {
-            userImage ="user/"+ userImageClaim.Value;
+            userImage = userImageClaim.Value;
         }
     }
     <div class="wrapper">
