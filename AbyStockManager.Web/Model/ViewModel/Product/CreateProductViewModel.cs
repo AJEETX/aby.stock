@@ -20,7 +20,7 @@ namespace Aby.StockManager.Model.ViewModel.Product
         public string Barcode { get; set; }
 
         [Display(Name = "Description")]
-        public string Description { get; set; } = "--";
+        public string Description { get; set; }
 
         [Display(Name = "Image")]
         public string Image { get; set; }

@@ -36,7 +36,7 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         public string TransactionDate { get; set; }
 
         [Display(Name = "Description")]
-        public string Description { get; set; }
+        public string Description { get; set; } = "--";
 
         public IList<TransactionDetailViewModel> TransactionDetail { get; set; }
         public IEnumerable<SelectListItem> StoreList { get; set; }

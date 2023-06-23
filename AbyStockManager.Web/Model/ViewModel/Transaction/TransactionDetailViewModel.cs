@@ -11,7 +11,7 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         public double? Amount { get; set; }
         public double? Tax { get; set; }
         public double Price { get; set; }
-        public string? Description { get; set; }
+        public string? Description { get; set; } = "--";
         public string ProductName { get; set; }
         public string Barcode { get; set; }
         public string UnitOfMeasureName { get; set; }
