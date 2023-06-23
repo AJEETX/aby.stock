@@ -16,7 +16,7 @@ namespace Aby.StockManager.Model.ViewModel.Product
         public string ProductName { get; set; }
 
         [MaxLength(50)]
-        [Display(Name = "Barcode")]
+        [Display(Name = "Product code")]
         public string Barcode { get; set; }
 
         [Display(Name = "Description")]

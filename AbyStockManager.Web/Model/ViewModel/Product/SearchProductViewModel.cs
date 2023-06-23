@@ -13,7 +13,7 @@ namespace Aby.StockManager.Model.ViewModel.Product
         [Display(Name = "Product Name")]
         public string ProductName { get; set; }
 
-        [Display(Name = "Barcode")]
+        [Display(Name = "Product code")]
         public string Barcode { get; set; }
 
         [Display(Name = "Category")]

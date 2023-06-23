@@ -43,7 +43,10 @@
                     mDataProp: "InvoiceNumber"
                 },
                 {
-                    mDataProp: "TransactionTypeName"
+                    mDataProp: "Description"
+                },
+                {
+                    mDataProp: "TransactionTypeName", bVisible: false
                 },
                 {
                     mDataProp: "TransactionDate"
