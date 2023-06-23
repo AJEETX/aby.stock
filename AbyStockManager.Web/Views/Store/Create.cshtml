@@ -25,6 +25,11 @@
                                 <input asp-for="StoreCode" type="text" class="form-control">
                                 <span asp-validation-for="StoreCode" class="text-danger"></span>
                             </div>
+                            <div class="form-group">
+                                <label asp-for="ImageFile"></label>
+                                <input asp-for="ImageFile" type="file" accept=".png, .jpg, .jpeg, .gif" class="form-control">
+                                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                            </div>
                         </div>
                         <div class="card-footer text-right">
                             <a class="btn btn-default" href="/Store">Back</a>

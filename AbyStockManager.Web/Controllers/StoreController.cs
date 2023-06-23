@@ -9,18 +9,23 @@ using Aby.StockManager.Model.Domain;
 using Aby.StockManager.Model.Service;
 using Aby.StockManager.Model.ViewModel.JsonResult;
 using Aby.StockManager.Model.ViewModel.Store;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Aby.StockManager.Service.User;
 
 namespace Aby.StockManager.Web.Controllers
 {
     public class StoreController : Controller
     {
         private readonly IStoreService _storeService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IMapper _mapper;
 
-        public StoreController(IStoreService storeService,
+        public StoreController(IStoreService storeService, IWebHostEnvironment webHostEnvironment,
                               IMapper mapper)
         {
             _storeService = storeService;
+            this._webHostEnvironment = webHostEnvironment;
             _mapper = mapper;
         }
 
@@ -41,6 +46,15 @@ namespace Aby.StockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
+                if (model.ImageFile != null && model.ImageFile.Length > 0)
+                {
+                    string newFileName = Guid.NewGuid().ToString();
+                    string fileExtension = Path.GetExtension(model.ImageFile.FileName);
+                    newFileName += fileExtension;
+                    var upload = Path.Combine(_webHostEnvironment.WebRootPath, "store", newFileName);
+                    model.ImageFile.CopyTo(new FileStream(upload, FileMode.Create));
+                    model.Image = newFileName;
+                }
                 StoreDTO storeDTO = _mapper.Map<StoreDTO>(model);
                 var serviceResult = await _storeService.AddAsync(storeDTO);
                 jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);
@@ -57,6 +71,8 @@ namespace Aby.StockManager.Web.Controllers
         {
             var serviceResult = await _storeService.GetById(id);
             EditStoreViewModel model = _mapper.Map<EditStoreViewModel>(serviceResult.TransactionResult);
+            if (!string.IsNullOrEmpty(model.Image))
+                model.ImageDisplayURL = Path.Combine(_webHostEnvironment.WebRootPath, "store", model.Image);
             return View(model);
         }
 
@@ -67,6 +83,15 @@ namespace Aby.StockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
+                if (model.ImageFile != null && model.ImageFile.Length > 0)
+                {
+                    string newFileName = Guid.NewGuid().ToString();
+                    string fileExtension = Path.GetExtension(model.ImageFile.FileName);
+                    newFileName += fileExtension;
+                    var upload = Path.Combine(_webHostEnvironment.WebRootPath, "store", newFileName);
+                    model.ImageFile.CopyTo(new FileStream(upload, FileMode.Create));
+                    model.Image = newFileName;
+                }
                 StoreDTO StoreDTO = _mapper.Map<StoreDTO>(model);
                 var serviceResult = await _storeService.Update(StoreDTO);
                 jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);
@@ -114,6 +139,23 @@ namespace Aby.StockManager.Web.Controllers
             }
 
             return Json(jsonDataTableModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteImage(int id)
+        {
+            JsonResultModel jsonResultModel = new JsonResultModel();
+            try
+            {
+                ServiceResult serviceResult = await _storeService.DeleteProductImage(id);
+                jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);
+            }
+            catch (Exception ex)
+            {
+                jsonResultModel.IsSucceeded = false;
+                jsonResultModel.UserMessage = ex.Message;
+            }
+            return Json(jsonResultModel);
         }
 
         [HttpPost]

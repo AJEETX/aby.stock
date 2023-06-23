@@ -4,6 +4,7 @@
 }
 @section script{
     <partial name="~/Views/Shared/_FormScriptsPartial.cshtml" />
+    <script src="~/pages/store/store-image-delete.js"></script>
 }
 <section class="content pt-2">
     <div class="container-fluid ">
@@ -24,6 +25,20 @@
                                 <label asp-for="StoreCode"></label>
                                 <input asp-for="StoreCode" type="text" class="form-control">
                                 <span asp-validation-for="StoreCode" class="text-danger"></span>
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.Image))
+                            {
+                                <div class="form-group" id="delete-image-main">
+                                    <label asp-for="ImageFile"></label>
+                                    <img height="150" src="/store/@Model.Image" />
+                                    <button id="btnDeleteImage" data-id="@Model.Id" type="button" class="btn btn-danger">Delete Image</button>
+                                </div>
+                            }
+                            <div class="form-group">
+                                <label asp-for="ImageFile"></label>
+                                <input asp-for="ImageFile" type="file" accept=".png, .jpg, .jpeg, .gif" class="form-control">
+                                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                                <input type="hidden" asp-for="Image" />
                             </div>
                         </div>
                         <div class="card-footer text-right">

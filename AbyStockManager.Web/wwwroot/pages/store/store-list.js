@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var datatable = $('#datatable').dataTable({
         "searching": false,
         "iDisplayLength": 10,
@@ -7,9 +6,9 @@ $(document).ready(function () {
         "lengthChange": false,
         "bServerSide": true,
         "processing": true,
-        "paging": true,
+        "paging": false,
         "sAjaxSource": "/Store/List",
-        "info": true,
+        "info": false,
         "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
             aoData.push(
                 { "name": "returnformat", "value": "plain" },
@@ -34,6 +33,14 @@ $(document).ready(function () {
         aoColumns:
             [
                 {
+                    "sDefaultContent": "",
+                    "bSortable": false,
+                    "mRender": function (data, type, row) {
+                        var img = '<img src="' + row.ImageDisplay + '" src height="60" />';
+                        return img;
+                    }
+                },
+                {
                     mDataProp: "StoreName"
                 },
                 {
@@ -45,7 +52,7 @@ $(document).ready(function () {
                     "mRender": function (data, type, row) {
                         var buttons = "";
                         buttons += '<a href="/Store/Edit/' + row.Id + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
-                        buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> Delete</a>'
+                        //buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> Delete</a>'
                         return buttons;
                     }
                 }
@@ -61,20 +68,15 @@ $(document).ready(function () {
         datatable.fnFilter();
     });
 
-
     $('.enter-keyup').keypress(function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
             datatable.fnFilter();
         }
     });
-
 });
 
-
-
 function deleteRow(row, id) {
-
     $.ajax({
         url: '/Store/Delete/' + id,
         type: "POST",
@@ -91,4 +93,3 @@ function deleteRow(row, id) {
         }
     });
 }
-

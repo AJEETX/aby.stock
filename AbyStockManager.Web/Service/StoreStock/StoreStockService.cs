@@ -9,6 +9,7 @@ using Aby.StockManager.Model.Domain;
 using Aby.StockManager.Model.Service;
 using Aby.StockManager.Service.Base;
 using Entity = Aby.StockManager.Data.Entity;
+using AbyStockManager.Web.Common.Message;
 
 namespace Aby.StockManager.Service.StoreStock
 {
