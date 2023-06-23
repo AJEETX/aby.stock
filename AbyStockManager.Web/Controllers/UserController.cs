@@ -51,7 +51,7 @@ namespace Aby.StockManager.Web.Controllers
                     string newFileName = Guid.NewGuid().ToString();
                     string fileExtension = Path.GetExtension(model.ImageFile.FileName);
                     newFileName += fileExtension;
-                    var upload = Path.Combine(_webHostEnvironment.WebRootPath, "upload", newFileName);
+                    var upload = Path.Combine(_webHostEnvironment.WebRootPath, "user", newFileName);
                     model.ImageFile.CopyTo(new FileStream(upload, FileMode.Create));
                     model.Image = newFileName;
                 }
@@ -72,7 +72,7 @@ namespace Aby.StockManager.Web.Controllers
             var serviceResult = await _userService.GetById(id);
             EditUserViewModel model = _mapper.Map<EditUserViewModel>(serviceResult.TransactionResult);
             if (!string.IsNullOrEmpty(model.Image))
-                model.ImageDisplayURL = Path.Combine(_webHostEnvironment.WebRootPath, "upload", model.Image);
+                model.ImageDisplayURL = Path.Combine(_webHostEnvironment.WebRootPath, "user", model.Image);
             return View(model);
         }
 
@@ -88,7 +88,7 @@ namespace Aby.StockManager.Web.Controllers
                     string newFileName = Guid.NewGuid().ToString();
                     string fileExtension = Path.GetExtension(model.ImageFile.FileName);
                     newFileName += fileExtension;
-                    var upload = Path.Combine(_webHostEnvironment.WebRootPath, "upload", newFileName);
+                    var upload = Path.Combine(_webHostEnvironment.WebRootPath, "user", newFileName);
                     model.ImageFile.CopyTo(new FileStream(upload, FileMode.Create));
                     model.Image = newFileName;
                 }

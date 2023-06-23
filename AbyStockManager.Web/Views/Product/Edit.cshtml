@@ -14,7 +14,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Edit Product</h3>
                     </div>
-                    <form asp-action="Edit" asp-antiforgery="true" id="frmCreate">
+                    <form asp-action="Edit" asp-antiforgery="true" id="frmCreate" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form-group">
                                 <label asp-for="ProductName"></label>
@@ -61,13 +61,13 @@
                             {
                                 <div class="form-group" id="delete-image-main">
                                     <label asp-for="ImageFile"></label>
-                                    <img height="150" width="100%" src="/upload/@Model.Image" />
+                                    <img height="150" width="150" src="/upload/@Model.Image" />
                                     <button id="btnDeleteImage" data-id="@Model.Id" type="button" class="btn btn-danger">Delete Image</button>
                                 </div>
                             }
                             <div class="form-group">
                                 <label asp-for="ImageFile"></label>
-                                <input asp-for="ImageFile" type="file" class="form-control">
+                                <input asp-for="ImageFile" type="file" accept=".png, .jpg, .jpeg, .gif" class="form-control">
                                 <span asp-validation-for="ImageFile" class="text-danger"></span>
                                 <input type="hidden" asp-for="Image" />
                             </div>
