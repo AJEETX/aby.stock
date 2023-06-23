@@ -11,6 +11,7 @@ namespace Aby.StockManager.Data.Entity
         public string Description { get; set; }
         public string Image { get; set; }
         public double? Price { get; set; }
+        public double? PurchasePrice { get; set; }
         public int? CategoryId { get; set; }
         public int? TaxId { get; set; }
         public int UnitOfMeasureId { get; set; }

@@ -12,6 +12,7 @@ namespace Aby.StockManager.Model.ViewModel.Product
         public string Barcode { get; set; }
         public string ImageDisplay { get; set; }
         public string Price { get; set; }
+        public string PurchasePrice { get; set; }
         public string Tax { get; set; }
         public string CategoryName { get; set; }
         public string UnitOfMeasureName { get; set; }

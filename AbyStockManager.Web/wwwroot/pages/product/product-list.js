@@ -48,7 +48,9 @@
                 {
                     mDataProp: "Price"
                 },
-
+                {
+                    mDataProp: "PurchasePrice"
+                },
                 {
                     mDataProp: "Tax"
                 },

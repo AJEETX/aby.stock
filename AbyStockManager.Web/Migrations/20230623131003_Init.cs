@@ -153,6 +153,7 @@ namespace AbyStockManager.Web.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Image = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
                     Price = table.Column<double>(type: "decimal(18,2)", nullable: true),
+                    PurchasePrice = table.Column<double>(type: "decimal(18,2)", nullable: true),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: true),
                     TaxId = table.Column<int>(type: "INTEGER", nullable: true),
                     UnitOfMeasureId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -234,25 +235,25 @@ namespace AbyStockManager.Web.Migrations
                 columns: new[] { "Id", "CategoryName", "CreateDate" },
                 values: new object[,]
                 {
-                    { 1, "2 wheeler", new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7594) },
-                    { 2, "4 wheeler", new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7597) },
-                    { 3, "Heavy Vehicle", new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7599) },
-                    { 4, "Tractor", new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7601) },
-                    { 5, "Other", new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7603) }
+                    { 1, "2 wheeler", new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1390) },
+                    { 2, "4 wheeler", new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1391) },
+                    { 3, "Heavy Vehicle", new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1393) },
+                    { 4, "Tractor", new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1394) },
+                    { 5, "Other", new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1395) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Store",
                 columns: new[] { "Id", "CreateDate", "Image", "StoreCode", "StoreName" },
-                values: new object[] { 1, new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(8562), null, "SDA", "CEAT Tyres" });
+                values: new object[] { 1, new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(2280), null, "SDA", "CEAT Tyres" });
 
             migrationBuilder.InsertData(
                 table: "Tax",
                 columns: new[] { "Id", "CreateDate", "Name", "Rate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7684), "FIRST", 18.0 },
-                    { 2, new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7687), "SECOND", 28.0 }
+                    { 1, new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1456), "FIRST", 18.0 },
+                    { 2, new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1457), "SECOND", 28.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -260,8 +261,8 @@ namespace AbyStockManager.Web.Migrations
                 columns: new[] { "Id", "CreateDate", "TransactionTypeName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7268), "Stock In" },
-                    { 2, new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7318), "Stock Out" }
+                    { 1, new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1111), "Stock In" },
+                    { 2, new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1175), "Stock Out" }
                 });
 
             migrationBuilder.InsertData(
@@ -269,20 +270,20 @@ namespace AbyStockManager.Web.Migrations
                 columns: new[] { "Id", "CreateDate", "Isocode", "UnitOfMeasureName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7495), "pc", "Piece" },
-                    { 2, new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7502), "kg", "Kilogram" },
-                    { 3, new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(7506), "m", "Meter" }
+                    { 1, new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1329), "pc", "Piece" },
+                    { 2, new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1336), "kg", "Kilogram" },
+                    { 3, new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(1339), "m", "Meter" }
                 });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "CreateDate", "Email", "Image", "Name", "Password", "Surname" },
-                values: new object[] { 1, new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(8457), "jag@sda.com", null, "Jagdeesh", "2cbe7f341eb6aca638a32b77ddedfd4c", "Tiwari" });
+                values: new object[] { 1, new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(2201), "jag@sda.com", null, "Jagdeesh", "2cbe7f341eb6aca638a32b77ddedfd4c", "Tiwari" });
 
             migrationBuilder.InsertData(
                 table: "Product",
-                columns: new[] { "Id", "Barcode", "CategoryId", "CreateDate", "Description", "Image", "Price", "ProductName", "TaxId", "UnitOfMeasureId" },
-                values: new object[] { 1, "test", 1, new DateTime(2023, 6, 23, 14, 27, 28, 569, DateTimeKind.Local).AddTicks(8641), null, null, 100.0, "test", 1, 1 });
+                columns: new[] { "Id", "Barcode", "CategoryId", "CreateDate", "Description", "Image", "Price", "ProductName", "PurchasePrice", "TaxId", "UnitOfMeasureId" },
+                values: new object[] { 1, "test", 1, new DateTime(2023, 6, 23, 23, 10, 3, 619, DateTimeKind.Local).AddTicks(2337), null, null, 110.0, "test", 100.0, 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",

@@ -17,6 +17,7 @@ namespace Aby.StockManager.Model.Domain
         public string Tax { get; set; }
         public string UnitPrice { get; set; }
         public double Price { get; set; }
+        public double PurchasePrice { get; set; }
         public double TaxRate { get; set; }
 
         public string SubTotalPrice { get; set; }

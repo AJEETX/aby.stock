@@ -31,8 +31,11 @@ namespace Aby.StockManager.Model.ViewModel.Product
 
         public string ImageDisplayURL { get; set; }
 
-        [Display(Name = "Price")]
+        [Display(Name = "Sales Price")]
         public decimal? Price { get; set; }
+
+        [Display(Name = "Purchase Price")]
+        public decimal? PurchasePrice { get; set; }
 
         [Display(Name = "Category")]
         public int? CategoryId { get; set; }

@@ -11,7 +11,7 @@ namespace Aby.StockManager.Data.Seed
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.HasData(
-                new Product { Id = 1, ProductName = "test", Barcode = "test", CategoryId = 1, TaxId = 1, CreateDate = DateTime.Now, UnitOfMeasureId = 1, Price = 100 }
+                new Product { Id = 1, ProductName = "test", Barcode = "test", CategoryId = 1, TaxId = 1, CreateDate = DateTime.Now, UnitOfMeasureId = 1, Price = 110.00, PurchasePrice = 100.00 }
                 );
         }
     }

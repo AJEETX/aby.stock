@@ -57,7 +57,7 @@ namespace Aby.StockManager.Web.Controllers
             model.TransactionTypeId = typeId;
             model.PageName = GetPageName(typeId);
             model.StoreList = await GetStoreList();
-            model.InvoiceNumber = InvoiceNumberGenerator.GenerateInvoiceNumber();
+            model.InvoiceNumber = InvoiceNumberGenerator.GenerateInvoiceNumber(typeId);
 
             if (typeId == (int)TransactionType.Invoice)
             {

@@ -102,6 +102,7 @@ namespace Aby.StockManager.Mapper
             CreateMap<ProductDTO, ListProductViewModel>()
                  .ForMember(dm => dm.ImageDisplay, vm => vm.MapFrom(vmf => !string.IsNullOrEmpty(vmf.Image) ? "/upload/" + vmf.Image : "/dist/img/no-image.png"))
                  .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Price.HasValue ? string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Price.Value) : "-"))
+                 .ForMember(dm => dm.PurchasePrice, vm => vm.MapFrom(vmf => vmf.PurchasePrice.HasValue ? string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.PurchasePrice.Value) : "-"))
                  .ForMember(dm => dm.Tax, vm => vm.MapFrom(vmf => vmf.TaxRate != null ? string.Format("{0:P2}", vmf.TaxRate / 100) : "-"))
                  ;
 
@@ -120,7 +121,7 @@ namespace Aby.StockManager.Mapper
 
             CreateMap<TransactionDetailViewModel, TransactionDetailDTO>();
             CreateMap<TransactionDetailDTO, TransactionDetailViewModel>()
-    .ForMember(x => x.Price, vm => vm.MapFrom(vmf => string.IsNullOrWhiteSpace(vmf.UnitPrice) ? double.Parse(vmf.UnitPrice) : 0.0D));
+                .ForMember(x => x.Price, vm => vm.MapFrom(vmf => string.IsNullOrWhiteSpace(vmf.UnitPrice) ? double.Parse(vmf.UnitPrice) : 0.0D));
             CreateMap<SearchTransactionViewModel, TransactionDTO>()
                     .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
                     .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
@@ -138,8 +139,8 @@ namespace Aby.StockManager.Mapper
             CreateMap<StoreStockDTO, ListStoreStockReportViewModel>()
                  .ForMember(dm => dm.ProductFullName, vm => vm.MapFrom(vmf => string.Format("{1} ({0})", vmf.Barcode, vmf.ProductName)))
                  .ForMember(dm => dm.StoreFullName, vm => vm.MapFrom(vmf => string.Format("{1} ({0})", vmf.StoreCode, vmf.StoreName)))
-                 .ForMember(dm => dm.ProductPrice, vm => vm.MapFrom(vmf => vmf.Price.ToString()))
-                 .ForMember(dm => dm.ProductTotalPrice, vm => vm.MapFrom(vmf => (vmf.Price * vmf.Stock).ToString()))
+                 .ForMember(dm => dm.ProductPrice, vm => vm.MapFrom(vmf => vmf.PurchasePrice.ToString()))
+                 .ForMember(dm => dm.ProductTotalPrice, vm => vm.MapFrom(vmf => (vmf.PurchasePrice * vmf.Stock).ToString()))
                  .ForMember(dm => dm.QTY, vm => vm.MapFrom(vmf => string.Format("{0} ({1})", vmf.Stock.ToString(), vmf.Isocode)));
 
             CreateMap<SearchTransactionDetailReportViewModel, TransactionDetailReportDTO>()
@@ -149,8 +150,8 @@ namespace Aby.StockManager.Mapper
             CreateMap<TransactionDetailReportDTO, ListTransactionDetailReportViewModel>()
                  .ForMember(dm => dm.ProductFullName, vm => vm.MapFrom(vmf => string.Format("{1} ({0})", vmf.Barcode, vmf.ProductName)))
                  .ForMember(dm => dm.StoreFullName, vm => vm.MapFrom(vmf => string.Format("{1} ({0})", vmf.StoreCode, vmf.StoreName)))
-                 .ForMember(dm => dm.ProductPrice, vm => vm.MapFrom(vmf => vmf.Price.ToString()))
-                 .ForMember(dm => dm.ProductTotalPrice, vm => vm.MapFrom(vmf => (vmf.Price * vmf.Amount).ToString()))
+                 .ForMember(dm => dm.ProductPrice, vm => vm.MapFrom(vmf => vmf.PurchasePrice.ToString()))
+                 .ForMember(dm => dm.ProductTotalPrice, vm => vm.MapFrom(vmf => (vmf.PurchasePrice * vmf.Amount).ToString()))
                  .ForMember(dm => dm.ToStoreFullName, vm => vm.MapFrom(vmf => !string.IsNullOrEmpty(vmf.ToStoreName) ? string.Format("{1} ({0})", vmf.ToStoreCode, vmf.ToStoreName) : ""))
                  .ForMember(dm => dm.Amount, vm => vm.MapFrom(vmf => string.Format("{0} ({1})", vmf.Amount.ToString(), vmf.UnitOfMeasureShortName)))
                  .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.TransactionDate))); ;
@@ -190,6 +191,7 @@ namespace Aby.StockManager.Mapper
                 .ForMember(dm => dm.ProductName, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.ProductName : ""))
                 .ForMember(dm => dm.TaxRate, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.Tax.Rate : 0D))
                 .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.Price : 0D))
+                .ForMember(dm => dm.PurchasePrice, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.PurchasePrice : 0D))
                 .ForMember(dm => dm.Tax, vm => vm.MapFrom(vmf => vmf.Product != null ? string.Format("{0:P2}", vmf.Product.Tax.Rate / 100) : "--"))
                 .ForMember(dm => dm.UnitPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Product.Price != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Product.Price) : "--"))
                 .ForMember(dm => dm.SubTotalPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Product.Price != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.Product.Price * (100 / (100 + vmf.Product.Tax.Rate)) * vmf.Amount)) : "--"))
@@ -209,6 +211,7 @@ namespace Aby.StockManager.Mapper
                  .ForMember(dm => dm.Barcode, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.Barcode : "-"))
                  .ForMember(dm => dm.UnitOfMeasureName, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.UnitOfMeasure.UnitOfMeasureName : "-"))
                  .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.Price.ToString() : "-"))
+                 .ForMember(dm => dm.PurchasePrice, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.PurchasePrice.ToString() : "-"))
                  .ForMember(dm => dm.TotalPrice, vm => vm.MapFrom(vmf => vmf.Product != null ? (vmf.Product.Price * vmf.Stock).ToString() : "-"))
                  .ForMember(dm => dm.Isocode, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.UnitOfMeasure.Isocode : "-"));
 
@@ -218,6 +221,7 @@ namespace Aby.StockManager.Mapper
                  .ForMember(dm => dm.ToStoreCode, vm => vm.MapFrom(vmf => vmf.Transaction.ToStore != null ? vmf.Transaction.ToStore.StoreCode : ""))
                  .ForMember(dm => dm.ToStoreName, vm => vm.MapFrom(vmf => vmf.Transaction.ToStore != null ? vmf.Transaction.ToStore.StoreName : ""))
                  .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Product.Price.ToString()))
+                 .ForMember(dm => dm.PurchasePrice, vm => vm.MapFrom(vmf => vmf.Product.PurchasePrice.ToString()))
                  .ForMember(dm => dm.TotalPrice, vm => vm.MapFrom(vmf => (vmf.Product.Price * vmf.Amount).ToString()))
                  .ForMember(dm => dm.ProductName, vm => vm.MapFrom(vmf => vmf.Product.ProductName))
                  .ForMember(dm => dm.Barcode, vm => vm.MapFrom(vmf => vmf.Product.Barcode))

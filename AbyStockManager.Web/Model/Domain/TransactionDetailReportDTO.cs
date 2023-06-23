@@ -18,6 +18,7 @@ namespace Aby.StockManager.Model.Domain
         public double? Amount { get; set; }
         public string ProductName { get; set; }
         public double? Price { get; set; }
+        public double? PurchasePrice { get; set; }
         public double? TotalPrice { get; set; }
         public string Barcode { get; set; }
         public string UnitOfMeasureName { get; set; }

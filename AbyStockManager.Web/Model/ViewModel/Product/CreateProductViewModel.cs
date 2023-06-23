@@ -29,8 +29,11 @@ namespace Aby.StockManager.Model.ViewModel.Product
         [RegularExpression(@"^.*\.(jpg|JPG|png|PNG|jpeg|JPEG)$")]
         public IFormFile ImageFile { get; set; }
 
-        [Display(Name = "Price")]
+        [Display(Name = "Sales Price")]
         public decimal? Price { get; set; }
+
+        [Display(Name = "Purchase Price")]
+        public decimal? PurchasePrice { get; set; }
 
         [Display(Name = "Category")]
         public int? CategoryId { get; set; }

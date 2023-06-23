@@ -11,6 +11,7 @@ namespace Aby.StockManager.Model.Domain
         public string Description { get; set; }
         public string Image { get; set; }
         public double? Price { get; set; }
+        public double? PurchasePrice { get; set; }
         public int? CategoryId { get; set; }
         public double? TaxRate { get; set; }
         public string? Tax { get; set; }
