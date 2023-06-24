@@ -44,31 +44,31 @@ namespace AbyStockManager.Web.Migrations
                         {
                             Id = 1,
                             CategoryName = "2 wheeler",
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2861)
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(4993)
                         },
                         new
                         {
                             Id = 2,
                             CategoryName = "4 wheeler",
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2863)
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(4995)
                         },
                         new
                         {
                             Id = 3,
                             CategoryName = "Heavy Vehicle",
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2865)
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(4997)
                         },
                         new
                         {
                             Id = 4,
                             CategoryName = "Tractor",
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2866)
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(4998)
                         },
                         new
                         {
                             Id = 5,
                             CategoryName = "Other",
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2896)
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(5000)
                         });
                 });
 
@@ -131,7 +131,7 @@ namespace AbyStockManager.Web.Migrations
                             Id = 1,
                             Barcode = "test",
                             CategoryId = 1,
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(3967),
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(6482),
                             Price = 110.0,
                             ProductName = "test",
                             PurchasePrice = 100.0,
@@ -174,7 +174,7 @@ namespace AbyStockManager.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(3889),
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(6414),
                             StoreCode = "SDA",
                             StoreName = "CEAT Tyres"
                         });
@@ -227,14 +227,14 @@ namespace AbyStockManager.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2982),
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(5069),
                             Name = "FIRST",
                             Rate = 18.0
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2985),
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(5071),
                             Name = "SECOND",
                             Rate = 28.0
                         });
@@ -325,13 +325,13 @@ namespace AbyStockManager.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2580),
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(4717),
                             TransactionTypeName = "Stock In"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2641),
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(4783),
                             TransactionTypeName = "Stock Out"
                         });
                 });
@@ -366,21 +366,21 @@ namespace AbyStockManager.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2784),
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(4921),
                             Isocode = "pc",
                             UnitOfMeasureName = "Piece"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2790),
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(4927),
                             Isocode = "kg",
                             UnitOfMeasureName = "Kilogram"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(2794),
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(4931),
                             Isocode = "m",
                             UnitOfMeasureName = "Meter"
                         });
@@ -433,10 +433,10 @@ namespace AbyStockManager.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 6, 24, 10, 11, 35, 309, DateTimeKind.Local).AddTicks(3795),
+                            CreateDate = new DateTime(2023, 6, 24, 11, 42, 13, 641, DateTimeKind.Local).AddTicks(6297),
                             Email = "jag@sda.com",
                             Name = "Jagdeesh",
-                            Password = "2cbe7f341eb6aca638a32b77ddedfd4c",
+                            Password = "E18D20C33FC1860873B0AB34A1915F138D6134141B9BF6A4310340ED2F2D92DF",
                             Surname = "Tiwari"
                         });
                 });

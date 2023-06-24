@@ -25,7 +25,7 @@ namespace AbyStockManager.Web.Common.Extensions
             }
             catch (Exception e)
             {
-                // TODO: handle exception
+                Console.WriteLine(e.ToString());
             }
             return "";
         }
