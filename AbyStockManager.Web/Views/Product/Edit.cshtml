@@ -5,6 +5,35 @@
 @section script{
     <partial name="~/Views/Shared/_FormScriptsPartial.cshtml" />
     <script src="~/pages/product/product-image-delete.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#SalePrice').on('change', function () {
+                var purchasePrice = $('#PurchasePrice').val();
+                var salePrice = $('#SalePrice').val();
+                if (purchasePrice >= salePrice) {
+                    alert('sale price should be more than purchase price!');
+                    //$('#SalePrice').css({'border':'1px solid red'});
+                    $('#SalePrice').focus();
+                } else {
+                    $('#SalePrice').css({ 'border': '1px solid #ced4da' });
+
+                }
+            });
+            //$('#PurchasePrice').on('change', function () {
+            //    var purchasePrice = $('#PurchasePrice').val();
+            //    var salePrice = $('#SalePrice').val();
+            //    if (salePrice !== '' && purchasePrice >= salePrice) {
+            //        alert('sale price should be more than purchase price!');
+            //        $('#PurchasePrice').css({ 'border': '1px solid red' });
+            //        $('#PurchasePrice').focus();
+            //    } else {
+            //        $('#PurchasePrice').css({ 'border': '1px solid #ced4da' });
+
+            //    }
+            //});
+        });
+
+    </script>
 }
 <section class="content pt-2">
     <div class="container-fluid ">
@@ -28,12 +57,12 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="PurchasePrice"></label>
-                                <input asp-for="PurchasePrice" type="text" class="form-control">
+                                <input id="PurchasePrice" asp-for="PurchasePrice" type="number" min="1" step="any" class="form-control">
                                 <span asp-validation-for="PurchasePrice" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="SalePrice"></label>
-                                <input asp-for="SalePrice" type="number" class="form-control">
+                                <input id="SalePrice" asp-for="SalePrice" type="number" min="1" step="any" class="form-control">
                                 <span asp-validation-for="SalePrice" class="text-danger"></span>
                             </div>
                             
