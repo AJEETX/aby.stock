@@ -46,7 +46,7 @@
                     mDataProp: "ProductName"
                 },
                 {
-                    mDataProp: "Price"
+                    mDataProp: "SalePrice"
                 },
                 {
                     mDataProp: "PurchasePrice"

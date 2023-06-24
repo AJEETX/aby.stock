@@ -37,7 +37,7 @@
                     "sDefaultContent": "",
                     "bSortable": false,
                     "mRender": function (data, type, row) {
-                        var img = '<img src="' + row.ImageDisplay + '" src height="60" />';
+                        var img = '<img src="' + row.ImageDisplay + '" src height="100%" width="100%" />';
                         return img;
                     }
                 },

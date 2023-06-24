@@ -30,7 +30,7 @@ namespace Aby.StockManager.Model.ViewModel.Product
         public IFormFile ImageFile { get; set; }
 
         [Display(Name = "Sales Price")]
-        public decimal? Price { get; set; }
+        public decimal? SalePrice { get; set; }
 
         [Display(Name = "Purchase Price")]
         public decimal? PurchasePrice { get; set; }
