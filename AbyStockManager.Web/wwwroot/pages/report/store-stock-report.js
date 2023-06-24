@@ -47,7 +47,7 @@
                     mDataProp: "QTY"
                 },
                 {
-                    mDataProp: "ProductTotalPrice"
+                    mDataProp: "ProductTotalDisplayPrice"
                 },
 
             ]

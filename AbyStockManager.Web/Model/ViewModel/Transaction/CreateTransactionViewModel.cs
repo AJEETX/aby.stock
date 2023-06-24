@@ -13,7 +13,7 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
 
         [Required]
         [MaxLength(30)]
-        [Display(Name = "Transaction Code")]
+        [Display(Name = "Transaction Type")]
         public string TransactionCode { get; set; }
 
         [Required]

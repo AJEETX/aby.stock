@@ -59,7 +59,7 @@
                 var cols = "";
                 cols += '<td><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"></select></td>';
                 cols += '<td><input type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" /></td>';
-                cols += '<td style="padding:10px 2px;"><input type="button" class="ibtnDel btn btn-sm btn-danger "  value="x"></td>';
+                cols += '<td style="padding:1em 0;"><input type="button" class="ibtnDel btn btn-sm btn-danger "  value="x"></td>';
                 newRow.append(cols);
                 $("table#table-detail").append(newRow);
                 setSelect2("#ProductId" + counter);
@@ -108,18 +108,16 @@
                                             </select>
                                             <span asp-validation-for="StoreId" class="text-danger"></span>
                                         </div>
-                                    </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label asp-for="TransactionDate"></label>
                                         <input asp-for="TransactionDate" type="text" class="form-control datepicker">
                                         <span asp-validation-for="TransactionDate" class="text-danger"></span>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
+                                    </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label asp-for="Description"></label>
                                         <input asp-for="Description" type="text" class="form-control">

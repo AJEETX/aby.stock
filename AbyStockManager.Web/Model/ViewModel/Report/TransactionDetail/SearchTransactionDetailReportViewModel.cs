@@ -9,7 +9,7 @@ namespace Aby.StockManager.Model.ViewModel.Report.TransactionDetail
 {
     public class SearchTransactionDetailReportViewModel: BaseViewModel
     {
-        [Display(Name = "Transaction Code")]
+        [Display(Name = "Transaction Type")]
         public string TransactionCode { get; set; }
 
         [Display(Name = "Product")]

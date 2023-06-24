@@ -16,7 +16,7 @@ namespace Aby.StockManager.Model.ViewModel.UnitOfMeasure
 
         [Required]
         [MaxLength(3)]
-        [Display(Name = "Measurement type Code")]
+        [Display(Name = "Measurement type Code [ 3 character code]")]
         public string Isocode { get; set; }
     }
 }

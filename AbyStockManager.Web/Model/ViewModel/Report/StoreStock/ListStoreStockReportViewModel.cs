@@ -13,5 +13,6 @@ namespace Aby.StockManager.Model.ViewModel.Report.StoreStock
         public string ProductFullName { get; set; }
         public string ProductPrice { get; set; }
         public string ProductTotalPrice { get; set; }
+        public string ProductTotalDisplayPrice { get; set; }
     }
 }
