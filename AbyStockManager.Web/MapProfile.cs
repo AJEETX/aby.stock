@@ -202,6 +202,8 @@ namespace Aby.StockManager.Mapper
                 .ForMember(dm => dm.UnitPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Product.SalePrice != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Product.SalePrice) : "--"))
                 .ForMember(dm => dm.SubTotalPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Product.SalePrice != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.Product.SalePrice * (100 / (100 + vmf.Product.Tax.Rate)) * vmf.Amount)) : "--"))
                 .ForMember(dm => dm.Description, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Description : ""))
+                .ForMember(dm => dm.Contact, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Contact : ""))
+                .ForMember(dm => dm.Gstin, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Gstin : ""))
                 .ForMember(dm => dm.Barcode, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.Barcode : ""))
                 .ForMember(dm => dm.InvoiceNumber, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.InvoiceNumber : ""))
                 .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.TransactionDate.ToString("dd/MM/yyyy") : "--"))

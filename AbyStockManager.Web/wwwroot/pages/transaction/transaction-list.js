@@ -125,8 +125,11 @@ function detailShow(row, id) {
                 $('#tax-total').text(data.TaxTotal);
                 $('#sgst-total').text(data.SgstTotal);
                 $('#cgst-total').text(data.CgstTotal);
+                
 
                 $.each(data.Data, function (i, item) {
+                    $('#invoice-contact').text(item.Contact);
+                    $('#invoice-gstin').text(item.Gstin);
                     $('#invoice-description').text(item.Description);
                     $('#invoice-number').text(item.InvoiceNumber);
                     $('#invoice-date').text(item.TransactionDate);

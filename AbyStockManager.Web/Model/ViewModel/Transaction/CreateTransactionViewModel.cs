@@ -35,8 +35,14 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         [Display(Name = "Date")]
         public string TransactionDate { get; set; }
 
-        [Display(Name = "Description")]
-        public string Description { get; set; } = "--";
+        [Display(Name = "Payable To")]
+        public string Description { get; set; } = string.Empty;
+
+        [Display(Name = "Contact detail")]
+        public string Contact { get; set; } = string.Empty;
+
+        [Display(Name = "GSTIN")]
+        public string Gstin { get; set; } = string.Empty;
 
         public IList<TransactionDetailViewModel> TransactionDetail { get; set; }
         public IEnumerable<SelectListItem> StoreList { get; set; }

@@ -21,6 +21,8 @@ namespace Aby.StockManager.Model.Domain
         public double TaxRate { get; set; }
 
         public string SubTotalPrice { get; set; }
+        public string Contact { get; set; }
+        public string Gstin { get; set; }
         public string Description { get; set; }
         public string UnitOfMeasureName { get; set; }
         public string UnitOfMeasureShortName { get; set; }

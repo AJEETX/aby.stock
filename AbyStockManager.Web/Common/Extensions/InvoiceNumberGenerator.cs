@@ -13,11 +13,11 @@ namespace AbyStockManager.Web.Common.Extensions
         {
             if (typeId == (int)TransactionType.Invoice)
             {
-                prefix = TransactionType.Invoice.ToString() + DateTime.Now.ToString("yyyyMMdd") + counter.ToString("D4");
+                prefix = string.Concat(TransactionType.Invoice.ToString().AsSpan(0, 3), DateTime.Now.ToString("yyyyMMdd"), counter.ToString("D3"));
             }
             if (typeId == (int)TransactionType.StockIn)
             {
-                prefix = TransactionType.StockIn.ToString() + DateTime.Now.ToString("yyyyMMdd") + counter.ToString("D4");
+                prefix = string.Concat(TransactionType.StockIn.ToString().AsSpan(0, 3), DateTime.Now.ToString("yyyyMMdd"), counter.ToString("D3"));
             }
             counter++;
             return prefix;

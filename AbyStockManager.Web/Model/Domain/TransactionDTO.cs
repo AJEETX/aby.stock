@@ -18,6 +18,8 @@ namespace Aby.StockManager.Model.Domain
         public int? TransactionTypeId { get; set; }
         public DateTime TransactionDate { get; set; }
         public string Description { get; set; }
+        public string Contact { get; set; }
+        public string Gstin { get; set; }
         public string StoreName { get; set; }
         public string ToStoreName { get; set; }
         public string TransactionTypeName { get; set; }
