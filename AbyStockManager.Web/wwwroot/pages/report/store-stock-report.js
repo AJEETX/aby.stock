@@ -38,39 +38,37 @@
                     mDataProp: "ProductFullName"
                 },
                 {
+                    mDataProp: "QTY"
+                },
+                {
                     mDataProp: "StoreFullName", bVisible: false
                 },
+
                 {
                     mDataProp: "ProductPrice"
                 },
-                {
-                    mDataProp: "QTY"
-                },
+
                 {
                     mDataProp: "ProductTotalDisplayPrice"
                 },
 
             ],
         rowCallback: function (row, data, index) {
-            console.log({
-                data
-            })
             if (data.Quantity < 2) {
-                $(row).find('td:eq(2)').append(
+                $(row).find('td:eq(1)').append(
                     $("<span>", { "class": "required-indicator" }).text("*")
                 );
-                $(row).find('td:eq(2)').css({ 'color': 'red','font-weight':'bold' });
+                $(row).find('td:eq(1)').css({ 'color': 'red', 'font-weight': 'bold' });
             }
             else if (data.Quantity < 5) {
-                $(row).find('td:eq(2)').append(
+                $(row).find('td:eq(1)').append(
                     $("<span>", { "class": "required-indicator" }).text("*")
                 );
-                $(row).find('td:eq(2)').css({ 'color': '#FFBF00', 'font-weight': 'bold' });
+                $(row).find('td:eq(1)').css({ 'color': '#FFBF00', 'font-weight': 'bold' });
             }
             else if (data.Quantity >= 5) {
-                $(row).find('td:eq(2)').css({ 'color': 'green', 'font-weight': 'bold' });
+                $(row).find('td:eq(1)').css({ 'color': 'green', 'font-weight': 'bold' });
             }
-            
         },
     });
 
