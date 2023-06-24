@@ -9,6 +9,7 @@ namespace Aby.StockManager.Data.Entity
         public int StoreId { get; set; }
         public int ProductId { get; set; }
         public int Stock { get; set; }
+        public int MinStock { get; set; } = 1;
         public virtual Product Product { get; set; }
         public virtual Store Store { get; set; }
     }

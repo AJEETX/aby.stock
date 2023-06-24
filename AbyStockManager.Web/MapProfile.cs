@@ -142,7 +142,9 @@ namespace Aby.StockManager.Mapper
                  .ForMember(dm => dm.ProductPrice, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.PurchasePrice))))
                  .ForMember(dm => dm.ProductTotalPrice, vm => vm.MapFrom(vmf => (vmf.PurchasePrice * vmf.Stock).ToString()))
                  .ForMember(dm => dm.ProductTotalDisplayPrice, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.PurchasePrice * vmf.Stock))))
-                 .ForMember(dm => dm.QTY, vm => vm.MapFrom(vmf => string.Format("{0} ({1})", vmf.Stock.ToString(), vmf.Isocode)));
+                 .ForMember(dm => dm.QTY, vm => vm.MapFrom(vmf => string.Format("{0} ({1})", vmf.Stock.ToString(), vmf.Isocode)))
+                 .ForMember(dm => dm.Quantity, vm => vm.MapFrom(vmf => int.Parse(vmf.Stock.ToString())))
+                 ;
 
             CreateMap<SearchTransactionDetailReportViewModel, TransactionDetailReportDTO>()
                     .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))

@@ -9,6 +9,7 @@ namespace Aby.StockManager.Model.ViewModel.Report.StoreStock
     public class ListStoreStockReportViewModel : BaseViewModel
     {
         public string QTY { get; set; }
+        public int Quantity { get; set; }
         public string StoreFullName { get; set; }
         public string ProductFullName { get; set; }
         public string ProductPrice { get; set; }
