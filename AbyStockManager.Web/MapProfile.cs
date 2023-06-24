@@ -150,8 +150,11 @@ namespace Aby.StockManager.Mapper
             CreateMap<TransactionDetailReportDTO, ListTransactionDetailReportViewModel>()
                  .ForMember(dm => dm.ProductFullName, vm => vm.MapFrom(vmf => string.Format("{1} ({0})", vmf.Barcode, vmf.ProductName)))
                  .ForMember(dm => dm.StoreFullName, vm => vm.MapFrom(vmf => string.Format("{1} ({0})", vmf.StoreCode, vmf.StoreName)))
-                 .ForMember(dm => dm.ProductPrice, vm => vm.MapFrom(vmf => vmf.PurchasePrice.ToString()))
-                 .ForMember(dm => dm.ProductTotalPrice, vm => vm.MapFrom(vmf => (vmf.PurchasePrice * vmf.Amount).ToString()))
+                 .ForMember(dm => dm.ProductPrice, vm => vm.MapFrom(vmf =>
+                 vmf.TransactionCode == Common.Enums.TransactionType.Invoice.ToString() ? (vmf.Price).ToString() : (vmf.PurchasePrice).ToString()))
+                 .ForMember(dm => dm.ProductPurchasePrice, vm => vm.MapFrom(vmf => vmf.PurchasePrice.ToString()))
+                 .ForMember(dm => dm.ProductTotalPrice, vm => vm.MapFrom(vmf =>
+                 vmf.TransactionCode == Common.Enums.TransactionType.Invoice.ToString() ? (vmf.Price * vmf.Amount).ToString() : (vmf.PurchasePrice * vmf.Amount).ToString()))
                  .ForMember(dm => dm.ToStoreFullName, vm => vm.MapFrom(vmf => !string.IsNullOrEmpty(vmf.ToStoreName) ? string.Format("{1} ({0})", vmf.ToStoreCode, vmf.ToStoreName) : ""))
                  .ForMember(dm => dm.Amount, vm => vm.MapFrom(vmf => string.Format("{0} ({1})", vmf.Amount.ToString(), vmf.UnitOfMeasureShortName)))
                  .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.TransactionDate))); ;
