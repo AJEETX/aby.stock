@@ -79,9 +79,17 @@
                 }
             ],
         rowCallback: function (row, data, index) {
-            //if (data.Description == '')
+            if (data.Description == 'Good Received')
             {
-                $(row).find('td:eq(2)').val('Good Received');
+                $(row).find('td:eq(1)').append(
+                    $("<span>", { "class": "required-indicator" }).text("Goods Received *")
+                );
+                $(row).find('td:eq(1)').css({ 'font-style': 'italic' });
+            }
+            if (data.InvoiceNumber == null) {
+                $(row).find('td:eq(0)').append(
+                    $("<span>", { "class": "required-indicator" }).text("stock-in *")
+                );
                 $(row).find('td:eq(1)').css({ 'font-style': 'italic' });
             }
         }
