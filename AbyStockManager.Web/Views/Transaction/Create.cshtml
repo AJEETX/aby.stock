@@ -78,9 +78,9 @@
     <div class="container-fluid ">
         <div class="row ">
             <div class="col-md-12">
-                <div class="card card-primary">
+                <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title">@Model.PageName</h3>
+                        <h3 class="card-title"><i class="fas fa-plus"></i> Create @Model.PageName</h3>
                     </div>
                     <form asp-antiforgery="true" id="frmCreate">
                         <input type="hidden" asp-for="TransactionTypeId" />
@@ -188,7 +188,7 @@
                         <div class="card-footer text-right">
                             <a class="btn btn-default" href="/Transaction">Back</a>
                             @*<button id="btnUpdate" type="submit" formmethod="post" formaction="/Transaction/Quote" class="btn btn-warning">Quote</button>*@
-                            <button id="btnSave" type="submit" formaction="/Transaction/Create?typeId=100" class="btn btn-primary">Save</button>
+                            <button id="btnSave" type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Create</button>
                         </div>
                     </form>
                 </div>
