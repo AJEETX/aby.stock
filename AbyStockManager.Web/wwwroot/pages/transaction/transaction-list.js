@@ -62,10 +62,14 @@
                     "bSortable": false,
                     "mRender": function (data, type, row) {
                         var buttons = "";
-                        var columnValue = row['InvoiceNumber'];
+                        var invoiceNumber = row['InvoiceNumber'];
+                        var description = row['Description'];
 
-                        if (columnValue.startsWith('Inv')) {
+                        if (invoiceNumber != null && invoiceNumber != '' && invoiceNumber.startsWith('Inv')) {
                             buttons += '<a id="print-invoice" onclick="detailShow(this,' + row.Id + ')"  class="btn btn-xs btn-default"><i class="fas fa-print"></i> Print</a>&nbsp;'
+                        }
+                        else if (invoiceNumber == null) {
+                            row['Description'] = 'Good Received';
                         }
                         buttons += '<a href="/Transaction/Edit/' + row.Id + '?typeId=' + row.TransactionTypeId + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
                         //buttons += '<a href="/Transaction/Print/' + row.Id + '?typeId=' + row.TransactionTypeId + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> PRINT</a>&nbsp;'
@@ -73,7 +77,14 @@
                         return buttons;
                     }
                 }
-            ]
+            ],
+        rowCallback: function (row, data, index) {
+            //if (data.Description == '')
+            {
+                $(row).find('td:eq(2)').val('Good Received');
+                $(row).find('td:eq(1)').css({ 'font-style': 'italic' });
+            }
+        }
     });
 
     $("#btnFilter").click(function () {
