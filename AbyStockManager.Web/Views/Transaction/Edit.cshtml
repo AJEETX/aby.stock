@@ -32,27 +32,37 @@
                                 }
                             }
                             <div class="row">
+                                @{
+                                    if (Model.TransactionTypeId == 2)
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="TransactionDate"></label>
+                                                <input asp-for="TransactionDate" type="text" class="form-control datepicker">
+                                                <span asp-validation-for="TransactionDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label asp-for="TransactionDate"></label>
-                                        <input asp-for="TransactionDate" type="text" class="form-control datepicker">
-                                        <span asp-validation-for="TransactionDate" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    @{
-                                        if (Model.TransactionTypeId == 2)
-                                        {
                                             <div class="form-group">
                                                 <label asp-for="Description"></label>
                                                 <input asp-for="Description" type="text" class="form-control">
                                                 <span asp-validation-for="Description" class="text-danger"></span>
                                             </div>
-                                        }
-                                    }
-                                </div>
 
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="TransactionDate"></label>
+                                                <input asp-for="TransactionDate" type="text" class="form-control datepicker">
+                                                <span asp-validation-for="TransactionDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    }
+                                }
                             </div>
                             @{
                                 if (Model.TransactionTypeId == 2)
@@ -103,7 +113,7 @@
                                                     <td class="col-md-2">
                                                         @if (i > 0)
                                                         {
-                                                        <input type="button" class="ibtnDel btn btn-sm btn-danger" value="x">
+                                                            <input type="button" class="ibtnDel btn btn-sm btn-danger" value="x">
                                                         }
                                                     </td>
                                                 </tr>
@@ -139,7 +149,7 @@
     <link href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet">
     <link href="~/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <link href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
-}
+    }
 @section script{
     <script src="~/plugins/select2/js/select2.full.min.js"></script>
     <script src="~/plugins/moment/moment.min.js"></script>
@@ -205,4 +215,4 @@
         });
 
     </script>
-}
+    }
