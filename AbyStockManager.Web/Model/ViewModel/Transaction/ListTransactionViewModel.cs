@@ -14,7 +14,7 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         public int? TransactionTypeId { get; set; }
         public string TransactionDate { get; set; }
 
-        [Display(Name = "Payable To")]
+        [Display(Name = "Bill To")]
         public string Description { get; set; } = string.Empty;
 
         [Display(Name = "Contact detail")]
