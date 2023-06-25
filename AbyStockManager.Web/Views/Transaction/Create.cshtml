@@ -87,20 +87,30 @@
                         <input type="hidden" asp-for="TransactionCode" />
                         <input type="hidden" asp-for="StoreId" />
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label asp-for="InvoiceNumber"></label>
-                                        <input readonly asp-for="InvoiceNumber" type="text" value="@Model.InvoiceNumber" class="form-control">
-                                        <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
+                            @{
+                                if (Model.TransactionTypeId == 2)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="InvoiceNumber"></label>
+                                                <input readonly asp-for="InvoiceNumber" type="text" value="@Model.InvoiceNumber" class="form-control">
+                                                <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                }
+                            }
+                            <div class="row">
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label asp-for="TransactionDate"></label>
                                         <input asp-for="TransactionDate" type="text" class="form-control datepicker">
                                         <span asp-validation-for="TransactionDate" class="text-danger"></span>
                                     </div>
+                                </div>
+                                <div class="col-md-6">
                                     @{
                                         if (Model.TransactionTypeId == 2)
                                         {
