@@ -1,6 +1,9 @@
 ﻿@using System.Security.Claims;
 @using Aby.StockManager.Core.Service;
+@using Aby.StockManager.Model.ViewModel.Store;
+@using AutoMapper;
 @inject IStoreService _storeService
+@inject IMapper _mapper
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,9 +20,13 @@
 
 <body class="hold-transition sidebar-mini">
     @{
-        var storeData = _storeService.GetById(1);
+        string userName = "User", userImage = string.Empty, logo = string.Empty;
+        var storeData = await _storeService.GetById(1);
 
-        string userName = "User", userImage = string.Empty;
+        ListStoreViewModel listVM = _mapper.Map<ListStoreViewModel>(storeData.TransactionResult);
+
+        logo = listVM.ImageDisplay;
+        string storeName = listVM.StoreName;
         Claim userNameClaim = User.Claims.FirstOrDefault(x=>x.Type == ClaimTypes.Name);
         if (userNameClaim != null)
         {
@@ -45,8 +52,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
-                <img src="store/@storeData.Result.TransactionResult.Image" alt="Stock" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">@storeData.Result.TransactionResult.StoreName</span>
+                <img src="@logo" alt="Store" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">@storeName</span>
             </a>
             <!-- User Logo -->
             <a href="/" class="brand-link">

@@ -225,7 +225,7 @@ namespace Aby.StockManager.Web.Controllers
 
                     jsonResultModel.Data = serviceResult.TransactionResult;
 
-                    jsonResultModel.StoreImage = "store/" + storeData.Result.TransactionResult.Image;
+                    jsonResultModel.StoreImage = "/store/" + storeData.Result.TransactionResult.Image;
                     jsonResultModel.StoreName = storeData.Result.TransactionResult.StoreName;
                     jsonResultModel.StoreAddress = storeData.Result.TransactionResult.StoreCode;
                     jsonResultModel.StoreContact = storeData.Result.TransactionResult.Contact;
