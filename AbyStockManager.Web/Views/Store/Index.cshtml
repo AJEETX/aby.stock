@@ -3,7 +3,9 @@
     ViewData["Title"] = "Store List";
 }
 <style>
-
+    table.dataTable > tbody > tr td {
+        font-size:.8em;
+    }
 </style>
 
 <section class="content pt-2">
@@ -18,7 +20,7 @@
                         <table id="datatable" class="table table-bordered table-hover dt-responsive nowrap w-100">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
+                                    <th style="max-width:70px">Image</th>
                                     <th>Name</th>
                                     <th>Address</th>
                                     <th>Contact Number</th>
