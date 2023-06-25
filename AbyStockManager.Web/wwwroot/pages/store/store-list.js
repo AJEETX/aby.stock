@@ -36,7 +36,7 @@
                     "sDefaultContent": "",
                     "bSortable": false,
                     "mRender": function (data, type, row) {
-                        var img = '<img src="' + row.ImageDisplay + '" src height="100%" width="100%" />';
+                        var img = '<img src="' + row.ImageDisplay + '" height="60" width="60" />';
                         return img;
                     }
                 },
@@ -45,6 +45,12 @@
                 },
                 {
                     mDataProp: "StoreCode"
+                },
+                {
+                    mDataProp: "Contact"
+                },
+                {
+                    mDataProp: "Gstin"
                 },
                 {
                     "sDefaultContent": "",

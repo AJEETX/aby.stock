@@ -1,4 +1,6 @@
 ﻿@using System.Security.Claims;
+@using Aby.StockManager.Core.Service;
+@inject IStoreService _storeService
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +17,8 @@
 
 <body class="hold-transition sidebar-mini">
     @{
+        var storeData = _storeService.GetById(1);
+
         string userName = "User", userImage = string.Empty;
         Claim userNameClaim = User.Claims.FirstOrDefault(x=>x.Type == ClaimTypes.Name);
         if (userNameClaim != null)
@@ -41,8 +45,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
-                <img src="/invoice/img/logo.png" alt="Stock" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">sda chandauli</span>
+                <img src="store/@storeData.Result.TransactionResult.Image" alt="Stock" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">@storeData.Result.TransactionResult.StoreName</span>
             </a>
             <!-- User Logo -->
             <a href="/" class="brand-link">

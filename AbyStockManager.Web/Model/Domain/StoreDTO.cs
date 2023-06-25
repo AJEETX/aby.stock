@@ -8,6 +8,8 @@ namespace Aby.StockManager.Model.Domain
     {
         public string StoreName { get; set; }
         public string StoreCode { get; set; }
+        public string Contact { get; set; }
+        public string Gstin { get; set; }
         public string Image { get; set; }
     }
 }

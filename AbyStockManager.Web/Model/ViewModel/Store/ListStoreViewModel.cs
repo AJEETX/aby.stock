@@ -10,6 +10,8 @@ namespace Aby.StockManager.Model.ViewModel.Store
     {
         public string StoreName { get; set; }
         public string StoreCode { get; set; }
+        public string Contact { get; set; }
+        public string Gstin { get; set; }
         public string ImageDisplay { get; set; }
     }
 }

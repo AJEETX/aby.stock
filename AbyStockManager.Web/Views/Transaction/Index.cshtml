@@ -130,13 +130,13 @@
                                 <p id="print-title">.</p>
                                 <div class="header clearfix">
                                     <div id="logo">
-                                        <img src="~/invoice/img/logo.png">
+                                        <img id="store-image" src="" height="60" width="60">
                                     </div>
                                     <div id="company">
                                         <p class="name"><img src="~/dist/img/ceat.png" height="30"></p>
-                                        <h4 class="name">SDA Chandauli</h4>
-                                        <div> 76, Jasuri, GT Road, Chandauli, UP, 232104</div>
-                                        <div><a href="#">+91 70202 53920</a></div>
+                                        <h4 class="name" id="store-name"></h4>
+                                        <div id="store-address"></div>
+                                        <div><a href="#" id="store-contact"></a></div>
                                         <hr />
                                     </div>
                                 </div>
@@ -194,8 +194,8 @@
                                     <div id="grand-plain-total"> </div>
                                     <div id="thanks">Thank you!</div>
                                     <div id="notices">
-                                        
-                                        <div class="notice">GSTIN: 09AFLPT3786Q1Z5</div>
+
+                                        <div>GSTIN: <span id="store-gstin" class="notice"> </span></div>
                                         <div>note:</div>
                                         <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
                                     </div>

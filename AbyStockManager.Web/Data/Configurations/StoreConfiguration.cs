@@ -11,7 +11,9 @@ namespace Aby.StockManager.Data.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.StoreName).IsRequired().HasMaxLength(30);
-            builder.Property(x => x.StoreCode).IsRequired().HasMaxLength(10);
+            builder.Property(x => x.StoreCode).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Contact).HasMaxLength(15);
+            builder.Property(x => x.Gstin).HasMaxLength(15);
             builder.Property(x => x.Image).HasMaxLength(50);
             builder.ToTable("Store");
         }

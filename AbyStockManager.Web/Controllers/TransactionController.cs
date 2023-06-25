@@ -221,8 +221,15 @@ namespace Aby.StockManager.Web.Controllers
                 if (serviceResult.IsSucceeded)
                 {
                     //IEnumerable<TransactionDetailViewModel> transactionDetailViewModel = _mapper.Map<IEnumerable<TransactionDetailViewModel>>(serviceResult.TransactionResult);
+                    var storeData = _storeService.GetById(1);
 
                     jsonResultModel.Data = serviceResult.TransactionResult;
+
+                    jsonResultModel.StoreImage = "store/" + storeData.Result.TransactionResult.Image;
+                    jsonResultModel.StoreName = storeData.Result.TransactionResult.StoreName;
+                    jsonResultModel.StoreAddress = storeData.Result.TransactionResult.StoreCode;
+                    jsonResultModel.StoreContact = storeData.Result.TransactionResult.Contact;
+                    jsonResultModel.StoreGstin = storeData.Result.TransactionResult.Gstin;
 
                     var GrandTotal = serviceResult.TransactionResult.Sum(r => (r.TransactionId == 1 ? r.PurchasePrice : r.Price) * r.Amount).Value;
                     var subTotal = Math.Round(serviceResult.TransactionResult.Sum(r => (r.TransactionId == 1 ? r.PurchasePrice : r.Price) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);

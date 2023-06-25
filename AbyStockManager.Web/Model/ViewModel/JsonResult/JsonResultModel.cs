@@ -23,5 +23,11 @@ namespace Aby.StockManager.Model.ViewModel.JsonResult
         public string SgstTotal { get; set; }
         public string CgstTotal { get; set; }
         public string TaxTotal { get; set; }
+
+        public string StoreName { get; set; }
+        public string StoreAddress { get; set; }
+        public string StoreContact { get; set; }
+        public string StoreGstin { get; set; }
+        public string StoreImage { get; set; }
     }
 }

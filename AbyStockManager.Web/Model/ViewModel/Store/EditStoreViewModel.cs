@@ -18,8 +18,16 @@ namespace Aby.StockManager.Model.ViewModel.Store
 
         [Required]
         [MaxLength(50)]
-        [Display(Name = "Details")]
+        [Display(Name = "Address")]
         public string StoreCode { get; set; }
+
+        [MaxLength(15)]
+        [Display(Name = "Contact Number")]
+        public string Contact { get; set; }
+
+        [MaxLength(15)]
+        [Display(Name = "Gstin")]
+        public string Gstin { get; set; }
 
         [Display(Name = "Image")]
         public string Image { get; set; }

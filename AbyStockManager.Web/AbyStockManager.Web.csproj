@@ -9,6 +9,7 @@
     <Content Remove="wwwroot\dist\img\logo.png" />
     <Content Remove="wwwroot\images\Receipt\logo.png" />
     <Content Remove="wwwroot\invoice\logo.png" />
+    <Content Remove="wwwroot\store\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,7 +36,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\invoice\receipt\" />
-    <Folder Include="wwwroot\store\" />
     <Folder Include="wwwroot\user\" />
     <Folder Include="wwwroot\upload\" />
   </ItemGroup>
@@ -43,6 +43,7 @@
   <ItemGroup>
     <None Include="wwwroot\dist\img\logo.png" />
     <None Include="wwwroot\images\Receipt\logo.png" />
+    <None Include="wwwroot\store\logo.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -119,13 +119,19 @@ function detailShow(row, id) {
         type: "GET",
         success: function (data) {
             if (data.IsSucceeded) {
+                $('#store-image').attr('src', data.StoreImage);
+
+                $('#store-name').text(data.StoreName);
+                $('#store-address').text(data.StoreAddress);
+                $('#store-contact').text(data.StoreContact);
+                $('#store-gstin').text(data.StoreGstin);
+
                 $('#amount-total').text(data.SubTotal);
                 $('#grand-total').text(data.GrandTotal);
                 $('#grand-plain-total').text(data.GrandPlainTotal);
                 $('#tax-total').text(data.TaxTotal);
                 $('#sgst-total').text(data.SgstTotal);
                 $('#cgst-total').text(data.CgstTotal);
-                
 
                 $.each(data.Data, function (i, item) {
                     $('#invoice-contact').text(item.Contact);
