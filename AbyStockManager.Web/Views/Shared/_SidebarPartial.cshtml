@@ -1,7 +1,19 @@
-﻿<nav class="mt-2">
+﻿
+<style>
+    .nav-header {
+        border: 1px solid #4b545c;
+        background-color: #4b545c !important;
+        text-transform: uppercase;
+    }
+
+    .nav-header-last{
+        border-bottom: 1px solid #4b545c;
+    }
+</style>
+<nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-        <li class="nav-header">Inventory</li>
+        <li class="nav-header">INVENTORY</li>
         <li class="nav-item">
             <a href="/Transaction" class="nav-link">
                 <i class="nav-icon fas fa-truck"></i>
@@ -55,7 +67,7 @@
             </a>
         </li>
 
-        <li class="nav-header">Settings</li>
+        <li class="nav-header">SETTINGS</li>
         <li class="nav-item">
             <a href="/User" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -73,10 +85,10 @@
             </a>
         </li>
 
-        <li class="nav-header"></li>
+        <li class="nav-header-last"></li>
         <li class="nav-item">
             <a href="/Auth/Logout" class="nav-link">
-                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <i class="fas fa-sign-out-alt"></i>
                 <p>
                     Logout
                 </p>

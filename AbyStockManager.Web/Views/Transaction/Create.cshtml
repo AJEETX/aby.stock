@@ -69,7 +69,11 @@
                 $(this).closest("tr").remove();
                 counter -= 1
             });
+            $('.select2').on("click", function () {
+                console.log('clicked')
+                $(".select2-search__field")[0].focus();
 
+            });
         });
 
     </script>
@@ -82,11 +86,11 @@
     .table td, .table th{
         padding: .25rem;
     }
-
-    .select2, .form-control {
+        */
+    .select2, table .form-control {
         padding:0 .2rem;
         font-weight:bold;
-    }*/
+    }
 </style>
 <section class="content pt-2">
     <div class="container-fluid ">
