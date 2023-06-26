@@ -122,9 +122,20 @@ namespace Aby.StockManager.Mapper
             CreateMap<TransactionDetailViewModel, TransactionDetailDTO>();
             CreateMap<TransactionDetailDTO, TransactionDetailViewModel>()
                 .ForMember(x => x.Price, vm => vm.MapFrom(vmf => string.IsNullOrWhiteSpace(vmf.UnitPrice) ? double.Parse(vmf.UnitPrice) : 0.0D));
+
             CreateMap<SearchTransactionViewModel, TransactionDTO>()
-                    .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
-                    .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
+                .ForMember(dm => dm.SearchStartDate, vm => vm.MapFrom(vmf =>
+                !string.IsNullOrWhiteSpace(vmf.SearchStartDate) ?
+                DateTime.ParseExact(vmf.SearchStartDate, "dd/MM/yyyy", CultureInfo.InvariantCulture) :
+                DateTime.MinValue
+                ))
+                 .ForMember(dm => dm.SearchEndDate, vm => vm.MapFrom(vmf =>
+                !string.IsNullOrWhiteSpace(vmf.SearchEndDate) ?
+                DateTime.ParseExact(vmf.SearchEndDate, "dd/MM/yyyy", CultureInfo.InvariantCulture) :
+                DateTime.MaxValue
+                ))
+                .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
+                .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
             CreateMap<TransactionDTO, ListTransactionViewModel>()
                  .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.TransactionDate)));
             CreateMap<TransactionDTO, EditTransactionViewModel>()
@@ -147,6 +158,16 @@ namespace Aby.StockManager.Mapper
                  ;
 
             CreateMap<SearchTransactionDetailReportViewModel, TransactionDetailReportDTO>()
+                        .ForMember(dm => dm.SearchStartDate, vm => vm.MapFrom(vmf =>
+                !string.IsNullOrWhiteSpace(vmf.SearchStartDate) ?
+                DateTime.ParseExact(vmf.SearchStartDate, "dd/MM/yyyy", CultureInfo.InvariantCulture) :
+                DateTime.MinValue
+                ))
+                 .ForMember(dm => dm.SearchEndDate, vm => vm.MapFrom(vmf =>
+                !string.IsNullOrWhiteSpace(vmf.SearchEndDate) ?
+                DateTime.ParseExact(vmf.SearchEndDate, "dd/MM/yyyy", CultureInfo.InvariantCulture) :
+                DateTime.MaxValue
+                ))
                     .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
                     .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
 
@@ -164,7 +185,7 @@ namespace Aby.StockManager.Mapper
 
             #endregion DTO & ViewModel
 
-            #region Entity & DTO
+            #region Entity & DTO-
 
             CreateMap<Category, CategoryDTO>();
             CreateMap<CategoryDTO, Category>();
@@ -240,7 +261,7 @@ namespace Aby.StockManager.Mapper
                  .ForMember(dm => dm.InvoiceNumber, vm => vm.MapFrom(vmf => vmf.Transaction.InvoiceNumber))
                  .ForMember(dm => dm.TransactionCode, vm => vm.MapFrom(vmf => vmf.Transaction.TransactionCode));
 
-            #endregion Entity & DTO
+            #endregion Entity & DTO-
         }
     }
 }
