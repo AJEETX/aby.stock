@@ -57,9 +57,9 @@
             $("#addrow").on("click", function () {
                 var newRow = $("<tr>");
                 var cols = "";
-                cols += '<td><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"></select></td>';
-                cols += '<td><input type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" /></td>';
-                cols += '<td style="padding:1em 0;"><input type="button" class="ibtnDel btn btn-sm btn-danger "  value="x"></td>';
+                cols += '<td class="col-md-5"><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"></select></td>';
+                cols += '<td class="col-md-5"><input type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" /></td>';
+                cols += '<td class="col-md-2" style="padding:1em 0;"><input type="button" class="ibtnDel btn btn-sm btn-danger "  value="x"></td>';
                 newRow.append(cols);
                 $("table#table-detail").append(newRow);
                 setSelect2("#ProductId" + counter);
@@ -76,7 +76,7 @@
 }
 <style>
     table#table-detail, .form-control{
-        font-size:.8rem;
+        font-size:.9rem;
     }
 
     .table td, .table th{
@@ -177,9 +177,9 @@
                                     <table id="table-detail" class=" table table-bordered table-form-crate">
                                         <thead>
                                             <tr>
-                                                <td>Product - Price</td>
-                                                <td>Quantity</td>
-                                                <td></td>
+                                                <th class="product">Product - Price</th>
+                                                <th>Quantity</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
