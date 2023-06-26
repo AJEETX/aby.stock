@@ -112,7 +112,7 @@ namespace Aby.StockManager.Mapper
             CreateMap<EditProductViewModel, ProductDTO>();
             CreateMap<ProductDTO, SelectListItem>()
                     .ForMember(dm => dm.Value, vm => vm.MapFrom(vmf => vmf.Id.ToString()))
-                    .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => !string.IsNullOrEmpty(vmf.Barcode) ? vmf.Barcode + "-" + vmf.ProductName : vmf.ProductName));
+                    .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => (vmf.SalePrice != null) ? vmf.ProductName + "- " + string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.SalePrice)) : vmf.ProductName));
 
             //CreateMap<CreateTransactionViewModel, TransactionDTO>()
             //    .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => vmf.TransactionDate));
@@ -220,8 +220,9 @@ namespace Aby.StockManager.Mapper
                 .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.SalePrice : 0D))
                 .ForMember(dm => dm.PurchasePrice, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.PurchasePrice : 0D))
                 .ForMember(dm => dm.Tax, vm => vm.MapFrom(vmf => vmf.Product != null ? string.Format("{0:P2}", vmf.Product.Tax.Rate / 100) : "--"))
-                .ForMember(dm => dm.UnitPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Product.SalePrice != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Product.SalePrice) : "--"))
-                .ForMember(dm => dm.SubTotalPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Product.SalePrice != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.Product.SalePrice * (100 / (100 + vmf.Product.Tax.Rate)) * vmf.Amount)) : "--"))
+                .ForMember(dm => dm.UnitPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Transaction.InvoiceNumber != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Product.SalePrice) : string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Product.PurchasePrice)))
+                .ForMember(dm => dm.SubTotalPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Transaction.InvoiceNumber != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.Product.SalePrice * (100 / (100 + vmf.Product.Tax.Rate)) * vmf.Amount)) :
+                string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.Product.PurchasePrice * (100 / (100 + vmf.Product.Tax.Rate)) * vmf.Amount))))
                 .ForMember(dm => dm.Description, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Description : ""))
                 .ForMember(dm => dm.Contact, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Contact : ""))
                 .ForMember(dm => dm.Gstin, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Gstin : ""))
