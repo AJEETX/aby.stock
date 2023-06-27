@@ -240,9 +240,9 @@ namespace Aby.StockManager.Mapper
                  .ForMember(dm => dm.ProductName, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.ProductName : "-"))
                  .ForMember(dm => dm.Barcode, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.Barcode : "-"))
                  .ForMember(dm => dm.UnitOfMeasureName, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.UnitOfMeasure.UnitOfMeasureName : "-"))
-                 .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.SalePrice.ToString() : "-"))
-                 .ForMember(dm => dm.PurchasePrice, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.PurchasePrice.ToString() : "-"))
-                 .ForMember(dm => dm.TotalPrice, vm => vm.MapFrom(vmf => vmf.Product != null ? (vmf.Product.SalePrice * vmf.Stock).ToString() : "-"))
+                 .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Product.SalePrice != null ? vmf.Product.SalePrice.ToString() : null))
+                 .ForMember(dm => dm.PurchasePrice, vm => vm.MapFrom(vmf => vmf.Product.PurchasePrice != null ? vmf.Product.PurchasePrice.ToString() : null))
+                 .ForMember(dm => dm.TotalPrice, vm => vm.MapFrom(vmf => vmf.Product.SalePrice != null ? (vmf.Product.SalePrice * vmf.Stock).ToString() : null))
                  .ForMember(dm => dm.Isocode, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.UnitOfMeasure.Isocode : "-"));
 
             CreateMap<TransactionDetail, TransactionDetailReportDTO>()
