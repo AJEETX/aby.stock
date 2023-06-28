@@ -1,14 +1,15 @@
 ﻿$(document).ready(function () {
     var datatable = $('#datatable').dataTable({
+        "dom": 'lBfrtip',
         "searching": false,
-        "iDisplayLength": 10,
+        "iDisplayLength": 100,
         "ordering": false,
-        "lengthChange": false,
         "bServerSide": true,
         "processing": true,
         "paging": true,
         "sAjaxSource": "/Product/List",
         "info": true,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
         "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
             aoData.push(
                 { "name": "returnformat", "value": "plain" },

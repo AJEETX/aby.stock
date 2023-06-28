@@ -2,11 +2,11 @@
     var datatable = $('#datatable').dataTable({
         "dom": 'lBfrtip',
         "searching": false,
-        "iDisplayLength": 10,
+        "iDisplayLength": 100,
         "ordering": false,
         "bServerSide": true,
         "processing": true,
-        "paging": true,
+        "paging": false,
         "sAjaxSource": "/Report/StoreStockList",
         "info": true,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
