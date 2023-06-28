@@ -9,6 +9,7 @@
     <link href="~/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <link href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
 }
+
 @section script{
     <script src="~/plugins/select2/js/select2.full.min.js"></script>
     <script src="~/plugins/moment/moment.min.js"></script>
@@ -57,8 +58,15 @@
             $("#addrow").on("click", function () {
                 var newRow = $("<tr>");
                 var cols = "";
-                cols += '<td class="col-md-5"><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"></select></td>';
-                cols += '<td class="col-md-5"><input type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" /></td>';
+                cols += '<td class="col-md-10"><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"><option selected="selected"> --- SELECT PRODUCT --- </option></select>';
+                cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].ProductId" data-valmsg-replace="true"></span>';
+                cols += '<br />';
+                cols += '<input required type="number" name="TransactionDetail[' + counter + '].SalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />';
+                cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].SalePrice" data-valmsg-replace="true"></span>';
+                cols += '<br />';
+                cols += '<input required type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" min="1" placeholder="quantity" />';
+                cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].Amount" data-valmsg-replace="true"></span>';
+                cols += '</td>';
                 cols += '<td class="col-md-2" style="padding:1em 0;"><input type="button" class="ibtnDel btn btn-sm btn-danger "  value="x"></td>';
                 newRow.append(cols);
                 $("table#table-detail").append(newRow);
@@ -75,32 +83,9 @@
 
             });
         });
-
     </script>
 }
-<style>
-/*    table#table-detail, .form-control{
-        font-size:.9rem;
-    }
 
-    .table td, .table th{
-        padding: .25rem;
-    }
-        */
-    .select2, table .form-control {
-        padding:0 .2rem;
-    }
-
-    .select2-container--default .select2-selection--single {
-        padding: .3rem .2rem;
-    }
-
-    .table td{
-        padding: .2rem;
-        font-size: .9rem;
-        font-family:unset;
-    }
-</style>
 <section class="content pt-2">
     <div class="container-fluid ">
         <div class="row ">
@@ -186,26 +171,28 @@
                             }
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Detail</p>
                                     <table id="table-detail" class=" table table-bordered table-form-crate">
                                         <thead>
                                             <tr>
-                                                <th class="product">Product - Price</th>
-                                                <th>QTY</th>
+                                                <th class="product">Product - Price - Quantity</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="col-md-5">
+                                                <td class="col-md-10">
                                                     <select required class="form-control prd-first-select2" name="TransactionDetail[0].ProductId" id="ProductId0">
+                                                        <option selected="selected"> --- SELECT PRODUCT --- </option>
                                                     </select>
                                                     <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].ProductId" data-valmsg-replace="true"></span>
-                                                </td>
-                                                <td class="col-md-5">
-                                                    <input required type="number" name="TransactionDetail[0].Amount" class="form-control" step="1" min="1" />
+                                                    <br />
+                                                    <input required type="number" name="TransactionDetail[0].SalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />
+                                                    <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].SalePrice" data-valmsg-replace="true"></span>
+                                                    <br />
+                                                    <input required type="number" name="TransactionDetail[0].Amount" class="form-control" step="1" min="1" placeholder="quantity" />
                                                     <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].Amount" data-valmsg-replace="true"></span>
                                                 </td>
+                                                
                                                 
                                                 <td class="col-md-2">
                                                     <a class="deleteRow"></a>
