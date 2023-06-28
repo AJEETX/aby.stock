@@ -113,4 +113,11 @@
             }
         }
     });
+
+    $('.select2').on("click", function () {
+        console.log('clicked')
+        $(".select2-search__field")[0].focus();
+
+    });
+
 });

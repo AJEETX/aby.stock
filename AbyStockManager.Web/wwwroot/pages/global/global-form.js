@@ -16,7 +16,7 @@ function successForm(result, statusText) {
         window.location = result.RedirectUrl;
     }
     else {
-        $('#btnSave').html('Save');
+        $('#btnSave').html('+ Create');
         $('#btnSave').attr("disabled", false);
         if (result.IsSucceeded == true) {
             $('#frmCreate').clearForm();
