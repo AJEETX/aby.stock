@@ -46,7 +46,7 @@ namespace Aby.StockManager.Web
             //});
 
             services.AddDbContext<EasyStockManagerDbContext>(options =>
-                    options.UseSqlite("Data Source=logo-Jun.db"));
+                    options.UseSqlite("Data Source=sell-Jun.db"));
 
             services.AddAutoMapper(c => c.AddProfile<Aby.StockManager.Mapper.MapProfile>(), typeof(Startup));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
