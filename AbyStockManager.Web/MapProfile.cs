@@ -112,7 +112,7 @@ namespace Aby.StockManager.Mapper
             CreateMap<EditProductViewModel, ProductDTO>();
             CreateMap<ProductDTO, SelectListItem>()
                     .ForMember(dm => dm.Value, vm => vm.MapFrom(vmf => vmf.Id.ToString()))
-                    .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => (vmf.SalePrice != null) ? vmf.ProductName + "- " + string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.SalePrice)) : vmf.ProductName));
+                    .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => vmf.ProductName + " - " + string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.PurchasePrice))));
 
             //CreateMap<CreateTransactionViewModel, TransactionDTO>()
             //    .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => vmf.TransactionDate));

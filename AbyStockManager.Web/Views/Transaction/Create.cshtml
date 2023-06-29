@@ -58,7 +58,7 @@
             $("#addrow").on("click", function () {
                 var newRow = $("<tr>");
                 var cols = "";
-                cols += '<td class="col-md-10"><label>Produt name - Sale Price</label><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"><option selected="selected"> --- SELECT PRODUCT --- </option></select>';
+                cols += '<td class="col-md-10"><label>Produt name - Purchase Price</label><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"><option selected="selected"> --- SELECT PRODUCT --- </option></select>';
                 cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].ProductId" data-valmsg-replace="true"></span>';
                 cols += '<label>Quantity</label>';
                 cols += '<input required type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" min="1" placeholder="quantity" />';
@@ -183,7 +183,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="col-md-10">
-                                                    <label>Produt name - Sale Price</label>
+                                                    <label>Produt name - Purchase Price</label>
                                                     <select required class="form-control prd-first-select2" name="TransactionDetail[0].ProductId" id="ProductId0">
                                                         <option selected="selected"> --- SELECT PRODUCT --- </option>
                                                     </select>
