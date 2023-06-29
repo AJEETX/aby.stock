@@ -87,28 +87,30 @@
                             }
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Detail</p>
+                                    <p>Product List Detail</p>
                                     <table id="table-detail" class=" table table-bordered table-form-crate">
                                         <thead>
                                             <tr>
-                                                <td>Product</td>
-                                                <td>Quantity</td>
-                                                <td></td>
+                                                <th class="product"></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @for (int i = 0; i < Model.TransactionDetail.Count; i++)
                                             {
                                                 <tr>
-                                                    <td class="col-md-5">
+                                                    <td class="col-md-10">
+                                                        <label>Produt name - Sale Price</label>
                                                         <select asp-for="TransactionDetail[i].ProductId" class="form-control f-select2">
-                                                            <option value="@Model.TransactionDetail[i].ProductId">@Model.TransactionDetail[i].Barcode @Model.TransactionDetail[i].ProductName</option>
+                                                            <option value="@Model.TransactionDetail[i].ProductId">@Model.TransactionDetail[i].ProductName  - @Model.TransactionDetail[i].FinalSalePrice</option>
                                                         </select>
                                                         <span class="text-danger field-validation-valid" data-valmsg-for="@Model.TransactionDetail[i].ProductId" data-valmsg-replace="true"></span>
-                                                    </td>
-                                                    <td class="col-md-5">
-                                                        <input required type="number" asp-for="TransactionDetail[i].Amount" class="form-control" step="any" min="0.1" />
+                                                        <label>Quantity</label>
+                                                        <input required type="number" asp-for="TransactionDetail[i].Amount" class="form-control" step="1" min="1" placeholder="quantity" />
                                                         <span class="text-danger field-validation-valid" data-valmsg-for="@Model.TransactionDetail[i].Amount" data-valmsg-replace="true"></span>
+                                                        <label>Final Selling Price [ Rs.]</label>
+                                                        <input required type="number" asp-for="TransactionDetail[i].FinalSalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />
+                                                        <span class="text-danger field-validation-valid" data-valmsg-for="@Model.TransactionDetail[i].FinalSalePrice" data-valmsg-replace="true"></span>
                                                     </td>
                                                     <td class="col-md-2">
                                                         @if (i > 0)
@@ -122,7 +124,7 @@
                                         <tfoot>
                                             <tr>
                                                 <td colspan="5" style="text-align: left;">
-                                                    <input type="button" class="btn btn-lg btn-block btn-success" id="addrow" value="Add Product" />
+                                                    <input type="button" class="btn btn-lg btn-block btn-success" id="addrow" value="+ Product" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -199,9 +201,17 @@
             $("#addrow").on("click", function () {
                 var newRow = $("<tr>");
                 var cols = "";
-                cols += '<td><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"></select></td>';
-                cols += '<td><input type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" /></td>';
-                cols += '<td style="padding:1em 0;"><input type="button" class="ibtnDel btn btn-sm btn-danger"  value="x"></td>';
+                cols += '<td class="col-md-10"><label>Produt name - Sale Price</label><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"><option selected="selected"> --- SELECT PRODUCT --- </option></select>';
+                cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].ProductId" data-valmsg-replace="true"></span>';
+                cols += '<label>Quantity</label>';
+                cols += '<input required type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" min="1" placeholder="quantity" />';
+                cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].Amount" data-valmsg-replace="true"></span>';
+                cols += '<label>Final Selling Price [ Rs.]</label>';
+                cols += '<input required type="number" name="TransactionDetail[' + counter + '].FinalSalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />';
+                cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].FinalSalePrice" data-valmsg-replace="true"></span>';
+
+                cols += '</td>';
+                cols += '<td class="col-md-2" style="padding:1em 0;"><input type="button" class="ibtnDel btn btn-sm btn-danger "  value="x"></td>';
                 newRow.append(cols);
                 $("table#table-detail").append(newRow);
                 setSelect2("#ProductId" + counter);

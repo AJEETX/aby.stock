@@ -204,17 +204,17 @@ namespace Aby.StockManager.Web.Controllers
                     jsonResultModel.StoreContact = storeData.Result.TransactionResult.Contact;
                     jsonResultModel.StoreGstin = storeData.Result.TransactionResult.Gstin;
 
-                    var GrandTotal = serviceResult.TransactionResult.Sum(r => (r.InvoiceNumber == null ? r.PurchasePrice : r.Price) * r.Amount).Value;
-                    var subTotal = Math.Round(serviceResult.TransactionResult.Sum(r => (r.InvoiceNumber == null ? r.PurchasePrice : r.Price) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);
+                    var GrandTotal = serviceResult.TransactionResult.Sum(r => (r.InvoiceNumber == null ? r.PurchasePrice : r.FinalSalePrice) * r.Amount).Value;
+                    var subTotal = Math.Round(serviceResult.TransactionResult.Sum(r => (r.InvoiceNumber == null ? r.PurchasePrice : r.FinalSalePrice) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);
                     var totalTax = GrandTotal - subTotal;
 
-                    jsonResultModel.CgstTotal = "CGST:" + string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
-                    jsonResultModel.SgstTotal = "SGST:" + string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
+                    jsonResultModel.CgstTotal = "CGST: " + string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
+                    jsonResultModel.SgstTotal = "SGST: " + string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
                     jsonResultModel.TaxTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax);
 
                     jsonResultModel.GrandPlainTotal = "Rs. " + NumberToWords.ConvertAmount(GrandTotal);
                     jsonResultModel.GrandTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", GrandTotal);
-                    jsonResultModel.SubTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", serviceResult.TransactionResult.Sum(r => r.Price * (100 / (100 + r.TaxRate)) * r.Amount).Value);
+                    jsonResultModel.SubTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", serviceResult.TransactionResult.Sum(r => r.FinalSalePrice * (100 / (100 + r.TaxRate)) * r.Amount).Value);
                 }
             }
             catch (Exception ex)

@@ -58,14 +58,15 @@
             $("#addrow").on("click", function () {
                 var newRow = $("<tr>");
                 var cols = "";
-                cols += '<td class="col-md-10"><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"><option selected="selected"> --- SELECT PRODUCT --- </option></select>';
+                cols += '<td class="col-md-10"><label>Produt name - Sale Price</label><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"><option selected="selected"> --- SELECT PRODUCT --- </option></select>';
                 cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].ProductId" data-valmsg-replace="true"></span>';
-                cols += '<br />';
-                cols += '<input required type="number" name="TransactionDetail[' + counter + '].FinalSalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />';
-                cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].FinalSalePrice" data-valmsg-replace="true"></span>';
-                cols += '<br />';
+                cols += '<label>Quantity</label>';
                 cols += '<input required type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" min="1" placeholder="quantity" />';
                 cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].Amount" data-valmsg-replace="true"></span>';
+                cols += '<label>Final Selling Price</label>';
+                cols += '<input required type="number" name="TransactionDetail[' + counter + '].FinalSalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />';
+                cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].FinalSalePrice" data-valmsg-replace="true"></span>';
+
                 cols += '</td>';
                 cols += '<td class="col-md-2" style="padding:1em 0;"><input type="button" class="ibtnDel btn btn-sm btn-danger "  value="x"></td>';
                 newRow.append(cols);
@@ -171,29 +172,29 @@
                             }
                             <div class="row">
                                 <div class="col-md-12">
+                                    <p>Product List Detail</p>
                                     <table id="table-detail" class=" table table-bordered table-form-crate">
                                         <thead>
                                             <tr>
-                                                <th class="product">Product - Price - Quantity</th>
+                                                <th class="product"></th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td class="col-md-10">
+                                                    <label>Produt name - Sale Price</label>
                                                     <select required class="form-control prd-first-select2" name="TransactionDetail[0].ProductId" id="ProductId0">
                                                         <option selected="selected"> --- SELECT PRODUCT --- </option>
                                                     </select>
                                                     <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].ProductId" data-valmsg-replace="true"></span>
-                                                    <br />
-                                                    <input required type="number" name="TransactionDetail[0].FinalSalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />
-                                                    <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].FinalSalePrice" data-valmsg-replace="true"></span>
-                                                    <br />
+                                                    <label>Quantity</label>
                                                     <input required type="number" name="TransactionDetail[0].Amount" class="form-control" step="1" min="1" placeholder="quantity" />
                                                     <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].Amount" data-valmsg-replace="true"></span>
+                                                    <label>Final Selling Price [ Rs.]</label>
+                                                    <input required type="number" name="TransactionDetail[0].FinalSalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />
+                                                    <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].FinalSalePrice" data-valmsg-replace="true"></span>
                                                 </td>
-                                                
-                                                
                                                 <td class="col-md-2">
                                                     <a class="deleteRow"></a>
                                                 </td>

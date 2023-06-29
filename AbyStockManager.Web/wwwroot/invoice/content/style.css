@@ -119,6 +119,7 @@
     border-collapse: collapse;
     border-spacing: 0;
     margin-bottom: 20px;
+    font-family: Arial Narrow;
 }
 
 .modal table th,
@@ -207,8 +208,8 @@
 }
 
 .modal table tfoot tr:last-child td {
-    font-family: 'Franklin Gothic' ;
-    font-size: 1em;
+    font-family: 'Arial Narrow' ;
+    font-size: .9rem;
     font-weight: bold;
     border-top: 1px solid #57B223;
 }

@@ -220,7 +220,7 @@ namespace Aby.StockManager.Mapper
                 .ForMember(dm => dm.Price, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.SalePrice : 0D))
                 .ForMember(dm => dm.PurchasePrice, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.PurchasePrice : 0D))
                 .ForMember(dm => dm.Tax, vm => vm.MapFrom(vmf => vmf.Product != null ? string.Format("{0:P2}", vmf.Product.Tax.Rate / 100) : "--"))
-                .ForMember(dm => dm.UnitPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Transaction.InvoiceNumber != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Product.SalePrice) : string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Product.PurchasePrice)))
+                .ForMember(dm => dm.UnitPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Transaction.InvoiceNumber != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.FinalSalePrice) : string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Product.PurchasePrice)))
                 .ForMember(dm => dm.SubTotalPrice, vm => vm.MapFrom(vmf => (vmf.Product != null && vmf.Transaction.InvoiceNumber != null) ? string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.Product.SalePrice * (100 / (100 + vmf.Product.Tax.Rate)) * vmf.Amount)) :
                 string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.Product.PurchasePrice * (100 / (100 + vmf.Product.Tax.Rate)) * vmf.Amount))))
                 .ForMember(dm => dm.Description, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Description : ""))
