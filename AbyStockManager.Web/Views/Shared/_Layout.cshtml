@@ -12,8 +12,8 @@
 
     ListStoreViewModel listVM = _mapper.Map<ListStoreViewModel>(storeData.TransactionResult);
 
-    logo = listVM.ImageDisplay;
-    string storeName = listVM.StoreName;
+    logo = listVM?.ImageDisplay;
+    string storeName = listVM?.StoreName;
     Claim userNameClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
     if (userNameClaim != null)
     {

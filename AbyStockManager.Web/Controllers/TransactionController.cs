@@ -74,33 +74,6 @@ namespace Aby.StockManager.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken()]
-        public async Task<IActionResult> Quote(CreateTransactionViewModel model)
-        {
-            JsonResultModel jsonResultModel = new JsonResultModel();
-            try
-            {
-                if (model.TransactionTypeId == (int)TransactionType.Invoice)
-                {
-                    model.TransactionCode = TransactionType.Invoice.ToString();
-                }
-                if (model.TransactionTypeId == (int)TransactionType.StockIn)
-                {
-                    model.TransactionCode = TransactionType.StockIn.ToString();
-                }
-                TransactionDTO transactionDTO = _mapper.Map<TransactionDTO>(model);
-                var serviceResult = await _transactionService.AddAsync(transactionDTO);
-                jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);
-            }
-            catch (Exception ex)
-            {
-                jsonResultModel.IsSucceeded = false;
-                jsonResultModel.UserMessage = ex.Message;
-            }
-            return Json(jsonResultModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken()]
         public async Task<IActionResult> Create(CreateTransactionViewModel model)
         {
             JsonResultModel jsonResultModel = new JsonResultModel();

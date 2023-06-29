@@ -8,7 +8,7 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
     {
         public int? ProductId { get; set; }
         public int? TransactionId { get; set; }
-        public double? Amount { get; set; }
+        public int? Amount { get; set; }
         public double? FinalSalePrice { get; set; }
         public double? Tax { get; set; }
         public double Price { get; set; }

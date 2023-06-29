@@ -61,8 +61,8 @@
                 cols += '<td class="col-md-10"><select class="form-control" name="TransactionDetail[' + counter + '].ProductId" id="ProductId' + counter + '"><option selected="selected"> --- SELECT PRODUCT --- </option></select>';
                 cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].ProductId" data-valmsg-replace="true"></span>';
                 cols += '<br />';
-                cols += '<input required type="number" name="TransactionDetail[' + counter + '].SalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />';
-                cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].SalePrice" data-valmsg-replace="true"></span>';
+                cols += '<input required type="number" name="TransactionDetail[' + counter + '].FinalSalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />';
+                cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].FinalSalePrice" data-valmsg-replace="true"></span>';
                 cols += '<br />';
                 cols += '<input required type="number" name="TransactionDetail[' + counter + '].Amount" class="form-control" step="any" min="1" placeholder="quantity" />';
                 cols += '<span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[' + counter + '].Amount" data-valmsg-replace="true"></span>';
@@ -186,8 +186,8 @@
                                                     </select>
                                                     <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].ProductId" data-valmsg-replace="true"></span>
                                                     <br />
-                                                    <input required type="number" name="TransactionDetail[0].SalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />
-                                                    <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].SalePrice" data-valmsg-replace="true"></span>
+                                                    <input required type="number" name="TransactionDetail[0].FinalSalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />
+                                                    <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].FinalSalePrice" data-valmsg-replace="true"></span>
                                                     <br />
                                                     <input required type="number" name="TransactionDetail[0].Amount" class="form-control" step="1" min="1" placeholder="quantity" />
                                                     <span class="text-danger field-validation-valid" data-valmsg-for="TransactionDetail[0].Amount" data-valmsg-replace="true"></span>

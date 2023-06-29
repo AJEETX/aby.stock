@@ -12,7 +12,8 @@ namespace Aby.StockManager.Data.Configurations
         public void Configure(EntityTypeBuilder<TransactionDetail> builder)
         {
             builder.HasKey(x => new { x.TransactionId, x.ProductId });
-            builder.Property(x => x.Amount).HasConversion<double>();
+            builder.Property(x => x.Amount).HasConversion<int>();
+            builder.Property(x => x.FinalSalePrice).HasConversion<double>();
             builder.ToTable("TransactionDetail");
         }
     }
