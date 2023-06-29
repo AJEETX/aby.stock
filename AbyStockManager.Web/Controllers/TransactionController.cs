@@ -208,8 +208,8 @@ namespace Aby.StockManager.Web.Controllers
                     var subTotal = Math.Round(serviceResult.TransactionResult.Sum(r => (r.InvoiceNumber == null ? r.PurchasePrice : r.FinalSalePrice) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);
                     var totalTax = GrandTotal - subTotal;
 
-                    jsonResultModel.CgstTotal = "CGST: " + string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
-                    jsonResultModel.SgstTotal = "SGST: " + string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
+                    jsonResultModel.CgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
+                    jsonResultModel.SgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
                     jsonResultModel.TaxTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax);
 
                     jsonResultModel.GrandPlainTotal = "Rs. " + NumberToWords.ConvertAmount(GrandTotal);
