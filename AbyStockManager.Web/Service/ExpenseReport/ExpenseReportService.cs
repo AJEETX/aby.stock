@@ -239,7 +239,7 @@ namespace Aby.StockManager.Service
                 {
                     IEnumerable<Entity.ExpenseReport> list = await _unitOfWork
                                                                 .ExpenseReportRepository
-                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.ItemName) || x.ItemName.Contains(criteria.ItemName)) &&
+                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.ItemName) || x.ItemName.ToLower().Contains(criteria.ItemName.Trim().ToLower())) &&
                                                                  (criteria.SearchStartDate == null || x.ExpenseDate >= criteria.SearchStartDate) &&
                                                                                         (criteria.SearchEndDate == null || x.ExpenseDate <= criteria.SearchEndDate) &&
                                                                                         (criteria.Category == null || x.Category == criteria.Category),

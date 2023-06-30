@@ -50,7 +50,7 @@ namespace Aby.StockManager.Service.UnitOfMeasure
                 {
                     IEnumerable<Entity.UnitOfMeasure> list = await _unitOfWork
                                                                    .UnitOfMeasureRepository
-                                                                   .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.UnitOfMeasureName) || x.UnitOfMeasureName.Contains(criteria.UnitOfMeasureName)) &&
+                                                                   .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.UnitOfMeasureName) || x.UnitOfMeasureName.ToLower().Contains(criteria.UnitOfMeasureName.Trim().ToLower())) &&
                                                                                            (string.IsNullOrEmpty(criteria.Isocode) || x.Isocode.Contains(criteria.Isocode)),
                                                                            orderByDesc: x => x.Id,
                                                                            skip: criteria.PageNumber,
@@ -74,7 +74,7 @@ namespace Aby.StockManager.Service.UnitOfMeasure
                 using (_unitOfWork)
                 {
                     int count = await _unitOfWork.UnitOfMeasureRepository
-                                                 .FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.UnitOfMeasureName) || x.UnitOfMeasureName.Contains(criteria.UnitOfMeasureName)) &&
+                                                 .FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.UnitOfMeasureName) || x.UnitOfMeasureName.ToLower().Contains(criteria.UnitOfMeasureName.Trim().ToLower())) &&
                                                                               (string.IsNullOrEmpty(criteria.Isocode) || x.Isocode.Contains(criteria.Isocode)));
                     result.TransactionResult = count;
                 }

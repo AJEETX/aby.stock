@@ -63,9 +63,9 @@ namespace Aby.StockManager.Service.User
                 {
                     IEnumerable<Entity.User> list = await _unitOfWork
                                                                 .UserRepository
-                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.Email) || x.Email.Contains(criteria.Email)) &&
-                                                                                        (string.IsNullOrEmpty(criteria.Name) || x.Name.Contains(criteria.Name)) &&
-                                                                                        (string.IsNullOrEmpty(criteria.Surname) || x.Surname.Contains(criteria.Surname)),
+                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.Email) || x.Email.ToLower().Contains(criteria.Email.Trim().ToLower())) &&
+                                                                                        (string.IsNullOrEmpty(criteria.Name) || x.Name.ToLower().Contains(criteria.Name.Trim().ToLower())) &&
+                                                                                        (string.IsNullOrEmpty(criteria.Surname) || x.Surname.ToLower().Contains(criteria.Surname.Trim().ToLower())),
                                                                            orderByDesc: x => x.Id,
                                                                            skip: criteria.PageNumber,
                                                                            take: criteria.RecordCount);
@@ -89,9 +89,9 @@ namespace Aby.StockManager.Service.User
                 using (_unitOfWork)
                 {
                     int count = await _unitOfWork.UserRepository
-                                                  .FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.Email) || x.Email.Contains(criteria.Email)) &&
-                                                                               (string.IsNullOrEmpty(criteria.Name) || x.Name.Contains(criteria.Name)) &&
-                                                                               (string.IsNullOrEmpty(criteria.Surname) || x.Surname.Contains(criteria.Surname)));
+                                                  .FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.Email) || x.Email.ToLower().Contains(criteria.Email.Trim().ToLower())) &&
+                                                                               (string.IsNullOrEmpty(criteria.Name) || x.Name.ToLower().Contains(criteria.Name.Trim().ToLower())) &&
+                                                                               (string.IsNullOrEmpty(criteria.Surname) || x.Surname.ToLower().Contains(criteria.Surname.Trim().ToLower())));
 
                     result.TransactionResult = count;
                 }

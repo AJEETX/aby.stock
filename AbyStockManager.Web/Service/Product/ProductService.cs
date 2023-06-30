@@ -55,8 +55,8 @@ namespace Aby.StockManager.Service.Product
                 {
                     IEnumerable<Entity.Product> list = await _unitOfWork
                                                                 .ProductRepository
-                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.ProductName) || x.ProductName.Contains(criteria.ProductName)) &&
-                                                                                        (string.IsNullOrEmpty(criteria.Barcode) || x.Barcode.Contains(criteria.Barcode)) &&
+                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.ProductName) || x.ProductName.ToLower().Contains(criteria.ProductName.Trim().ToLower())) &&
+                                                                                        (string.IsNullOrEmpty(criteria.Barcode) || x.Barcode.ToLower().Contains(criteria.Barcode.Trim().ToLower())) &&
                                                                                         (criteria.CategoryId == null || x.CategoryId == criteria.CategoryId) &&
                                                                                         (criteria.UnitOfMeasureId == null || x.UnitOfMeasureId == criteria.UnitOfMeasureId),
                                                                            includes: new List<string>() { "UnitOfMeasure", "Category", "Tax" },
@@ -85,8 +85,8 @@ namespace Aby.StockManager.Service.Product
                 using (_unitOfWork)
                 {
                     int count = await _unitOfWork.ProductRepository
-                                                 .FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.ProductName) || x.ProductName.Contains(criteria.ProductName)) &&
-                                                                              (string.IsNullOrEmpty(criteria.Barcode) || x.Barcode.Contains(criteria.Barcode)) &&
+                                                 .FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.ProductName) || x.ProductName.ToLower().Contains(criteria.ProductName.Trim().ToLower())) &&
+                                                                                        (string.IsNullOrEmpty(criteria.Barcode) || x.Barcode.ToLower().Contains(criteria.Barcode.Trim().ToLower())) &&
                                                                               (criteria.CategoryId == null || x.CategoryId == criteria.CategoryId) &&
                                                                               (criteria.UnitOfMeasureId == null || x.UnitOfMeasureId == criteria.UnitOfMeasureId));
                     result.TransactionResult = count;

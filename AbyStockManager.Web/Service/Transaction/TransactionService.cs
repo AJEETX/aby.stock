@@ -90,7 +90,7 @@ namespace Aby.StockManager.Service.Transaction
                 {
                     IEnumerable<Entity.Transaction> list = await _unitOfWork
                                                                 .TransactionRepository
-                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.TransactionCode) || x.TransactionCode.Contains(criteria.TransactionCode)) &&
+                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.TransactionCode) || x.TransactionCode.ToLower().Contains(criteria.TransactionCode.Trim().ToLower())) &&
                                                                                         (criteria.TransactionTypeId == null || x.TransactionTypeId == criteria.TransactionTypeId) &&
                                                                                         (criteria.SearchStartDate == null || x.TransactionDate >= criteria.SearchStartDate) &&
                                                                                         (criteria.SearchEndDate == null || x.TransactionDate <= criteria.SearchEndDate) &&
@@ -120,7 +120,7 @@ namespace Aby.StockManager.Service.Transaction
                 using (_unitOfWork)
                 {
                     int count = await _unitOfWork.TransactionRepository
-                                                 .FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.TransactionCode) || x.TransactionCode.Contains(criteria.TransactionCode)) &&
+                                                 .FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.TransactionCode) || x.TransactionCode.ToLower().Contains(criteria.TransactionCode.Trim().ToLower())) &&
                                                                               (criteria.TransactionTypeId == null || x.TransactionTypeId == criteria.TransactionTypeId) &&
                                                                               (criteria.SearchStartDate == null || x.TransactionDate >= criteria.SearchStartDate) &&
                                                                               (criteria.SearchEndDate == null || x.TransactionDate <= criteria.SearchEndDate) &&

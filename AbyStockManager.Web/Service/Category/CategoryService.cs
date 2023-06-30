@@ -55,7 +55,8 @@ namespace Aby.StockManager.Service.Category
                 {
                     IEnumerable<Entity.Category> list = await _unitOfWork
                                                                 .CategoryRepository
-                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.CategoryName) || x.CategoryName.Contains(criteria.CategoryName)),
+                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.CategoryName)
+                                                                || x.CategoryName.ToLower().Contains(criteria.CategoryName.Trim().ToLower())),
                                                                            orderByDesc: x => x.Id,
                                                                            skip: criteria.PageNumber,
                                                                            take: criteria.RecordCount);
@@ -80,7 +81,8 @@ namespace Aby.StockManager.Service.Category
             {
                 using (_unitOfWork)
                 {
-                    int count = await _unitOfWork.CategoryRepository.FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.CategoryName) || x.CategoryName.Contains(criteria.CategoryName)));
+                    int count = await _unitOfWork.CategoryRepository.FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.CategoryName)
+                                                                || x.CategoryName.ToLower().Contains(criteria.CategoryName.Trim().ToLower())));
                     result.TransactionResult = count;
                 }
             }

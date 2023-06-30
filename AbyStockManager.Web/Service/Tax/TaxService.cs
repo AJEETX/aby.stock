@@ -55,7 +55,10 @@ namespace AbyStockManager.Web.Service.Tax
                 {
                     IEnumerable<Aby.StockManager.Data.Entity.Tax> list = await _unitOfWork
                                                                 .TaxRepository
-                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.Name) || x.Rate.ToString().Contains(criteria.Rate.ToString())),
+                                                                .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.Name)
+                                                                || x.Name.Contains(criteria.Name.Trim().ToLower())
+                                                                || x.Rate.ToString().Contains(criteria.Rate.ToString()))
+                                                                ,
                                                                            orderByDesc: x => x.Id,
                                                                            skip: criteria.PageNumber,
                                                                            take: criteria.RecordCount);
@@ -80,7 +83,8 @@ namespace AbyStockManager.Web.Service.Tax
             {
                 using (_unitOfWork)
                 {
-                    int count = await _unitOfWork.TaxRepository.FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.Name) || x.Rate.ToString().Contains(criteria.Rate.ToString())));
+                    int count = await _unitOfWork.TaxRepository.FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.Name)
+                    || x.Name.Contains(criteria.Name.Trim().ToLower()) || x.Rate.ToString().Contains(criteria.Rate.ToString())));
                     result.TransactionResult = count;
                 }
             }
