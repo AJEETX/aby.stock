@@ -12,7 +12,7 @@ namespace Aby.StockManager.Model.ViewModel.Report.TransactionDetail
         [Display(Name = "Transaction Type")]
         public string TransactionCode { get; set; }
 
-        [Display(Name = "Product")]
+        [Display(Name = "Product name - Purchase price [Rs.]")]
         public int? ProductId { get; set; }
 
         [Display(Name = "Store")]

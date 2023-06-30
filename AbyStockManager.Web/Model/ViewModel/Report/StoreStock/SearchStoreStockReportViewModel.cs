@@ -9,7 +9,7 @@ namespace Aby.StockManager.Model.ViewModel.Report.StoreStock
 {
     public class SearchStoreStockReportViewModel : BaseViewModel
     {
-        [Display(Name = "Product")]
+        [Display(Name = "Product name - Purchase price [Rs.]")]
         public int? ProductId { get; set; }
 
         [Display(Name = "Store")]
