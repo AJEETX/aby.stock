@@ -25,6 +25,7 @@ using Aby.StockManager.Service.Transaction;
 using Aby.StockManager.Service.UnitOfMeasure;
 using Aby.StockManager.Service.User;
 using AbyStockManager.Web.Service.Tax;
+using Aby.StockManager.Service;
 
 namespace Aby.StockManager.Web
 {
@@ -46,7 +47,7 @@ namespace Aby.StockManager.Web
             //});
 
             services.AddDbContext<EasyStockManagerDbContext>(options =>
-                    options.UseSqlite("Data Source=sell-Jun.db"));
+                    options.UseSqlite("Data Source=edit-stock.db"));
 
             services.AddAutoMapper(c => c.AddProfile<Aby.StockManager.Mapper.MapProfile>(), typeof(Startup));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -56,9 +57,10 @@ namespace Aby.StockManager.Web
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStoreService, StoreService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IExpenseReportService, ExpenseReportService>();
             services.AddScoped<IStoreStockService, StoreStockService>();
             services.AddScoped<ITransactionService, TransactionService>();
-            services.AddScoped<IUnitOfWorks, Aby.StockManager.UnitOfWork.UnitOfWork>();
+            services.AddScoped<IUnitOfWorks, UnitOfWork.UnitOfWork>();
             services.AddControllersWithViews().
                     AddJsonOptions(options =>
                     {

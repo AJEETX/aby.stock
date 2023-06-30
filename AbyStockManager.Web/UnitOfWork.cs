@@ -33,6 +33,7 @@ namespace Aby.StockManager.UnitOfWork
         private ICategoryRepository iCategoryRepository;
         private ITaxRepository iTaxRepository;
         private IProductRepository iProductRepository;
+        private IExpenseReportRepository iExpenseReportRepository;
         private IStoreRepository iStoreRepository;
         private IStoreStockRepository iStoreStockRepository;
         private ITransactionDetailRepository iTransactionDetailRepository;
@@ -40,6 +41,16 @@ namespace Aby.StockManager.UnitOfWork
         private ITransactionTypeRepository iTransactionTypeRepository;
         private IUnitOfMeasureRepository iUnitOfMeasureRepository;
         private IUserRepository iUserRepository;
+
+        public IExpenseReportRepository ExpenseReportRepository
+        {
+            get
+            {
+                if (iExpenseReportRepository == null)
+                    iExpenseReportRepository = new ExpenseReportRepository(_context);
+                return iExpenseReportRepository;
+            }
+        }
 
         public IProductRepository ProductRepository
         {

@@ -1,0 +1,141 @@
+﻿@model Aby.StockManager.Model.ViewModel.Expense.SearchExpenseReportViewModel
+@{
+    ViewData["Title"] = "Expense List";
+}
+@section style{
+    <partial name="~/Views/Shared/_DataTableStylePartial.cshtml" />
+    <link href="~/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet">
+    <link href="~/invoice/content/style.css" rel="stylesheet" />
+
+    }
+<section class="content pt-2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-search"></i> Search Expense</h3>
+                    </div>
+                    <div class="card-body dataTable-search-form">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label asp-for="SearchStartDate"></label>
+                                    <input asp-for="SearchStartDate" type="text" class="form-control-sm form-control enter-keyup datepicker">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label asp-for="SearchEndDate"></label>
+                                    <input asp-for="SearchEndDate" type="text" class="form-control-sm form-control enter-keyup datepicker">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label asp-for="ItemName"></label>
+                                    <input asp-for="ItemName" type="text" class="form-control-sm form-control enter-keyup">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label asp-for="CategoryName" class="control-label"></label>
+                                    <select asp-for="CategoryName" class="form-control">
+                                        <option value="">-- Select Expense Category --</option>
+                                        <option value="Food">Food</option>
+                                        <option value="Shopping">Shopping</option>
+                                        <option value="Travel">Travel</option>
+                                        <option value="Health">Health</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button id="btnClear" type="button" class="btn btn-secondary btn-sm"><i class="fas fa-sync-alt"></i> Clear</button>
+                                <button id="btnFilter" type="button" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Search</button>
+                                <a class="btn btn-success btn-sm" href="/Expense/Create"><i class="fas fa-plus"></i> Expense</a>
+                                <button class="btn btn-info btn-sm" onclick="ReportExpense()"><i class="fas fa-chart-line"></i> Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-list"></i> Expense List</h3>
+                    </div>
+                    <div class="card-body">
+                        <table id="datatable" class="table table-bordered table-hover dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Expense</th>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Expense Date</th>
+                                    <th style="width:15%">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Expense</th>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Expense Date</th>
+                                    <th style="width:15%">Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="expenseReportModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Expense Report</h3>
+            </div>
+            <div class="modal-body" id="expenseReportModalDiv">
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <partial name="~/Views/Shared/_DataTableScriptPartial.cshtml" />
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="~/pages/expense/expense-list.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.datepicker').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                "locale": {
+                    "format": "DD/MM/YYYY"
+                }
+            });
+            $('.datepicker').val('');
+        });
+
+        var ReportExpense = function () {
+            var url = "/Expense/ExpenseSummary";
+
+            $("#expenseReportModalDiv").load(url, function () {
+                $("#expenseReportModal").modal("show");
+            })
+        }
+    </script>
+}
+

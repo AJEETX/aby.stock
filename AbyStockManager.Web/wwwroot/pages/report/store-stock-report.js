@@ -47,10 +47,19 @@
                 {
                     mDataProp: "ProductPrice"
                 },
-
                 {
                     mDataProp: "ProductTotalDisplayPrice"
                 },
+                {
+                    "sDefaultContent": "",
+                    "bSortable": false,
+                    "mRender": function (data, type, row) {
+                        var buttons = "";
+                        buttons += '<a href="/Report/Edit/' + row.ProductId + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
+                        //buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> Delete</a>'
+                        return buttons;
+                    },
+                }
 
             ],
         rowCallback: function (row, data, index) {
@@ -117,7 +126,5 @@
     $('.select2').on("click", function () {
         console.log('clicked')
         $(".select2-search__field")[0].focus();
-
     });
-
 });

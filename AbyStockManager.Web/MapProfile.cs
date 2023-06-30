@@ -18,6 +18,8 @@ using Aby.StockManager.Model.ViewModel.User;
 using Elfie.Serialization;
 using System.Globalization;
 using AbyStockManager.Web.Model.ViewModel.Tax;
+using Aby.StockManager.Model.ViewModel.Expense;
+using AbyStockManager.Web.Model.ViewModel.Report.StoreStock;
 
 namespace Aby.StockManager.Mapper
 {
@@ -123,6 +125,20 @@ namespace Aby.StockManager.Mapper
             CreateMap<TransactionDetailDTO, TransactionDetailViewModel>()
                 .ForMember(x => x.Price, vm => vm.MapFrom(vmf => string.IsNullOrWhiteSpace(vmf.UnitPrice) ? double.Parse(vmf.UnitPrice) : 0.0D));
 
+            CreateMap<SearchExpenseReportViewModel, ExpenseReportDTO>()
+                .ForMember(dm => dm.SearchStartDate, vm => vm.MapFrom(vmf =>
+                !string.IsNullOrWhiteSpace(vmf.SearchStartDate) ?
+                DateTime.ParseExact(vmf.SearchStartDate, "dd/MM/yyyy", CultureInfo.InvariantCulture) :
+                DateTime.MinValue
+                ))
+                 .ForMember(dm => dm.SearchEndDate, vm => vm.MapFrom(vmf =>
+                !string.IsNullOrWhiteSpace(vmf.SearchEndDate) ?
+                DateTime.ParseExact(vmf.SearchEndDate, "dd/MM/yyyy", CultureInfo.InvariantCulture) :
+                DateTime.MaxValue
+                ))
+                .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
+                .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
+
             CreateMap<SearchTransactionViewModel, TransactionDTO>()
                 .ForMember(dm => dm.SearchStartDate, vm => vm.MapFrom(vmf =>
                 !string.IsNullOrWhiteSpace(vmf.SearchStartDate) ?
@@ -156,6 +172,12 @@ namespace Aby.StockManager.Mapper
                  .ForMember(dm => dm.QTY, vm => vm.MapFrom(vmf => string.Format("{0} ({1})", vmf.Stock.ToString(), vmf.Isocode)))
                  .ForMember(dm => dm.Quantity, vm => vm.MapFrom(vmf => int.Parse(vmf.Stock.ToString())))
                  ;
+
+            CreateMap<StoreStockDTO, EditStoreStockReportViewModel>();
+            CreateMap<EditStoreStockReportViewModel, StoreStockDTO>()
+                ;
+
+            CreateMap<StoreStockDTO, StoreStock>();
 
             CreateMap<SearchTransactionDetailReportViewModel, TransactionDetailReportDTO>()
                         .ForMember(dm => dm.SearchStartDate, vm => vm.MapFrom(vmf =>
@@ -200,6 +222,19 @@ namespace Aby.StockManager.Mapper
 
             CreateMap<Store, StoreDTO>();
             CreateMap<StoreDTO, Store>();
+
+            CreateMap<ExpenseReport, ExpenseReportDTO>()
+                 .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => vmf.ExpenseDate))
+                ;
+
+            CreateMap<ExpenseReportDTO, ListExpenseReportViewModel>()
+                             .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.ExpenseDate))); ;
+
+            CreateMap<ExpenseReportDTO, EditExpenseReportViewModel>();
+            CreateMap<EditExpenseReportViewModel, ExpenseReportDTO>();
+            CreateMap<ExpenseReport, ExpenseReportDTO>();
+            CreateMap<ExpenseReportDTO, ExpenseReport>();
+            CreateMap<CreateExpenseReportViewModel, ExpenseReportDTO>();
 
             CreateMap<Product, ProductDTO>()
                  .ForMember(dm => dm.CategoryName, vm => vm.MapFrom(vmf => vmf.Category != null ? vmf.Category.CategoryName : "-"))

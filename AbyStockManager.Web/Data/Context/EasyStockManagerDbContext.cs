@@ -23,6 +23,8 @@ namespace Aby.StockManager.Data.Context
         public DbSet<TransactionDetail> TransactionDetail { get; set; }
         public DbSet<TransactionType> TransactionType { get; set; }
         public DbSet<UnitOfMeasure> UnitOfMeasure { get; set; }
+        public virtual DbSet<ExpenseReport> ExpenseReport { get; set; }
+
         public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,6 +32,7 @@ namespace Aby.StockManager.Data.Context
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new TaxConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new ExpenseReportConfiguration());
             modelBuilder.ApplyConfiguration(new StoreConfiguration());
             modelBuilder.ApplyConfiguration(new StoreStockConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());

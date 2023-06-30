@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Aby.StockManager.Core.Repository;
+using Aby.StockManager.Repository.Product;
 
 namespace Aby.StockManager.Core.UnitOfWorks
 {
@@ -12,6 +13,7 @@ namespace Aby.StockManager.Core.UnitOfWorks
         ITaxRepository TaxRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
+        IExpenseReportRepository ExpenseReportRepository { get; }
         IStoreRepository StoreRepository { get; }
         IStoreStockRepository StoreStockRepository { get; }
         ITransactionDetailRepository TransactionDetailRepository { get; }

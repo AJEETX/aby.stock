@@ -13,6 +13,9 @@ using Aby.StockManager.Model.ViewModel.Report.StoreStock;
 using Aby.StockManager.Model.ViewModel.Report.TransactionDetail;
 using System.Collections;
 using System.Globalization;
+using Aby.StockManager.Model.ViewModel.Category;
+using Aby.StockManager.Service.Category;
+using AbyStockManager.Web.Model.ViewModel.Report.StoreStock;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -43,6 +46,52 @@ namespace Aby.StockManager.Web.Controllers
             model.StoreList = await GetStoreList();
             model.ProductList = new List<SelectListItem>();
             return View(model);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var serviceResult = await _productService.GetById(id);
+            var storeData = await _storeService.GetById(1);
+
+            var storeStockDTO = new StoreStockDTO
+            {
+                ProductId = id,
+                StoreId = storeData.TransactionResult.Id,
+            };
+
+            var storeStock = await _storeStockService.Find(storeStockDTO);
+
+            EditStoreStockReportViewModel model = _mapper.Map<EditStoreStockReportViewModel>(storeStock.TransactionResult.FirstOrDefault());
+            model.ProductFullName = serviceResult.TransactionResult.ProductName;
+            model.PurchasePrice = string.Format(new CultureInfo("hi-IN"), "{0:c}", (serviceResult.TransactionResult.PurchasePrice));
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken()]
+        public async Task<IActionResult> Edit(EditStoreStockReportViewModel model)
+        {
+            JsonResultModel jsonResultModel = new JsonResultModel();
+            try
+            {
+                var productResult = await _productService.GetById(model.ProductId);
+                model.PurchasePrice = productResult.TransactionResult.PurchasePrice?.ToString();
+                StoreStockDTO stockDTO = _mapper.Map<StoreStockDTO>(model);
+
+                var serviceResult = await _storeStockService.Update(stockDTO);
+                jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);
+                if (jsonResultModel.IsSucceeded)
+                {
+                    jsonResultModel.IsRedirect = true;
+                    jsonResultModel.RedirectUrl = "/Report";
+                }
+            }
+            catch (Exception ex)
+            {
+                jsonResultModel.IsSucceeded = false;
+                jsonResultModel.UserMessage = ex.Message;
+            }
+            return Json(jsonResultModel);
         }
 
         [HttpGet]

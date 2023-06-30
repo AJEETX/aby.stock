@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-body dataTable-search-form">
                         <div class="row">
-                            @*<div class="col-sm-3">
+                            @*<div class="col-sm-6">
                                 <div class="form-group">
                                     <label asp-for="StoreId"></label>
                                     <select asp-for="StoreId" class="form-control form-control-sm" asp-items="Model.StoreList">
@@ -29,7 +29,7 @@
                                     </select>
                                 </div>
                             </div>*@
-                            <div class="col-sm-3">
+                            <div class="col-sm-12">
                                 <div class="form-group">
                                     <label asp-for="ProductId"></label>
                                     <select asp-for="ProductId" class="form-control form-control-sm">
@@ -64,6 +64,7 @@
                                     <th>Store</th>
                                     <th>Purchase Price / QTY</th>
                                     <th>Total Amount</th>
+                                    <th style="width:15%">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,6 +76,7 @@
                                     <th>Store</th>
                                     <th>Purchase Price / QTY</th>
                                     <th>Total Amount</th>
+                                    <th style="width:15%">Actions</th>
                                 </tr>
                             </tfoot>
                         </table>

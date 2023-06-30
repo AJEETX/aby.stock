@@ -41,6 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Expense\Index0.cshtml" />
+    <None Include="Views\Expense\_expenseForm.cshtml" />
+    <None Include="Views\Expense\_expenseReport.cshtml" />
     <None Include="wwwroot\dist\img\logo.png" />
     <None Include="wwwroot\images\Receipt\logo.png" />
     <None Include="wwwroot\store\logo.png" />

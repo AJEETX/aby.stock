@@ -1,0 +1,51 @@
+﻿@using AbyStockManager.Web.Model.ViewModel.Report.StoreStock;
+@model EditStoreStockReportViewModel
+@{
+    ViewData["Title"] = "Stock Edit";
+}
+
+@section script{
+    <partial name="~/Views/Shared/_FormScriptsPartial.cshtml" />
+}
+<section class="content pt-2">
+    <div class="container-fluid ">
+        <div class="row ">
+            <div class="col-md-6">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-pen"></i> Edit Stock</h3>
+                    </div>
+                    <form asp-action="Edit" asp-antiforgery="true" id="frmCreate">
+                        <input type="hidden" asp-for="ProductId" />
+                        <input type="hidden" asp-for="StoreId" />
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="ProductFullName"></label>
+                                <input readonly asp-for="ProductFullName" type="text" class="form-control">
+                                <span asp-validation-for="ProductFullName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PurchasePrice"></label>
+                                <input readonly asp-for="PurchasePrice" type="text" class="form-control">
+                                <span asp-validation-for="PurchasePrice" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Stock"></label>
+                                <input asp-for="Stock" type="number" class="form-control" min="1" step="1">
+                                <span asp-validation-for="Stock" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <a class="btn btn-outline-secondary" href="/Report"><i class="fas fa-arrow-left"></i> Back</a>
+                            <button id="btnSave" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i> Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

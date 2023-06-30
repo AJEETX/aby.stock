@@ -9,9 +9,10 @@ using Aby.StockManager.Repository.Base;
 
 namespace Aby.StockManager.Repository.StoreStock
 {
-    public class StoreStockRepository : Repository<Aby.StockManager.Data.Entity.StoreStock>, IStoreStockRepository
+    public class StoreStockRepository : Repository<Data.Entity.StoreStock>, IStoreStockRepository
     {
         private EasyStockManagerDbContext dbContext { get => _context as EasyStockManagerDbContext; }
+
         public StoreStockRepository(DbContext context) : base(context)
         {
         }
@@ -23,12 +24,10 @@ namespace Aby.StockManager.Repository.StoreStock
                 dbContext.StoreStock.Remove(entity);
         }
 
-        public async Task<Aby.StockManager.Data.Entity.StoreStock> GetByStoreAndProductId(int productId, int storeId)
+        public async Task<Data.Entity.StoreStock> GetByStoreAndProductId(int productId, int storeId)
         {
             var entity = await dbContext.StoreStock.FirstOrDefaultAsync(x => x.StoreId == storeId && x.ProductId == productId);
             return entity;
         }
-
-        
     }
 }
