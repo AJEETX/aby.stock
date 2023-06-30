@@ -10,7 +10,7 @@
 
     $(document).ready(function () {
         $("#btnWeeklyReport").click(function () {
-            var titleMessage = "Expenses in last four weeks is : ";
+            var titleMessage = "Expense in last 4 weeks is : Rs.";
 
             $.ajax({
                 type: "GET",
@@ -34,7 +34,7 @@
         })
 
         $("#btnMonthlyReport").click(function () {
-            var titleMessage = "Expenses in last six months is : ";
+            var titleMessage = "Expense in last 6 months is : Rs.";
 
             $.ajax({
                 type: "GET",
@@ -86,7 +86,7 @@
                 enabled: false
             },
             tooltip: {
-                pointFormat: 'Total money spent: <b>{point.y:.2f} </b>'
+                pointFormat: 'Total money spent: Rs.<b>{point.y:.2f} </b>'
             },
             series: [{
                 type: 'column',
