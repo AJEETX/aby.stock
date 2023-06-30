@@ -21,35 +21,39 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="form-group">
+                                    <label asp-for="CategoryName" class="control-label"></label>
+                                    <select asp-for="CategoryName" class="form-control">
+                                        <option value="">-- Select Expense Category --</option>
+                                        <option value="Snacks">Snacks</option>
+                                        <option value="Rent">Rent</option>
+                                        <option value="Utilities">Utilities</option>
+                                        <option value="Water">Drinking Water</option>
+                                        <option value="Travel">Travel</option>
+                                        <option value="Wage">Wage</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="control-label">Expense descrilption</label>
+                                    <input asp-for="ItemName" type="text" class="form-control-sm form-control enter-keyup">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
                                     <label asp-for="SearchStartDate"></label>
-                                    <input asp-for="SearchStartDate" type="text" class="form-control-sm form-control enter-keyup datepicker">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    <input asp-for="SearchStartDate" type="text" class="form-control datepicker">
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="SearchEndDate"></label>
-                                    <input asp-for="SearchEndDate" type="text" class="form-control-sm form-control enter-keyup datepicker">
+                                    <input asp-for="SearchEndDate" type="text" class="form-control datepicker">
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="ItemName"></label>
-                                    <input asp-for="ItemName" type="text" class="form-control-sm form-control enter-keyup">
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="CategoryName" class="control-label"></label>
-                                    <select asp-for="CategoryName" class="form-control">
-                                        <option value="">-- Select Expense Category --</option>
-                                        <option value="Food">Food</option>
-                                        <option value="Shopping">Shopping</option>
-                                        <option value="Travel">Travel</option>
-                                        <option value="Health">Health</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
                             
                         </div>
                         <div class="row">
@@ -105,7 +109,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">Expense Report</h3>
+                <h3 class="modal-title"></h3>
             </div>
             <div class="modal-body" id="expenseReportModalDiv">
             </div>

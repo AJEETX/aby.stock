@@ -228,7 +228,9 @@ namespace Aby.StockManager.Mapper
                 ;
 
             CreateMap<ExpenseReportDTO, ListExpenseReportViewModel>()
-                             .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.ExpenseDate))); ;
+                             .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.ExpenseDate)))
+                             .ForMember(dm => dm.Amount, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Amount)))
+                             ;
 
             CreateMap<ExpenseReportDTO, EditExpenseReportViewModel>();
             CreateMap<EditExpenseReportViewModel, ExpenseReportDTO>();
