@@ -5,13 +5,11 @@ using System.Text;
 
 using Aby.StockManager.Model.ViewModel.Base;
 
-namespace Aby.StockManager.Model.ViewModel.Category
+namespace Aby.StockManager.Model.ViewModel.ExpenseCategory
 {
-    public class CreateCategoryViewModel : BaseViewModel
+    public class ListExpenseCategoryViewModel : BaseViewModel
     {
-        [Required]
-        [MaxLength(30)]
-        [Display(Name = "Product Category Name")]
+        [Display(Name = "Expense Category Name")]
         public string CategoryName { get; set; }
     }
 }

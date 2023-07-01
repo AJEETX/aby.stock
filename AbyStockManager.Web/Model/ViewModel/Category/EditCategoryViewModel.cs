@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+
 using Aby.StockManager.Model.ViewModel.Base;
 
 namespace Aby.StockManager.Model.ViewModel.Category
@@ -10,7 +11,7 @@ namespace Aby.StockManager.Model.ViewModel.Category
     {
         [Required]
         [MaxLength(30)]
-        [Display(Name = "Category Name")]
+        [Display(Name = "Product Category Name")]
         public string CategoryName { get; set; }
     }
 }

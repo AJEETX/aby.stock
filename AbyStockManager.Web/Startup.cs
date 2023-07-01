@@ -52,6 +52,7 @@ namespace Aby.StockManager.Web
             services.AddAutoMapper(c => c.AddProfile<Aby.StockManager.Mapper.MapProfile>(), typeof(Startup));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
             services.AddScoped<ITaxService, TaxService>();
             services.AddScoped<IUnitOfMeasureService, UnitOfMeasureService>();
             services.AddScoped<IUserService, UserService>();

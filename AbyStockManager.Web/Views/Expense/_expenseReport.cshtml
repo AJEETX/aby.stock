@@ -10,7 +10,7 @@
 
     $(document).ready(function () {
         $("#btnWeeklyReport").click(function () {
-            var titleMessage = "Expense in last 4 weeks is : Rs.";
+            var titleMessage = "Last 4 week expense:Rs.";
 
             $.ajax({
                 type: "GET",
@@ -34,7 +34,7 @@
         })
 
         $("#btnMonthlyReport").click(function () {
-            var titleMessage = "Expense in last 6 months is : Rs.";
+            var titleMessage = "Last 6 month expense:Rs.";
 
             $.ajax({
                 type: "GET",

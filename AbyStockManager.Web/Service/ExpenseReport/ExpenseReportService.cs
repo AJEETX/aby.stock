@@ -143,48 +143,59 @@ namespace Aby.StockManager.Service
 
             Dictionary<string, double> dictMonthlySum = new Dictionary<string, double>();
 
-            double snackSum = db.ExpenseReport.Where
-                (cat => cat.Category == "Snacks" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-                .Select(cat => cat.Amount)
-                .Sum();
+            var expenseCategories = db.ExpenseCategory;
 
-            double rentSum = db.ExpenseReport.Where
-               (cat => cat.Category == "Rent" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-               .Select(cat => cat.Amount)
-               .Sum();
+            foreach (var expenseCategory in expenseCategories)
+            {
+                double catum = db.ExpenseReport.Where
+                                (cat => cat.Category == expenseCategory.CategoryName && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+                                .Select(cat => cat.Amount)
+                                .Sum();
+                dictMonthlySum.Add(expenseCategory.CategoryName, catum);
+            }
 
-            double travelSum = db.ExpenseReport.Where
-               (cat => cat.Category == "Travel" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-               .Select(cat => cat.Amount)
-               .Sum();
+            //double snackSum = db.ExpenseReport.Where
+            //    (cat => cat.Category == "Snacks" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+            //    .Select(cat => cat.Amount)
+            //    .Sum();
 
-            double utilitySum = db.ExpenseReport.Where
-               (cat => cat.Category == "Utilities" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-               .Select(cat => cat.Amount)
-               .Sum();
+            //double rentSum = db.ExpenseReport.Where
+            //   (cat => cat.Category == "Rent" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+            //   .Select(cat => cat.Amount)
+            //   .Sum();
 
-            double waterSum = db.ExpenseReport.Where
-               (cat => cat.Category == "Water" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-               .Select(cat => cat.Amount)
-               .Sum();
+            //double travelSum = db.ExpenseReport.Where
+            //   (cat => cat.Category == "Travel" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+            //   .Select(cat => cat.Amount)
+            //   .Sum();
 
-            double wageSum = db.ExpenseReport.Where
-               (cat => cat.Category == "Wage" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-               .Select(cat => cat.Amount)
-               .Sum();
+            //double utilitySum = db.ExpenseReport.Where
+            //   (cat => cat.Category == "Utilities" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+            //   .Select(cat => cat.Amount)
+            //   .Sum();
 
-            double otherSum = db.ExpenseReport.Where
-               (cat => cat.Category == "Other" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-               .Select(cat => cat.Amount)
-               .Sum();
+            //double waterSum = db.ExpenseReport.Where
+            //   (cat => cat.Category == "Water" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+            //   .Select(cat => cat.Amount)
+            //   .Sum();
 
-            dictMonthlySum.Add("Snacks", snackSum);
-            dictMonthlySum.Add("Rent", rentSum);
-            dictMonthlySum.Add("Travel", travelSum);
-            dictMonthlySum.Add("Utilities", utilitySum);
-            dictMonthlySum.Add("Water", waterSum);
-            dictMonthlySum.Add("Wage", wageSum);
-            dictMonthlySum.Add("Other", otherSum);
+            //double wageSum = db.ExpenseReport.Where
+            //   (cat => cat.Category == "Wage" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+            //   .Select(cat => cat.Amount)
+            //   .Sum();
+
+            //double otherSum = db.ExpenseReport.Where
+            //   (cat => cat.Category == "Other" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+            //   .Select(cat => cat.Amount)
+            //   .Sum();
+
+            //dictMonthlySum.Add("Snacks", snackSum);
+            //dictMonthlySum.Add("Rent", rentSum);
+            //dictMonthlySum.Add("Travel", travelSum);
+            //dictMonthlySum.Add("Utilities", utilitySum);
+            //dictMonthlySum.Add("Water", waterSum);
+            //dictMonthlySum.Add("Wage", wageSum);
+            //dictMonthlySum.Add("Other", otherSum);
 
             return dictMonthlySum;
         }
@@ -196,48 +207,59 @@ namespace Aby.StockManager.Service
 
             Dictionary<string, double> dictWeeklySum = new Dictionary<string, double>();
 
-            double snackSum = db.ExpenseReport.Where
-                (cat => cat.Category == "Snacks" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+            var expenseCategories = db.ExpenseCategory;
+
+            foreach (var expenseCategory in expenseCategories)
+            {
+                double catum = db.ExpenseReport.Where
+                (cat => cat.Category == expenseCategory.CategoryName && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
                 .Select(cat => cat.Amount)
                 .Sum();
+                dictWeeklySum.Add(expenseCategory.CategoryName, catum);
+            }
 
-            double rentSum = db.ExpenseReport.Where
-               (cat => cat.Category == "Rent" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-               .Select(cat => cat.Amount)
-               .Sum();
+            //double snackSum = db.ExpenseReport.Where
+            //    (cat => cat.Category == "Snacks" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+            //    .Select(cat => cat.Amount)
+            //    .Sum();
 
-            double travelSum = db.ExpenseReport.Where
-               (cat => cat.Category == "Travel" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-               .Select(cat => cat.Amount)
-               .Sum();
+            //double rentSum = db.ExpenseReport.Where
+            //   (cat => cat.Category == "Rent" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+            //   .Select(cat => cat.Amount)
+            //   .Sum();
 
-            double utilitySum = db.ExpenseReport.Where
-               (cat => cat.Category == "Utilities" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-               .Select(cat => cat.Amount)
-               .Sum();
+            //double travelSum = db.ExpenseReport.Where
+            //   (cat => cat.Category == "Travel" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+            //   .Select(cat => cat.Amount)
+            //   .Sum();
 
-            double waterSum = db.ExpenseReport.Where
-               (cat => cat.Category == "Water" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-               .Select(cat => cat.Amount)
-               .Sum();
+            //double utilitySum = db.ExpenseReport.Where
+            //   (cat => cat.Category == "Utilities" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+            //   .Select(cat => cat.Amount)
+            //   .Sum();
 
-            double wageSum = db.ExpenseReport.Where
-              (cat => cat.Category == "Wage" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-              .Select(cat => cat.Amount)
-              .Sum();
+            //double waterSum = db.ExpenseReport.Where
+            //   (cat => cat.Category == "Water" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+            //   .Select(cat => cat.Amount)
+            //   .Sum();
 
-            double otherSum = db.ExpenseReport.Where
-              (cat => cat.Category == "Other" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-              .Select(cat => cat.Amount)
-              .Sum();
+            //double wageSum = db.ExpenseReport.Where
+            //  (cat => cat.Category == "Wage" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+            //  .Select(cat => cat.Amount)
+            //  .Sum();
 
-            dictWeeklySum.Add("Snacks", snackSum);
-            dictWeeklySum.Add("Rent", rentSum);
-            dictWeeklySum.Add("Travel", travelSum);
-            dictWeeklySum.Add("Utilities", utilitySum);
-            dictWeeklySum.Add("Water", waterSum);
-            dictWeeklySum.Add("Wage", wageSum);
-            dictWeeklySum.Add("Other", otherSum);
+            //double otherSum = db.ExpenseReport.Where
+            //  (cat => cat.Category == "Other" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+            //  .Select(cat => cat.Amount)
+            //  .Sum();
+
+            //dictWeeklySum.Add("Snacks", snackSum);
+            //dictWeeklySum.Add("Rent", rentSum);
+            //dictWeeklySum.Add("Travel", travelSum);
+            //dictWeeklySum.Add("Utilities", utilitySum);
+            //dictWeeklySum.Add("Water", waterSum);
+            //dictWeeklySum.Add("Wage", wageSum);
+            //dictWeeklySum.Add("Other", otherSum);
 
             return dictWeeklySum;
         }

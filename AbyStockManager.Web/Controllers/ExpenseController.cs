@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Aby.StockManager.Core.Service;
 using Aby.StockManager.Data.Entity;
 using Aby.StockManager.Model.Domain;
 using Aby.StockManager.Model.Service;
@@ -15,23 +16,28 @@ using Aby.StockManager.Service;
 using AutoMapper;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AbyStockManager.Web.Controllers
 {
     public class ExpenseController : Controller
     {
         private readonly IExpenseReportService expenseService;
+        private readonly IExpenseCategoryService categoryService;
         private readonly IMapper _mapper;
 
-        public ExpenseController(IExpenseReportService _expenseService, IMapper mapper)
+        public ExpenseController(IExpenseReportService _expenseService, IExpenseCategoryService categoryService, IMapper mapper)
         {
             expenseService = _expenseService;
+            this.categoryService = categoryService;
             this._mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            SearchExpenseReportViewModel model = new SearchExpenseReportViewModel();
+            model.CategoryList = await GetCategoryList();
+            return View(model);
         }
 
         [HttpGet]
@@ -76,9 +82,11 @@ namespace AbyStockManager.Web.Controllers
             return PartialView("_expenseForm", model);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            CreateExpenseReportViewModel model = new CreateExpenseReportViewModel();
+            model.CategoryList = await GetCategoryList();
+            return View(model);
         }
 
         [HttpPost]
@@ -103,6 +111,7 @@ namespace AbyStockManager.Web.Controllers
         {
             var serviceResult = await expenseService.GetById(id);
             EditExpenseReportViewModel model = _mapper.Map<EditExpenseReportViewModel>(serviceResult.TransactionResult);
+            model.CategoryList = await GetCategoryList();
             return View(model);
         }
 
@@ -162,6 +171,13 @@ namespace AbyStockManager.Web.Controllers
         {
             Dictionary<string, double> weeklyExpense = expenseService.CalculateWeeklyExpense();
             return new JsonResult(weeklyExpense);
+        }
+
+        private async Task<IEnumerable<SelectListItem>> GetCategoryList()
+        {
+            ServiceResult<IEnumerable<ExpenseCategoryDTO>> serviceResult = await categoryService.GetAll();
+            IEnumerable<SelectListItem> drpCategoryList = _mapper.Map<IEnumerable<SelectListItem>>(serviceResult.TransactionResult);
+            return drpCategoryList;
         }
     }
 }

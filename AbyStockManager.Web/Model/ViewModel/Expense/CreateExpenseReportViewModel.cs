@@ -23,5 +23,7 @@ namespace Aby.StockManager.Model.ViewModel.Expense
 
         [Required]
         public string Category { get; set; }
+
+        public IEnumerable<SelectListItem> CategoryList { get; set; }
     }
 }

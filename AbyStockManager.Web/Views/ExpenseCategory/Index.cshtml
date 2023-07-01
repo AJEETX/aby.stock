@@ -1,6 +1,6 @@
 ﻿@model Aby.StockManager.Model.ViewModel.Category.SearchCategoryViewModel
 @{
-    ViewData["Title"] = "Product Category List";
+    ViewData["Title"] = "Expense Category List";
 }
 
 <section class="content pt-2">
@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-search"></i> Search Product Category</h3>
+                        <h3 class="card-title"><i class="fas fa-search"></i> Search Expense Category</h3>
                     </div>
                     <div class="card-body dataTable-search-form">
                         <div class="row">
@@ -24,7 +24,7 @@
                             <div class="col-md-12 text-right">
                                 <button id="btnClear" type="button" class="btn btn-secondary btn-sm"><i class="fas fa-sync-alt"></i> Clear</button>
                                 <button id="btnFilter" type="button" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Search</button>
-                                <a class="btn btn-success btn-sm" href="/Category/Create"><i class="fas fa-plus"></i> Category</a>
+                                <a class="btn btn-success btn-sm" href="/ExpenseCategory/Create"><i class="fas fa-plus"></i> Expense Category</a>
                             </div>
                         </div>
                     </div>
@@ -36,13 +36,13 @@
             <div class="col-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-list"></i> Product Category List</h3>
+                        <h3 class="card-title"><i class="fas fa-list"></i> Expense Category List</h3>
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-bordered table-hover dt-responsive nowrap w-100">
                             <thead>
                                 <tr>
-                                    <th>Product Category Name</th>
+                                    <th>Expense Category Name</th>
                                     <th style="width:15%">Actions</th>
                                 </tr>
                             </thead>
@@ -50,7 +50,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Product Category Name</th>
+                                    <th>Expense Category Name</th>
                                     <th style="width:15%">Actions</th>
                                 </tr>
                             </tfoot>
@@ -69,5 +69,5 @@
 }
 @section script{
     <partial name="~/Views/Shared/_DataTableScriptPartial.cshtml" />
-    <script src="~/pages/category/category-list.js"></script>
+    <script src="~/pages/expensecategory/expense-category-list.js"></script>
 }
