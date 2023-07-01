@@ -214,7 +214,7 @@ namespace Aby.StockManager.Web.Controllers
 
                     jsonResultModel.GrandPlainTotal = "Rs. " + NumberToWords.ConvertAmount(GrandTotal);
                     jsonResultModel.GrandTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", GrandTotal);
-                    jsonResultModel.SubTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", serviceResult.TransactionResult.Sum(r => r.FinalSalePrice * (100 / (100 + r.TaxRate)) * r.Amount).Value);
+                    jsonResultModel.SubTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", subTotal);
                 }
             }
             catch (Exception ex)
