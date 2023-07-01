@@ -11,6 +11,8 @@ namespace Aby.StockManager.Model.Domain
         public double Amount { get; set; }
         public string Category { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ExpenseDate { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Aby.StockManager.Model.ViewModel.Expense
         public double Amount { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ExpenseDate { get; set; } = DateTime.Now;
 
         [Required]
