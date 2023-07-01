@@ -224,11 +224,12 @@ namespace Aby.StockManager.Mapper
             CreateMap<StoreDTO, Store>();
 
             CreateMap<ExpenseReport, ExpenseReportDTO>()
-                 .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.ExpenseDate)))
+                 .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => vmf.ExpenseDate.ToString("dd/MM/yyyy")))
                 ;
 
             CreateMap<ExpenseReportDTO, ListExpenseReportViewModel>()
                              .ForMember(dm => dm.Amount, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Amount)))
+                 .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", DateTime.ParseExact(vmf.ExpenseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture))))
                              ;
 
             CreateMap<ExpenseReportDTO, EditExpenseReportViewModel>();
