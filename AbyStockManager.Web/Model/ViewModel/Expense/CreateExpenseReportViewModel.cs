@@ -20,6 +20,7 @@ namespace Aby.StockManager.Model.ViewModel.Expense
         public string ExpenseDate { get; set; }
 
         [Required]
+        [Display(Name = "Expense Category")]
         public string Category { get; set; }
     }
 }

@@ -31,7 +31,8 @@ namespace AbyStockManager.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            SearchExpenseReportViewModel model = new SearchExpenseReportViewModel();
+            return View(model);
         }
 
         [HttpGet]
