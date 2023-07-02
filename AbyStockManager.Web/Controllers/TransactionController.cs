@@ -64,12 +64,10 @@ namespace Aby.StockManager.Web.Controllers
 
             if (typeId == (int)TransactionType.Invoice)
             {
-                model.InvoiceNumber = sequenceService.GetNumberSequence(TransactionType.Invoice.ToString());
                 model.TransactionCode = TransactionType.Invoice.ToString();
             }
             if (typeId == (int)TransactionType.StockIn)
             {
-                model.InvoiceNumber = sequenceService.GetNumberSequence(TransactionType.StockIn.ToString());
                 model.TransactionCode = TransactionType.StockIn.ToString();
             }
             var serviceResult = await _storeService.GetAll();
@@ -86,10 +84,12 @@ namespace Aby.StockManager.Web.Controllers
             {
                 if (model.TransactionTypeId == (int)TransactionType.Invoice)
                 {
+                    model.InvoiceNumber = sequenceService.GetNumberSequence(TransactionType.Invoice.ToString());
                     model.TransactionCode = TransactionType.Invoice.ToString();
                 }
                 if (model.TransactionTypeId == (int)TransactionType.StockIn)
                 {
+                    model.InvoiceNumber = sequenceService.GetNumberSequence(TransactionType.StockIn.ToString());
                     model.TransactionCode = TransactionType.StockIn.ToString();
                 }
                 TransactionDTO transactionDTO = _mapper.Map<TransactionDTO>(model);

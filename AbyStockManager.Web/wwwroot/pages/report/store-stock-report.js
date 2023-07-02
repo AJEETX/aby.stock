@@ -1,12 +1,15 @@
 ﻿$(document).ready(function () {
     var datatable = $('#datatable').dataTable({
+        "aLengthMenu": [
+            [25, 50, 100, -1],
+            [25, 50, 100, "All"]
+        ],
+        "iDisplayLength": 25,
         "dom": 'lBfrtip',
         "searching": false,
-        "iDisplayLength": 100,
         "ordering": false,
         "bServerSide": true,
         "processing": true,
-        "paging": false,
         "sAjaxSource": "/Report/StoreStockList",
         "info": true,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],

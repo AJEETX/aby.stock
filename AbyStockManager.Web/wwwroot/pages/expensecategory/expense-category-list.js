@@ -1,7 +1,11 @@
 ﻿$(document).ready(function () {
     var datatable = $('#datatable').dataTable({
         "searching": false,
-        "iDisplayLength": 10,
+        "aLengthMenu": [
+            [25, 50, 100, -1],
+            [25, 50, 100, "All"]
+        ],
+        "iDisplayLength": 25,
         "ordering": false,
         "lengthChange": false,
         "bServerSide": true,

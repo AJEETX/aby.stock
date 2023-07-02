@@ -15,8 +15,7 @@ namespace Aby.StockManager.Data.Seed
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasData(
-                new User { Id = 1, Email = "jag@sda.com", Name = "Jagdeesh", Surname = "Tiwari", Password = adminPassword.MD5Hash(), CreateDate = DateTime.Now },
-                new User { Id = 2, Email = "sarb@sda.com", Name = "Sarbjeet", Surname = "Tiwari", Password = papaPassword.MD5Hash(), CreateDate = DateTime.Now }
+                new User { Id = 1, Email = "jag@sda.com", Name = "Jagdeesh Kumar", Surname = "Tiwari", Password = adminPassword.MD5Hash(), CreateDate = DateTime.Now }
                 );
         }
     }

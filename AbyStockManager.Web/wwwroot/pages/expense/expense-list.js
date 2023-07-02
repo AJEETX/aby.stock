@@ -2,7 +2,11 @@
     var datatable = $('#datatable').dataTable({
         "dom": 'lBfrtip',
         "searching": false,
-        "iDisplayLength": 100,
+        "aLengthMenu": [
+            [25, 50, 100, -1],
+            [25, 50, 100, "All"]
+        ],
+        "iDisplayLength": 25,
         "ordering": false,
         "bServerSide": true,
         "processing": true,
