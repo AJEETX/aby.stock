@@ -17,13 +17,10 @@ namespace Aby.StockManager.Model.ViewModel.Expense
         [DataType(DataType.Currency)]
         public double Amount { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime ExpenseDate { get; set; } = DateTime.Now;
+        public string ExpenseDate { get; set; }
 
         [Required]
+        [Display(Name = "Expense Category")]
         public string Category { get; set; }
-
-        public IEnumerable<SelectListItem> CategoryList { get; set; }
     }
 }

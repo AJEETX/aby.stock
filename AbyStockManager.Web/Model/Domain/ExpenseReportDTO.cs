@@ -11,6 +11,6 @@ namespace Aby.StockManager.Model.Domain
         public double Amount { get; set; }
         public string Category { get; set; }
 
-        public DateTime ExpenseDate { get; set; }
+        public string ExpenseDate { get; set; }
     }
 }
