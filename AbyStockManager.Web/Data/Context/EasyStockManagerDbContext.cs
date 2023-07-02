@@ -48,7 +48,7 @@ namespace Aby.StockManager.Data.Context
             modelBuilder.ApplyConfiguration(new TaxSeed());
             modelBuilder.ApplyConfiguration(new UserSeed());
             modelBuilder.ApplyConfiguration(new StoreSeed());
-            modelBuilder.ApplyConfiguration(new ProductSeed());
+            //modelBuilder.ApplyConfiguration(new ProductSeed());
         }
     }
 }
