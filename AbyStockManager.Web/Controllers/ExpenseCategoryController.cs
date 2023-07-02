@@ -27,7 +27,7 @@ namespace Aby.StockManager.Web.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             SearchExpenseCategoryViewModel model = new SearchExpenseCategoryViewModel();
             return View(model);

@@ -19,6 +19,7 @@ using AbyStockManager.Web.Model.ViewModel.Invoice;
 using Microsoft.CodeAnalysis;
 using AbyStockManager.Web.Common.Extensions;
 using System.Globalization;
+using Aby.StockManager.Web.Service;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -28,18 +29,21 @@ namespace Aby.StockManager.Web.Controllers
         private readonly IProductService _productService;
         private readonly ITransactionService _transactionService;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly INumberSequenceService sequenceService;
         private readonly IMapper _mapper;
 
         public TransactionController(IStoreService storeService,
                                      IProductService productService,
                                      ITransactionService transactionService,
                                      IWebHostEnvironment webHostEnvironment,
+                                     INumberSequenceService sequenceService,
                                      IMapper mapper)
         {
             _storeService = storeService;
             _productService = productService;
             _transactionService = transactionService;
             this.webHostEnvironment = webHostEnvironment;
+            this.sequenceService = sequenceService;
             _mapper = mapper;
         }
 
@@ -57,14 +61,15 @@ namespace Aby.StockManager.Web.Controllers
             model.TransactionTypeId = typeId;
             model.PageName = GetPageName(typeId);
             model.StoreList = await GetStoreList();
-            model.InvoiceNumber = InvoiceNumberGenerator.GenerateInvoiceNumber(typeId);
 
             if (typeId == (int)TransactionType.Invoice)
             {
+                model.InvoiceNumber = sequenceService.GetNumberSequence(TransactionType.Invoice.ToString());
                 model.TransactionCode = TransactionType.Invoice.ToString();
             }
             if (typeId == (int)TransactionType.StockIn)
             {
+                model.InvoiceNumber = sequenceService.GetNumberSequence(TransactionType.StockIn.ToString());
                 model.TransactionCode = TransactionType.StockIn.ToString();
             }
             var serviceResult = await _storeService.GetAll();
