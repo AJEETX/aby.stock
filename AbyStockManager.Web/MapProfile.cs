@@ -20,6 +20,7 @@ using System.Globalization;
 using AbyStockManager.Web.Model.ViewModel.Tax;
 using Aby.StockManager.Model.ViewModel.Expense;
 using AbyStockManager.Web.Model.ViewModel.Report.StoreStock;
+using Aby.StockManager.Model.ViewModel.ExpenseCategory;
 
 namespace Aby.StockManager.Mapper
 {
@@ -28,6 +29,36 @@ namespace Aby.StockManager.Mapper
         public MapProfile()
         {
             #region DTO & ViewModel
+
+            CreateMap<CreateExpenseCategoryViewModel, ExpenseCategoryDTO>()
+                .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
+
+            CreateMap<ExpenseCategoryDTO, CreateExpenseCategoryViewModel>()
+              .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
+
+            CreateMap<EditExpenseCategoryViewModel, ExpenseCategoryDTO>()
+             .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
+
+            CreateMap<ExpenseCategoryDTO, EditExpenseCategoryViewModel>()
+              .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
+
+            CreateMap<ListExpenseCategoryViewModel, ExpenseCategoryDTO>()
+                .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
+
+            CreateMap<ExpenseCategoryDTO, ListExpenseCategoryViewModel>()
+              .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
+
+            CreateMap<SearchExpenseCategoryViewModel, ExpenseCategoryDTO>()
+                .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
+
+            CreateMap<ExpenseCategoryDTO, SearchExpenseCategoryViewModel>()
+              .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
+
+            CreateMap<ExpenseCategory, ExpenseCategoryDTO>()
+                .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
+
+            CreateMap<ExpenseCategoryDTO, ExpenseCategory>()
+              .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
 
             CreateMap<ServiceResult, JsonResultModel>();
 
@@ -62,6 +93,10 @@ namespace Aby.StockManager.Mapper
             CreateMap<CategoryDTO, SelectListItem>()
                    .ForMember(dm => dm.Value, vm => vm.MapFrom(vmf => vmf.Id.ToString()))
                    .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => vmf.CategoryName));
+
+            CreateMap<ExpenseCategoryDTO, SelectListItem>()
+       .ForMember(dm => dm.Value, vm => vm.MapFrom(vmf => vmf.Id.ToString()))
+       .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => vmf.CategoryName));
 
             CreateMap<CreateUnitOfMeasureViewModel, UnitOfMeasureDTO>();
             CreateMap<SearchUnitOfMeasureViewModel, UnitOfMeasureDTO>()
@@ -225,13 +260,18 @@ namespace Aby.StockManager.Mapper
 
             CreateMap<ExpenseReport, ExpenseReportDTO>()
                  .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => vmf.ExpenseDate.ToString("dd/MM/yyyy")))
+                 .ForMember(dm => dm.CategoryName, vm => vm.MapFrom(vmf => vmf.Category != null ? vmf.Category.CategoryName : "-"))
                 ;
+            CreateMap<ExpenseReportDTO, ExpenseReport>();
 
             CreateMap<ExpenseReportDTO, ListExpenseReportViewModel>()
+                .ForMember(x => x.Category, y => y.MapFrom(f => f.CategoryName))
                              .ForMember(dm => dm.Amount, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Amount)))
                  .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", DateTime.ParseExact(vmf.ExpenseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture))))
                              ;
-
+            CreateMap<ListExpenseReportViewModel, ExpenseReportDTO>()
+                .ForMember(x => x.CategoryName, y => y.MapFrom(f => f.Category))
+                ;
             CreateMap<ExpenseReportDTO, EditExpenseReportViewModel>();
             CreateMap<EditExpenseReportViewModel, ExpenseReportDTO>();
             CreateMap<ExpenseReportDTO, ExpenseReport>()

@@ -13,9 +13,7 @@ namespace Aby.StockManager.Model.ViewModel.ExpenseCategory
     {
         [Required]
         [MaxLength(30)]
-        [Display(Name = "Expense Category Name")]
+        [Display(Name = "Expense Type Name")]
         public string CategoryName { get; set; }
-
-        public IEnumerable<SelectListItem> CategoryList { get; set; }
     }
 }

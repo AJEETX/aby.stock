@@ -1,6 +1,6 @@
-﻿@model Aby.StockManager.Model.ViewModel.Category.CreateCategoryViewModel
+﻿@model Aby.StockManager.Model.ViewModel.ExpenseCategory.CreateExpenseCategoryViewModel
 @{
-    ViewData["Title"] = "Expense Category Create";
+    ViewData["Title"] = "Expense Type Create";
 }
 @section script{
     <partial name="~/Views/Shared/_FormScriptsPartial.cshtml" />
@@ -11,7 +11,7 @@
             <div class="col-md-6">
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-plus"></i> Create Expense Category</h3>
+                        <h3 class="card-title"><i class="fas fa-plus"></i> Create Expense Type</h3>
                     </div>
                     <form asp-action="Create" asp-antiforgery="true" id="frmCreate">
                         <div class="card-body">
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <a class="btn btn-outline-secondary" href="/Category"><i class="fas fa-arrow-left"></i> Back</a>
+                            <a class="btn btn-outline-secondary" href="/ExpenseCategory"><i class="fas fa-arrow-left"></i> Back</a>
                             <button id="btnSave" type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Create</button>
                         </div>
                     </form>

@@ -19,8 +19,9 @@ namespace Aby.StockManager.Model.ViewModel.Expense
 
         public string ExpenseDate { get; set; }
 
-        [Required]
-        [Display(Name = "Expense Category")]
-        public string Category { get; set; }
+        [Display(Name = "Expense Type")]
+        public int? CategoryId { get; set; }
+
+        public IEnumerable<SelectListItem> CategoryList { get; set; }
     }
 }

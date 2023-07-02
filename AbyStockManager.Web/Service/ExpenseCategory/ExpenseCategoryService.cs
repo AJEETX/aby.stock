@@ -102,7 +102,7 @@ namespace Aby.StockManager.Service.Category
             {
                 using (_unitOfWork)
                 {
-                    IEnumerable<Entity.Category> list = await _unitOfWork.CategoryRepository.GetAllAsync();
+                    IEnumerable<Entity.ExpenseCategory> list = await _unitOfWork.ExpenseCategoryRepository.GetAllAsync();
                     result.TransactionResult = _mapper.Map<IEnumerable<ExpenseCategoryDTO>>(list);
                 }
             }
@@ -141,7 +141,7 @@ namespace Aby.StockManager.Service.Category
             {
                 using (_unitOfWork)
                 {
-                    await _unitOfWork.CategoryRepository.RemoveById(id);
+                    await _unitOfWork.ExpenseCategoryRepository.RemoveById(id);
                     await _unitOfWork.SaveAsync();
                     result.UserMessage = CommonMessages.MSG0001;
                 }

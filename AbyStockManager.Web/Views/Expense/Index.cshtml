@@ -22,8 +22,8 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="Category" class="control-label"></label>
-                                    <select id="Category" asp-for="Category" class="form-control">
-                                        <option value="">-- Select Expense Category --</option>
+                                    <select id="Category" asp-for="Category" class="form-control" asp-items="Model.CategoryList">
+                                        <option value="">-- Select Expense Type --</option>
                                     </select>
                                 </div>
                             </div>
@@ -72,8 +72,8 @@
                         <table id="datatable" class="table table-bordered table-hover dt-responsive nowrap w-100">
                             <thead>
                                 <tr>
-                                    <th>Expense</th>
-                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Expense Type</th>
                                     <th>Amount</th>
                                     <th>Expense Date</th>
                                     <th style="width:15%">Actions</th>
@@ -83,8 +83,8 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Expense</th>
-                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Expense Type</th>
                                     <th>Amount</th>
                                     <th>Expense Date</th>
                                     <th style="width:15%">Actions</th>

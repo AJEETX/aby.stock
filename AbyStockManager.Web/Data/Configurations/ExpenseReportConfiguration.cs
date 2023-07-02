@@ -14,7 +14,7 @@ namespace Aby.StockManager.Data.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.ItemName).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Category).HasMaxLength(50);
+            builder.Property(x => x.CategoryId).HasMaxLength(50);
             builder.Property(x => x.Amount).HasColumnType("decimal(18,2)");
             builder.ToTable("ExpenseReport");
         }

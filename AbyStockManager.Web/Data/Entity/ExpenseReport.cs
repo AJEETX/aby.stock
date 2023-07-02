@@ -21,7 +21,7 @@ namespace Aby.StockManager.Data.Entity
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ExpenseDate { get; set; } = DateTime.Now;
 
-        [Required]
-        public string Category { get; set; }
+        public int? CategoryId { get; set; }
+        public virtual ExpenseCategory Category { get; set; }
     }
 }

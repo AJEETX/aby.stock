@@ -13,7 +13,5 @@ namespace Aby.StockManager.Model.ViewModel.ExpenseCategory
     {
         [Display(Name = "Expense Category Name")]
         public string CategoryName { get; set; }
-
-        public IEnumerable<SelectListItem> CategoryList { get; set; }
     }
 }

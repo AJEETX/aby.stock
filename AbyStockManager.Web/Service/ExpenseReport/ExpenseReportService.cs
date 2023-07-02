@@ -147,55 +147,12 @@ namespace Aby.StockManager.Service
 
             foreach (var expenseCategory in expenseCategories)
             {
-                double catum = db.ExpenseReport.Where
-                                (cat => cat.Category == expenseCategory.CategoryName && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+                double catum = db.ExpenseReport.Include(i => i.Category).Where
+                                (cat => cat.Category.CategoryName == expenseCategory.CategoryName && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
                                 .Select(cat => cat.Amount)
                                 .Sum();
                 dictMonthlySum.Add(expenseCategory.CategoryName, catum);
             }
-
-            //double snackSum = db.ExpenseReport.Where
-            //    (cat => cat.Category == "Snacks" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-            //    .Select(cat => cat.Amount)
-            //    .Sum();
-
-            //double rentSum = db.ExpenseReport.Where
-            //   (cat => cat.Category == "Rent" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-            //   .Select(cat => cat.Amount)
-            //   .Sum();
-
-            //double travelSum = db.ExpenseReport.Where
-            //   (cat => cat.Category == "Travel" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-            //   .Select(cat => cat.Amount)
-            //   .Sum();
-
-            //double utilitySum = db.ExpenseReport.Where
-            //   (cat => cat.Category == "Utilities" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-            //   .Select(cat => cat.Amount)
-            //   .Sum();
-
-            //double waterSum = db.ExpenseReport.Where
-            //   (cat => cat.Category == "Water" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-            //   .Select(cat => cat.Amount)
-            //   .Sum();
-
-            //double wageSum = db.ExpenseReport.Where
-            //   (cat => cat.Category == "Wage" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-            //   .Select(cat => cat.Amount)
-            //   .Sum();
-
-            //double otherSum = db.ExpenseReport.Where
-            //   (cat => cat.Category == "Other" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
-            //   .Select(cat => cat.Amount)
-            //   .Sum();
-
-            //dictMonthlySum.Add("Snacks", snackSum);
-            //dictMonthlySum.Add("Rent", rentSum);
-            //dictMonthlySum.Add("Travel", travelSum);
-            //dictMonthlySum.Add("Utilities", utilitySum);
-            //dictMonthlySum.Add("Water", waterSum);
-            //dictMonthlySum.Add("Wage", wageSum);
-            //dictMonthlySum.Add("Other", otherSum);
 
             return dictMonthlySum;
         }
@@ -211,55 +168,12 @@ namespace Aby.StockManager.Service
 
             foreach (var expenseCategory in expenseCategories)
             {
-                double catum = db.ExpenseReport.Where
-                (cat => cat.Category == expenseCategory.CategoryName && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+                double catum = db.ExpenseReport.Include(i => i.Category).Where
+                (cat => cat.Category.CategoryName == expenseCategory.CategoryName && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
                 .Select(cat => cat.Amount)
                 .Sum();
                 dictWeeklySum.Add(expenseCategory.CategoryName, catum);
             }
-
-            //double snackSum = db.ExpenseReport.Where
-            //    (cat => cat.Category == "Snacks" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-            //    .Select(cat => cat.Amount)
-            //    .Sum();
-
-            //double rentSum = db.ExpenseReport.Where
-            //   (cat => cat.Category == "Rent" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-            //   .Select(cat => cat.Amount)
-            //   .Sum();
-
-            //double travelSum = db.ExpenseReport.Where
-            //   (cat => cat.Category == "Travel" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-            //   .Select(cat => cat.Amount)
-            //   .Sum();
-
-            //double utilitySum = db.ExpenseReport.Where
-            //   (cat => cat.Category == "Utilities" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-            //   .Select(cat => cat.Amount)
-            //   .Sum();
-
-            //double waterSum = db.ExpenseReport.Where
-            //   (cat => cat.Category == "Water" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-            //   .Select(cat => cat.Amount)
-            //   .Sum();
-
-            //double wageSum = db.ExpenseReport.Where
-            //  (cat => cat.Category == "Wage" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-            //  .Select(cat => cat.Amount)
-            //  .Sum();
-
-            //double otherSum = db.ExpenseReport.Where
-            //  (cat => cat.Category == "Other" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
-            //  .Select(cat => cat.Amount)
-            //  .Sum();
-
-            //dictWeeklySum.Add("Snacks", snackSum);
-            //dictWeeklySum.Add("Rent", rentSum);
-            //dictWeeklySum.Add("Travel", travelSum);
-            //dictWeeklySum.Add("Utilities", utilitySum);
-            //dictWeeklySum.Add("Water", waterSum);
-            //dictWeeklySum.Add("Wage", wageSum);
-            //dictWeeklySum.Add("Other", otherSum);
 
             return dictWeeklySum;
         }
@@ -300,7 +214,8 @@ namespace Aby.StockManager.Service
                                                                 .FindAsync(filter: x => (string.IsNullOrEmpty(criteria.ItemName) || x.ItemName.ToLower().Contains(criteria.ItemName.Trim().ToLower())) &&
                                                                  (criteria.SearchStartDate == null || x.ExpenseDate >= criteria.SearchStartDate) &&
                                                                                         (criteria.SearchEndDate == null || x.ExpenseDate <= criteria.SearchEndDate) &&
-                                                                                        (criteria.Category == null || x.Category == criteria.Category),
+                                                                                        (criteria.CategoryId == null || x.CategoryId == criteria.CategoryId),
+                                                                           includes: new List<string>() { "Category" },
                                                                            orderByDesc: x => x.Id,
                                                                            skip: criteria.PageNumber,
                                                                            take: criteria.RecordCount);
@@ -328,7 +243,7 @@ namespace Aby.StockManager.Service
                                                  .FindCountAsync(filter: x => (string.IsNullOrEmpty(criteria.ItemName) || x.ItemName.Contains(criteria.ItemName)) &&
                                                                  (criteria.SearchStartDate == null || x.ExpenseDate >= criteria.SearchStartDate) &&
                                                                                         (criteria.SearchEndDate == null || x.ExpenseDate <= criteria.SearchEndDate) &&
-                                                                                        (criteria.Category == null || x.Category == criteria.Category));
+                                                                                        (criteria.CategoryId == null || x.CategoryId == criteria.CategoryId));
                     result.TransactionResult = count;
                 }
             }

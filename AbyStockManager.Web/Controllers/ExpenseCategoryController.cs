@@ -10,6 +10,8 @@ using Aby.StockManager.Model.Service;
 using Aby.StockManager.Model.ViewModel.Category;
 using Aby.StockManager.Model.ViewModel.JsonResult;
 using Aby.StockManager.Model.ViewModel.ExpenseCategory;
+using Aby.StockManager.Service.Category;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -25,9 +27,10 @@ namespace Aby.StockManager.Web.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            SearchExpenseCategoryViewModel model = new SearchExpenseCategoryViewModel();
+            return View(model);
         }
 
         public IActionResult Create()

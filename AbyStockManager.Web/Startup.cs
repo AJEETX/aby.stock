@@ -26,6 +26,7 @@ using Aby.StockManager.Service.UnitOfMeasure;
 using Aby.StockManager.Service.User;
 using AbyStockManager.Web.Service.Tax;
 using Aby.StockManager.Service;
+using Aby.StockManager.Data.Entity;
 
 namespace Aby.StockManager.Web
 {
@@ -85,6 +86,27 @@ namespace Aby.StockManager.Web
             using var scope = app.ApplicationServices.CreateScope();
             using var context = scope.ServiceProvider.GetRequiredService<EasyStockManagerDbContext>();
             context.Database.EnsureCreated();
+
+            //if (context.ExpenseCategory.Any())
+            //{
+            //    var expenseCategory = context.ExpenseCategory.ToList();
+            //    context.ExpenseCategory.RemoveRange(expenseCategory);
+            //    context.SaveChanges();
+
+            //    var list = new List<ExpenseCategory>
+            //    {
+            //        new ExpenseCategory { Id = 1, CategoryName = "Snacks", CreateDate = DateTime.Now },
+            //        new ExpenseCategory { Id = 2, CategoryName = "Rent", CreateDate = DateTime.Now },
+            //        new ExpenseCategory { Id = 3, CategoryName = "Travel", CreateDate = DateTime.Now },
+            //        new ExpenseCategory { Id = 4, CategoryName = "Utilities", CreateDate = DateTime.Now },
+            //        new ExpenseCategory { Id = 5, CategoryName = "Water", CreateDate = DateTime.Now },
+            //        new ExpenseCategory { Id = 6, CategoryName = "Wage", CreateDate = DateTime.Now },
+            //        new ExpenseCategory { Id = 7, CategoryName = "Other", CreateDate = DateTime.Now }
+            //    };
+
+            //    context.ExpenseCategory.AddRange(list);
+            //    context.SaveChanges();
+            //}
 
             if (env.IsDevelopment())
             {
