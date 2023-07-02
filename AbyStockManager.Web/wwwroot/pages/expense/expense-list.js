@@ -25,6 +25,7 @@
                 "data": aoData,
                 "success": function (data) {
                     if (data.IsSucceeded == true) {
+                        $('#total-expense').html(data.iAllProductTotalPrice);
                         fnCallback(data);
                     }
                     else {

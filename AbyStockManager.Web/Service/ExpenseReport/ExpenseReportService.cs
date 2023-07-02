@@ -148,7 +148,7 @@ namespace Aby.StockManager.Service
             foreach (var expenseCategory in expenseCategories)
             {
                 double catum = db.ExpenseReport.Include(i => i.Category).Where
-                                (cat => cat.Category.CategoryName == expenseCategory.CategoryName && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+                                (cat => cat.Category.Id == expenseCategory.Id && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
                                 .Select(cat => cat.Amount)
                                 .Sum();
                 dictMonthlySum.Add(expenseCategory.CategoryName, catum);
@@ -169,7 +169,7 @@ namespace Aby.StockManager.Service
             foreach (var expenseCategory in expenseCategories)
             {
                 double catum = db.ExpenseReport.Include(i => i.Category).Where
-                (cat => cat.Category.CategoryName == expenseCategory.CategoryName && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+                (cat => cat.Category.Id == expenseCategory.Id && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
                 .Select(cat => cat.Amount)
                 .Sum();
                 dictWeeklySum.Add(expenseCategory.CategoryName, catum);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -53,9 +54,12 @@ namespace AbyStockManager.Web.Controllers
                 if (serviceCountResult.IsSucceeded && serviceListResult.IsSucceeded)
                 {
                     List<ListExpenseReportViewModel> listVM = _mapper.Map<List<ListExpenseReportViewModel>>(serviceListResult.TransactionResult);
+                    var totalExpense = serviceListResult.TransactionResult.Sum(s => s.Amount);
+
                     jsonDataTableModel.aaData = listVM;
                     jsonDataTableModel.iTotalDisplayRecords = serviceCountResult.TransactionResult;
                     jsonDataTableModel.iTotalRecords = serviceCountResult.TransactionResult;
+                    jsonDataTableModel.iAllProductTotalPrice = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalExpense);
                 }
                 else
                 {

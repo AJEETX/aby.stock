@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AbyStockManager.Web.Migrations
 {
     /// <inheritdoc />
-    public partial class ExpCat : Migration
+    public partial class ExpType : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -277,11 +277,11 @@ namespace AbyStockManager.Web.Migrations
                 columns: new[] { "Id", "CategoryName", "CreateDate" },
                 values: new object[,]
                 {
-                    { 1, "2 wheeler", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(8527) },
-                    { 2, "4 wheeler", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(8530) },
-                    { 3, "Heavy Vehicle", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(8532) },
-                    { 4, "Tractor", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(8535) },
-                    { 5, "Other", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(8538) }
+                    { 1, "2 wheeler", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(143) },
+                    { 2, "4 wheeler", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(147) },
+                    { 3, "Heavy Vehicle", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(148) },
+                    { 4, "Tractor", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(150) },
+                    { 5, "Other", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(152) }
                 });
 
             migrationBuilder.InsertData(
@@ -289,27 +289,27 @@ namespace AbyStockManager.Web.Migrations
                 columns: new[] { "Id", "CategoryName", "CreateDate" },
                 values: new object[,]
                 {
-                    { 1, "Snacks", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(9013) },
-                    { 2, "Rent", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(9026) },
-                    { 3, "Travel", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(9028) },
-                    { 4, "Utilities", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(9031) },
-                    { 5, "Water", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(9033) },
-                    { 6, "Wage", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(9035) },
-                    { 7, "Other", new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(9037) }
+                    { 1, "Snacks", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(412) },
+                    { 2, "Rent", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(418) },
+                    { 3, "Travel", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(420) },
+                    { 4, "Utilities", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(423) },
+                    { 5, "Water", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(425) },
+                    { 6, "Wage", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(427) },
+                    { 7, "Other", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(429) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Store",
                 columns: new[] { "Id", "Contact", "CreateDate", "Gstin", "Image", "StoreCode", "StoreName" },
-                values: new object[] { 1, "+91 70202 53920", new DateTime(2023, 7, 2, 13, 36, 15, 533, DateTimeKind.Local).AddTicks(199), "09AFLPT3786Q1Z5", null, "76 Jasuri GT Road Chandauli UP, 232104", "SDA Chandauli" });
+                values: new object[] { 1, "+91 70202 53920", new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(1399), "09AFLPT3786Q1Z5", null, "76 Jasuri GT Road Chandauli UP, 232104", "SDA Chandauli" });
 
             migrationBuilder.InsertData(
                 table: "Tax",
                 columns: new[] { "Id", "CreateDate", "Name", "Rate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(9346), "FIRST", 18.0 },
-                    { 2, new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(9350), "SECOND", 28.0 }
+                    { 1, new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(541), "FIRST", 18.0 },
+                    { 2, new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(545), "SECOND", 28.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -317,8 +317,8 @@ namespace AbyStockManager.Web.Migrations
                 columns: new[] { "Id", "CreateDate", "TransactionTypeName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(7985), "Stock In" },
-                    { 2, new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(8042), "Stock Out" }
+                    { 1, new DateTime(2023, 7, 2, 14, 31, 56, 259, DateTimeKind.Local).AddTicks(9784), "Stock In" },
+                    { 2, new DateTime(2023, 7, 2, 14, 31, 56, 259, DateTimeKind.Local).AddTicks(9846), "Stock Out" }
                 });
 
             migrationBuilder.InsertData(
@@ -326,9 +326,9 @@ namespace AbyStockManager.Web.Migrations
                 columns: new[] { "Id", "CreateDate", "Isocode", "UnitOfMeasureName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(8398), "pc", "Piece" },
-                    { 2, new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(8409), "kg", "Kilogram" },
-                    { 3, new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(8414), "m", "Meter" }
+                    { 1, new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(50), "pc", "Piece" },
+                    { 2, new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(59), "kg", "Kilogram" },
+                    { 3, new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(65), "m", "Meter" }
                 });
 
             migrationBuilder.InsertData(
@@ -336,14 +336,14 @@ namespace AbyStockManager.Web.Migrations
                 columns: new[] { "Id", "CreateDate", "Email", "Image", "Name", "Password", "Surname" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 7, 2, 13, 36, 15, 532, DateTimeKind.Local).AddTicks(9959), "jag@sda.com", null, "Jagdeesh", "E18D20C33FC1860873B0AB34A1915F138D6134141B9BF6A4310340ED2F2D92DF", "Tiwari" },
-                    { 2, new DateTime(2023, 7, 2, 13, 36, 15, 533, DateTimeKind.Local).AddTicks(49), "sarb@sda.com", null, "Sarbjeet", "5994471ABB01112AFCC18159F6CC74B4F511B99806DA59B3CAF5A9C173CACFC5", "Tiwari" }
+                    { 1, new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(1179), "jag@sda.com", null, "Jagdeesh", "E18D20C33FC1860873B0AB34A1915F138D6134141B9BF6A4310340ED2F2D92DF", "Tiwari" },
+                    { 2, new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(1286), "sarb@sda.com", null, "Sarbjeet", "5994471ABB01112AFCC18159F6CC74B4F511B99806DA59B3CAF5A9C173CACFC5", "Tiwari" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Product",
                 columns: new[] { "Id", "Barcode", "CategoryId", "CreateDate", "Description", "Image", "ProductName", "PurchasePrice", "SalePrice", "TaxId", "UnitOfMeasureId" },
-                values: new object[] { 1, "test", 1, new DateTime(2023, 7, 2, 13, 36, 15, 533, DateTimeKind.Local).AddTicks(290), null, null, "test", 100.0, 110.0, 1, 1 });
+                values: new object[] { 1, "test", 1, new DateTime(2023, 7, 2, 14, 31, 56, 260, DateTimeKind.Local).AddTicks(1484), null, null, "test", 100.0, 110.0, 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExpenseReport_CategoryId",
