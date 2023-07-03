@@ -3,6 +3,7 @@
 @using Aby.StockManager.Model.ViewModel.Store;
 @using AutoMapper;
 @inject IStoreService _storeService
+@inject IUserService _userService
 @inject IMapper _mapper
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +26,9 @@
     {
         userImage = userImageClaim.Value;
     }
+    Claim userEmailClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email);
+    var user = await _userService.Find(new Aby.StockManager.Model.Domain.UserDTO { Email = userEmailClaim.Value });
+    var userEmailId = user.TransactionResult.FirstOrDefault();
 }
 
 <head>
@@ -57,12 +61,12 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="/" class="brand-link">
+            <a href="/Store" class="brand-link">
                 <img src="@logo" alt="Store" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">@storeName</span>
             </a>
             <!-- User Logo -->
-            <a href="/" class="brand-link">
+            <a href="/User/Edit/@userEmailId.Id" class="brand-link">
                 <img src="@userImage" alt="user" class="brand-image elevation-3">
                 <span style="font-family:'Arial Narrow', Arial, sans-serif;font-size:.9em;" class="">@userName</span>
             </a>
