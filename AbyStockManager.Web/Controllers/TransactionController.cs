@@ -209,8 +209,8 @@ namespace Aby.StockManager.Web.Controllers
                     jsonResultModel.StoreContact = storeData.Result.TransactionResult.Contact;
                     jsonResultModel.StoreGstin = storeData.Result.TransactionResult.Gstin;
 
-                    var GrandTotal = serviceResult.TransactionResult.Sum(r => (r.InvoiceNumber == null ? r.PurchasePrice : r.FinalSalePrice) * r.Amount).Value;
-                    var subTotal = Math.Round(serviceResult.TransactionResult.Sum(r => (r.InvoiceNumber == null ? r.PurchasePrice : r.FinalSalePrice) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);
+                    var GrandTotal = serviceResult.TransactionResult.Sum(r => (r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3)) ? r.FinalSalePrice : r.PurchasePrice) * r.Amount).Value;
+                    var subTotal = Math.Round(serviceResult.TransactionResult.Sum(r => (r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3)) ? r.FinalSalePrice : r.PurchasePrice) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);
                     var totalTax = GrandTotal - subTotal;
 
                     jsonResultModel.CgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
