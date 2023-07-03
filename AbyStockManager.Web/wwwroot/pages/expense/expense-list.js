@@ -18,7 +18,7 @@
             aoData.push(
                 { "name": "returnformat", "value": "plain" },
                 { "name": "ItemName", "value": $('input[name="ItemName"]').val() },
-                { "name": "Category", "value": $('select[name="Category"]').val() },
+                { "name": "CategoryId", "value": $('select[name="CategoryId"]').val() },
                 { "name": "SearchStartDate", "value": $('input[name="SearchStartDate"]').val() },
                 { "name": "SearchEndDate", "value": $('input[name="SearchEndDate"]').val() }
             );

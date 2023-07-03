@@ -20,7 +20,7 @@ namespace Aby.StockManager.Model.ViewModel.Expense
         public string SearchEndDate { get; set; }
 
         [Display(Name = "Expense Type")]
-        public string Category { get; set; }
+        public int? CategoryId { get; set; }
 
         public IEnumerable<SelectListItem> CategoryList { get; set; }
     }
