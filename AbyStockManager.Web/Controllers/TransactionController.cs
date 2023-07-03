@@ -220,6 +220,12 @@ namespace Aby.StockManager.Web.Controllers
                     jsonResultModel.GrandPlainTotal = "Rs. " + NumberToWords.ConvertAmount(GrandTotal);
                     jsonResultModel.GrandTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", GrandTotal);
                     jsonResultModel.SubTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", subTotal);
+
+                    var isInvoice = serviceResult.TransactionResult.FirstOrDefault(r => r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3)))?.InvoiceNumber;
+                    if (string.IsNullOrWhiteSpace(isInvoice))
+                    {
+                        jsonResultModel.PrintHeader = "Tax Receipt";
+                    }
                 }
             }
             catch (Exception ex)

@@ -29,5 +29,6 @@ namespace Aby.StockManager.Model.ViewModel.JsonResult
         public string StoreContact { get; set; }
         public string StoreGstin { get; set; }
         public string StoreImage { get; set; }
+        public string PrintHeader { get; set; } = "Tax Invoice";
     }
 }

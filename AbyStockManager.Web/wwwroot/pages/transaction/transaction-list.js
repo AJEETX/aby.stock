@@ -144,8 +144,8 @@ function detailShow(row, id) {
         type: "GET",
         success: function (data) {
             if (data.IsSucceeded) {
+                $('#print-header').text(data.PrintHeader);
                 $('#store-image').attr('src', data.StoreImage);
-
                 $('#store-name').text(data.StoreName);
                 $('#store-address').text(data.StoreAddress);
                 $('#store-contact').text(data.StoreContact);
