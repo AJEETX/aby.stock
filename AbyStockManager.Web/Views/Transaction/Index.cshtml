@@ -161,10 +161,10 @@
                                             <tr>
                                                 <th class="no">#</th>
                                                 <th class="desc">Item</th>
-                                                <th class="unit">Price</th>
+                                                <th class="unit">Price <span class="required-indicator">*</span></th>
                                                 <th class="qty">Qty</th>
                                                 <th class="tax">Tax</th>
-                                                <th class="total">Amount</th>
+                                                <th class="total">Amount <span class="required-indicator">**</span></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -175,7 +175,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td>Amount total</td>
+                                                <td>Amount total<span class="required-indicator">**</span></td>
                                                 <td id="amount-total"> </td>
                                             </tr>
                                             <tr>
@@ -205,6 +205,8 @@
 
                                         <div>GSTIN: <span id="store-gstin" class="notice"> </span></div>
                                         <div>note:</div>
+                                        <div class="notice"><span class="required-indicator">*</span>  including GST</div>
+                                        <div class="notice"><span class="required-indicator">**</span>  excluding GST</div>
                                         <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
                                     </div>
                                 </main>
