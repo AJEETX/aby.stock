@@ -253,10 +253,10 @@ namespace Aby.StockManager.Web.Controllers
         private string GetPageName(int transactionTypeId)
         {
             if ((int)TransactionType.StockIn == transactionTypeId)
-                return "Stock In";
+                return TransactionType.StockIn.ToString();
             else if ((int)TransactionType.Invoice == transactionTypeId)
-                return "Create Invoice";
-            return "Create Invoice";
+                return TransactionType.Invoice.ToString();
+            return TransactionType.Invoice.ToString();
         }
 
         public async Task<IActionResult> Print(int id = 0)

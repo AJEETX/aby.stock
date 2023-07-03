@@ -93,7 +93,7 @@
             <div class="col-md-12">
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-plus"></i> @Model.PageName</h3>
+                        <h3 class="card-title"><i class="fas fa-plus"></i> Create @Model.PageName</h3>
                     </div>
                     <form asp-antiforgery="true" id="frmCreate">
                         <input type="hidden" asp-for="TransactionTypeId" />
@@ -183,7 +183,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="col-md-10">
-                                                    <label>Produt name - Purchase Price</label>
+                                                    <label>Product name - Purchase Price</label>
                                                     <select required class="form-control prd-first-select2" name="TransactionDetail[0].ProductId" id="ProductId0">
                                                         <option selected="selected"> --- SELECT PRODUCT --- </option>
                                                     </select>
