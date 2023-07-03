@@ -125,6 +125,7 @@ namespace Aby.StockManager.Service.Transaction
                                                                               (criteria.SearchStartDate == null || x.TransactionDate >= criteria.SearchStartDate) &&
                                                                               (criteria.SearchEndDate == null || x.TransactionDate <= criteria.SearchEndDate) &&
                                                                               (criteria.StoreId == null || x.StoreId == criteria.StoreId) &&
+
                                                                               (criteria.ToStoreId == null || x.ToStoreId == criteria.ToStoreId));
                     result.TransactionResult = count;
                 }
