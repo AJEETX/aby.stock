@@ -39,6 +39,8 @@ namespace Aby.StockManager.Service.Transaction
                                                                       Amount = g.Sum(s => s.Amount),
                                                                       ProductId = g.Key,
                                                                       FinalSalePrice = g.Sum(g => g.FinalSalePrice),
+                                                                      PurchasePrice = g.Sum(g => g.PurchasePrice),
+                                                                      Price = g.Sum(g => g.Price),
                                                                   }).ToList();
 
                 using (_unitOfWork)
@@ -266,6 +268,9 @@ namespace Aby.StockManager.Service.Transaction
                                                                   .Select(g => new TransactionDetailDTO
                                                                   {
                                                                       Amount = g.Sum(s => s.Amount),
+                                                                      FinalSalePrice = g.Sum(g => g.FinalSalePrice),
+                                                                      PurchasePrice = g.Sum(g => g.PurchasePrice),
+                                                                      Price = g.Sum(g => g.Price),
                                                                       ProductId = g.Key
                                                                   }).ToList();
 

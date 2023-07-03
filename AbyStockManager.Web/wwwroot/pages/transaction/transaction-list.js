@@ -75,7 +75,7 @@
                         //    buttons += '<a id="print-invoice" onclick="detailShow(this,' + row.Id + ')"  class="btn btn-xs btn-default"><i class="fas fa-print"></i> Print</a>&nbsp;'
                         //}
                         //else
-                        if (invoiceNumber == null) {
+                        if (invoiceNumber != null && invoiceNumber.endsWith('StockIn')) {
                             row['Description'] = 'Good Received';
                         }
                         buttons += '<a href="/Transaction/Edit/' + row.Id + '?typeId=' + row.TransactionTypeId + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
