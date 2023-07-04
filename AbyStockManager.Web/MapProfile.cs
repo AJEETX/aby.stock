@@ -158,7 +158,8 @@ namespace Aby.StockManager.Mapper
 
             CreateMap<TransactionDetailViewModel, TransactionDetailDTO>();
             CreateMap<TransactionDetailDTO, TransactionDetailViewModel>()
-                .ForMember(x => x.Price, vm => vm.MapFrom(vmf => string.IsNullOrWhiteSpace(vmf.UnitPrice) ? double.Parse(vmf.UnitPrice) : 0.0D));
+                .ForMember(x => x.Price, vm => vm.MapFrom(
+                    vmf => vmf.InvoiceNumber != null && vmf.InvoiceNumber.Contains(Common.Enums.TransactionType.Invoice.ToString().Substring(0, 3)) ? vmf.FinalSalePrice : vmf.PurchasePrice));
 
             CreateMap<SearchExpenseReportViewModel, ExpenseReportDTO>()
                 .ForMember(dm => dm.SearchStartDate, vm => vm.MapFrom(vmf =>
@@ -190,9 +191,12 @@ namespace Aby.StockManager.Mapper
             CreateMap<TransactionDTO, ListTransactionViewModel>()
                  .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.TransactionDate)));
             CreateMap<TransactionDTO, EditTransactionViewModel>()
-                .ForMember(x => x.TransactionDate, y => y.MapFrom(z => z.TransactionDate.ToString("dd/MM/yyyy")));
+                .ForMember(x => x.TransactionDate, y => y.MapFrom(z => z.TransactionDate.ToString("dd/MM/yyyy")))
+                ;
             CreateMap<EditTransactionViewModel, TransactionDTO>()
-                .ForMember(x => x.TransactionDate, y => y.MapFrom(z => DateTime.ParseExact(z.TransactionDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)));
+                .ForMember(x => x.TransactionDate, y => y.MapFrom(
+                    z => DateTime.ParseExact(z.TransactionDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                ;
 
             CreateMap<SearchStoreStockReportViewModel, StoreStockDTO>()
                     .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))

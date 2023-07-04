@@ -99,19 +99,26 @@
                                         <tbody>
                                             @for (int i = 0; i < Model.TransactionDetail.Count; i++)
                                             {
+                                                var price = Model.TransactionTypeId == 2 ? @Model.TransactionDetail[i].FinalSalePrice : @Model.TransactionDetail[i].Price;
+                                                var pricename = Model.TransactionTypeId == 2 ? "Sale" : "";
                                                 <tr>
                                                     <td class="col-md-10">
-                                                        <label for="TransactionDetail[i].ProductId">Product name - Purchase Price</label>
+                                                        <label for="TransactionDetail[i].ProductId">Product name - @pricename Price</label>
                                                         <select asp-for="TransactionDetail[i].ProductId" class="form-control f-select2">
-                                                            <option value="@Model.TransactionDetail[i].ProductId">@Model.TransactionDetail[i].ProductName  - @Model.TransactionDetail[i].FinalSalePrice</option>
+                                                            <option value="@Model.TransactionDetail[i].ProductId">@Model.TransactionDetail[i].ProductName  - @price</option>
                                                         </select>
                                                         <span class="text-danger field-validation-valid" data-valmsg-for="@Model.TransactionDetail[i].ProductId" data-valmsg-replace="true"></span>
                                                         <label>Quantity</label>
                                                         <input required type="number" asp-for="TransactionDetail[i].Amount" class="form-control" step="1" min="1" placeholder="quantity" />
                                                         <span class="text-danger field-validation-valid" data-valmsg-for="@Model.TransactionDetail[i].Amount" data-valmsg-replace="true"></span>
-                                                        <label>Final Selling Price [ Rs.]</label>
-                                                        <input required type="number" asp-for="TransactionDetail[i].FinalSalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />
-                                                        <span class="text-danger field-validation-valid" data-valmsg-for="@Model.TransactionDetail[i].FinalSalePrice" data-valmsg-replace="true"></span>
+                                                        @{
+                                                            if (Model.TransactionTypeId == 2)
+                                                            {
+                                                                <label>Final Selling Price [ Rs.]</label>
+                                                                <input required type="number" asp-for="TransactionDetail[i].FinalSalePrice" class="form-control" step="any" min="1" placeholder="final sale price in Rs." />
+                                                                <span class="text-danger field-validation-valid" data-valmsg-for="@Model.TransactionDetail[i].FinalSalePrice" data-valmsg-replace="true"></span>
+                                                            }
+                                                        }
                                                     </td>
                                                     <td class="col-md-2">
                                                         @if (i > 0)
