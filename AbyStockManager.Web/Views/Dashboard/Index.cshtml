@@ -1,0 +1,168 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+@section style{
+    <partial name="~/Views/Shared/_DataTableStylePartial.cshtml" />
+    <link href="~/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet">
+    <link href="~/invoice/content/style.css" rel="stylesheet" />
+
+    }
+@section script{
+    <partial name="~/Views/Shared/_DataTableScriptPartial.cshtml" />
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript">
+
+        function GetWeeklySale() {
+            var titleMessage = "Last 4 week sale:Rs.";
+            $.ajax({
+                type: "GET",
+                url: "/Dashboard/GetWeeklySale",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    var keys = Object.keys(result);
+                    var weeklydata = new Array();
+                    var totalspent = 0.0;
+                    for (var i = 0; i < keys.length; i++) {
+                        var arrL = new Array();
+                        arrL.push(keys[i]);
+                        arrL.push(result[keys[i]]);
+                        totalspent += result[keys[i]];
+                        weeklydata.push(arrL);
+                    }
+                    createCharts(weeklydata, titleMessage, totalspent.toFixed(2));
+                }
+            })
+        }
+        function createCharts(sum, titleText, totalspent) {
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: titleText + ' ' + totalspent, 
+                    style: {
+                        fontSize: '1rem',
+                        fontFamily: 'Arial Narrow, sans-serif'
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Arial Narrow, sans-serif'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Sale Amount'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: 'Total sale: Rs.<b>{point.y:.2f} </b>'
+                },
+                series: [{
+                    type: 'column',
+                    data: sum,
+                }]
+            });
+        }
+        $(document).ready(function () {
+            $('.datepicker').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                "locale": {
+                    "format": "DD/MM/YYYY"
+                }
+            });
+            $('.datepicker').val('');
+
+        GetWeeklySale();
+
+        $("#btnWeeklyReport").click(function () {
+
+            GetWeeklySale();
+        })
+
+        $("#btnMonthlyReport").click(function () {
+            var titleMessage = "Last 6 month sale:Rs.";
+
+            $.ajax({
+                type: "GET",
+                url: "/Dashboard/GetMonthlySale",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    var keys = Object.keys(result);
+                    var monthlydata = new Array();
+                    var totalspent = 0.0;
+                    for (var i = 0; i < keys.length; i++) {
+                        var arrL = new Array();
+                        arrL.push(keys[i]);
+                        arrL.push(result[keys[i]]);
+                        totalspent += result[keys[i]];
+                        monthlydata.push(arrL);
+                    }
+                    createCharts(monthlydata, titleMessage, totalspent.toFixed(2));
+                }
+            })
+        })
+    })
+
+</script>
+}
+<style>
+    #total-expense {
+        background-color: green;
+        color: white;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+</style>
+<section class="content pt-2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Sales report</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="container" style="height:auto;margin: 0 auto;min-height:30rem;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-light">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-dashboard"></i> </h3>
+                    </div>
+                    <div class="card-body dataTable-search-form">
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button id="btnWeeklyReport" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly Sale</button>
+                                <button id="btnMonthlyReport" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly Sale</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Dashboard\_saleReport.cshtml" />
     <Content Remove="wwwroot\dist\img\logo.png" />
     <Content Remove="wwwroot\images\Receipt\logo.png" />
     <Content Remove="wwwroot\invoice\logo.png" />
@@ -41,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Dashboard\_saleReport.cshtml" />
     <None Include="Views\Expense\Index0.cshtml" />
     <None Include="Views\Expense\_expenseForm.cshtml" />
     <None Include="Views\Expense\_expenseReport.cshtml" />

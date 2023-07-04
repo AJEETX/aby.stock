@@ -139,8 +139,6 @@ namespace Aby.StockManager.Service
         // To calculate last six months expense
         public Dictionary<string, double> CalculateMonthlyExpense()
         {
-            List<ExpenseReport> lstEmployee = new List<ExpenseReport>();
-
             Dictionary<string, double> dictMonthlySum = new Dictionary<string, double>();
 
             var expenseCategories = db.ExpenseCategory;
@@ -160,8 +158,6 @@ namespace Aby.StockManager.Service
         // To calculate last four weeks expense
         public Dictionary<string, double> CalculateWeeklyExpense()
         {
-            List<ExpenseReport> lstEmployee = new List<ExpenseReport>();
-
             Dictionary<string, double> dictWeeklySum = new Dictionary<string, double>();
 
             var expenseCategories = db.ExpenseCategory;

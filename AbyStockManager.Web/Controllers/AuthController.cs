@@ -57,7 +57,7 @@ namespace Aby.StockManager.Web.Controllers
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                     jsonResultModel.IsSucceeded = true;
                     jsonResultModel.IsRedirect = true;
-                    jsonResultModel.RedirectUrl = "/Transaction";
+                    jsonResultModel.RedirectUrl = "/Dashboard";
                 }
                 else
                 {

@@ -29,6 +29,7 @@ using Aby.StockManager.Service;
 using Aby.StockManager.Data.Entity;
 using AbyStockManager.Web.Service;
 using Aby.StockManager.Web.Service;
+using AbyStockManager.Web.Service.Dashboard;
 
 namespace Aby.StockManager.Web
 {
@@ -55,6 +56,7 @@ namespace Aby.StockManager.Web
             services.AddAutoMapper(c => c.AddProfile<Aby.StockManager.Mapper.MapProfile>(), typeof(Startup));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IDashboardService, DashboardService>();
             services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
             services.AddScoped<ITaxService, TaxService>();
             services.AddScoped<INumberSequenceService, NumberSequenceService>();
@@ -110,7 +112,7 @@ namespace Aby.StockManager.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Transaction}/{action=Index}/{id?}")
+                    pattern: "{controller=Dashboard}/{action=Index}/{id?}")
                 .RequireAuthorization();
             });
         }
