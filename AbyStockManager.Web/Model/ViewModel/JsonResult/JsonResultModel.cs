@@ -30,5 +30,9 @@ namespace Aby.StockManager.Model.ViewModel.JsonResult
         public string StoreGstin { get; set; }
         public string StoreImage { get; set; }
         public string PrintHeader { get; set; } = "Tax Invoice";
+        public string PrintBillType { get; set; } = "Invoice";
+        public string PrintBilled { get; set; } = "Thanks!";
+        public string PrintBillTo { get; set; } = "Bill to:";
+        public string PrintBillNotice { get; set; } = "note: A finance charge of 1.5% be made on unpaid balance after 30 days.";
     }
 }

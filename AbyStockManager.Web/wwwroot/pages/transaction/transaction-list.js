@@ -90,7 +90,6 @@
                 }
             ],
         rowCallback: function (row, data, index) {
-
             if (data.InvoiceNumber == null) {
                 $(row).find('td:eq(1)').append(
                     $("<span>", { "class": "required-indicator" }).text("Goods Received *")
@@ -153,6 +152,14 @@ function detailShow(row, id) {
         type: "GET",
         success: function (data) {
             if (data.IsSucceeded) {
+                $('#print-header').text(data.PrintHeader);
+                $('#print-bill-type').text(data.PrintBillType);
+                $('#print-bill-disclaimer').text(data.PrintBillType);
+                $('#print-bill-date').text(data.PrintBillType);
+                $('#print-bill-due-date').text(data.PrintBillType);
+                $('#thanks').text(data.PrintBilled);
+                $('#bill-to').text(data.PrintBillTo);
+                $('#bill-notice').text(data.PrintBillNotice);
                 $('#print-header').text(data.PrintHeader);
                 $('#store-image').attr('src', data.StoreImage);
                 $('#store-name').text(data.StoreName);

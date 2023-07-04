@@ -145,16 +145,16 @@
                                 <main>
                                     <div id="details" class="clearfix">
                                         <div id="client">
-                                            <div class="to">Bill to:</div>
+                                            <div id="bill-to" class="to"></div>
                                             <div><span id="invoice-description" class="invoice-description"></span></div>
                                             <div class="to">Address:</div>
                                             <div><span id="invoice-contact" class="invoice-description"></span></div>
                                             <div class="to">GSTIN: <span id="invoice-gstin" class="invoice-description"></span></div>
                                         </div>
                                         <div id="invoice">
-                                            <div>Invoice #: <span id="invoice-number" class="notice"></span></div>
-                                            <div>Invoice date: <span id="invoice-date" class="notice"> </span></div>
-                                            <div>Due Date: <span id="invoice-due-date" class="notice"> </span></div>
+                                            <div><span id="print-bill-type" class="notice"></span> #: <span id="invoice-number" class="notice"></span></div>
+                                            <div><span id="print-bill-date" class="notice"></span> date: <span id="invoice-date" class="notice"> </span></div>
+                                            <div><span id="print-bill-due-date" class="notice"></span> due date: <span id="invoice-due-date" class="notice"> </span></div>
                                         </div>
                                     </div>
                                     <table id="invoice-table" class="invoice-table" border="0" cellspacing="0" cellpadding="0">
@@ -201,18 +201,18 @@
                                         </tfoot>
                                     </table>
                                     <div id="grand-plain-total"> </div>
-                                    <div id="thanks">Thank you!</div>
+                                    <div id="thanks">!</div>
                                     <div id="notices">
 
                                         <div>GSTIN: <span id="store-gstin" class="notice"> </span></div>
                                         <div></div>
                                         <div class="notice"><span class="required-indicator">*</span>  including GST</div>
                                         <div class="notice"><span class="required-indicator">**</span>  excluding GST</div>
-                                        <div class="notice">note: A finance charge of 1.5% be made on unpaid balance after 30 days.</div>
+                                        <div id="bill-notice" class="notice"></div>
                                     </div>
                                 </main>
                                 <footer>
-                                    Invoice is valid without the signature and seal.
+                                    <span id="print-bill-disclaimer" class="notice"></span> is valid without the signature and seal.
                                 </footer>
                             </div>
                         </div>
@@ -227,6 +227,8 @@
         </div>
     </div>
 </div>
+
+
 @section style{
     <partial name="~/Views/Shared/_DataTableStylePartial.cshtml" />
     <link href="~/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />

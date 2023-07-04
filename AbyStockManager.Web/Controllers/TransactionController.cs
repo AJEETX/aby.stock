@@ -225,6 +225,10 @@ namespace Aby.StockManager.Web.Controllers
                     if (string.IsNullOrWhiteSpace(isInvoice))
                     {
                         jsonResultModel.PrintHeader = "Tax Receipt";
+                        jsonResultModel.PrintBillType = "Receipt";
+                        jsonResultModel.PrintBilled = "Received!";
+                        jsonResultModel.PrintBillNotice = "";
+                        jsonResultModel.PrintBillTo = "Received from: ";
                     }
                 }
             }
