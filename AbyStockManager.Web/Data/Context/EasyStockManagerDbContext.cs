@@ -26,6 +26,7 @@ namespace Aby.StockManager.Data.Context
         public DbSet<UnitOfMeasure> UnitOfMeasure { get; set; }
         public virtual DbSet<ExpenseReport> ExpenseReport { get; set; }
         public virtual DbSet<NumberSequence> NumberSequence { get; set; }
+        public virtual DbSet<InvoiceNumberSequence> InvoiceNumberSequence { get; set; }
 
         public DbSet<User> User { get; set; }
 

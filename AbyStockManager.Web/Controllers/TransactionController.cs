@@ -84,7 +84,7 @@ namespace Aby.StockManager.Web.Controllers
             {
                 if (model.TransactionTypeId == (int)TransactionType.Invoice)
                 {
-                    model.InvoiceNumber = sequenceService.GetNumberSequence(TransactionType.Invoice.ToString());
+                    model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(TransactionType.Invoice.ToString());
                     model.TransactionCode = TransactionType.Invoice.ToString();
                 }
                 if (model.TransactionTypeId == (int)TransactionType.StockIn)
