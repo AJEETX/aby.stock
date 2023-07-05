@@ -36,5 +36,17 @@ namespace AbyStockManager.Web.Controllers
             Dictionary<string, double> weeklyExpense = dashboardService.CalculateWeeklySale();
             return new JsonResult(weeklyExpense);
         }
+
+        public JsonResult GetMonthlyPurchase()
+        {
+            Dictionary<string, double> monthlyExpense = dashboardService.CalculateMonthlyPurchase();
+            return new JsonResult(monthlyExpense);
+        }
+
+        public JsonResult GetWeeklyPurchase()
+        {
+            Dictionary<string, double> weeklyExpense = dashboardService.CalculateWeeklyPurchase();
+            return new JsonResult(weeklyExpense);
+        }
     }
 }

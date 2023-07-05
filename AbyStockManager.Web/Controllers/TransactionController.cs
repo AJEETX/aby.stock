@@ -228,7 +228,7 @@ namespace Aby.StockManager.Web.Controllers
                         jsonResultModel.PrintBillType = "Receipt";
                         jsonResultModel.PrintBilled = "Paid!";
                         jsonResultModel.PrintBillNotice = "";
-                        jsonResultModel.PrintBillTo = "Paid to:";
+                        jsonResultModel.PrintBillTo = "Paid to: Agency";
                     }
                 }
             }

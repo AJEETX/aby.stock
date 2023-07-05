@@ -12,7 +12,7 @@
     <partial name="~/Views/Shared/_DataTableScriptPartial.cshtml" />
     <script src="~/plugins/moment/moment.min.js"></script>
     <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="~/dist/js/highcharts.js"></script>
     <script type="text/javascript">
 
         function GetWeeklySale() {
@@ -33,12 +33,34 @@
                         totalspent += result[keys[i]];
                         weeklydata.push(arrL);
                     }
-                    createCharts(weeklydata, titleMessage, totalspent.toFixed(2));
+                    createCharts('container', 'Sale', weeklydata, titleMessage, totalspent.toFixed(2));
                 }
             })
         }
-        function createCharts(sum, titleText, totalspent) {
-            Highcharts.chart('container', {
+        function GetWeeklyPurchase() {
+            var titleMessage = "Last 4 week Purchase:Rs.";
+            $.ajax({
+                type: "GET",
+                url: "/Dashboard/GetWeeklyPurchase",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    var keys = Object.keys(result);
+                    var weeklydata = new Array();
+                    var totalspent = 0.0;
+                    for (var i = 0; i < keys.length; i++) {
+                        var arrL = new Array();
+                        arrL.push(keys[i]);
+                        arrL.push(result[keys[i]]);
+                        totalspent += result[keys[i]];
+                        weeklydata.push(arrL);
+                    }
+                    createCharts('container1', 'Purchase', weeklydata, titleMessage, totalspent.toFixed(2));
+                }
+            })
+        }
+        function createCharts(container, txn, sum, titleText, totalspent) {
+            Highcharts.chart(container, {
                 chart: {
                     type: 'column'
                 },
@@ -62,14 +84,14 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Sale Amount'
+                        text: txn +' Amount'
                     }
                 },
                 legend: {
                     enabled: false
                 },
                 tooltip: {
-                    pointFormat: 'Total sale: Rs.<b>{point.y:.2f} </b>'
+                    pointFormat: 'Total '+txn+': Rs.<b>{point.y:.2f} </b>'
                 },
                 series: [{
                     type: 'column',
@@ -87,36 +109,63 @@
             });
             $('.datepicker').val('');
 
-        GetWeeklySale();
-
-        $("#btnWeeklyReport").click(function () {
-
             GetWeeklySale();
-        })
+            GetWeeklyPurchase();
 
-        $("#btnMonthlyReport").click(function () {
-            var titleMessage = "Last 6 month sale:Rs.";
-
-            $.ajax({
-                type: "GET",
-                url: "/Dashboard/GetMonthlySale",
-                contentType: "application/json",
-                dataType: "json",
-                success: function (result) {
-                    var keys = Object.keys(result);
-                    var monthlydata = new Array();
-                    var totalspent = 0.0;
-                    for (var i = 0; i < keys.length; i++) {
-                        var arrL = new Array();
-                        arrL.push(keys[i]);
-                        arrL.push(result[keys[i]]);
-                        totalspent += result[keys[i]];
-                        monthlydata.push(arrL);
-                    }
-                    createCharts(monthlydata, titleMessage, totalspent.toFixed(2));
-                }
+            $("#btnWeeklyReport").click(function () {
+                GetWeeklySale();
             })
-        })
+            $("#btnWeeklyPurchaseReport").click(function () {
+                GetWeeklyPurchase();
+            })
+
+            $("#btnMonthlyReport").click(function () {
+                var titleMessage = "Last 6 month sale:Rs.";
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Dashboard/GetMonthlySale",
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                        var keys = Object.keys(result);
+                        var monthlydata = new Array();
+                        var totalspent = 0.0;
+                        for (var i = 0; i < keys.length; i++) {
+                            var arrL = new Array();
+                            arrL.push(keys[i]);
+                            arrL.push(result[keys[i]]);
+                            totalspent += result[keys[i]];
+                            monthlydata.push(arrL);
+                        }
+                        createCharts('container', 'Sale', monthlydata, titleMessage, totalspent.toFixed(2));
+                    }
+                })
+            })
+
+            $("#btnMonthlyPurchaseReport").click(function () {
+                    var titleMessage = "Last 6 month purchase:Rs.";
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Dashboard/GetMonthlyPurchase",
+                        contentType: "application/json",
+                        dataType: "json",
+                        success: function (result) {
+                            var keys = Object.keys(result);
+                            var monthlydata = new Array();
+                            var totalspent = 0.0;
+                            for (var i = 0; i < keys.length; i++) {
+                                var arrL = new Array();
+                                arrL.push(keys[i]);
+                                arrL.push(result[keys[i]]);
+                                totalspent += result[keys[i]];
+                                monthlydata.push(arrL);
+                            }
+                            createCharts('container1', 'Purchase', monthlydata, titleMessage, totalspent.toFixed(2));
+                        }
+                    })
+                })
     })
 
 </script>
@@ -136,27 +185,48 @@
             <div class="col-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Sales report</h3>
+                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Dashboard</h3>
                     </div>
                     <div class="card-body">
-                        <div id="container" style="height:auto;margin: 0 auto;min-height:30rem;">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-light">
-                    <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-dashboard"></i> </h3>
-                    </div>
-                    <div class="card-body dataTable-search-form">
                         <div class="row">
-                            <div class="col-md-12 text-right">
-                                <button id="btnWeeklyReport" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly Sale</button>
-                                <button id="btnMonthlyReport" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly Sale</button>
+                            <div class="col-md-6">
+                                <div class="card card-light">
+                                    <div class="card-header">
+                                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Sales</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="container" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                        </div>
+                                    </div>
+                                    <div class="card-body dataTable-search-form">
+                                        <div class="row">
+                                            <div class="col-md-12 text-right">
+                                                <button id="btnWeeklyReport" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
+                                                <button id="btnMonthlyReport" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-6">
+                                <div class="card card-light">
+                                    <div class="card-header">
+                                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Purchase</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="container1" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                        </div>
+                                    </div>
+                                    <div class="card-body dataTable-search-form">
+                                        <div class="row">
+                                            <div class="col-md-12 text-right">
+                                                <button id="btnWeeklyPurchaseReport" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
+                                                <button id="btnMonthlyPurchaseReport" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
