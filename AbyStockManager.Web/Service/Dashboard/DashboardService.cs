@@ -23,6 +23,8 @@ namespace AbyStockManager.Web.Service.Dashboard
 
         Dictionary<string, double> CalculatePurchaseChart();
 
+        Dictionary<string, double> CalculateExpenseChart();
+
         Dictionary<string, double> CalculateWeeklyPurchase();
     }
 
@@ -33,6 +35,33 @@ namespace AbyStockManager.Web.Service.Dashboard
         public DashboardService(EasyStockManagerDbContext db)
         {
             this.db = db;
+        }
+
+        public Dictionary<string, double> CalculateExpenseChart()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Dictionary<string, double> dictMonthlySum = new Dictionary<string, double>();
+
+            var startDate = new DateTime(DateTime.Now.Year, 1, 1);
+            var months = Enumerable.Range(0, 11)
+                                   .Select(startDate.AddMonths)
+                       .Select(m => m)
+                       .ToList();
+            foreach (var monthName in months)
+            {
+                var txn = db.ExpenseReport.Include(i => i.Category);
+
+                var filterTxn = txn.Where
+                                (t =>
+                                    t.ExpenseDate > monthName.Date &&
+                                    t.ExpenseDate <= monthName.AddMonths(1)
+                                    );
+
+                var catum = filterTxn.Select(t => t.Amount).Sum();
+                dictMonthlySum.Add(monthName.ToString("MMM"), catum);
+            }
+
+            return dictMonthlySum;
         }
 
         public Dictionary<string, double> CalculateMonthlyPurchase()

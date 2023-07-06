@@ -53,13 +53,13 @@
             });
         }
 
-        function createSaleChart(container, data, keys, total) {
+        function createSaleChart(container,titleText, data, keys, total) {
             Highcharts.chart(container, {
                 chart: {
                     marginRight: 0
                 },
                 title: {
-                    text: 'Total sale Rs.'+total,
+                    text: 'Total '+ titleText +' Rs.' + total,
                     style: {
                         fontSize: '1rem',
                         fontFamily: 'Arial Narrow, sans-serif'
@@ -84,37 +84,6 @@
             });
         }
 
-        function createPurchaseChart(container, data, keys, total) {
-            Highcharts.chart(container, {
-                chart: {
-                    marginRight: 0
-                },
-                title: {
-                    text: 'Total purchase Rs.' + total,
-                    style: {
-                        fontSize: '1rem',
-                        fontFamily: 'Arial Narrow, sans-serif'
-                    }
-                },
-                legend: {
-                    enabled: false
-                },
-                xAxis: {
-                    categories: keys
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: ' Amount'
-                    }
-                },
-                series: [{
-                    data: data,
-                    color: 'green'
-                }]
-            });
-        }
-        
         function GetSaleChart(){
             var titleMessage = "Last 12 month sale:Rs.";
             $.ajax({
@@ -133,7 +102,7 @@
                         totalspent += result[keys[i]];
                         weeklydata.push(arrL);
                     }
-                    createSaleChart('container0', weeklydata, keys, totalspent.toFixed(2));
+                    createSaleChart('container0','Sale', weeklydata, keys, totalspent.toFixed(2));
                 }
             })
         }
@@ -156,7 +125,30 @@
                         totalspent += result[keys[i]];
                         weeklydata.push(arrL);
                     }
-                    createSaleChart('container2', weeklydata, keys, totalspent.toFixed(2));
+                    createSaleChart('container2', 'Purchase', weeklydata, keys, totalspent.toFixed(2));
+                }
+            })
+        }
+
+        function GetExpenseChart() {
+            var titleMessage = "Last 12 month expense :Rs.";
+            $.ajax({
+                type: "GET",
+                url: "/Dashboard/GetExpenseChart",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    var keys = Object.keys(result);
+                    var weeklydata = new Array();
+                    var totalspent = 0.0;
+                    for (var i = 0; i < keys.length; i++) {
+                        var arrL = new Array();
+                        arrL.push(keys[i]);
+                        arrL.push(result[keys[i]]);
+                        totalspent += result[keys[i]];
+                        weeklydata.push(arrL);
+                    }
+                    createSaleChart('container22', 'Expense', weeklydata, keys, totalspent.toFixed(2));
                 }
             })
         }
@@ -206,19 +198,69 @@
                 }
             })
         }
+
+        function GetWeeklyExpense() {
+            var titleMessage = "Last 4 week Expense:Rs.";
+            $.ajax({
+                type: "GET",
+                url: "/Dashboard/GetWeeklyExpense",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    var keys = Object.keys(result);
+                    var weeklydata = new Array();
+                    var totalspent = 0.0;
+                    for (var i = 0; i < keys.length; i++) {
+                        var arrL = new Array();
+                        arrL.push(keys[i]);
+                        arrL.push(result[keys[i]]);
+                        totalspent += result[keys[i]];
+                        weeklydata.push(arrL);
+                    }
+                    createCharts('container11', 'Expense', weeklydata, titleMessage, totalspent.toFixed(2));
+                }
+            })
+        }
         
         $(document).ready(function () {
             GetWeeklySale();
             GetWeeklyPurchase();
             GetSaleChart();
             GetPurchaseChart();
+            GetWeeklyExpense();
+            GetExpenseChart();
             $("#btnWeeklyReport").click(function () {
                 GetWeeklySale();
             })
             $("#btnWeeklyPurchaseReport").click(function () {
                 GetWeeklyPurchase();
             })
+            $("#btnWeeklyExpense").click(function () {
+                GetWeeklyExpense();
+            })
+            $("#btnMonthlyExpense").click(function () {
+                var titleMessage = "Last 6 month expense:Rs.";
 
+                $.ajax({
+                    type: "GET",
+                    url: "/Dashboard/GetMonthlyExpense",
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                        var keys = Object.keys(result);
+                        var monthlydata = new Array();
+                        var totalspent = 0.0;
+                        for (var i = 0; i < keys.length; i++) {
+                            var arrL = new Array();
+                            arrL.push(keys[i]);
+                            arrL.push(result[keys[i]]);
+                            totalspent += result[keys[i]];
+                            monthlydata.push(arrL);
+                        }
+                        createCharts('container', 'Expense', monthlydata, titleMessage, totalspent.toFixed(2));
+                    }
+                })
+            })
             $("#btnMonthlyReport").click(function () {
                 var titleMessage = "Last 6 month sale:Rs.";
 
@@ -287,7 +329,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="card card-light">
                                     <div class="card-header">
                                         <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Sales</h3>
@@ -306,30 +348,48 @@
                                     </div>
                                 </div>
                             </div>
-                    <div class="col-md-6">
-                        <div class="card card-light">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Purchase</h3>
-                            </div>
-                            <div class="card-body">
-                                <div id="container1" style="height:auto;margin: 0 auto;min-height:30rem;">
+                            <div class="col-md-4">
+                                <div class="card card-light">
+                                    <div class="card-header">
+                                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Purchase</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="container1" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                        </div>
+                                    </div>
+                                    <div class="card-body dataTable-search-form">
+                                        <div class="row">
+                                            <div class="col-md-12 text-right">
+                                                <button id="btnWeeklyPurchaseReport" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
+                                                <button id="btnMonthlyPurchaseReport" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body dataTable-search-form">
-                                <div class="row">
-                                    <div class="col-md-12 text-right">
-                                        <button id="btnWeeklyPurchaseReport" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
-                                        <button id="btnMonthlyPurchaseReport" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
+                            <div class="col-md-4">
+                                <div class="card card-light">
+                                    <div class="card-header">
+                                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Expense</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="container11" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                        </div>
+                                    </div>
+                                    <div class="card-body dataTable-search-form">
+                                        <div class="row">
+                                            <div class="col-md-12 text-right">
+                                                <button id="btnWeeklyExpense" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
+                                                <button id="btnMonthlyExpense" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                            
-                        </div>
                         <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Sale</h3>
@@ -340,7 +400,7 @@
                             </div>
                         </div>
                     </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="card card-light">
                                     <div class="card-header">
                                         <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Purchase</h3>
@@ -351,6 +411,17 @@
                                     </div>
                                 </div>
                             </div>
+                    <div class="col-md-4">
+                        <div class="card card-light">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Expense</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="container22" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         </div>
                     </div>
                 </div>
