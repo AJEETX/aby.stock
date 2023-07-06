@@ -142,6 +142,30 @@
             })
         }
         
+        function GetMonthly(title, url, container){
+            var titleMessage = "Last 6 month "+title+"Rs.";
+
+            $.ajax({
+                type: "GET",
+                url: "/Dashboard/"+url,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    var keys = Object.keys(result);
+                    var monthlydata = new Array();
+                    var totalspent = 0.0;
+                    for (var i = 0; i < keys.length; i++) {
+                        var arrL = new Array();
+                        arrL.push(keys[i]);
+                        arrL.push(result[keys[i]]);
+                        totalspent += result[keys[i]];
+                        monthlydata.push(arrL);
+                    }
+                    createCharts(container, title, monthlydata, titleMessage, totalspent.toFixed(2));
+                }
+            })
+        }
+
         $(document).ready(function () {
             GetWeekly('Sale', 'GetWeeklySale', 'container');
             GetWeekly('Purchase', 'GetWeeklyPurchase', 'container1');
@@ -161,76 +185,16 @@
                 GetWeekly('Expense', 'GetWeeklyExpense', 'container11');
             })
             $("#btnMonthlyExpense").click(function () {
-                var titleMessage = "Last 6 month Expense:Rs.";
-
-                $.ajax({
-                    type: "GET",
-                    url: "/Dashboard/GetMonthlyExpense",
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (result) {
-                        var keys = Object.keys(result);
-                        var monthlydata = new Array();
-                        var totalspent = 0.0;
-                        for (var i = 0; i < keys.length; i++) {
-                            var arrL = new Array();
-                            arrL.push(keys[i]);
-                            arrL.push(result[keys[i]]);
-                            totalspent += result[keys[i]];
-                            monthlydata.push(arrL);
-                        }
-                        createCharts('container11', 'Expense', monthlydata, titleMessage, totalspent.toFixed(2));
-                    }
-                })
-            })
+                GetMonthly('Expense', 'GetMonthlyExpense', 'container11');
+             })
 
             $("#btnMonthlyReport").click(function () {
-                var titleMessage = "Last 6 month Sale:Rs.";
-
-                $.ajax({
-                    type: "GET",
-                    url: "/Dashboard/GetMonthlySale",
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (result) {
-                        var keys = Object.keys(result);
-                        var monthlydata = new Array();
-                        var totalspent = 0.0;
-                        for (var i = 0; i < keys.length; i++) {
-                            var arrL = new Array();
-                            arrL.push(keys[i]);
-                            arrL.push(result[keys[i]]);
-                            totalspent += result[keys[i]];
-                            monthlydata.push(arrL);
-                        }
-                        createCharts('container', 'Sale', monthlydata, titleMessage, totalspent.toFixed(2));
-                    }
-                })
+                GetMonthly('Sale', 'GetMonthlySale', 'container');
             })
 
             $("#btnMonthlyPurchaseReport").click(function () {
-                    var titleMessage = "Last 6 month Purchase:Rs.";
-
-                    $.ajax({
-                        type: "GET",
-                        url: "/Dashboard/GetMonthlyPurchase",
-                        contentType: "application/json",
-                        dataType: "json",
-                        success: function (result) {
-                            var keys = Object.keys(result);
-                            var monthlydata = new Array();
-                            var totalspent = 0.0;
-                            for (var i = 0; i < keys.length; i++) {
-                                var arrL = new Array();
-                                arrL.push(keys[i]);
-                                arrL.push(result[keys[i]]);
-                                totalspent += result[keys[i]];
-                                monthlydata.push(arrL);
-                            }
-                            createCharts('container1', 'Purchase', monthlydata, titleMessage, totalspent.toFixed(2));
-                        }
-                    })
-                })
+                GetMonthly('Purchase', 'GetMonthlyPurchase', 'container1');
+            })
     })
 
 </script>
