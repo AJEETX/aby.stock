@@ -10,10 +10,155 @@
     }
 @section script{
     <partial name="~/Views/Shared/_DataTableScriptPartial.cshtml" />
-    <script src="~/plugins/moment/moment.min.js"></script>
-    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
-    <script src="~/dist/js/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript">
+        function createCharts(container, txn, sum, titleText, totalspent) {
+            Highcharts.chart(container, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: titleText + ' ' + totalspent,
+                    style: {
+                        fontSize: '.9rem',
+                        fontFamily: 'Arial Narrow, sans-serif'
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '12px',
+                            fontFamily: 'Arial Narrow, sans-serif'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: txn + ' Amount'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: 'Total ' + txn + ': Rs.<b>{point.y:.2f} </b>'
+                },
+                series: [{
+                    type: 'column',
+                    data: sum,
+                }]
+            });
+        }
+
+        function createSaleChart(container, data, total) {
+            Highcharts.chart(container, {
+                chart: {
+                    marginRight: 0
+                },
+                title: {
+                    text: 'Total sale Rs.'+total,
+                    style: {
+                        fontSize: '1rem',
+                        fontFamily: 'Arial Narrow, sans-serif'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: ' Amount'
+                    }
+                },
+                series: [{
+                    data: data,
+                    color: 'green'
+                }]
+            });
+        }
+
+        function createPurchaseChart(container, data, total) {
+            Highcharts.chart(container, {
+                chart: {
+                    marginRight: 0
+                },
+                title: {
+                    text: 'Total purchase Rs.' + total,
+                    style: {
+                        fontSize: '1rem',
+                        fontFamily: 'Arial Narrow, sans-serif'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: ' Amount'
+                    }
+                },
+                series: [{
+                    data: data,
+                    color: 'green'
+                }]
+            });
+        }
+        
+        function GetSaleChart(){
+            var titleMessage = "Last 12 month sale:Rs.";
+            $.ajax({
+                type: "GET",
+                url: "/Dashboard/GetSaleChart",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    var keys = Object.keys(result);
+                    var weeklydata = new Array();
+                    var totalspent = 0.0;
+                    for (var i = 0; i < keys.length; i++) {
+                        var arrL = new Array();
+                        arrL.push(keys[i]);
+                        arrL.push(result[keys[i]]);
+                        totalspent += result[keys[i]];
+                        weeklydata.push(arrL);
+                    }
+                    createSaleChart('container0', weeklydata, totalspent.toFixed(2));
+                }
+            })
+        }
+        function GetPurchaseChart() {
+            var titleMessage = "Last 12 month sale:Rs.";
+            $.ajax({
+                type: "GET",
+                url: "/Dashboard/GetPurchaseChart",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    var keys = Object.keys(result);
+                    var weeklydata = new Array();
+                    var totalspent = 0.0;
+                    for (var i = 0; i < keys.length; i++) {
+                        var arrL = new Array();
+                        arrL.push(keys[i]);
+                        arrL.push(result[keys[i]]);
+                        totalspent += result[keys[i]];
+                        weeklydata.push(arrL);
+                    }
+                    createSaleChart('container2', weeklydata, totalspent.toFixed(2));
+                }
+            })
+        }
 
         function GetWeeklySale() {
             var titleMessage = "Last 4 week sale:Rs.";
@@ -37,6 +182,7 @@
                 }
             })
         }
+        
         function GetWeeklyPurchase() {
             var titleMessage = "Last 4 week Purchase:Rs.";
             $.ajax({
@@ -59,59 +205,12 @@
                 }
             })
         }
-        function createCharts(container, txn, sum, titleText, totalspent) {
-            Highcharts.chart(container, {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: titleText + ' ' + totalspent, 
-                    style: {
-                        fontSize: '1rem',
-                        fontFamily: 'Arial Narrow, sans-serif'
-                    }
-                },
-                xAxis: {
-                    type: 'category',
-                    labels: {
-                        rotation: -45,
-                        style: {
-                            fontSize: '13px',
-                            fontFamily: 'Arial Narrow, sans-serif'
-                        }
-                    }
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: txn +' Amount'
-                    }
-                },
-                legend: {
-                    enabled: false
-                },
-                tooltip: {
-                    pointFormat: 'Total '+txn+': Rs.<b>{point.y:.2f} </b>'
-                },
-                series: [{
-                    type: 'column',
-                    data: sum,
-                }]
-            });
-        }
+        
         $(document).ready(function () {
-            $('.datepicker').daterangepicker({
-                singleDatePicker: true,
-                showDropdowns: true,
-                "locale": {
-                    "format": "DD/MM/YYYY"
-                }
-            });
-            $('.datepicker').val('');
-
             GetWeeklySale();
             GetWeeklyPurchase();
-
+            GetSaleChart();
+            GetPurchaseChart();
             $("#btnWeeklyReport").click(function () {
                 GetWeeklySale();
             })
@@ -181,9 +280,7 @@
 </style>
 <section class="content pt-2">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card card-secondary">
+         <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Dashboard</h3>
                     </div>
@@ -212,6 +309,19 @@
                             <div class="col-md-6">
                                 <div class="card card-light">
                                     <div class="card-header">
+                                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Chart</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="container0" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card card-light">
+                                    <div class="card-header">
                                         <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Purchase</h3>
                                     </div>
                                     <div class="card-body">
@@ -228,11 +338,21 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="card card-light">
+                                    <div class="card-header">
+                                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Chart</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="container2" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
     </div>
 </section>
 
