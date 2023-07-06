@@ -84,11 +84,11 @@
             });
         }
 
-        function GetSaleChart(){
-            var titleMessage = "Last 12 month sale:Rs.";
+        function GetChart(title, url, container){
+            var titleMessage = "Last 12 month " +title +":Rs.";
             $.ajax({
                 type: "GET",
-                url: "/Dashboard/GetSaleChart",
+                url: "/Dashboard/"+url,
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
@@ -102,59 +102,25 @@
                         totalspent += result[keys[i]];
                         weeklydata.push(arrL);
                     }
-                    createSaleChart('container0','Sale', weeklydata, keys, totalspent.toFixed(2));
+                    createSaleChart(container, title, weeklydata, keys, totalspent.toFixed(2));
                 }
             })
+        }
+
+        function GetSaleChart(){
+            GetChart('Sale', 'GetSaleChart', 'container0')
         }
 
         function GetPurchaseChart() {
-            var titleMessage = "Last 12 month sale:Rs.";
-            $.ajax({
-                type: "GET",
-                url: "/Dashboard/GetPurchaseChart",
-                contentType: "application/json",
-                dataType: "json",
-                success: function (result) {
-                    var keys = Object.keys(result);
-                    var weeklydata = new Array();
-                    var totalspent = 0.0;
-                    for (var i = 0; i < keys.length; i++) {
-                        var arrL = new Array();
-                        arrL.push(keys[i]);
-                        arrL.push(result[keys[i]]);
-                        totalspent += result[keys[i]];
-                        weeklydata.push(arrL);
-                    }
-                    createSaleChart('container2', 'Purchase', weeklydata, keys, totalspent.toFixed(2));
-                }
-            })
+            GetChart('Purchase', 'GetPurchaseChart', 'container2')
         }
 
         function GetExpenseChart() {
-            var titleMessage = "Last 12 month expense :Rs.";
-            $.ajax({
-                type: "GET",
-                url: "/Dashboard/GetExpenseChart",
-                contentType: "application/json",
-                dataType: "json",
-                success: function (result) {
-                    var keys = Object.keys(result);
-                    var weeklydata = new Array();
-                    var totalspent = 0.0;
-                    for (var i = 0; i < keys.length; i++) {
-                        var arrL = new Array();
-                        arrL.push(keys[i]);
-                        arrL.push(result[keys[i]]);
-                        totalspent += result[keys[i]];
-                        weeklydata.push(arrL);
-                    }
-                    createSaleChart('container22', 'Expense', weeklydata, keys, totalspent.toFixed(2));
-                }
-            })
+            GetChart('Expense', 'GetExpenseChart', 'container22')
         }
 
-        function GetWeeklySale() {
-            var titleMessage = "Last 4 week sale:Rs.";
+        function GetWeekly(title, url, container) {
+            var titleMessage = "Last 4 week "+ title+":Rs.";
             $.ajax({
                 type: "GET",
                 url: "/Dashboard/GetWeeklySale",
@@ -171,75 +137,31 @@
                         totalspent += result[keys[i]];
                         weeklydata.push(arrL);
                     }
-                    createCharts('container', 'Sale', weeklydata, titleMessage, totalspent.toFixed(2));
-                }
-            })
-        }
-        
-        function GetWeeklyPurchase() {
-            var titleMessage = "Last 4 week Purchase:Rs.";
-            $.ajax({
-                type: "GET",
-                url: "/Dashboard/GetWeeklyPurchase",
-                contentType: "application/json",
-                dataType: "json",
-                success: function (result) {
-                    var keys = Object.keys(result);
-                    var weeklydata = new Array();
-                    var totalspent = 0.0;
-                    for (var i = 0; i < keys.length; i++) {
-                        var arrL = new Array();
-                        arrL.push(keys[i]);
-                        arrL.push(result[keys[i]]);
-                        totalspent += result[keys[i]];
-                        weeklydata.push(arrL);
-                    }
-                    createCharts('container1', 'Purchase', weeklydata, titleMessage, totalspent.toFixed(2));
-                }
-            })
-        }
-
-        function GetWeeklyExpense() {
-            var titleMessage = "Last 4 week Expense:Rs.";
-            $.ajax({
-                type: "GET",
-                url: "/Dashboard/GetWeeklyExpense",
-                contentType: "application/json",
-                dataType: "json",
-                success: function (result) {
-                    var keys = Object.keys(result);
-                    var weeklydata = new Array();
-                    var totalspent = 0.0;
-                    for (var i = 0; i < keys.length; i++) {
-                        var arrL = new Array();
-                        arrL.push(keys[i]);
-                        arrL.push(result[keys[i]]);
-                        totalspent += result[keys[i]];
-                        weeklydata.push(arrL);
-                    }
-                    createCharts('container11', 'Expense', weeklydata, titleMessage, totalspent.toFixed(2));
+                    createCharts(container, title, weeklydata, titleMessage, totalspent.toFixed(2));
                 }
             })
         }
         
         $(document).ready(function () {
-            GetWeeklySale();
-            GetWeeklyPurchase();
+            GetWeekly('Sale', 'GetWeeklySale', 'container');
+            GetWeekly('Purchase', 'GetWeeklyPurchase', 'container1');
+            GetWeekly('Expense', 'GetWeeklyExpense', 'container11');
+
             GetSaleChart();
             GetPurchaseChart();
-            GetWeeklyExpense();
             GetExpenseChart();
+
             $("#btnWeeklyReport").click(function () {
-                GetWeeklySale();
+                GetWeekly('Sale', 'GetWeeklySale', 'container');
             })
             $("#btnWeeklyPurchaseReport").click(function () {
-                GetWeeklyPurchase();
+                GetWeekly('Purchase', 'GetWeeklyPurchase', 'container1');
             })
             $("#btnWeeklyExpense").click(function () {
                 GetWeeklyExpense();
             })
             $("#btnMonthlyExpense").click(function () {
-                var titleMessage = "Last 6 month expense:Rs.";
+                var titleMessage = "Last 6 month Expense:Rs.";
 
                 $.ajax({
                     type: "GET",
@@ -263,7 +185,7 @@
             })
 
             $("#btnMonthlyReport").click(function () {
-                var titleMessage = "Last 6 month sale:Rs.";
+                var titleMessage = "Last 6 month Sale:Rs.";
 
                 $.ajax({
                     type: "GET",
@@ -287,7 +209,7 @@
             })
 
             $("#btnMonthlyPurchaseReport").click(function () {
-                    var titleMessage = "Last 6 month purchase:Rs.";
+                    var titleMessage = "Last 6 month Purchase:Rs.";
 
                     $.ajax({
                         type: "GET",
