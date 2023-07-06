@@ -88,9 +88,6 @@ namespace AbyStockManager.Web.Service.Dashboard
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Dictionary<string, double> dictMonthlySum = new Dictionary<string, double>();
 
-            var categories = db.Category;
-            string[] monthNames = CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
-
             var startDate = new DateTime(DateTime.Now.Year, 1, 1);
             var months = Enumerable.Range(0, 11)
                                    .Select(startDate.AddMonths)
@@ -122,10 +119,7 @@ namespace AbyStockManager.Web.Service.Dashboard
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Dictionary<string, double> dictMonthlySum = new Dictionary<string, double>();
 
-            var categories = db.Category;
-            string[] monthNames = CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
-
-            var startDate = DateTime.Now.AddMonths(-6);
+            var startDate = new DateTime(DateTime.Now.Year, 1, 1);
             var months = Enumerable.Range(0, 11)
                                    .Select(startDate.AddMonths)
                        .Select(m => m)
