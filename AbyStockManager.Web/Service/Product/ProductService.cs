@@ -70,16 +70,8 @@ namespace Aby.StockManager.Service.Product
                     foreach (var item in list)
                     {
                         var transaction = await _unitOfWork.TransactionRepository.GetWithDetailByProductId(item.Id);
-                        if (transaction != null)
+                        if (transaction)
                         {
-                            foreach (var txnDetail in transaction.TransactionDetail)
-                            {
-                                if(item.Id == txnDetail.ProductId)
-                                {
-                                    stockedInAmountList.Add(item.Id, txnDetail.Amount);
-                                }
-                            }
-                            var ppp = transaction.TransactionDetail?.ToList()?.Select(t=>t.Amount);
                             stockedInList.Add(item.Id, true);
                         }
                         else

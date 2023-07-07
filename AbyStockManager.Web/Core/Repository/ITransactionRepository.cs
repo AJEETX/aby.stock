@@ -11,6 +11,6 @@ namespace Aby.StockManager.Core.Repository
 
         Task<Aby.StockManager.Data.Entity.Transaction> GetWithDetailAndProductById(int id);
 
-        Task<Aby.StockManager.Data.Entity.Transaction> GetWithDetailByProductId(int id);
+        Task<bool> GetWithDetailByProductId(int id);
     }
 }

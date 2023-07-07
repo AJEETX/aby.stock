@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Aby.StockManager.Core.Repository;
 using Aby.StockManager.Data.Context;
 using Aby.StockManager.Repository.Base;
+using System.Linq;
 
 namespace Aby.StockManager.Repository.Transaction
 {
@@ -30,12 +31,25 @@ namespace Aby.StockManager.Repository.Transaction
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Aby.StockManager.Data.Entity.Transaction> GetWithDetailByProductId(int id)
+        public async Task<bool> GetWithDetailByProductId(int id)
         {
-            return await dbContext.Transaction
+            var data = await dbContext.Transaction
                 .Include(x => x.TransactionDetail)
-                .ThenInclude(x => x.Product)
-                .FirstOrDefaultAsync(i => i.InvoiceNumber.Contains(Common.Enums.TransactionType.StockIn.ToString()));
+                .ThenInclude(x => x.Product).ToListAsync();
+            foreach (var item in data)
+            {
+                if (item.TransactionCode.Contains(Common.Enums.TransactionType.StockIn.ToString()))
+                {
+                    foreach (var item2 in item.TransactionDetail)
+                    {
+                        if (item2.ProductId == id)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
     }
 }
