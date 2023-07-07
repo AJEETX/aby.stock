@@ -53,6 +53,17 @@ namespace AbyStockManager.Web.Controllers
             return new JsonResult(weeklyExpense);
         }
 
+        public JsonResult GetProductWeeklySale()
+        {
+            Dictionary<string, double> weeklyExpense = dashboardService.CalculateWeeklyProductSale();
+            return new JsonResult(weeklyExpense);
+        }
+        public JsonResult GetProductMonthlylySale()
+        {
+            Dictionary<string, double> weeklyExpense = dashboardService.CalculateMonthlyProductSale();
+            return new JsonResult(weeklyExpense);
+        }
+
         public JsonResult GetMonthlyPurchase()
         {
             Dictionary<string, double> monthlyExpense = dashboardService.CalculateMonthlyPurchase();
@@ -80,6 +91,12 @@ namespace AbyStockManager.Web.Controllers
         public JsonResult GetExpenseChart()
         {
             Dictionary<string, double> monthlyExpense = dashboardService.CalculateExpenseChart();
+            return new JsonResult(monthlyExpense);
+        }
+
+        public JsonResult GetProductChart()
+        {
+            Dictionary<string, double> monthlyExpense = dashboardService.CalculateProductChart();
             return new JsonResult(monthlyExpense);
         }
     }

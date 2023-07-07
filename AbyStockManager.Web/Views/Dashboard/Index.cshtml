@@ -53,13 +53,13 @@
             });
         }
 
-        function createSaleChart(container,titleText, data, keys, total) {
+        function createSaleChart(container, titleText, data, keys, total) {
             Highcharts.chart(container, {
                 chart: {
                     marginRight: 0
                 },
                 title: {
-                    text: 'Total '+ titleText +' Rs.' + total,
+                    text: 'Total ' + titleText + ' Rs.' + total,
                     style: {
                         fontSize: '1rem',
                         fontFamily: 'Arial Narrow, sans-serif'
@@ -84,11 +84,11 @@
             });
         }
 
-        function GetChart(title, url, container){
-            var titleMessage = "Last 12 month " +title +":Rs.";
+        function GetChart(title, url, container) {
+            var titleMessage = "Last 12 month " + title + ":Rs.";
             $.ajax({
                 type: "GET",
-                url: "/Dashboard/"+url,
+                url: "/Dashboard/" + url,
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
@@ -107,23 +107,26 @@
             })
         }
 
-        function GetSaleChart(){
-            GetChart('Sale', 'GetSaleChart', 'container0')
+        function GetSaleChart() {
+            GetChart('Sale', 'GetSaleChart', 'container-monthly-sale')
         }
 
         function GetPurchaseChart() {
-            GetChart('Purchase', 'GetPurchaseChart', 'container2')
+            GetChart('Purchase', 'GetPurchaseChart', 'container-monthly-purchase')
+        }
+        function GetProductChart() {
+            GetChart('Product', 'GetProductChart', 'container-monthly-product')
         }
 
         function GetExpenseChart() {
-            GetChart('Expense', 'GetExpenseChart', 'container22')
+            GetChart('Expense', 'GetExpenseChart', 'container-monthly-expense')
         }
 
         function GetWeekly(title, url, container) {
-            var titleMessage = "Last 4 week "+ title+":Rs.";
+            var titleMessage = "Last 4 week " + title + ":Rs.";
             $.ajax({
                 type: "GET",
-                url: "/Dashboard/"+ url,
+                url: "/Dashboard/" + url,
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
@@ -141,13 +144,13 @@
                 }
             })
         }
-        
-        function GetMonthly(title, url, container){
-            var titleMessage = "Last 6 month "+title+"Rs.";
+
+        function GetMonthly(title, url, container) {
+            var titleMessage = "Last 6 month " + title + "Rs.";
 
             $.ajax({
                 type: "GET",
-                url: "/Dashboard/"+url,
+                url: "/Dashboard/" + url,
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
@@ -167,37 +170,48 @@
         }
 
         $(document).ready(function () {
-            GetWeekly('Sale', 'GetWeeklySale', 'container');
-            GetWeekly('Purchase', 'GetWeeklyPurchase', 'container1');
-            GetWeekly('Expense', 'GetWeeklyExpense', 'container11');
+            GetWeekly('Sale', 'GetWeeklySale', 'container-sale');
+            GetWeekly('Purchase', 'GetWeeklyPurchase', 'container-purchase');
+            GetWeekly('Expense', 'GetWeeklyExpense', 'container-expense');
+            GetWeekly('Product', 'GetProductWeeklySale', 'container-product');
 
             GetSaleChart();
             GetPurchaseChart();
             GetExpenseChart();
+            GetProductChart();
 
             $("#btnWeeklyReport").click(function () {
-                GetWeekly('Sale', 'GetWeeklySale', 'container');
+                GetWeekly('Sale', 'GetWeeklySale', 'container-sale');
             })
             $("#btnWeeklyPurchaseReport").click(function () {
-                GetWeekly('Purchase', 'GetWeeklyPurchase', 'container1');
+                GetWeekly('Purchase', 'GetWeeklyPurchase', 'container-purchase');
             })
             $("#btnWeeklyExpense").click(function () {
-                GetWeekly('Expense', 'GetWeeklyExpense', 'container11');
+                GetWeekly('Expense', 'GetWeeklyExpense', 'container-expense');
             })
+
+            $("#btnWeeklyProduct").click(function () {
+                GetWeekly('Product', 'GetProductWeeklySale', 'container-product');
+            })
+
             $("#btnMonthlyExpense").click(function () {
-                GetMonthly('Expense', 'GetMonthlyExpense', 'container11');
-             })
+                GetMonthly('Expense', 'GetMonthlyExpense', 'container-expense');
+            })
 
             $("#btnMonthlyReport").click(function () {
-                GetMonthly('Sale', 'GetMonthlySale', 'container');
+                GetMonthly('Sale', 'GetMonthlySale', 'container-sale');
             })
 
             $("#btnMonthlyPurchaseReport").click(function () {
-                GetMonthly('Purchase', 'GetMonthlyPurchase', 'container1');
+                GetMonthly('Purchase', 'GetMonthlyPurchase', 'container-purchase');
             })
-    })
 
-</script>
+            $("#btnMonthlyProduct").click(function () {
+                GetMonthly('Product', 'GetProductMonthlylySale', 'container-product');
+            })
+        })
+
+    </script>
 }
 <style>
     #total-expense {
@@ -210,108 +224,137 @@
 </style>
 <section class="content pt-2">
     <div class="container-fluid">
-         <div class="card card-secondary">
-                    <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Dashboard</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card card-light">
-                                    <div class="card-header">
-                                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Sales</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="container" style="height:auto;margin: 0 auto;min-height:30rem;">
-                                        </div>
-                                    </div>
-                                    <div class="card-body dataTable-search-form">
-                                        <div class="row">
-                                            <div class="col-md-12 text-right">
-                                                <button id="btnWeeklyReport" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
-                                                <button id="btnMonthlyReport" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
-                                            </div>
-                                        </div>
-                                    </div>
+        <div class="card card-secondary">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Dashboard</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card card-light">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Sales</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="container-sale" style="height:auto;margin: 0 auto;min-height:30rem;">
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="card card-light">
-                                    <div class="card-header">
-                                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Purchase</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="container1" style="height:auto;margin: 0 auto;min-height:30rem;">
-                                        </div>
-                                    </div>
-                                    <div class="card-body dataTable-search-form">
-                                        <div class="row">
-                                            <div class="col-md-12 text-right">
-                                                <button id="btnWeeklyPurchaseReport" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
-                                                <button id="btnMonthlyPurchaseReport" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card card-light">
-                                    <div class="card-header">
-                                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Expense</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="container11" style="height:auto;margin: 0 auto;min-height:30rem;">
-                                        </div>
-                                    </div>
-                                    <div class="card-body dataTable-search-form">
-                                        <div class="row">
-                                            <div class="col-md-12 text-right">
-                                                <button id="btnWeeklyExpense" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
-                                                <button id="btnMonthlyExpense" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
-                                            </div>
-                                        </div>
+                            <div class="card-body dataTable-search-form">
+                                <div class="row">
+                                    <div class="col-md-12 text-right">
+                                        <button id="btnWeeklyReport" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
+                                        <button id="btnMonthlyReport" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-
-                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-light">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Purchase</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="container-purchase" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                </div>
+                            </div>
+                            <div class="card-body dataTable-search-form">
+                                <div class="row">
+                                    <div class="col-md-12 text-right">
+                                        <button id="btnWeeklyPurchaseReport" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
+                                        <button id="btnMonthlyPurchaseReport" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-light">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Expense</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="container-expense" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                </div>
+                            </div>
+                            <div class="card-body dataTable-search-form">
+                                <div class="row">
+                                    <div class="col-md-12 text-right">
+                                        <button id="btnWeeklyExpense" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
+                                        <button id="btnMonthlyExpense" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-light">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Top Product</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="container-product" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                </div>
+                            </div>
+                            <div class="card-body dataTable-search-form">
+                                <div class="row">
+                                    <div class="col-md-12 text-right">
+                                        <button id="btnWeeklyProduct" class="btn btn-warning"><i class="far fa-chart-bar"></i> Weekly</button>
+                                        <button id="btnMonthlyProduct" class="btn btn-info"><i class="fas fa-chart-bar"></i> Monthly</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Sale</h3>
                             </div>
                             <div class="card-body">
-                                <div id="container0" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                <div id="container-monthly-sale" style="height:auto;margin: 0 auto;min-height:30rem;">
                                 </div>
                             </div>
                         </div>
                     </div>
-                            <div class="col-md-4">
-                                <div class="card card-light">
-                                    <div class="card-header">
-                                        <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Purchase</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="container2" style="height:auto;margin: 0 auto;min-height:30rem;">
-                                        </div>
-                                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-light">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Purchase</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="container-monthly-purchase" style="height:auto;margin: 0 auto;min-height:30rem;">
                                 </div>
                             </div>
-                    <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Expense</h3>
                             </div>
                             <div class="card-body">
-                                <div id="container22" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                <div id="container-monthly-expense" style="height:auto;margin: 0 auto;min-height:30rem;">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="card card-light">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Product Sale</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="container-monthly-product" style="height:auto;margin: 0 auto;min-height:30rem;">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </div>
 </section>
 

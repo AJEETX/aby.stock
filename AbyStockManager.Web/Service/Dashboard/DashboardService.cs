@@ -25,7 +25,13 @@ namespace AbyStockManager.Web.Service.Dashboard
 
         Dictionary<string, double> CalculateExpenseChart();
 
+        Dictionary<string, double> CalculateProductChart();
+
         Dictionary<string, double> CalculateWeeklyPurchase();
+
+        Dictionary<string, double> CalculateWeeklyProductSale();
+
+        Dictionary<string, double> CalculateMonthlyProductSale();
     }
 
     public class DashboardService : IDashboardService
@@ -39,7 +45,6 @@ namespace AbyStockManager.Web.Service.Dashboard
 
         public Dictionary<string, double> CalculateExpenseChart()
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Dictionary<string, double> dictMonthlySum = new Dictionary<string, double>();
 
             var startDate = new DateTime(DateTime.Now.Year, 1, 1);
@@ -47,21 +52,50 @@ namespace AbyStockManager.Web.Service.Dashboard
                                    .Select(startDate.AddMonths)
                        .Select(m => m)
                        .ToList();
+            var txn = db.ExpenseReport.Include(i => i.Category);
             foreach (var monthName in months)
             {
-                var txn = db.ExpenseReport.Include(i => i.Category);
-
-                var filterTxn = txn.Where
-                                (t =>
+                var filterTxn = txn.Where(t =>
                                     t.ExpenseDate > monthName.Date &&
-                                    t.ExpenseDate <= monthName.AddMonths(1)
-                                    );
+                                    t.ExpenseDate <= monthName.AddMonths(1));
 
                 var catum = filterTxn.Select(t => t.Amount).Sum();
                 dictMonthlySum.Add(monthName.ToString("MMM"), catum);
             }
 
             return dictMonthlySum;
+        }
+
+        public Dictionary<string, double> CalculateMonthlyProductSale()
+        {
+            Dictionary<string, double> dictWeeklySum = new Dictionary<string, double>();
+            var tdetail = db.TransactionDetail
+                .Include(t => t.Transaction)
+                .Include(t => t.Product)
+                .OrderByDescending(o => o.Amount * o.FinalSalePrice.Value)
+                .GroupBy(g => g.ProductId);
+
+            foreach (var td in tdetail)
+            {
+                double totalSale = 0;
+                string productName = string.Empty;
+                foreach (var m in td)
+                {
+                    if (string.IsNullOrWhiteSpace(productName))
+                    {
+                        productName = m.Product.ProductName;
+                    }
+                    if (m.Transaction.TransactionTypeId == 2 && m.Transaction.TransactionDate > DateTime.Now.AddMonths(-7))
+                    {
+                        totalSale += m.Amount * m.FinalSalePrice.Value;
+                    }
+                }
+                if (totalSale > 0)
+                {
+                    dictWeeklySum.Add(productName, totalSale);
+                }
+            }
+            return dictWeeklySum;
         }
 
         public Dictionary<string, double> CalculateMonthlyPurchase()
@@ -112,9 +146,39 @@ namespace AbyStockManager.Web.Service.Dashboard
             return dictMonthlySum;
         }
 
+        public Dictionary<string, double> CalculateProductChart()
+        {
+            Dictionary<string, double> dictMonthlySum = new Dictionary<string, double>();
+            var startDate = new DateTime(DateTime.Now.Year, 1, 1);
+            var months = Enumerable.Range(0, 11).Select(startDate.AddMonths).Select(m => m).ToList();
+            var tdetail = db.TransactionDetail
+                .Include(t => t.Transaction)
+                .Include(t => t.Product)
+                .OrderByDescending(o => o.Amount * o.FinalSalePrice.Value)
+                .GroupBy(g => g.ProductId);
+            foreach (var monthName in months)
+            {
+                double totalSale = 0;
+                foreach (var txn in tdetail)
+                {
+                    var filterP = txn.Where
+                                (t =>
+                                    t.Transaction.TransactionTypeId == 2 &&
+                                    t.Transaction.TransactionDate > monthName.Date &&
+                                    t.Transaction.TransactionDate <= monthName.AddMonths(1)
+                                    );
+                    totalSale += filterP.Select(t => t.Amount * t.FinalSalePrice.Value).Sum();
+                }
+                if (totalSale > 0)
+                {
+                    dictMonthlySum.Add(monthName.ToString("MMM"), totalSale);
+                }
+            }
+            return dictMonthlySum;
+        }
+
         public Dictionary<string, double> CalculatePurchaseChart()
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Dictionary<string, double> dictMonthlySum = new Dictionary<string, double>();
 
             var startDate = new DateTime(DateTime.Now.Year, 1, 1);
@@ -122,13 +186,12 @@ namespace AbyStockManager.Web.Service.Dashboard
                                    .Select(startDate.AddMonths)
                        .Select(m => m)
                        .ToList();
+            var txn = db.TransactionDetail
+            .Include(d => d.Transaction)
+            .Include(d => d.Product)
+            .ThenInclude(d => d.Category);
             foreach (var monthName in months)
             {
-                var txn = db.TransactionDetail
-                    .Include(d => d.Transaction)
-                    .Include(d => d.Product)
-                    .ThenInclude(d => d.Category);
-
                 var filterTxn = txn.Where
                                 (t =>
                                     t.Transaction.TransactionTypeId == 1 &&
@@ -145,7 +208,6 @@ namespace AbyStockManager.Web.Service.Dashboard
 
         public Dictionary<string, double> CalculateSaleChart()
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Dictionary<string, double> dictMonthlySum = new Dictionary<string, double>();
 
             var startDate = new DateTime(DateTime.Now.Year, 1, 1);
@@ -153,25 +215,53 @@ namespace AbyStockManager.Web.Service.Dashboard
                                    .Select(startDate.AddMonths)
                        .Select(m => m)
                        .ToList();
+            var txn = db.TransactionDetail
+             .Include(d => d.Transaction)
+             .Include(d => d.Product)
+             .ThenInclude(d => d.Category);
             foreach (var monthName in months)
             {
-                var txn = db.TransactionDetail
-                    .Include(d => d.Transaction)
-                    .Include(d => d.Product)
-                    .ThenInclude(d => d.Category);
-
-                var filterTxn = txn.Where
-                                (t =>
-                                    t.Transaction.TransactionTypeId == 2 &&
-                                    t.Transaction.TransactionDate > monthName.Date &&
-                                    t.Transaction.TransactionDate <= monthName.AddMonths(1)
-                                    );
+                var filterTxn = txn.Where(t => t.Transaction.TransactionTypeId == 2 &&
+                                   t.Transaction.TransactionDate > monthName.Date &&
+                                   t.Transaction.TransactionDate <= monthName.AddMonths(1));
 
                 var catum = filterTxn.Select(t => t.Amount * t.FinalSalePrice.Value).Sum();
                 dictMonthlySum.Add(monthName.ToString("MMM"), catum);
             }
 
             return dictMonthlySum;
+        }
+
+        public Dictionary<string, double> CalculateWeeklyProductSale()
+        {
+            Dictionary<string, double> dictWeeklySum = new Dictionary<string, double>();
+            var tdetail = db.TransactionDetail
+                .Include(t => t.Transaction)
+                .Include(t => t.Product)
+                .OrderByDescending(o => o.Amount * o.FinalSalePrice.Value)
+                .GroupBy(g => g.ProductId);
+
+            foreach (var td in tdetail)
+            {
+                double totalSale = 0;
+                string productName = string.Empty;
+                foreach (var m in td)
+                {
+                    if (string.IsNullOrWhiteSpace(productName))
+                    {
+                        productName = m.Product.ProductName;
+                    }
+                    if (m.Transaction.TransactionTypeId == 2 && m.Transaction.TransactionDate > DateTime.Now.AddDays(-28))
+                    {
+                        totalSale += m.Amount * m.FinalSalePrice.Value;
+                    }
+                }
+                if (totalSale > 0)
+                {
+                    dictWeeklySum.Add(productName, totalSale);
+                }
+            }
+            return dictWeeklySum;
         }
 
         public Dictionary<string, double> CalculateWeeklyPurchase()
