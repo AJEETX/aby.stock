@@ -69,7 +69,7 @@ namespace Aby.StockManager.Service
             try
             {
                 exp = GetAllExpenses().ToList();
-                return exp.Where(x => x.ItemName.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1);
+                return exp.Where(x => x.ItemName.ToLower().Trim().IndexOf(searchString, StringComparison.OrdinalIgnoreCase) != -1);
             }
             catch
             {

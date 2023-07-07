@@ -9,6 +9,8 @@ using Aby.StockManager.Model.Domain;
 using Aby.StockManager.Model.Service;
 using Aby.StockManager.Model.ViewModel.JsonResult;
 using Aby.StockManager.Model.ViewModel.UnitOfMeasure;
+using Aby.StockManager.Service.Category;
+using AbyStockManager.Web.Common.Message;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -23,7 +25,6 @@ namespace Aby.StockManager.Web.Controllers
             _unitOfMeasureService = unitOfMeasureService;
             _mapper = mapper;
         }
-
 
         public IActionResult Index()
         {
@@ -42,6 +43,13 @@ namespace Aby.StockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
+                ServiceResult<IEnumerable<UnitOfMeasureDTO>> serviceListResult = await _unitOfMeasureService.Find(new UnitOfMeasureDTO { UnitOfMeasureName = model.UnitOfMeasureName });
+                if (serviceListResult != null || serviceListResult.TransactionResult != null || serviceListResult.TransactionResult.Any())
+                {
+                    jsonResultModel.IsSucceeded = false;
+                    jsonResultModel.UserMessage = string.Format(CommonMessages.MSG0002, $"{model.UnitOfMeasureName} exists");
+                    return Json(jsonResultModel);
+                }
                 UnitOfMeasureDTO unitOfMeasureDTO = _mapper.Map<UnitOfMeasureDTO>(model);
                 var serviceResult = await _unitOfMeasureService.AddAsync(unitOfMeasureDTO);
                 jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);
@@ -133,6 +141,5 @@ namespace Aby.StockManager.Web.Controllers
             }
             return Json(jsonResultModel);
         }
-
     }
 }

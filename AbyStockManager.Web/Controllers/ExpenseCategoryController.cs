@@ -12,6 +12,7 @@ using Aby.StockManager.Model.ViewModel.JsonResult;
 using Aby.StockManager.Model.ViewModel.ExpenseCategory;
 using Aby.StockManager.Service.Category;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using AbyStockManager.Web.Common.Message;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -45,6 +46,13 @@ namespace Aby.StockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
+                ServiceResult<IEnumerable<ExpenseCategoryDTO>> serviceListResult = await _categoryService.Find(new ExpenseCategoryDTO { CategoryName = model.CategoryName });
+                if (serviceListResult != null || serviceListResult.TransactionResult != null || serviceListResult.TransactionResult.Any())
+                {
+                    jsonResultModel.IsSucceeded = false;
+                    jsonResultModel.UserMessage = string.Format(CommonMessages.MSG0002, $"{model.CategoryName} exists");
+                    return Json(jsonResultModel);
+                }
                 ExpenseCategoryDTO categoryDTO = _mapper.Map<ExpenseCategoryDTO>(model);
                 var serviceResult = await _categoryService.AddAsync(categoryDTO);
                 jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);

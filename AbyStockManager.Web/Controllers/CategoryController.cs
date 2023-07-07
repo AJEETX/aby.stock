@@ -9,12 +9,12 @@ using Aby.StockManager.Model.Domain;
 using Aby.StockManager.Model.Service;
 using Aby.StockManager.Model.ViewModel.Category;
 using Aby.StockManager.Model.ViewModel.JsonResult;
+using AbyStockManager.Web.Common.Message;
 
 namespace Aby.StockManager.Web.Controllers
 {
     public class CategoryController : Controller
     {
-
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
@@ -42,6 +42,14 @@ namespace Aby.StockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
+                ServiceResult<IEnumerable<CategoryDTO>> serviceListResult = await _categoryService.Find(new CategoryDTO { CategoryName = model.CategoryName });
+                if (serviceListResult != null || serviceListResult.TransactionResult != null || serviceListResult.TransactionResult.Any())
+                {
+                    jsonResultModel.IsSucceeded = false;
+                    jsonResultModel.UserMessage = string.Format(CommonMessages.MSG0002, $"{model.CategoryName} exists");
+                    return Json(jsonResultModel);
+                }
+
                 CategoryDTO categoryDTO = _mapper.Map<CategoryDTO>(model);
                 var serviceResult = await _categoryService.AddAsync(categoryDTO);
                 jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);

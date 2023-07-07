@@ -12,6 +12,7 @@ using Aby.StockManager.Model.Domain;
 using Aby.StockManager.Model.Service;
 using Aby.StockManager.Model.ViewModel.JsonResult;
 using Aby.StockManager.Model.ViewModel.Product;
+using AbyStockManager.Web.Common.Message;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -64,6 +65,14 @@ namespace Aby.StockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
+                ServiceResult<IEnumerable<ProductDTO>> serviceListResult = await _productService.Find(new ProductDTO { CategoryName = model.ProductName, Barcode = model.Barcode });
+                if (serviceListResult != null || serviceListResult.TransactionResult != null || serviceListResult.TransactionResult.Any())
+                {
+                    jsonResultModel.IsSucceeded = false;
+                    jsonResultModel.UserMessage = string.Format(CommonMessages.MSG0002, $"{model.ProductName} exists");
+                    return Json(jsonResultModel);
+                }
+
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
                 {
                     string newFileName = Guid.NewGuid().ToString();

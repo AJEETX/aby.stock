@@ -10,6 +10,8 @@ using Aby.StockManager.Model.Service;
 using Aby.StockManager.Model.ViewModel.Category;
 using Aby.StockManager.Model.ViewModel.JsonResult;
 using AbyStockManager.Web.Model.ViewModel.Tax;
+using Aby.StockManager.Service.Product;
+using AbyStockManager.Web.Common.Message;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -42,6 +44,14 @@ namespace Aby.StockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
+                ServiceResult<IEnumerable<TaxDTO>> serviceListResult = await _categoryService.Find(new TaxDTO { Name = model.Name });
+                if (serviceListResult != null || serviceListResult.TransactionResult != null || serviceListResult.TransactionResult.Any())
+                {
+                    jsonResultModel.IsSucceeded = false;
+                    jsonResultModel.UserMessage = string.Format(CommonMessages.MSG0002, $"{model.Name} exists");
+                    return Json(jsonResultModel);
+                }
+
                 TaxDTO taxDTO = _mapper.Map<TaxDTO>(model);
                 var serviceResult = await _categoryService.AddAsync(taxDTO);
                 jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);
