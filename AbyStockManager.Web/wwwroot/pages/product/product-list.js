@@ -77,15 +77,12 @@
 
                         if (stockedin == false) {
                             $(row).find('td:eq(0)').append(
-                                $("<span>", { "class": "required-indicator" }).text("* {" + qty + "}")
+                                $("<span>", { "class": "required-indicator" }).text("*")
                             );
-                            $(row).find('td:eq(0)').css({ 'color': 'red' });
+                            $(row).css({ 'color': 'red' });
                         }
                         else {
-                            $(row).find('td:eq(0)').append(
-                                $("<span>", { "class": "required-indicator" }).text("* {" + qty + "}")
-                            );
-                            $(row).find('td:eq(0)').css({ 'color': 'green' });
+                            $(row).css({ 'color': 'green' });
                         }
                         var buttons = "";
                         buttons += '<a href="/Product/Edit/' + row.Id + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
@@ -97,15 +94,12 @@
         rowCallback: function (row, data, index) {
             if (data.Stockedin === false) {
                 $(row).find('td:eq(0)').append(
-                    $("<span>", { "class": "required-indicator" }).text("* {" + data.Qty + "}")
+                    $("<span>", { "class": "required-indicator" }).text("*")
                 );
-                $(row).find('td:eq(0)').css({ 'color': 'red' });
+                $(row).css({ 'color': 'red' });
             }
             else {
-                $(row).find('td:eq(0)').append(
-                    $("<span>", { "class": "required-indicator" }).text("* {" + data.Qty + "}")
-                );
-                $(row).find('td:eq(0)').css({ 'color': 'green' });
+                $(row).css({ 'color': 'green' });
             }
         }
     });
