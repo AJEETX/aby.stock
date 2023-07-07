@@ -230,7 +230,28 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3">
+                    <button class="btn btn-danger visible-xs" type="button" data-toggle="collapse" data-target="#collapseSale" aria-expanded="false" aria-controls="collapseSale">
+                        Sales
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-info hidden visible-xs" type="button" data-toggle="collapse" data-target="#collapsePurchase" aria-expanded="false" aria-controls="collapsePurchase">
+                        Purchase
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-warning hidden visible-xs" type="button" data-toggle="collapse" data-target="#collapseExpense" aria-expanded="false" aria-controls="collapseExpense">
+                        Expense
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-primary hidden visible-xs" type="button" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct">
+                        Top Products
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card card-light">
+            <div class="card-body">
+                <div class="row">
+                    <div id="collapseSale" class="col-md-3 collapse dont-collapse-sm">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Sales</h3>
@@ -249,7 +270,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div id="collapsePurchase" class="col-md-3 collapse dont-collapse-sm">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Purchase</h3>
@@ -268,7 +289,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div id="collapseExpense" class="col-md-3 collapse dont-collapse-sm">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Expense</h3>
@@ -287,7 +308,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div id="collapseProduct" class="col-md-3 collapse dont-collapse-sm">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Top Product</h3>
@@ -308,7 +329,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 collapse dont-collapse-sm">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Sale</h3>
@@ -319,7 +340,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 collapse dont-collapse-sm">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Purchase</h3>
@@ -330,7 +351,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 collapse dont-collapse-sm">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Expense</h3>
@@ -341,7 +362,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 collapse dont-collapse-sm">
                         <div class="card card-light">
                             <div class="card-header">
                                 <h3 class="card-title"><i class="fas fa-tachometer-alt"></i> Monthly Product Sale</h3>

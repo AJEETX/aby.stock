@@ -13,7 +13,9 @@
         "paging": true,
         "sAjaxSource": "/Transaction/List",
         "info": true,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        "buttons": [
+            "copy", "csv", "excel", "pdf", "print", "colvis"
+        ],
         "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
             aoData.push(
                 { "name": "returnformat", "value": "plain" },
@@ -68,13 +70,7 @@
                     "mRender": function (data, type, row) {
                         var buttons = "";
                         var invoiceNumber = row['InvoiceNumber'];
-                        var description = row['Description'];
                         buttons += '<a id="print-invoice" onclick="detailShow(this,' + row.Id + ')"  class="btn btn-xs btn-default"><i class="fas fa-print"></i> Print</a>&nbsp;'
-
-                        //if (invoiceNumber != null && invoiceNumber != '' && invoiceNumber.startsWith('Inv')) {
-                        //    buttons += '<a id="print-invoice" onclick="detailShow(this,' + row.Id + ')"  class="btn btn-xs btn-default"><i class="fas fa-print"></i> Print</a>&nbsp;'
-                        //}
-                        //else
 
                         if (invoiceNumber == null) {
                             row['Description'] = 'Good Received';
@@ -83,7 +79,6 @@
                             row['Description'] = 'Good Received';
                         }
                         buttons += '<a href="/Transaction/Edit/' + row.Id + '?typeId=' + row.TransactionTypeId + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
-                        //buttons += '<a href="/Transaction/Print/' + row.Id + '?typeId=' + row.TransactionTypeId + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> PRINT</a>&nbsp;'
                         buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> Delete</a>'
                         return buttons;
                     }
