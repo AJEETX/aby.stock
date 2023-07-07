@@ -45,16 +45,16 @@
                     "mRender": function (data, type, row) {
                         var img = '<img src="' + row.ImageDisplay + '" src height="60" width="60" />';
                         return img;
-                    }
+                    }, bVisible: false
                 },
                 {
                     mDataProp: "ProductName"
                 },
                 {
-                    mDataProp: "SalePrice"
+                    mDataProp: "PurchasePrice"
                 },
                 {
-                    mDataProp: "PurchasePrice"
+                    mDataProp: "SalePrice"
                 },
                 {
                     mDataProp: "Tax"
@@ -72,13 +72,42 @@
                     "sDefaultContent": "",
                     "bSortable": false,
                     "mRender": function (data, type, row) {
+                        var stockedin = row['Stockedin'];
+                        var qty = row['Qty'];
+
+                        if (stockedin == false) {
+                            $(row).find('td:eq(0)').append(
+                                $("<span>", { "class": "required-indicator" }).text("* {" + qty + "}")
+                            );
+                            $(row).find('td:eq(0)').css({ 'color': 'red' });
+                        }
+                        else {
+                            $(row).find('td:eq(0)').append(
+                                $("<span>", { "class": "required-indicator" }).text("* {" + qty + "}")
+                            );
+                            $(row).find('td:eq(0)').css({ 'color': 'green' });
+                        }
                         var buttons = "";
                         buttons += '<a href="/Product/Edit/' + row.Id + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
                         buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> Delete</a>'
                         return buttons;
                     }
                 }
-            ]
+            ],
+        rowCallback: function (row, data, index) {
+            if (data.Stockedin === false) {
+                $(row).find('td:eq(0)').append(
+                    $("<span>", { "class": "required-indicator" }).text("* {" + data.Qty + "}")
+                );
+                $(row).find('td:eq(0)').css({ 'color': 'red' });
+            }
+            else {
+                $(row).find('td:eq(0)').append(
+                    $("<span>", { "class": "required-indicator" }).text("* {" + data.Qty + "}")
+                );
+                $(row).find('td:eq(0)').css({ 'color': 'green' });
+            }
+        }
     });
 
     $("#btnFilter").click(function () {

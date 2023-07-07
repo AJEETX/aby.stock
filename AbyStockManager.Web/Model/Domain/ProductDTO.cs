@@ -19,5 +19,7 @@ namespace Aby.StockManager.Model.Domain
         public string CategoryName { get; set; }
         public int? UnitOfMeasureId { get; set; }
         public string UnitOfMeasureName { get; set; }
+        public bool Stockedin { get; set; }
+        public int Qty { get; set; }
     }
 }

@@ -12,16 +12,30 @@ namespace Aby.StockManager.Repository.Transaction
     public class TransactionRepository : Repository<Aby.StockManager.Data.Entity.Transaction>, ITransactionRepository
     {
         private EasyStockManagerDbContext dbContext { get => _context as EasyStockManagerDbContext; }
+
         public TransactionRepository(DbContext context) : base(context)
         {
         }
+
         public async Task<Aby.StockManager.Data.Entity.Transaction> GetWithDetailById(int id)
         {
             return await dbContext.Transaction.Include(x => x.TransactionDetail).FirstOrDefaultAsync(x => x.Id == id);
         }
+
         public async Task<Aby.StockManager.Data.Entity.Transaction> GetWithDetailAndProductById(int id)
         {
-            return await dbContext.Transaction.Include(x => x.TransactionDetail).ThenInclude(x=> x.Product).FirstOrDefaultAsync(x => x.Id == id);
+            return await dbContext.Transaction
+                .Include(x => x.TransactionDetail)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Aby.StockManager.Data.Entity.Transaction> GetWithDetailByProductId(int id)
+        {
+            return await dbContext.Transaction
+                .Include(x => x.TransactionDetail)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefaultAsync(i => i.InvoiceNumber.Contains(Common.Enums.TransactionType.StockIn.ToString()));
         }
     }
 }

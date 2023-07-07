@@ -16,5 +16,7 @@ namespace Aby.StockManager.Model.ViewModel.Product
         public string Tax { get; set; }
         public string CategoryName { get; set; }
         public string UnitOfMeasureName { get; set; }
+        public bool Stockedin { get; set; }
+        public int Qty { get; set; }
     }
 }

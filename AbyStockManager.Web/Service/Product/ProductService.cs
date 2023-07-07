@@ -13,6 +13,7 @@ using Aby.StockManager.Service.Base;
 
 using Entity = Aby.StockManager.Data.Entity;
 using AbyStockManager.Web.Common.Message;
+using System.Linq;
 
 namespace Aby.StockManager.Service.Product
 {
@@ -64,7 +65,49 @@ namespace Aby.StockManager.Service.Product
                                                                            skip: criteria.PageNumber,
                                                                            take: criteria.RecordCount);
 
+                    var stockedInList = new Dictionary<int, bool>();
+                    var stockedInAmountList = new Dictionary<int, int>();
+                    foreach (var item in list)
+                    {
+                        var transaction = await _unitOfWork.TransactionRepository.GetWithDetailByProductId(item.Id);
+                        if (transaction != null)
+                        {
+                            foreach (var txnDetail in transaction.TransactionDetail)
+                            {
+                                if(item.Id == txnDetail.ProductId)
+                                {
+                                    stockedInAmountList.Add(item.Id, txnDetail.Amount);
+                                }
+                            }
+                            var ppp = transaction.TransactionDetail?.ToList()?.Select(t=>t.Amount);
+                            stockedInList.Add(item.Id, true);
+                        }
+                        else
+                        {
+                            stockedInList.Add(item.Id, false);
+                            stockedInAmountList.Add(item.Id, 0);
+                        }
+                    }
+
                     result.TransactionResult = _mapper.Map<IEnumerable<ProductDTO>>(list);
+
+                    var newList = new List<ProductDTO>();
+
+                    foreach (var item in result.TransactionResult)
+                    {
+                        bool checkStockIn = false;
+                        stockedInList.TryGetValue(item.Id.Value, out checkStockIn);
+
+                        int stockInQty = 0;
+                        stockedInAmountList.TryGetValue(item.Id.Value, out stockInQty);
+
+                        ProductDTO newItem = item;
+                        newItem.Stockedin = checkStockIn;
+                        newItem.Qty = stockInQty;
+                        newList.Add(newItem);
+                    }
+
+                    result.TransactionResult = newList;
                 }
             }
             catch (Exception ex)
