@@ -30,6 +30,12 @@ using Aby.StockManager.Data.Entity;
 using AbyStockManager.Web.Service;
 using Aby.StockManager.Web.Service;
 using AbyStockManager.Web.Service.Dashboard;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using System.Reflection;
+using Microsoft.Extensions.Options;
+using AbyStockManager.Web.Resources;
 
 namespace Aby.StockManager.Web
 {
@@ -83,6 +89,38 @@ namespace Aby.StockManager.Web
                          options.ExpireTimeSpan = TimeSpan.FromMinutes(120);
                          options.SlidingExpiration = true;
                      });
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddSingleton<LocalizationService>();
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    {
+                        var assemblyName = new AssemblyName(typeof(ApplicationResource).GetTypeInfo().Assembly.FullName);
+                        return factory.Create("ApplicationResource", assemblyName.Name);
+                    };
+                });
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("hi"),
+                };
+
+                // State what the default culture for your application is. This will be used if no specific culture
+                // can be determined for a given request.
+                options.DefaultRequestCulture = new RequestCulture("en");
+
+                // You must explicitly state which cultures your application supports.
+                // These are the cultures the app supports for formatting numbers, dates, etc.
+                options.SupportedCultures = supportedCultures;
+
+                // These are the cultures the app supports for UI strings, i.e. we have localized resources for.
+                options.SupportedUICultures = supportedCultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,6 +142,8 @@ namespace Aby.StockManager.Web
 
             app.UseRouting();
 
+            var requestlocalizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(requestlocalizationOptions.Value);
             app.UseAuthentication();
 
             app.UseAuthorization();

@@ -1,6 +1,9 @@
-﻿@model Aby.StockManager.Model.ViewModel.Category.CreateCategoryViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+
+@model Aby.StockManager.Model.ViewModel.Category.CreateCategoryViewModel
 @{
-    ViewData["Title"] = "Product Category Create";
+    ViewData["Title"] = @ViewLocalizer["Create"] + " " + @ViewLocalizer["Product Category"];
 }
 @section script{
     <partial name="~/Views/Shared/_FormScriptsPartial.cshtml" />
@@ -11,19 +14,19 @@
             <div class="col-md-6">
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-plus"></i> Create Product Category</h3>
+                        <h3 class="card-title"><i class="fas fa-plus"></i> @ViewLocalizer["Create"] @ViewLocalizer["Product Category"]</h3>
                     </div>
                     <form asp-action="Create" asp-antiforgery="true" id="frmCreate">
                         <div class="card-body">
                             <div class="form-group">
-                                <label asp-for="CategoryName"></label>
-                                <input asp-for="CategoryName" type="text" class="form-control">
+                                @ViewLocalizer["CategoryName"]
+                                <input asp-for="CategoryName" type="text" class="form-control" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["CategoryName"]">
                                 <span asp-validation-for="CategoryName" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <a class="btn btn-outline-secondary" href="/Category"><i class="fas fa-arrow-left"></i> Back</a>
-                            <button id="btnSave" type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Create</button>
+                            <a class="btn btn-outline-secondary" href="/Category"><i class="fas fa-arrow-left"></i> @ViewLocalizer["Back"]</a>
+                            <button id="btnSave" type="submit" class="btn btn-success"><i class="fas fa-plus"></i>  @ViewLocalizer["Create"]</button>
                         </div>
                     </form>
                 </div>

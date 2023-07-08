@@ -1,6 +1,8 @@
-﻿@model Aby.StockManager.Model.ViewModel.User.EditUserViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+@model Aby.StockManager.Model.ViewModel.User.EditUserViewModel
 @{
-    ViewData["Title"] = "Edit User";
+    ViewData["Title"] = @ViewLocalizer["Edit"] + " " + @ViewLocalizer["User"];
 }
 @section script{
     <partial name="~/Views/Shared/_FormScriptsPartial.cshtml" />
@@ -9,33 +11,34 @@
 <section class="content pt-2">
     <div class="container-fluid ">
         <div class="row ">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-warning">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-pen"></i> Edit User</h3>
+                        <h3 class="card-title"><i class="fas fa-pen"></i> @ViewLocalizer["Edit"]  @ViewLocalizer["User"]</h3>
                     </div>
                     <form asp-action="Edit" asp-antiforgery="true" id="frmCreate" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form-group">
-                                <label asp-for="Email"></label>
-                                <input asp-for="Email" type="text" class="form-control">
+                                @ViewLocalizer["Email"]
+                                <input asp-for="Email" type="text" class="form-control" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["Email"]">
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Password"></label>
-                                <input asp-for="Password" type="password" class="form-control">
+                                @ViewLocalizer["Password"]
+                                <input asp-for="Password" type="password" class="form-control" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["Password"]">
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Name"></label>
-                                <input asp-for="Name" type="text" class="form-control">
+                                @ViewLocalizer["Name"]
+                                <input asp-for="Name" type="text" class="form-control" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["Name"]">
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Surname"></label>
-                                <input asp-for="Surname" type="text" class="form-control">
+                                @ViewLocalizer["Surname"]
+                                <input asp-for="Surname" type="text" class="form-control" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["Surname"]">
                                 <span asp-validation-for="Surname" class="text-danger"></span>
                             </div>
+
                             @if (!string.IsNullOrEmpty(Model.Image))
                             {
                                 <div class="form-group" id="delete-image-main">
@@ -44,16 +47,26 @@
                                     <button id="btnDeleteImage" data-id="@Model.Id" type="button" class="btn btn-danger">Delete Image</button>
                                 </div>
                             }
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <label asp-for="ImageFile"></label>
                                 <input asp-for="ImageFile" type="file" accept=".png, .jpg, .jpeg, .gif" class="form-control">
                                 <span asp-validation-for="ImageFile" class="text-danger"></span>
                                 <input type="hidden" asp-for="Image" />
+                            </div>*@
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">@ViewLocalizer["Upload"]</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" asp-for="ImageFile" accept=".png, .jpg, .jpeg, .gif" placeholder="@ViewLocalizer["ImageFile"]" aria-describedby="inputGroupFileAddon01" lang="hi">
+                                    <label class="custom-file-label" for="inputGroupFile01">@ViewLocalizer["Choose file"]</label>
+                                    <input type="hidden" asp-for="Image" />
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <a class="btn btn-outline-secondary" href="/User"><i class="fas fa-arrow-left"></i> Back</a>
-                            <button id="btnSave" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i> Edit</button>
+                            <a class="btn btn-outline-secondary" href="/User"><i class="fas fa-arrow-left"></i> @ViewLocalizer["Back"]</a>
+                            <button id="btnSave" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i> @ViewLocalizer["Edit"] </button>
                         </div>
                     </form>
                 </div>

@@ -1,6 +1,9 @@
-﻿@model Aby.StockManager.Model.ViewModel.Category.SearchCategoryViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+
+@model Aby.StockManager.Model.ViewModel.Category.SearchCategoryViewModel
 @{
-    ViewData["Title"] = "Product Category List";
+    ViewData["Title"] = @ViewLocalizer["CategoryName"] + " " + @ViewLocalizer["List"];
 }
 
 <section class="content pt-2">
@@ -9,22 +12,22 @@
             <div class="col-md-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-search"></i> Search Product Category</h3>
+                        <h3 class="card-title"><i class="fas fa-search"></i> @ViewLocalizer["Search"] @ViewLocalizer["CategoryName"]</h3>
                     </div>
                     <div class="card-body dataTable-search-form">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label asp-for="CategoryName"></label>
-                                    <input asp-for="CategoryName" type="text" class="form-control-sm form-control enter-keyup">
+                                    @ViewLocalizer["CategoryName"]
+                                    <input asp-for="CategoryName" type="text" class="form-control-sm form-control enter-keyup" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["CategoryName"]">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-right">
-                                <button id="btnClear" type="button" class="btn btn-secondary btn-sm"><i class="fas fa-sync-alt"></i> Clear</button>
-                                <button id="btnFilter" type="button" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Search</button>
-                                <a class="btn btn-success btn-sm" href="/Category/Create"><i class="fas fa-plus"></i> Category</a>
+                                <button id="btnClear" type="button" class="btn btn-secondary btn-sm"><i class="fas fa-sync-alt"></i> @ViewLocalizer["Clear"]</button>
+                                <button id="btnFilter" type="button" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> @ViewLocalizer["Search"]</button>
+                                <a class="btn btn-success btn-sm" href="/Category/Create"><i class="fas fa-plus"></i> @ViewLocalizer["CategoryName"]</a>
                             </div>
                         </div>
                     </div>
@@ -36,22 +39,22 @@
             <div class="col-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-list"></i> Product Category List</h3>
+                        <h3 class="card-title"><i class="fas fa-list"></i> @ViewLocalizer["CategoryName"] @ViewLocalizer["List"]</h3>
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-bordered table-hover dt-responsive nowrap w-100">
                             <thead>
                                 <tr>
-                                    <th>Product Category Name</th>
-                                    <th style="width:15%">Actions</th>
+                                    <th>@ViewLocalizer["CategoryName"]</th>
+                                    <th style="width:15%">@ViewLocalizer["Action"]</th>
                                 </tr>
                             </thead>
                             <tbody>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Product Category Name</th>
-                                    <th style="width:15%">Actions</th>
+                                    <th>@ViewLocalizer["CategoryName"]</th>
+                                    <th style="width:15%">@ViewLocalizer["Action"]</th>
                                 </tr>
                             </tfoot>
                         </table>

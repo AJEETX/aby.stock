@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+
 <style>
     .nav-header {
         border: 1px solid #4b545c;
@@ -13,46 +15,46 @@
 <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-        <li class="nav-header">HOME</li>
+        <li class="nav-header">@ViewLocalizer["Home"]</li>
         <li class="nav-item">
             <a href="/Dashboard" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>Dashboard</p>
+                <p>@ViewLocalizer["Dashboard"]</p>
             </a>
         </li>
-        <li class="nav-header">INVENTORY</li>
+        <li class="nav-header">@ViewLocalizer["INVENTORY"]</li>
         <li class="nav-item">
             <a href="/Transaction" class="nav-link">
                 <i class="nav-icon fas fa-rupee-sign"></i>
-                <p>Transaction</p>
+                <p>@ViewLocalizer["Transaction"]</p>
             </a>
         </li>
         <li class="nav-item">
             <a href="/Expense/Index" class="nav-link">
                 <i class="nav-icon fas fa-comments-dollar"></i>
-                <p>Expense</p>
+                <p>@ViewLocalizer["Expenses"]</p>
             </a>
         </li>
         <li class="nav-item">
             <a href="/Report/Index" class="nav-link">
                 <i class="nav-icon fas fa-building"></i>
-                <p>Stock</p>
+                <p>@ViewLocalizer["Stock"]</p>
             </a>
         </li>
         
         <li class="nav-item">
             <a href="/Report/TransactionDetailReport" class="nav-link">
                 <i class="nav-icon fas fa-list-alt"></i>
-                <p>Transaction Log</p>
+                <p>@ViewLocalizer["Transaction Log"]</p>
             </a>
         </li>
-        <li class="nav-header">Store</li>
+        <li class="nav-header">@ViewLocalizer["product catalog"]</li>
 
         <li class="nav-item">
             <a href="/Product" class="nav-link">
                 <i class="nav-icon fas fa-barcode"></i>
                 <p>
-                    Product
+                    @ViewLocalizer["Product"]
                 </p>
             </a>
         </li>
@@ -60,7 +62,7 @@
             <a href="/Category" class="nav-link">
                 <i class="nav-icon fas fa-folder"></i>
                 <p>
-                    Category
+                    @ViewLocalizer["Category"]
                 </p>
             </a>
         </li>
@@ -68,7 +70,7 @@
             <a href="/Tax" class="nav-link">
                 <i class="nav-icon fas fa-percent"></i>
                 <p>
-                    Tax
+                    @ViewLocalizer["Tax"]
                 </p>
             </a>
         </li>
@@ -76,16 +78,16 @@
             <a href="/UnitOfMeasure" class="nav-link">
                 <i class="nav-icon fas fa-box-open"></i>
                 <p>
-                    Unit
+                    @ViewLocalizer["measure unit"]
                 </p>
             </a>
         </li>
-        <li class="nav-header">SETTINGS</li>
+        <li class="nav-header">@ViewLocalizer["SETTINGS"]</li>
         <li class="nav-item">
             <a href="/User" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
                 <p>
-                    User
+                    @ViewLocalizer["User"]
                 </p>
             </a>
         </li>
@@ -93,7 +95,8 @@
             <a href="/ExpenseCategory" class="nav-link">
                 <i class="nav-icon fas fa-money-check-alt"></i>
                 <p>
-                    Expense Type
+                    @ViewLocalizer["Expense Type"]
+                    
                 </p>
             </a>
         </li>
@@ -101,17 +104,39 @@
             <a href="/Store" class="nav-link">
                 <i class="nav-icon fas fa-building"></i>
                 <p>
-                    Store Profile
+                    @ViewLocalizer["Store"]
                 </p>
             </a>
         </li>
-
+@*
+        <li class="nav-item">
+            <a href="/Customer/Create" class="nav-link">
+                <i class="nav-icon fas fa-building"></i>
+                <p>
+                    Language
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/Registration/Register" class="nav-link">
+                <i class="nav-icon fas fa-building"></i>
+                <p>
+                    Language2
+                </p>
+            </a>
+        </li>*@
+        
+                <li class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="color:white;">
+                    @await Html.PartialAsync("_SetLanguagePartial")
+                </li>
+            
         <li class="nav-header-last"></li>
         <li class="nav-item">
             <a href="/Auth/Logout" class="nav-link">
                 <i class="fas fa-sign-out-alt"></i>
                 <p>
-                    Logout
+                    @ViewLocalizer["Logout"]
+                    
                 </p>
             </a>
         </li>

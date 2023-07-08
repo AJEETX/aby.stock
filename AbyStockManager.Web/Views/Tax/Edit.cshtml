@@ -1,6 +1,9 @@
-﻿@model AbyStockManager.Web.Model.ViewModel.Tax.EditTaxViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+
+@model AbyStockManager.Web.Model.ViewModel.Tax.EditTaxViewModel
 @{
-    ViewData["Title"] = "Tax Edit";
+    ViewData["Title"] = @ViewLocalizer["Edit"] + " " + @ViewLocalizer["Tax"];
 }
 
 @section script{
@@ -12,24 +15,24 @@
             <div class="col-md-6">
                 <div class="card card-warning">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-pen"></i> Edit Tax</h3>
+                        <h3 class="card-title"><i class="fas fa-pen"></i> @ViewLocalizer["Edit"] + " " + @ViewLocalizer["Tax"]</h3>
                     </div>
                     <form asp-action="Edit" asp-antiforgery="true" id="frmCreate">
                         <div class="card-body">
                             <div class="form-group">
-                                <label asp-for="Name"></label>
-                                <input asp-for="Name" type="text" class="form-control">
+                                @ViewLocalizer["Name"]
+                                <input asp-for="Name" type="text" class="form-control" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["Name"]">
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Rate"></label>
-                                <input asp-for="Rate" type="number" class="form-control" step="any" min="0.1">
+                                @ViewLocalizer["Rate"]
+                                <input asp-for="Rate" type="number" class="form-control" step="any" min="0.1" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["Rate"]">
                                 <span asp-validation-for="Rate" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <a class="btn btn-outline-secondary" href="/Tax"><i class="fas fa-arrow-left"></i> Back</a>
-                            <button id="btnSave" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i> Edit</button>
+                            <a class="btn btn-outline-secondary" href="/Tax"><i class="fas fa-arrow-left"></i>  @ViewLocalizer["Back"]</a>
+                            <button id="btnSave" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i>  @ViewLocalizer["Edit"]</button>
                         </div>
                     </form>
                 </div>

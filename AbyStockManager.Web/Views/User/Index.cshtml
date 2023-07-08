@@ -1,6 +1,8 @@
-﻿@model Aby.StockManager.Model.ViewModel.User.SearchUserViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer ViewLocalizer
+@model Aby.StockManager.Model.ViewModel.User.SearchUserViewModel
 @{
-    ViewData["Title"] = "User List";
+    ViewData["Title"] = @ViewLocalizer["User"] + " " + @ViewLocalizer["List"];
 }
 
 <section class="content pt-2">
@@ -9,34 +11,34 @@
             <div class="col-md-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-search"></i> Search User</h3>
+                        <h3 class="card-title"><i class="fas fa-search"></i> @ViewLocalizer["Search User"]</h3>
                     </div>
                     <div class="card-body dataTable-search-form">
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label asp-for="Email"></label>
-                                    <input asp-for="Email" type="text" class="form-control-sm form-control enter-keyup">
+                                    @ViewLocalizer["Email"]
+                                    <input asp-for="Email" type="text" class="form-control-sm form-control enter-keyup" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["Email"]">
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label asp-for="Name"></label>
-                                    <input asp-for="Name" type="text" class="form-control-sm form-control enter-keyup">
+                                    @ViewLocalizer["Name"]
+                                    <input asp-for="Name" type="text" class="form-control-sm form-control enter-keyup" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["Name"]">
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label asp-for="Surname"></label>
-                                    <input asp-for="Surname" type="text" class="form-control-sm form-control enter-keyup">
+                                    @ViewLocalizer["Surname"]
+                                    <input asp-for="Surname" type="text" class="form-control-sm form-control enter-keyup" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["Name"]">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-right">
-                                <button id="btnClear" type="button" class="btn btn-secondary btn-sm"><i class="fas fa-sync-alt"></i> Clear</button>
-                                <button id="btnFilter" type="button" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Search</button>
-                                <a class="btn btn-success btn-sm" href="/User/Create"><i class="fas fa-plus"></i> User</a>
+                                <button id="btnClear" type="button" class="btn btn-secondary btn-sm"><i class="fas fa-sync-alt"></i> @ViewLocalizer["Clear"]</button>
+                                <button id="btnFilter" type="button" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> @ViewLocalizer["Search"]</button>
+                                <a class="btn btn-success btn-sm" href="/User/Create"><i class="fas fa-plus"></i> @ViewLocalizer["User"]</a>
                             </div>
                         </div>
                     </div>
@@ -48,28 +50,28 @@
             <div class="col-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-list"></i> User List</h3>
+                        <h3 class="card-title"><i class="fas fa-list"></i> @ViewLocalizer["User"] @ViewLocalizer["List"]</h3>
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-bordered table-hover dt-responsive nowrap w-100">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
-                                    <th>Email</th>
-                                    <th>Name</th>
-                                    <th>Surname</th>
-                                    <th style="width:15%">Actions</th>
+                                    <th>@ViewLocalizer["ImageFile"]</th>
+                                    <th>@ViewLocalizer["Email"]</th>
+                                    <th>@ViewLocalizer["Name"]</th>
+                                    <th>@ViewLocalizer["Surname"]</th>
+                                    <th style="width:15%">@ViewLocalizer["Action"]</th>
                                 </tr>
                             </thead>
                             <tbody>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Image</th>
-                                    <th>Email</th>
-                                    <th>Name</th>
-                                    <th>Surname</th>
-                                    <th style="width:15%">Actions</th>
+                                    <th>@ViewLocalizer["ImageFile"]</th>
+                                    <th>@ViewLocalizer["Email"]</th>
+                                    <th>@ViewLocalizer["Name"]</th>
+                                    <th>@ViewLocalizer["Surname"]</th>
+                                    <th style="width:15%">@ViewLocalizer["Action"]</th>
                                 </tr>
                             </tfoot>
                         </table>
