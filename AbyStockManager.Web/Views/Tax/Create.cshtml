@@ -3,7 +3,7 @@
 
 @model AbyStockManager.Web.Model.ViewModel.Tax.CreateTaxViewModel
 @{
-    ViewData["Title"] = @ViewLocalizer["Create"] + " " + @ViewLocalizer["Tax"];
+    ViewData["Title"] = @ViewLocalizer["Create"];
 }
 @section script{
     <partial name="~/Views/Shared/_FormScriptsPartial.cshtml" />
@@ -11,10 +11,10 @@
 <section class="content pt-2">
     <div class="container-fluid ">
         <div class="row ">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-plus"></i> @ViewLocalizer["Create"] @ViewLocalizer["Tax"]</h3>
+                        <h3 class="card-title"><i class="fas fa-plus"></i> @ViewLocalizer["Create"]</h3>
                     </div>
                     <form asp-action="Create" asp-antiforgery="true" id="frmCreate">
                         <div class="card-body">
@@ -30,8 +30,8 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <a class="btn btn-outline-secondary" href="/Category"><i class="fas fa-arrow-left"></i> @ViewLocalizer["Back"]</a>
-                            <button id="btnSave" type="submit" class="btn btn-success"><i class="fas fa-plus"></i>  @ViewLocalizer["Create"]</button>
+                            <a class="btn btn-outline-secondary" href="/Tax"><i class="fas fa-arrow-left"></i> @ViewLocalizer["Back"]</a>
+                            <button id="btnSave" type="submit" class="btn btn-success"><i class="fas fa-plus"></i>  @ViewLocalizer["CreateBtn"]</button>
                         </div>
                     </form>
                 </div>

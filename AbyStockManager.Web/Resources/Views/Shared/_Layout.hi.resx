@@ -159,4 +159,7 @@
   <data name="User" xml:space="preserve">
     <value>उपयोगकर्ता</value>
   </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>स्वागत है</value>
+  </data>
 </root>

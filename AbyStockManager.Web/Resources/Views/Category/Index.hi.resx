@@ -121,7 +121,7 @@
     <value>कार्य</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>पीछे</value>
+    <value>वापस जाएँ</value>
   </data>
   <data name="CategoryName" xml:space="preserve">
     <value>उत्पाद वर्ग</value>
@@ -130,10 +130,10 @@
     <value>फाइलें चुनें</value>
   </data>
   <data name="Clear" xml:space="preserve">
-    <value>साफ़</value>
+    <value>साफ़ करें</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>बनाएं</value>
+    <value>नया कर बनाएं</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>ईमेल</value>
@@ -148,7 +148,7 @@
     <value>सुची</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>नाम</value>
+    <value>उत्पाद वर्ग नाम</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>पासवर्ड</value>

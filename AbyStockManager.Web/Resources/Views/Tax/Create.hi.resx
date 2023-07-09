@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Back" xml:space="preserve">
-    <value>पीछे</value>
+    <value>वापस जाएँ</value>
   </data>
   <data name="CategoryName" xml:space="preserve">
     <value>उत्पाद वर्ग नाम</value>
@@ -127,7 +127,10 @@
     <value>फाइलें चुनें</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>बनाएं</value>
+    <value>नया कर बनाएं</value>
+  </data>
+  <data name="CreateBtn" xml:space="preserve">
+    <value>कर बनाएं</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>ईमेल</value>
@@ -139,7 +142,7 @@
     <value>छवि</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>दर नाम</value>
+    <value>कर नाम</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>पासवर्ड</value>

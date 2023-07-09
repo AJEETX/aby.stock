@@ -2,7 +2,7 @@
     "processing": "प्रगति पे हैं ...",
     "lengthMenu": " _MENU_ प्रविष्टियां दिखाएं ",
     "zeroRecords": "रिकॉर्ड्स का मेल नहीं मिला",
-    "info": "_START_ से _END_ of _TOTAL_ प्रविष्टियां दिखा रहे हैं",
+    "info": "_START_ से _END_ कुल _TOTAL_ प्रविष्टियां दिखा रहे हैं",
     "infoEmpty": "0 में से 0 से 0 प्रविष्टियां दिखा रहे हैं",
     "infoFiltered": "(_MAX_ कुल प्रविष्टियों में से छठा हुआ)",
     "paginate": {
@@ -72,11 +72,11 @@ var hi2 =
     "sProcessing": "प्रगति पे हैं ...",
     "sLengthMenu": " _MENU_ प्रविष्टियां दिखाएं ",
     "sZeroRecords": "रिकॉर्ड्स का मेल नहीं मिला",
-    "sInfo": "_START_ to _END_ of _TOTAL_ प्रविष्टियां दिखा रहे हैं",
+    "sInfo": "_START_ से _END_ कुल _TOTAL_ प्रविष्टियां दिखा रहे हैं",
     "sInfoEmpty": "0 में से 0 से 0 प्रविष्टियां दिखा रहे हैं",
     "sInfoFiltered": "(_MAX_ कुल प्रविष्टियों में से छठा हुआ)",
     "sInfoPostFix": "",
-    "sSearch": "खोजें:",
+    "sSearch": "नीचे ढूँढ़ें:",
     "sUrl": "",
     "oPaginate": {
         "sFirst": "प्रथम",
@@ -109,6 +109,20 @@ var en =
         "sSortDescending": ": activate to sort column descending"
     }
 };
+function setEditButton() {
+    if ($('#requestCulture_RequestCulture_UICulture_Name').val() != 'hi') {
+        return 'Edit'
+    } else {
+        return 'संपादन'
+    }
+}
+function setDeleteButton() {
+    if ($('#requestCulture_RequestCulture_UICulture_Name').val() != 'hi') {
+        return 'Delete'
+    } else {
+        return 'हटाएं'
+    }
+}
 $(document).ready(function () {
     var datatable = $('#datatable').dataTable({
         "searching": true,
@@ -157,18 +171,15 @@ $(document).ready(function () {
                     "bSortable": false,
                     "mRender": function (data, type, row) {
                         var buttons = "";
-                        buttons += '<a href="/Tax/Edit/' + row.Id + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
-                        buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> Delete</a>'
+                        buttons += '<a href="/Tax/Edit/' + row.Id + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> ' + setEditButton() + '</a>&nbsp;'
+                        buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> ' + setDeleteButton() + '</a>'
                         return buttons;
                     }
                 }
             ]
-
-
-});
+    });
 
     function setCulture(changedLangValue) {
-
         if (changedLangValue != 'hi') {
             datatable.fnDestroy();
             datatable = null;
@@ -179,7 +190,7 @@ $(document).ready(function () {
             datatable.fnDestroy();
             datatable = null;
             datatable = $('#datatable').dataTable({
-                 language: hi2
+                language: hi
             });
         }
     }
@@ -187,12 +198,11 @@ $(document).ready(function () {
         setCulture($('#requestCulture_RequestCulture_UICulture_Name').val());
     });
 
-
     $("#btnFilter").click(function () {
         datatable.fnFilter();
     });
 
-    $("#datatable_filter").on('enter-keyup',function () {
+    $("#datatable_filter").on('enter-keyup', function () {
         datatable.fnFilter();
     });
 

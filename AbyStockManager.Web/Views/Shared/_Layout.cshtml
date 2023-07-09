@@ -23,7 +23,7 @@
     {
         userName = userNameClaim.Value;
     }
-    userName = "Hi " + userName;
+    userName = ViewLocalizer["Welcome"].Value  + " " + userName;
     Claim userImageClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData);
     if (userImageClaim != null)
     {

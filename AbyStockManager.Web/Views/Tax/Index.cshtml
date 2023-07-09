@@ -12,14 +12,14 @@
             <div class="col-md-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-search"></i> @ViewLocalizer["Search"] @ViewLocalizer["Tax"]</h3>
+                        <h3 class="card-title"><i class="fas fa-search"></i> @ViewLocalizer["Search"]</h3>
                     </div>
                     <div class="card-body dataTable-search-form">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     @ViewLocalizer["Tax"]
-                                    <input asp-for="Name" type="text" class="form-control-sm form-control enter-keyup">
+                                    <input asp-for="Name" type="text" class="form-control-sm form-control enter-keyup" placeholder="@ViewLocalizer["Enter"] @ViewLocalizer["Tax"]">
                                 </div>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                             <div class="col-md-12 text-right">
                                 <button id="btnClear" type="button" class="btn btn-secondary btn-sm"><i class="fas fa-sync-alt"></i> @ViewLocalizer["Clear"]</button>
                                 <button id="btnFilter" type="button" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> @ViewLocalizer["Search"]</button>
-                                <a class="btn btn-success btn-sm" href="/Tax/Create"><i class="fas fa-plus"></i> @ViewLocalizer["Tax"]</a>
+                                <a class="btn btn-success btn-sm" href="/Tax/Create"><i class="fas fa-plus"></i> @ViewLocalizer["Create"]</a>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
             <div class="col-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-list"></i> @ViewLocalizer["Tax"] @ViewLocalizer["List"]</h3>
+                        <h3 class="card-title"><i class="fas fa-list"></i> @ViewLocalizer["TaxList"]</h3>
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-bordered table-hover dt-responsive nowrap w-100">
