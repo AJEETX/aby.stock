@@ -67,20 +67,61 @@
     },
     "loadingRecords": "प्रगति पे हैं ..."
 };
-
+var hi2 =
+{
+    "sProcessing": "प्रगति पे हैं ...",
+    "sLengthMenu": " _MENU_ प्रविष्टियां दिखाएं ",
+    "sZeroRecords": "रिकॉर्ड्स का मेल नहीं मिला",
+    "sInfo": "_START_ to _END_ of _TOTAL_ प्रविष्टियां दिखा रहे हैं",
+    "sInfoEmpty": "0 में से 0 से 0 प्रविष्टियां दिखा रहे हैं",
+    "sInfoFiltered": "(_MAX_ कुल प्रविष्टियों में से छठा हुआ)",
+    "sInfoPostFix": "",
+    "sSearch": "खोजें:",
+    "sUrl": "",
+    "oPaginate": {
+        "sFirst": "प्रथम",
+        "sPrevious": "पिछला",
+        "sNext": "अगला",
+        "sLast": "अंतिम"
+    }
+};
+var en =
+{
+    "sEmptyTable": "No data available in table",
+    "sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+    "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+    "sInfoFiltered": "(filtered from _MAX_ total entries)",
+    "sInfoPostFix": "",
+    "sInfoThousands": ",",
+    "sLengthMenu": "Show _MENU_ entries",
+    "sLoadingRecords": "Loading...",
+    "sProcessing": "Processing...",
+    "sSearch": "Search:",
+    "sZeroRecords": "No matching records found",
+    "oPaginate": {
+        "sFirst": "First",
+        "sLast": "Last",
+        "sNext": "Next",
+        "sPrevious": "Previous"
+    },
+    "oAria": {
+        "sSortAscending": ": activate to sort column ascending",
+        "sSortDescending": ": activate to sort column descending"
+    }
+};
 $(document).ready(function () {
     var datatable = $('#datatable').dataTable({
-        "searching": false,
+        "searching": true,
         "iDisplayLength": 10,
-        "ordering": false,
-        "lengthChange": false,
+        "ordering": true,
+        "lengthChange": true,
         "bServerSide": true,
         "processing": true,
         "paging": true,
         "sAjaxSource": "/Tax/List",
         "info": true,
-        language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/hi.json',
+        "search": {
+            return: true
         },
         "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
             aoData.push(
@@ -95,6 +136,7 @@ $(document).ready(function () {
                 "success": function (data) {
                     if (data.IsSucceeded == true) {
                         fnCallback(data);
+                        setCulture($('#requestCulture_RequestCulture_UICulture_Name').val());
                     }
                     else {
                         toastr.error(data.UserMessage);
@@ -121,31 +163,36 @@ $(document).ready(function () {
                     }
                 }
             ]
-    });
-    var currentLang = null;
+
+
+});
+
     function setCulture(changedLangValue) {
-        datatable.fnDestroy();
-        datatable = null;
-        if (changedLangValue == 'hi') {
+
+        if (changedLangValue != 'hi') {
+            datatable.fnDestroy();
+            datatable = null;
             datatable = $('#datatable').dataTable({
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/hi.json',
-                },
+                language: en
             });
         } else {
+            datatable.fnDestroy();
+            datatable = null;
             datatable = $('#datatable').dataTable({
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/en-GB.json',
-                },
+                 language: hi2
             });
         }
     }
     $('#requestCulture_RequestCulture_UICulture_Name').change(function () {
         setCulture($('#requestCulture_RequestCulture_UICulture_Name').val());
     });
-    //setCulture($('#requestCulture_RequestCulture_UICulture_Name').val());
+
 
     $("#btnFilter").click(function () {
+        datatable.fnFilter();
+    });
+
+    $("#datatable_filter").on('enter-keyup',function () {
         datatable.fnFilter();
     });
 

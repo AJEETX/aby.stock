@@ -61,6 +61,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\invoice\content\hi.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\invoice\content\receipt.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
