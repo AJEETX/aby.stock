@@ -62,12 +62,35 @@ $(document).ready(function () {
                     "bSortable": false,
                     "mRender": function (data, type, row) {
                         var buttons = "";
-                        buttons += '<a href="/Category/Edit/' + row.Id + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
-                        buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> Delete</a>'
+                        buttons += '<a href="/Category/Edit/' + row.Id + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> ' + setEditButton() + '</a>&nbsp;'
+                        buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> ' + setDeleteButton() + '</a>'
                         return buttons;
                     }
                 }
-            ]
+            ],
+        "fnDrawCallback": function (oSettings) {
+            setCulture($('#requestCulture_RequestCulture_UICulture_Name').val());
+        }
+    });
+
+
+    function setCulture(changedLangValue) {
+        if (changedLangValue != 'hi') {
+            datatable.fnDestroy();
+            datatable = null;
+            datatable = $('#datatable').dataTable({
+                language: en
+            });
+        } else {
+            datatable.fnDestroy();
+            datatable = null;
+            datatable = $('#datatable').dataTable({
+                language: hi
+            });
+        }
+    }
+    $('#requestCulture_RequestCulture_UICulture_Name').change(function () {
+        setCulture($('#requestCulture_RequestCulture_UICulture_Name').val());
     });
 
     $("#btnFilter").click(function () {

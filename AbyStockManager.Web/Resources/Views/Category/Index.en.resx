@@ -120,6 +120,9 @@
   <data name="Back" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="Choose file" xml:space="preserve">
     <value>Choose file</value>
   </data>

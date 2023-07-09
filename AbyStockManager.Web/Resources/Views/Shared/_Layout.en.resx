@@ -153,4 +153,7 @@
   <data name="User" xml:space="preserve">
     <value>User</value>
   </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
 </root>

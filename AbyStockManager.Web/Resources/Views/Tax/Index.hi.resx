@@ -133,7 +133,7 @@
     <value>साफ़ करें</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>नया कर बनाएं</value>
+    <value>नया बनाएं</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>ईमेल</value>
@@ -148,16 +148,16 @@
     <value>सुची</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>कर का नाम</value>
+    <value>नाम</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>पासवर्ड</value>
   </data>
   <data name="Rate" xml:space="preserve">
-    <value>कर प्रतिशत</value>
+    <value>प्रतिशत</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>कर ढूँढ़ें</value>
+    <value>ढूँढ़ें</value>
   </data>
   <data name="Search User" xml:space="preserve">
     <value>उपयोगकर्ता ढूंढ़</value>
@@ -166,7 +166,7 @@
     <value>उपनाम</value>
   </data>
   <data name="Tax" xml:space="preserve">
-    <value>कर का नाम</value>
+    <value>नाम</value>
   </data>
   <data name="TaxList" xml:space="preserve">
     <value>कर सुची</value>

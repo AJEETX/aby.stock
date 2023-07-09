@@ -167,8 +167,8 @@ $(document).ready(function () {
                             $(row).css({ 'color': 'green' });
                         }
                         var buttons = "";
-                        buttons += '<a href="/Product/Edit/' + row.Id + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
-                        buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> Delete</a>'
+                        buttons += '<a href="/Product/Edit/' + row.Id + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> ' + setEditButton() + '</a>&nbsp;'
+                        buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> ' + setDeleteButton() + '</a>'
                         return buttons;
                     }
                 }

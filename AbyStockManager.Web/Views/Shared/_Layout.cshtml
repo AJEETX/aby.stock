@@ -23,7 +23,7 @@
     {
         userName = userNameClaim.Value;
     }
-    userName = ViewLocalizer["Welcome"].Value  + " " + userName;
+    userName = @ViewLocalizer["Welcome"]  + " " + @userName;
     Claim userImageClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData);
     if (userImageClaim != null)
     {
@@ -111,6 +111,7 @@
     <script src="~/plugins/toastr/toastr.min.js"></script>
     @RenderSection("script", false)
     <script src="~/dist/js/adminlte.min.js"></script>
+    <script src="~/dist/js/app.js"></script>
 
 </body>
 </html>
