@@ -43,7 +43,7 @@ namespace Aby.StockManager.Web.Controllers
             try
             {
                 ServiceResult<IEnumerable<CategoryDTO>> serviceListResult = await _categoryService.Find(new CategoryDTO { CategoryName = model.CategoryName });
-                if (serviceListResult != null || serviceListResult.TransactionResult != null || serviceListResult.TransactionResult.Any())
+                if (serviceListResult != null && serviceListResult.TransactionResult.Count() > 0)
                 {
                     jsonResultModel.IsSucceeded = false;
                     jsonResultModel.UserMessage = string.Format(CommonMessages.MSG0002, $"{model.CategoryName} exists");
