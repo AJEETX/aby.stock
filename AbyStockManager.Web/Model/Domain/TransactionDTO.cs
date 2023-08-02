@@ -20,6 +20,7 @@ namespace Aby.StockManager.Model.Domain
         public string Description { get; set; }
         public string Contact { get; set; }
         public string Gstin { get; set; }
+        public string? Remarks { get; set; }
         public string StoreName { get; set; }
         public string ToStoreName { get; set; }
         public string TransactionTypeName { get; set; }

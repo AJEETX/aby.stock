@@ -177,6 +177,7 @@ function detailShow(row, id) {
                 $.each(data.Data, function (i, item) {
                     $('#invoice-contact').text(item.Contact);
                     $('#invoice-gstin').text(item.Gstin);
+                    $('#invoice-remarks').text(item.Remarks);
                     $('#invoice-description').text(item.Description);
                     $('#invoice-number').text(item.InvoiceNumber);
                     $('#invoice-date').text(item.TransactionDate);

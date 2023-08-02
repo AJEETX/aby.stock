@@ -44,6 +44,9 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         [Display(Name = "GSTIN")]
         public string Gstin { get; set; } = string.Empty;
 
+        [Display(Name = "Remarks")]
+        public string? Remarks { get; set; } = string.Empty;
+
         public IList<TransactionDetailViewModel> TransactionDetail { get; set; }
         public IEnumerable<SelectListItem> StoreList { get; set; }
         public IEnumerable<SelectListItem> ToStoreList { get; set; }

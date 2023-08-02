@@ -319,6 +319,7 @@ namespace Aby.StockManager.Mapper
                 .ForMember(dm => dm.Description, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Description : ""))
                 .ForMember(dm => dm.Contact, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Contact : ""))
                 .ForMember(dm => dm.Gstin, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Gstin : ""))
+                .ForMember(dm => dm.Remarks, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Remarks : ""))
                 .ForMember(dm => dm.Barcode, vm => vm.MapFrom(vmf => vmf.Product != null ? vmf.Product.Barcode : ""))
                 .ForMember(dm => dm.InvoiceNumber, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.InvoiceNumber : ""))
                 .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.TransactionDate.ToString("dd/MM/yyyy") : "--"))

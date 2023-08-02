@@ -15,6 +15,8 @@ namespace Aby.StockManager.Data.Entity
         public string Description { get; set; }
         public string Contact { get; set; }
         public string Gstin { get; set; }
+        public string? Remarks { get; set; }
+
         public virtual TransactionType TransactionType { get; set; }
         public virtual Store ToStore { get; set; }
         public virtual Store Store { get; set; }

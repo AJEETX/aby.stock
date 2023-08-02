@@ -4,6 +4,7 @@ using Aby.StockManager.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbyStockManager.Web.Migrations
 {
     [DbContext(typeof(EasyStockManagerDbContext))]
-    partial class EasyStockManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230802143217_InvoiceRemarks")]
+    partial class InvoiceRemarks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
