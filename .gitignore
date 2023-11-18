@@ -346,3 +346,6 @@ healthchecksdb
 /AbyStockManager.Web/wwwroot/invoice/Receipt20230519110539.pdf
 /AbyStockManager.Web/wwwroot/invoice/Receipt20230419110400.pdf
 /AbyStockManager.Web/wwwroot/invoice/Receipt20230219120238.pdf
+/AbyStockManager.Web/add-expenses.db-wal
+/AbyStockManager.Web/add-expenses.db-shm
+/AbyStockManager.Web/add-expenses.db

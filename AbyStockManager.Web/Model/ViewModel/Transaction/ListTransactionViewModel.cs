@@ -26,5 +26,6 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         public string StoreName { get; set; }
         public string ToStoreName { get; set; }
         public string TransactionTypeName { get; set; }
+        public string? Amount { get; set; }
     }
 }

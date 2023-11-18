@@ -51,6 +51,9 @@
                     mDataProp: "Description"
                 },
                 {
+                    mDataProp: "Amount"
+                },
+                {
                     mDataProp: "TransactionTypeName", bVisible: false
                 },
                 {

@@ -21,6 +21,7 @@ using AbyStockManager.Web.Model.ViewModel.Tax;
 using Aby.StockManager.Model.ViewModel.Expense;
 using AbyStockManager.Web.Model.ViewModel.Report.StoreStock;
 using Aby.StockManager.Model.ViewModel.ExpenseCategory;
+using System.Linq;
 
 namespace Aby.StockManager.Mapper
 {
@@ -189,7 +190,8 @@ namespace Aby.StockManager.Mapper
                 .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
                 .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
             CreateMap<TransactionDTO, ListTransactionViewModel>()
-                 .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.TransactionDate)));
+                 .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.TransactionDate)))
+                 .ForMember(dm => dm.Amount, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.TransactionDetail.Sum(t => t.Amount * t.FinalSalePrice)))));
             CreateMap<TransactionDTO, EditTransactionViewModel>()
                 .ForMember(x => x.TransactionDate, y => y.MapFrom(z => z.TransactionDate.ToString("dd/MM/yyyy")))
                 ;
