@@ -21,7 +21,7 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         public string Contact { get; set; } = string.Empty;
 
         [Display(Name = "GSTIN")]
-        public string Gstin { get; set; } = string.Empty;
+        public string Gstin { get; set; }
 
         public string StoreName { get; set; }
         public string ToStoreName { get; set; }

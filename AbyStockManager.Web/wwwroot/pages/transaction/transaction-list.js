@@ -66,6 +66,9 @@
                     mDataProp: "Amount"
                 },
                 {
+                    mDataProp: "Gstin"
+                },
+                {
                     mDataProp: "TransactionTypeName", bVisible: false
                 },
                 {
