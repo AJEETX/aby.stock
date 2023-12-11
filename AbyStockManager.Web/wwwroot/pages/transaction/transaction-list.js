@@ -51,6 +51,18 @@
                     mDataProp: "Description"
                 },
                 {
+                    mDataProp: "AmountWithGst"
+                },
+                {
+                    mDataProp: "AmountWithoutGst"
+                },
+                {
+                    mDataProp: "SGst"
+                },
+                {
+                    mDataProp: "CGst"
+                },
+                {
                     mDataProp: "Amount"
                 },
                 {

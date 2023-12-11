@@ -191,7 +191,19 @@ namespace Aby.StockManager.Mapper
                 .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
             CreateMap<TransactionDTO, ListTransactionViewModel>()
                  .ForMember(dm => dm.TransactionDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", vmf.TransactionDate)))
-                 .ForMember(dm => dm.Amount, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", (vmf.TransactionDetail.Sum(t => t.Amount * t.FinalSalePrice)))));
+                 .ForMember(dm => dm.Amount, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}",
+                 (vmf.TransactionDetail.Sum(t => t.Amount * t.FinalSalePrice)))))
+                 .ForMember(dm => dm.AmountWithGst, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}",
+                 (vmf.TransactionDetail.Sum(t => t.Amount * t.FinalSalePrice)))))
+                 .ForMember(dm => dm.AmountWithoutGst, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}",
+                 vmf.TransactionDetail.Sum(t => t.Amount * t.FinalSalePrice * ((double)100 / ((double)100 + t.TaxRate))))))
+                 .ForMember(dm => dm.CGst, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}",
+                 vmf.TransactionDetail.Sum(t => ((t.Amount * t.FinalSalePrice) - (t.FinalSalePrice * (100 / (100 + t.TaxRate)) * t.Amount)) / 2
+                 ))))
+                 .ForMember(dm => dm.SGst, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}",
+                 (vmf.TransactionDetail.Sum(t => ((t.Amount * t.FinalSalePrice) - (t.FinalSalePrice * (100 / (100 + t.TaxRate)) * t.Amount)) / 2
+                 )))));
+
             CreateMap<TransactionDTO, EditTransactionViewModel>()
                 .ForMember(x => x.TransactionDate, y => y.MapFrom(z => z.TransactionDate.ToString("dd/MM/yyyy")))
                 ;
