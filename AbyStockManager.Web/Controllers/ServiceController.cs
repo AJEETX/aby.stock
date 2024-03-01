@@ -130,7 +130,7 @@ namespace AbyStockManager.Web.Controllers
                 if (jsonResultModel.IsSucceeded)
                 {
                     jsonResultModel.IsRedirect = true;
-                    jsonResultModel.RedirectUrl = "/Expense";
+                    jsonResultModel.RedirectUrl = "/Service";
                 }
             }
             catch (Exception ex)

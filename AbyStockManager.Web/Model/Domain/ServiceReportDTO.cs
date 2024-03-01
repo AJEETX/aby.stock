@@ -12,6 +12,6 @@ namespace Aby.StockManager.Model.Domain
         public string ServiceCategoryName { get; set; }
         public int? ServiceCategoryId { get; set; }
 
-        public string ExpenseDate { get; set; }
+        public string ServiceDate { get; set; }
     }
 }

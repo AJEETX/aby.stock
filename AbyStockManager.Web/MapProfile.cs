@@ -47,7 +47,6 @@ namespace Aby.StockManager.Mapper
     .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
     .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
 
-
             CreateMap<CreateServiceCategoryViewModel, ServiceCategoryDTO>()
                  .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
 
@@ -78,11 +77,9 @@ namespace Aby.StockManager.Mapper
             CreateMap<ServiceCategory, ServiceCategoryDTO>()
   .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
 
-
             CreateMap<CreateExpenseCategoryViewModel, ExpenseCategoryDTO>()
                 .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
 
-            
             CreateMap<ExpenseCategoryDTO, CreateExpenseCategoryViewModel>()
               .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
 
@@ -336,14 +333,14 @@ namespace Aby.StockManager.Mapper
             CreateMap<StoreDTO, Store>();
 
             CreateMap<ServiceReport, ServiceReportDTO>()
-                 .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => vmf.ServiceDate.ToString("dd/MM/yyyy")))
+                 .ForMember(dm => dm.ServiceDate, vm => vm.MapFrom(vmf => vmf.ServiceDate.ToString("dd/MM/yyyy")))
                  .ForMember(dm => dm.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategory != null ? vmf.ServiceCategory.ServiceCategoryName : "-"))
                 ;
 
             CreateMap<ServiceReportDTO, ListServiceReportViewModel>()
                 .ForMember(x => x.ServiceCategory, y => y.MapFrom(f => f.ServiceCategoryName))
                              .ForMember(dm => dm.Amount, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Amount)))
-                 .ForMember(dm => dm.ServiceDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", DateTime.ParseExact(vmf.ExpenseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture))));
+                 .ForMember(dm => dm.ServiceDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", DateTime.ParseExact(vmf.ServiceDate, "dd/MM/yyyy", CultureInfo.InvariantCulture))));
 
             CreateMap<ListServiceReportViewModel, ServiceReportDTO>()
                 .ForMember(x => x.ServiceCategoryName, y => y.MapFrom(f => f.ServiceCategory))
@@ -352,7 +349,7 @@ namespace Aby.StockManager.Mapper
             CreateMap<ServiceReportDTO, EditServiceReportViewModel>();
             CreateMap<EditServiceReportViewModel, ServiceReportDTO>();
             CreateMap<ServiceReportDTO, ServiceReport>()
-                 .ForMember(dm => dm.ServiceDate, vm => vm.MapFrom(vmf => DateTime.ParseExact(vmf.ExpenseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                 .ForMember(dm => dm.ServiceDate, vm => vm.MapFrom(vmf => DateTime.ParseExact(vmf.ServiceDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
                 ;
             CreateMap<CreateServiceReportViewModel, ServiceReportDTO>();
 
