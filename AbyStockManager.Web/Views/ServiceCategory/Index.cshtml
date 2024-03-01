@@ -1,0 +1,73 @@
+﻿@model Aby.StockManager.Model.ViewModel.ServiceCategory.SearchServiceCategoryViewModel
+@{
+    ViewData["Title"] = "Service Category List";
+}
+
+<section class="content pt-2">
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-search"></i> Search Service Type</h3>
+                    </div>
+                    <div class="card-body dataTable-search-form">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="ServiceCategoryName"></label>
+                                    <input asp-for="ServiceCategoryName" type="text" class="form-control-sm form-control enter-keyup">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button id="btnClear" type="button" class="btn btn-secondary btn-sm"><i class="fas fa-sync-alt"></i> Clear</button>
+                                <button id="btnFilter" type="button" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Search</button>
+                                <a class="btn btn-success btn-sm" href="/ServiceCategory/Create"><i class="fas fa-plus"></i> Service Type</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-list"></i> Service Type List</h3>
+                    </div>
+                    <div class="card-body">
+                        <table id="datatable" class="table table-bordered table-hover dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Service Type Name</th>
+                                    <th style="width:15%">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Service Type Name</th>
+                                    <th style="width:15%">Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section style{
+    <partial name="~/Views/Shared/_DataTableStylePartial.cshtml" />
+}
+@section script{
+    <partial name="~/Views/Shared/_DataTableScriptPartial.cshtml" />
+    <script src="~/pages/servicecategory/service-category-list.js"></script>
+}

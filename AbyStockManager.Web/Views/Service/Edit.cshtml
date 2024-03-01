@@ -1,0 +1,72 @@
+﻿@model Aby.StockManager.Model.ViewModel.Service.EditServiceReportViewModel
+@{
+    ViewData["Title"] = "Edit Service";
+}
+@section style{
+
+    <link href="~/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet">
+    <link href="~/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+}
+
+@section script{
+    <script src="~/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <partial name="~/Views/Shared/_FormScriptsPartial.cshtml" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.datepicker').daterangepicker({
+                singleDatePicker: true,
+                "locale": {
+                    "format": "DD/MM/YYYY"
+                }
+            });
+        });
+
+    </script>
+}
+<section class="content pt-2">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-pen"></i> Edit Expense</h3>
+                    </div>
+                    <form asp-action="Edit" asp-antiforgery="true" id="frmCreate">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="control-label">Expense description</label>
+                                <input asp-for="ItemName" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ServiceCategoryId" class="control-label"></label>
+                                <select asp-for="ServiceCategoryId" class="form-control" asp-items="Model.CategoryList">
+                                    <option value="">-- Select Expense Type --</option>
+                                </select>
+                                <span asp-validation-for="ServiceCategoryId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Amount" class="control-label"></label>
+                                <input asp-for="Amount" class="form-control" />
+                            </div>
+                            <div class="form-group" id="calender-container">
+                                <label asp-for="ServiceDate" class="control-label"></label>
+                                <div class="input-group date">
+                                    <input asp-for="ServiceDate" type="text" class="form-control datepicker">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <a class="btn btn-outline-secondary" href="/Service"><i class="fas fa-arrow-left"></i> Back</a>
+                            <button id="btnSave" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i> Edit</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

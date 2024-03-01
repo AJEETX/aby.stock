@@ -1,0 +1,37 @@
+﻿@model Aby.StockManager.Model.ViewModel.ServiceCategory.EditServiceCategoryViewModel
+@{
+    ViewData["Title"] = "Service Type Edit";
+}
+
+@section script{
+    <partial name="~/Views/Shared/_FormScriptsPartial.cshtml" />
+}
+<section class="content pt-2">
+    <div class="container-fluid ">
+        <div class="row ">
+            <div class="col-md-6">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-pen"></i> Edit Service Type</h3>
+                    </div>
+                    <form asp-action="Edit" asp-antiforgery="true" id="frmCreate">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="ServiceCategoryName"></label>
+                                <input asp-for="ServiceCategoryName" type="text" class="form-control">
+                                <span asp-validation-for="ServiceCategoryName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <a class="btn btn-outline-secondary" href="/Category"><i class="fas fa-arrow-left"></i> Back</a>
+                            <button id="btnSave" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i> Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

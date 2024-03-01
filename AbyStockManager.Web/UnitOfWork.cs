@@ -31,6 +31,8 @@ namespace Aby.StockManager.UnitOfWork
         }
 
         private ICategoryRepository iCategoryRepository;
+        private IServiceCategoryRepository iServiceCategoryRepository;
+        private IServiceReportRepository iServiceReportRepository;
         private IExpenseCategoryRepository iExpenseCategoryRepository;
         private ITaxRepository iTaxRepository;
         private IProductRepository iProductRepository;
@@ -43,6 +45,24 @@ namespace Aby.StockManager.UnitOfWork
         private IUnitOfMeasureRepository iUnitOfMeasureRepository;
         private IUserRepository iUserRepository;
 
+        public IServiceReportRepository ServiceReportRepository
+        {
+            get
+            {
+                if (iServiceReportRepository == null)
+                    iServiceReportRepository = new ServiceReportRepository(_context);
+                return iServiceReportRepository;
+            }
+        }
+        public IServiceCategoryRepository ServiceCategoryRepository
+        {
+            get
+            {
+                if (iServiceCategoryRepository == null)
+                    iServiceCategoryRepository = new ServiceCategoryRepository(_context);
+                return iServiceCategoryRepository;
+            }
+        }
         public IExpenseCategoryRepository ExpenseCategoryRepository
         {
             get

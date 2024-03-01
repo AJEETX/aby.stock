@@ -21,7 +21,9 @@ using AbyStockManager.Web.Model.ViewModel.Tax;
 using Aby.StockManager.Model.ViewModel.Expense;
 using AbyStockManager.Web.Model.ViewModel.Report.StoreStock;
 using Aby.StockManager.Model.ViewModel.ExpenseCategory;
+using Aby.StockManager.Model.ViewModel.ServiceCategory;
 using System.Linq;
+using Aby.StockManager.Model.ViewModel.Service;
 
 namespace Aby.StockManager.Mapper
 {
@@ -31,9 +33,56 @@ namespace Aby.StockManager.Mapper
         {
             #region DTO & ViewModel
 
+            CreateMap<SearchServiceReportViewModel, ServiceReportDTO>()
+    .ForMember(dm => dm.SearchStartDate, vm => vm.MapFrom(vmf =>
+    !string.IsNullOrWhiteSpace(vmf.SearchStartDate) ?
+    DateTime.ParseExact(vmf.SearchStartDate, "dd/MM/yyyy", CultureInfo.InvariantCulture) :
+    DateTime.MinValue
+    ))
+     .ForMember(dm => dm.SearchEndDate, vm => vm.MapFrom(vmf =>
+    !string.IsNullOrWhiteSpace(vmf.SearchEndDate) ?
+    DateTime.ParseExact(vmf.SearchEndDate, "dd/MM/yyyy", CultureInfo.InvariantCulture) :
+    DateTime.MaxValue
+    ))
+    .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
+    .ForMember(dm => dm.RecordCount, vm => vm.MapFrom(vmf => vmf.iDisplayLength));
+
+
+            CreateMap<CreateServiceCategoryViewModel, ServiceCategoryDTO>()
+                 .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
+
+            CreateMap<ServiceCategoryDTO, CreateServiceCategoryViewModel>()
+            .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
+
+            CreateMap<EditServiceCategoryViewModel, ServiceCategoryDTO>()
+                 .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
+
+            CreateMap<ServiceCategoryDTO, EditServiceCategoryViewModel>()
+                 .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
+
+            CreateMap<ListServiceCategoryViewModel, ServiceCategoryDTO>()
+     .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
+
+            CreateMap<ServiceCategoryDTO, ListServiceCategoryViewModel>()
+     .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
+
+            CreateMap<SearchServiceCategoryViewModel, ServiceCategoryDTO>()
+    .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
+
+            CreateMap<ServiceCategoryDTO, SearchServiceCategoryViewModel>()
+    .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
+
+            CreateMap<ServiceCategoryDTO, ServiceCategory>()
+   .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
+
+            CreateMap<ServiceCategory, ServiceCategoryDTO>()
+  .ForMember(x => x.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
+
+
             CreateMap<CreateExpenseCategoryViewModel, ExpenseCategoryDTO>()
                 .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
 
+            
             CreateMap<ExpenseCategoryDTO, CreateExpenseCategoryViewModel>()
               .ForMember(x => x.CategoryName, vm => vm.MapFrom(vmf => vmf.CategoryName));
 
@@ -96,9 +145,12 @@ namespace Aby.StockManager.Mapper
                    .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => vmf.CategoryName));
 
             CreateMap<ExpenseCategoryDTO, SelectListItem>()
-       .ForMember(dm => dm.Value, vm => vm.MapFrom(vmf => vmf.Id.ToString()))
-       .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => vmf.CategoryName));
+               .ForMember(dm => dm.Value, vm => vm.MapFrom(vmf => vmf.Id.ToString()))
+               .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => vmf.CategoryName));
 
+            CreateMap<ServiceCategoryDTO, SelectListItem>()
+               .ForMember(dm => dm.Value, vm => vm.MapFrom(vmf => vmf.Id.ToString()))
+               .ForMember(dm => dm.Text, vm => vm.MapFrom(vmf => vmf.ServiceCategoryName));
             CreateMap<CreateUnitOfMeasureViewModel, UnitOfMeasureDTO>();
             CreateMap<SearchUnitOfMeasureViewModel, UnitOfMeasureDTO>()
                     .ForMember(dm => dm.PageNumber, vm => vm.MapFrom(vmf => vmf.iDisplayStart))
@@ -282,6 +334,27 @@ namespace Aby.StockManager.Mapper
 
             CreateMap<Store, StoreDTO>();
             CreateMap<StoreDTO, Store>();
+
+            CreateMap<ServiceReport, ServiceReportDTO>()
+                 .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => vmf.ServiceDate.ToString("dd/MM/yyyy")))
+                 .ForMember(dm => dm.ServiceCategoryName, vm => vm.MapFrom(vmf => vmf.ServiceCategory != null ? vmf.ServiceCategory.ServiceCategoryName : "-"))
+                ;
+
+            CreateMap<ServiceReportDTO, ListServiceReportViewModel>()
+                .ForMember(x => x.ServiceCategory, y => y.MapFrom(f => f.ServiceCategoryName))
+                             .ForMember(dm => dm.Amount, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Amount)))
+                 .ForMember(dm => dm.ServiceDate, vm => vm.MapFrom(vmf => string.Format("{0:D}", DateTime.ParseExact(vmf.ExpenseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture))));
+
+            CreateMap<ListServiceReportViewModel, ServiceReportDTO>()
+                .ForMember(x => x.ServiceCategoryName, y => y.MapFrom(f => f.ServiceCategory))
+                ;
+
+            CreateMap<ServiceReportDTO, EditServiceReportViewModel>();
+            CreateMap<EditServiceReportViewModel, ServiceReportDTO>();
+            CreateMap<ServiceReportDTO, ServiceReport>()
+                 .ForMember(dm => dm.ServiceDate, vm => vm.MapFrom(vmf => DateTime.ParseExact(vmf.ExpenseDate, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                ;
+            CreateMap<CreateServiceReportViewModel, ServiceReportDTO>();
 
             CreateMap<ExpenseReport, ExpenseReportDTO>()
                  .ForMember(dm => dm.ExpenseDate, vm => vm.MapFrom(vmf => vmf.ExpenseDate.ToString("dd/MM/yyyy")))

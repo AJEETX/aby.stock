@@ -1,0 +1,152 @@
+﻿@model Aby.StockManager.Model.ViewModel.Service.SearchServiceReportViewModel
+@{
+    ViewData["Title"] = "Service List";
+}
+@section style{
+    <partial name="~/Views/Shared/_DataTableStylePartial.cshtml" />
+    <link href="~/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet">
+    <link href="~/invoice/content/style.css" rel="stylesheet" />
+
+    }
+<style>
+    #total-expense {
+        background-color: green;
+        color: white;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+</style>
+<section class="content pt-2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-search"></i> Search Service</h3>
+                    </div>
+                    <div class="card-body dataTable-search-form">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="control-label">Service description</label>
+                                    <input asp-for="ItemName" type="text" class="form-control-sm form-control enter-keyup">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label asp-for="ServiceCategoryId" class="control-label"></label>
+                                    <select id="Category" asp-for="ServiceCategoryId" class="form-control" asp-items="Model.CategoryList">
+                                        <option value="">-- Select Service Type --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label asp-for="SearchStartDate"></label>
+                                    <input asp-for="SearchStartDate" type="text" class="form-control datepicker">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label asp-for="SearchEndDate"></label>
+                                    <input asp-for="SearchEndDate" type="text" class="form-control datepicker">
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button id="btnClear" type="button" class="btn btn-secondary btn-sm"><i class="fas fa-sync-alt"></i> Clear</button>
+                                <button id="btnFilter" type="button" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Search</button>
+                                <a class="btn btn-success btn-sm" href="/Service/Create"><i class="fas fa-plus"></i> Service</a>
+                                <button class="btn btn-info btn-sm" onclick="ReportExpense()"><i class="fas fa-chart-line"></i> Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-list"></i> Expense List</h3>
+                    </div>
+                    <div class="card-body">
+                        <table id="datatable" class="table table-bordered table-hover dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Service Type</th>
+                                    <th>Amount</th>
+                                    <th>Service Date</th>
+                                    <th style="width:15%">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Service Type</th>
+                                    <th>Amount</th>
+                                    <th>Service Date</th>
+                                    <th style="width:15%">Actions</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="card card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="nav-icon fas fa-rupee-sign"></i> Total Service :  <span id="total-expense"></span></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="expenseReportModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title"></h3>
+            </div>
+            <div class="modal-body" id="expenseReportModalDiv">
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <partial name="~/Views/Shared/_DataTableScriptPartial.cshtml" />
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="~/pages/service/service-list.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.datepicker').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                "locale": {
+                    "format": "DD/MM/YYYY"
+                }
+            });
+            $('.datepicker').val('');
+        });
+
+        var ReportExpense = function () {
+            var url = "/Service/ExpenseSummary";
+
+            $("#expenseReportModalDiv").load(url, function () {
+                $("#expenseReportModal").modal("show");
+            })
+        }
+    </script>
+}

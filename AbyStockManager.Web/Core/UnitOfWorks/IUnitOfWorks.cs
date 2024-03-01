@@ -12,6 +12,8 @@ namespace Aby.StockManager.Core.UnitOfWorks
     {
         ITaxRepository TaxRepository { get; }
         ICategoryRepository CategoryRepository { get; }
+        IServiceCategoryRepository ServiceCategoryRepository { get; }
+        IServiceReportRepository ServiceReportRepository { get; }
         IExpenseCategoryRepository ExpenseCategoryRepository { get; }
         IProductRepository ProductRepository { get; }
         IExpenseReportRepository ExpenseReportRepository { get; }
