@@ -11,9 +11,9 @@
     <div class="container-fluid ">
         <div class="row ">
             <div class="col-md-6">
-                <div class="card card-warning">
+                <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-pen"></i> Edit Stock</h3>
+                        <h3 class="card-title"><i class="fas fa-pen"></i> Stock Detail</h3>
                     </div>
                     <form asp-action="Edit" asp-antiforgery="true" id="frmCreate">
                         <input type="hidden" asp-for="ProductId" />
@@ -32,13 +32,13 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="Stock"></label>
-                                <input asp-for="Stock" type="number" class="form-control" min="0" step="1">
+                                <input readonly asp-for="Stock" type="number" class="form-control" min="0" step="1">
                                 <span asp-validation-for="Stock" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-footer text-right">
                             <a class="btn btn-outline-secondary" href="/Report"><i class="fas fa-arrow-left"></i> Back</a>
-                            <button id="btnSave" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i> Edit</button>
+                            @* <button id="btnSave" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i> Edit</button> *@
                         </div>
                     </form>
                 </div>
