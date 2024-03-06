@@ -126,25 +126,23 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 id="print-header" class="modal-title"></h4>
                     <button id="close-btn" type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div id="printSection" class="modal-body">
-
+                    <div class="modal-header">
+                        <h4 class="header-title">Tax Invoice</h4>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <br />
-                            <br />
-                            <br />
                             <div class="body">
                                 <div class="header clearfix">
                                     <div id="logo">
                                         <img id="store-image" src="" height="60" width="60">
                                     </div>
                                     <div id="company">
-                                        <p class="name"><img src="~/dist/img/ceat.png" height="30"></p>
+                                        <p class="name"><img src="~/dist/img/ceat.png" height="30"><h4 class="name" id="store-name"></h4></p>
                                         <h4 class="name" id="store-name"></h4>
                                         <div id="store-address"></div>
                                         <div><a href="#" id="store-contact"></a></div>
@@ -182,7 +180,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td></td>
+                                               - <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -276,7 +274,7 @@
             })
         }
         function printElement() {
-            var elem = document.getElementById('printThis');
+            var elem = document.getElementById('printSection');
             var domClone = elem.cloneNode(true);
 
             var $printSection = document.getElementById("printSection");
