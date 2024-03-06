@@ -76,13 +76,17 @@
             <div class="col-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title"><i class="fas fa-list"></i> Expense List</h3>
+                        <h3 class="card-title"><i class="fas fa-list"></i> Service List</h3>
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-bordered table-hover dt-responsive nowrap w-100">
                             <thead>
                                 <tr>
+                                    <th>Invoice #</th>
+                                    <th>Bill To</th>
+                                    <th>Phone Number</th>
                                     <th>Description</th>
+                                    <th>GSTin</th>
                                     <th>Service Type</th>
                                     <th>Amount</th>
                                     <th>Service Date</th>
@@ -93,7 +97,11 @@
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <th>Invoice #</th>
+                                    <th>Bill To</th>
+                                    <th>Phone Number</th>
                                     <th>Description</th>
+                                    <th>GSTin</th>
                                     <th>Service Type</th>
                                     <th>Amount</th>
                                     <th>Service Date</th>
@@ -112,6 +120,125 @@
         </div>
     </div>
 </section>
+
+<div id="printThis">
+    <div class="modal fade" id="modal-detail">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="print-header" class="modal-title"></h4>
+                    <button id="close-btn" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="printSection" class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br />
+                            <br />
+                            <br />
+                            <div class="body">
+                                <div class="header clearfix">
+                                    <div id="logo">
+                                        <img id="store-image" src="" height="60" width="60">
+                                    </div>
+                                    <div id="company">
+                                        <p class="name"><img src="~/dist/img/ceat.png" height="30"></p>
+                                        <h4 class="name" id="store-name"></h4>
+                                        <div id="store-address"></div>
+                                        <div><a href="#" id="store-contact"></a></div>
+                                        <hr />
+                                    </div>
+                                </div>
+                                <main>
+                                    <div id="details" class="clearfix">
+                                        <div id="client">
+                                            <div id="bill-to" class="to"></div>
+                                            <div><span id="invoice-description" class="invoice-description"></span></div>
+                                            <div class="to">Address:</div>
+                                            <div><span id="invoice-contact" class="invoice-description"></span></div>
+                                            <div class="to">GSTIN: <span id="invoice-gstin" class="invoice-description"></span></div>
+                                            <div class="to">Remarks: <span id="invoice-remarks" class="invoice-description"></span></div>
+                                        </div>
+                                        <div id="invoice">
+                                            <div><span id="print-bill-type" class="notice"></span> #: <span id="invoice-number" class="notice"></span></div>
+                                            <div><span id="print-bill-date" class="notice"></span> date: <span id="invoice-date" class="notice"> </span></div>
+                                            <div><span id="print-bill-due-date" class="notice"></span> due date: <span id="invoice-due-date" class="notice"> </span></div>
+                                        </div>
+                                    </div>
+                                    <table id="invoice-table" class="invoice-table" border="0" cellspacing="0" cellpadding="0">
+                                        <thead>
+                                            <tr>
+                                                <th class="no">#</th>
+                                                <th class="desc">Service</th>
+                                                <th class="unit">Price<span class="required-indicator">*</span></th>
+                                                <th class="qty">Qty</th>
+                                                <th class="tax">Tax</th>
+                                                <th class="total">Amount<span class="required-indicator">**</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>Amount total<span class="required-indicator">**</span></td>
+                                                <td id="amount-total"> </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td>
+                                                <td colspan="1"></td>
+                                                <td>SGST </td>
+                                                <td> CGST</td>
+                                                <td> </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td>
+                                                <td colspan="1">Tax total</td>
+                                                <td id="sgst-total"> </td>
+                                                <td id="cgst-total"> </td>
+                                                <td id="tax-total"> </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td>
+                                                <td colspan="3">Grand Total</td>
+                                                <td id="grand-total"> </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <div id="grand-plain-total"> </div>
+                                    <div id="thanks">!</div>
+                                    <div id="notices">
+
+                                        <div>GSTIN: <span id="store-gstin" class="notice"> </span></div>
+                                        <div></div>
+                                        <div class="notice"><span class="required-indicator">*</span>  including GST</div>
+                                        <div class="notice"><span class="required-indicator">**</span>  excluding GST</div>
+                                        <div id="bill-notice" class="notice"></div>
+                                    </div>
+                                </main>
+                                <footer>
+                                    <span id="print-bill-disclaimer" class="notice"></span> is valid without the signature and seal.
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="print-section" class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="printElement()" data-dismiss="modal">Print</button>
+                        @*<a id="print-invoice" href="#" on class="btn btn-warning">Print </a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="modal fade" id="expenseReportModal" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -147,6 +274,22 @@
             $("#expenseReportModalDiv").load(url, function () {
                 $("#expenseReportModal").modal("show");
             })
+        }
+        function printElement() {
+            var elem = document.getElementById('printThis');
+            var domClone = elem.cloneNode(true);
+
+            var $printSection = document.getElementById("printSection");
+
+            if (!$printSection) {
+                var $printSection = document.createElement("div");
+                $printSection.id = "printSection";
+                document.body.appendChild($printSection);
+            }
+
+            $printSection.innerHTML = "";
+            $printSection.appendChild(domClone);
+            window.print();
         }
     </script>
 }

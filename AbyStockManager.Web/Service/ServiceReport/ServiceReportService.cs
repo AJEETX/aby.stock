@@ -279,6 +279,9 @@ namespace Aby.StockManager.Service
                 using (_unitOfWork)
                 {
                     Entity.ServiceReport entity = await _unitOfWork.ServiceReportRepository.GetByIdAsync(id);
+                    var servicetype = await _unitOfWork.ServiceCategoryRepository.GetByIdAsync(entity.ServiceCategoryId.Value);
+
+                    entity.ServiceCategory = servicetype;
                     result.TransactionResult = _mapper.Map<ServiceReportDTO>(entity);
                 }
             }

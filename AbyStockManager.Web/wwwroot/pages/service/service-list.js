@@ -41,8 +41,22 @@
         aoColumns:
             [
                 {
+                    mDataProp: "InvoiceNumber"
+                },
+                {
+                    mDataProp: "Description"
+                },
+                {
+                    mDataProp: "Contact"
+
+                },
+                {
                     mDataProp: "ItemName"
                 },
+                {
+                    mDataProp: "Gstin"
+                },
+
                 {
                     mDataProp: "ServiceCategory"
                 },
@@ -59,7 +73,7 @@
                         var buttons = "";
                         var invoiceNumber = row['InvoiceNumber'];
                         var description = row['Description'];
-                        //buttons += '<a id="print-invoice" onclick="detailShow(this,' + row.Id + ')"  class="btn btn-xs btn-default"><i class="fas fa-print"></i> Print</a>&nbsp;'
+                        buttons += '<a id="print-invoice" onclick="detailShow(this,' + row.Id + ')"  class="btn btn-xs btn-default"><i class="fas fa-print"></i> Print</a>&nbsp;'
 
                         //if (invoiceNumber != null && invoiceNumber != '' && invoiceNumber.startsWith('Inv')) {
                         //    buttons += '<a id="print-invoice" onclick="detailShow(this,' + row.Id + ')"  class="btn btn-xs btn-default"><i class="fas fa-print"></i> Print</a>&nbsp;'
@@ -124,4 +138,63 @@ function deleteRow(row, id) {
             }
         }
     });
+}
+function detailShow(row, id) {
+    $("#invoice-table tbody").empty();
+    var str = '';
+    $.ajax({
+        url: '/Service/GetServiceDetail/' + id,
+        type: "GET",
+        success: function (data) {
+            if (data.IsSucceeded) {
+                $('#print-header').text(data.PrintHeader);
+                $('#print-bill-type').text(data.PrintBillType);
+                $('#print-bill-disclaimer').text(data.PrintBillType);
+                $('#print-bill-date').text(data.PrintBillType);
+                $('#print-bill-due-date').text(data.PrintBillType);
+                $('#thanks').text(data.PrintBilled);
+                $('#bill-to').text(data.PrintBillTo);
+                $('#bill-notice').text(data.PrintBillNotice);
+                $('#print-header').text(data.PrintHeader);
+                $('#store-image').attr('src', data.StoreImage);
+                $('#store-name').text(data.StoreName);
+                $('#store-address').text(data.StoreAddress);
+                $('#store-contact').text(data.StoreContact);
+                $('#store-gstin').text(data.StoreGstin);
+
+                $('#amount-total').text(data.SubTotal);
+                $('#grand-total').text(data.GrandTotal);
+                $('#grand-plain-total').text(data.GrandPlainTotal);
+                $('#tax-total').text(data.TaxTotal);
+                $('#sgst-total').text(data.SgstTotal);
+                $('#cgst-total').text(data.CgstTotal);
+
+                $.each(data.Data, function (i, item) {
+                    $('#invoice-contact').text(item.Contact);
+                    $('#invoice-gstin').text(item.Gstin);
+                    $('#invoice-remarks').text(item.ItemName);
+                    $('#invoice-description').text(item.Description);
+                    $('#invoice-number').text(item.InvoiceNumber);
+                    $('#invoice-date').text(item.ServiceDate);
+                    $('#invoice-due-date').text(item.ServiceDate);
+                    var count = i + 1;
+                    str += '<tr>';
+                    str += '<td class="no"> ' + count + ' </td>';
+                    str += '<td class="desc">' + item.ServiceCategoryName + ' </td>';
+                    str += '<td class="unit">' + item.Amount + ' </td>';
+                    str += '<td  class="qty">1 </td>';
+                    str += '<td  class="tax">12% </td>';
+                    str += '<td  class="total">' + item.Amount + ' </td>';
+                    str += '</tr>';
+                });
+                $("#invoice-table tbody").append(str);
+                //$('#print-invoice').attr('href', 'Transaction/Print?id=' + id);
+            }
+            else {
+                toastr.error(data.UserMessage);
+            }
+        }
+    });
+
+    $('#modal-detail').modal('show');
 }

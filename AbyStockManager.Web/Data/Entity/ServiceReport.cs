@@ -10,6 +10,12 @@ namespace Aby.StockManager.Data.Entity
 {
     public class ServiceReport : BaseEntity
     {
+        public string? Description { get; set; }
+        public string? Contact { get; set; }
+
+        public string? Gstin { get; set; }
+        public string InvoiceNumber { get; set; }
+
         [Required]
         public string ItemName { get; set; }
 

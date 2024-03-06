@@ -10,6 +10,15 @@ namespace Aby.StockManager.Model.ViewModel.Service
 {
     public class SearchServiceReportViewModel : BaseViewModel
     {
+        [Display(Name = "Bill To")]
+        public string? Description { get; set; }
+
+        [Display(Name = "Phone Number")]
+        public string? Contact { get; set; }
+
+        public string? Gstin { get; set; }
+        public string InvoiceNumber { get; set; }
+
         [Display(Name = "Service description")]
         public string ItemName { get; set; }
 

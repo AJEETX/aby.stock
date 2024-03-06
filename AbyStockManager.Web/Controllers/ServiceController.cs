@@ -16,6 +16,9 @@ using AutoMapper;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Aby.StockManager.Service.Store;
+using AbyStockManager.Web.Common.Extensions;
+using Aby.StockManager.Web.Service;
 
 namespace AbyStockManager.Web.Controllers
 {
@@ -23,12 +26,18 @@ namespace AbyStockManager.Web.Controllers
     {
         private readonly IServiceReportService expenseService;
         private readonly IServiceCategoryService categoryService;
+        private readonly IStoreService _storeService;
+        private readonly INumberSequenceService sequenceService;
         private readonly IMapper _mapper;
 
-        public ServiceController(IServiceReportService _expenseService, IServiceCategoryService categoryService, IMapper mapper)
+        public ServiceController(IServiceReportService _expenseService,
+                                     INumberSequenceService sequenceService,
+            IServiceCategoryService categoryService, IStoreService _storeService, IMapper mapper)
         {
             expenseService = _expenseService;
             this.categoryService = categoryService;
+            this._storeService = _storeService;
+            this.sequenceService = sequenceService;
             this._mapper = mapper;
         }
 
@@ -97,6 +106,7 @@ namespace AbyStockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
+                model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(Aby.StockManager.Common.Enums.TransactionType.Invoice.ToString());
                 ServiceReportDTO categoryDTO = _mapper.Map<ServiceReportDTO>(model);
                 var serviceResult = await expenseService.AddAsync(categoryDTO);
                 jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);
@@ -138,6 +148,47 @@ namespace AbyStockManager.Web.Controllers
                 jsonResultModel.IsSucceeded = false;
                 jsonResultModel.UserMessage = ex.Message;
             }
+            return Json(jsonResultModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetServiceDetail(int id)
+        {
+            JsonResultModel jsonResultModel = new JsonResultModel();
+            try
+            {
+                var serviceResult = await expenseService.GetById(id);
+                var storeData = _storeService.GetById(1);
+                jsonResultModel.Data = new List<ServiceReportDTO> { serviceResult.TransactionResult };
+
+                jsonResultModel.StoreImage = "/store/" + storeData.Result.TransactionResult.Image;
+                jsonResultModel.StoreName = storeData.Result.TransactionResult.StoreName;
+                jsonResultModel.StoreAddress = storeData.Result.TransactionResult.StoreCode;
+                jsonResultModel.StoreContact = storeData.Result.TransactionResult.Contact;
+                jsonResultModel.StoreGstin = storeData.Result.TransactionResult.Gstin;
+                var GrandTotal = serviceResult.TransactionResult.Amount;
+                var tax = (double)100 / 118;
+                var subTotal = Math.Round(serviceResult.TransactionResult.Amount * tax, 2);
+                var totalTax = GrandTotal - subTotal;
+                jsonResultModel.CgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
+                jsonResultModel.SgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
+                jsonResultModel.TaxTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax);
+
+                jsonResultModel.GrandPlainTotal = "Rs. " + NumberToWords.ConvertAmount(GrandTotal);
+                jsonResultModel.GrandTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", GrandTotal);
+                jsonResultModel.SubTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", subTotal);
+                jsonResultModel.PrintHeader = "Tax Invoice";
+                jsonResultModel.PrintBillType = "Invoice";
+                jsonResultModel.PrintBilled = "Balance Amount!";
+                jsonResultModel.PrintBillNotice = "";
+                jsonResultModel.PrintBillTo = "Bill to:";
+            }
+            catch (Exception ex)
+            {
+                jsonResultModel.IsSucceeded = false;
+                jsonResultModel.UserMessage = ex.Message;
+            }
+
             return Json(jsonResultModel);
         }
 
