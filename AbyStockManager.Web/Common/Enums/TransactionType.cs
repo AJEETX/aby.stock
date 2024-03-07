@@ -11,6 +11,8 @@ namespace Aby.StockManager.Common.Enums
         StockIn = 1,
 
         [Display(Name = "Invoice")]
-        Invoice = 2
+        Invoice = 2,
+        [Display(Name = "Service")]
+        Service = 3
     }
 }

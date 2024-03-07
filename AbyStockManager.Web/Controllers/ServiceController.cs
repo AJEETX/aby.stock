@@ -106,7 +106,7 @@ namespace AbyStockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
-                model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(Aby.StockManager.Common.Enums.TransactionType.Invoice.ToString());
+                model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(Aby.StockManager.Common.Enums.TransactionType.Service.ToString());
                 ServiceReportDTO categoryDTO = _mapper.Map<ServiceReportDTO>(model);
                 var serviceResult = await expenseService.AddAsync(categoryDTO);
                 jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);
