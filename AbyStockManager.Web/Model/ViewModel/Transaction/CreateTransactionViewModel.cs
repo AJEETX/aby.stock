@@ -38,13 +38,13 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         [Display(Name = "Biller")]
         public string Description { get; set; } = string.Empty;
 
-        [Display(Name = "Contact detail")]
+        [Display(Name = "Contact/address")]
         public string Contact { get; set; } = string.Empty;
 
         [Display(Name = "GSTIN")]
         public string Gstin { get; set; } = string.Empty;
 
-        [Display(Name = "Remarks")]
+        [Display(Name = "Stockist")]
         public string? Remarks { get; set; } = string.Empty;
 
         public IList<TransactionDetailViewModel> TransactionDetail { get; set; }

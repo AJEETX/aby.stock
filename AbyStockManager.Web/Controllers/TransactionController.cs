@@ -209,7 +209,7 @@ namespace Aby.StockManager.Web.Controllers
                     jsonResultModel.StoreGstin = storeData.Result.TransactionResult.Gstin;
 
                     var GrandTotal = serviceResult.TransactionResult.Sum(r =>
-                    (r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3)) ? r.FinalSalePrice : r.PurchasePrice) * r.Amount).Value;
+                    (r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3)) ? r.FinalSalePrice : r.PurchasePrice) * r.Amount).Value;
                     var subTotal = Math.Round(serviceResult.TransactionResult.Sum(r =>
                     (r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3))
                     ? r.FinalSalePrice : r.PurchasePrice) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);

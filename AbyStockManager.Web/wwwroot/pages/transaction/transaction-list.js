@@ -108,22 +108,22 @@
                 }
             ],
         rowCallback: function (row, data, index) {
-            if (data.InvoiceNumber == null) {
-                $(row).find('td:eq(1)').append(
-                    $("<span>", { "class": "required-indicator" }).text("Goods Received *")
-                );
-                $(row).find('td:eq(0)').append(
-                    $("<span>", { "class": "required-indicator" }).text("stock-in *")
-                );
-                $(row).find('td:eq(1)').css({ 'font-style': 'italic' });
-            }
-            else if (data.InvoiceNumber != null && data.InvoiceNumber.endsWith('StockIn')) {
-                $(row).find('td:eq(1)').append(
-                    $("<span>", { "class": "required-indicator" }).text("Goods Received *")
-                );
-                $(row).find('td:eq(1)').css({ 'font-style': 'italic' });
-                //$(row).find('td:eq(0)').css({ 'color': 'red', 'font-style': 'italic' });
-            }
+            //if (data.InvoiceNumber == null) {
+            //    $(row).find('td:eq(1)').append(
+            //        $("<span>", { "class": "required-indicator" }).text("Goods Received *")
+            //    );
+            //    $(row).find('td:eq(0)').append(
+            //        $("<span>", { "class": "required-indicator" }).text("stock-in *")
+            //    );
+            //    $(row).find('td:eq(1)').css({ 'font-style': 'italic' });
+            //}
+            //else if (data.InvoiceNumber != null && data.InvoiceNumber.endsWith('StockIn')) {
+            //    $(row).find('td:eq(1)').append(
+            //        $("<span>", { "class": "required-indicator" }).text("Goods Received *")
+            //    );
+            //    $(row).find('td:eq(1)').css({ 'font-style': 'italic' });
+            //    //$(row).find('td:eq(0)').css({ 'color': 'red', 'font-style': 'italic' });
+            //}
         }
     });
 
