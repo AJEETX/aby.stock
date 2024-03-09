@@ -89,7 +89,6 @@ namespace Aby.StockManager.Web.Controllers
                 }
                 if (model.TransactionTypeId == (int)TransactionType.StockIn)
                 {
-                    model.InvoiceNumber = sequenceService.GetNumberSequence(TransactionType.StockIn.ToString());
                     model.TransactionCode = TransactionType.StockIn.ToString();
                 }
                 TransactionDTO transactionDTO = _mapper.Map<TransactionDTO>(model);
@@ -231,7 +230,7 @@ namespace Aby.StockManager.Web.Controllers
                         jsonResultModel.PrintBillType = "Receipt";
                         jsonResultModel.PrintBilled = "Paid!";
                         jsonResultModel.PrintBillNotice = "";
-                        jsonResultModel.PrintBillTo = "Paid to: Agency";
+                        jsonResultModel.PrintBillTo = "Billed by: Agency";
                     }
                 }
             }

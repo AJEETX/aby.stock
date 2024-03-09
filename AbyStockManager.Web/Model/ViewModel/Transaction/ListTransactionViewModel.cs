@@ -14,10 +14,10 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         public int? TransactionTypeId { get; set; }
         public string TransactionDate { get; set; }
 
-        [Display(Name = "Bill To")]
+        [Display(Name = "Biller")]
         public string Description { get; set; } = string.Empty;
 
-        [Display(Name = "Contact detail")]
+        [Display(Name = "Contact/address")]
         public string Contact { get; set; } = string.Empty;
 
         [Display(Name = "GSTIN")]

@@ -55,46 +55,46 @@
                                     }
                                     else
                                     {
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label asp-for="TransactionDate"></label>
                                                 <input asp-for="TransactionDate" type="text" class="form-control datepicker">
                                                 <span asp-validation-for="TransactionDate" class="text-danger"></span>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="InvoiceNumber"></label>
+                                                <input asp-for="InvoiceNumber" type="text" class="form-control">
+                                                <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
+                                            </div>
+                                        </div>
                                     }
                                 }
                             </div>
-                            @{
-                                if (Model.TransactionTypeId == 2)
-                                {
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label asp-for="Contact"></label>
-                                                <input asp-for="Contact" type="text" class="form-control">
-                                                <span asp-validation-for="Contact" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label asp-for="Gstin"></label>
-                                                <input asp-for="Gstin" type="text" class="form-control">
-                                                <span asp-validation-for="Gstin" class="text-danger"></span>
-                                            </div>
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Description"></label>
+                                        <input asp-for="Description" type="text" class="form-control">
+                                        <span asp-validation-for="Description" class="text-danger"></span>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label asp-for="Remarks"></label>
-                                                <input asp-for="Remarks" type="text" class="form-control">
-                                                <span asp-validation-for="Remarks" class="text-danger"></span>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Gstin"></label>
+                                        <input asp-for="Gstin" type="text" class="form-control">
+                                        <span asp-validation-for="Gstin" class="text-danger"></span>
                                     </div>
-                                }
-                            }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label asp-for="Contact"></label>
+                                    <input asp-for="Contact" type="text" class="form-control">
+                                    <span asp-validation-for="Contact" class="text-danger"></span>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <h5><i class="fas fa-pen"></i> Edit Product(s) Detail</h5>

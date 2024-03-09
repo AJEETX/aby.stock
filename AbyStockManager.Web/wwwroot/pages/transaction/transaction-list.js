@@ -94,12 +94,12 @@
                         //}
                         //else
 
-                        if (invoiceNumber == null) {
-                            row['Description'] = 'Good Received';
-                        }
-                        if (invoiceNumber != null && invoiceNumber.endsWith('StockIn')) {
-                            row['Description'] = 'Good Received';
-                        }
+                        //if (invoiceNumber == null) {
+                        //    row['Description'] = 'Good Received';
+                        //}
+                        //if (invoiceNumber != null && invoiceNumber.endsWith('StockIn')) {
+                        //    row['Description'] = 'Good Received';
+                        //}
                         buttons += '<a href="/Transaction/Edit/' + row.Id + '?typeId=' + row.TransactionTypeId + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> Edit</a>&nbsp;'
                         //buttons += '<a href="/Transaction/Print/' + row.Id + '?typeId=' + row.TransactionTypeId + '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i> PRINT</a>&nbsp;'
                         buttons += '<a onclick="deleteRow(this,' + row.Id + ')"  class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> Delete</a>'
