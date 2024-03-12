@@ -5,6 +5,8 @@ using System;
 using Aby.StockManager.Data.Entity;
 
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Collections.Generic;
+using AbyStockManager.Web.Data.Entity;
 
 namespace Aby.StockManager.Data.Entity
 {
@@ -29,5 +31,7 @@ namespace Aby.StockManager.Data.Entity
 
         public int? ServiceCategoryId { get; set; }
         public virtual ServiceCategory ServiceCategory { get; set; }
+
+        public virtual ICollection<ServiceDetail> ServiceDetail { get; set; }
     }
 }
