@@ -38,7 +38,7 @@ namespace Aby.StockManager.Repository.Transaction
                 .ThenInclude(x => x.Product).ToListAsync();
             foreach (var item in data)
             {
-                if (item.TransactionCode.Contains(Common.Enums.TransactionType.StockIn.ToString()))
+                if (item.TransactionCode.Contains(Common.Enums.TransactionType.Purchase.ToString()))
                 {
                     foreach (var item2 in item.TransactionDetail)
                     {

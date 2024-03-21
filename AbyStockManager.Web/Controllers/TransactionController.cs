@@ -62,13 +62,13 @@ namespace Aby.StockManager.Web.Controllers
             model.PageName = GetPageName(typeId);
             model.StoreList = await GetStoreList();
 
-            if (typeId == (int)TransactionType.Invoice)
+            if (typeId == (int)TransactionType.Sales)
             {
-                model.TransactionCode = TransactionType.Invoice.ToString();
+                model.TransactionCode = TransactionType.Sales.ToString();
             }
-            if (typeId == (int)TransactionType.StockIn)
+            if (typeId == (int)TransactionType.Purchase)
             {
-                model.TransactionCode = TransactionType.StockIn.ToString();
+                model.TransactionCode = TransactionType.Purchase.ToString();
             }
             var serviceResult = await _storeService.GetAll();
             model.StoreId = serviceResult.TransactionResult.FirstOrDefault().Id.Value;
@@ -82,14 +82,14 @@ namespace Aby.StockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
-                if (model.TransactionTypeId == (int)TransactionType.Invoice)
+                if (model.TransactionTypeId == (int)TransactionType.Sales)
                 {
-                    model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(TransactionType.Invoice.ToString());
-                    model.TransactionCode = TransactionType.Invoice.ToString();
+                    model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(TransactionType.Sales.ToString());
+                    model.TransactionCode = TransactionType.Sales.ToString();
                 }
-                if (model.TransactionTypeId == (int)TransactionType.StockIn)
+                if (model.TransactionTypeId == (int)TransactionType.Purchase)
                 {
-                    model.TransactionCode = TransactionType.StockIn.ToString();
+                    model.TransactionCode = TransactionType.Purchase.ToString();
                 }
                 TransactionDTO transactionDTO = _mapper.Map<TransactionDTO>(model);
                 var serviceResult = await _transactionService.AddAsync(transactionDTO);
@@ -209,9 +209,9 @@ namespace Aby.StockManager.Web.Controllers
                     jsonResultModel.StoreGstin = storeData.Result.TransactionResult.Gstin;
 
                     var GrandTotal = serviceResult.TransactionResult.Sum(r =>
-                    (r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3)) ? r.FinalSalePrice : r.PurchasePrice) * r.Amount).Value;
+                    (r.InvoiceNumber.Contains(TransactionType.Sales.ToString().Substring(0, 3)) ? r.FinalSalePrice : r.PurchasePrice) * r.Amount).Value;
                     var subTotal = Math.Round(serviceResult.TransactionResult.Sum(r =>
-                    (r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3))
+                    (r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Sales.ToString().Substring(0, 3))
                     ? r.FinalSalePrice : r.PurchasePrice) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);
                     var totalTax = GrandTotal - subTotal;
 
@@ -223,7 +223,7 @@ namespace Aby.StockManager.Web.Controllers
                     jsonResultModel.GrandTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", GrandTotal);
                     jsonResultModel.SubTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", subTotal);
 
-                    var isInvoice = serviceResult.TransactionResult.FirstOrDefault(r => r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3)))?.InvoiceNumber;
+                    var isInvoice = serviceResult.TransactionResult.FirstOrDefault(r => r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Sales.ToString().Substring(0, 3)))?.InvoiceNumber;
                     if (string.IsNullOrWhiteSpace(isInvoice))
                     {
                         jsonResultModel.PrintHeader = "Tax Receipt";
@@ -264,11 +264,11 @@ namespace Aby.StockManager.Web.Controllers
 
         private string GetPageName(int transactionTypeId)
         {
-            if ((int)TransactionType.StockIn == transactionTypeId)
-                return TransactionType.StockIn.ToString();
-            else if ((int)TransactionType.Invoice == transactionTypeId)
-                return TransactionType.Invoice.ToString();
-            return TransactionType.Invoice.ToString();
+            if ((int)TransactionType.Purchase == transactionTypeId)
+                return TransactionType.Purchase.ToString();
+            else if ((int)TransactionType.Sales == transactionTypeId)
+                return TransactionType.Sales.ToString();
+            return TransactionType.Sales.ToString();
         }
 
         public async Task<IActionResult> Print(int id = 0)

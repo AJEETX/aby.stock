@@ -57,7 +57,7 @@ namespace Aby.StockManager.Web.Service
                     _context.SaveChanges();
                 }
 
-                result = counter.ToString().PadLeft(5, '0') + "#" + numberSequence.Prefix;
+                result = DateTime.Now.ToString("yyyyMMdd") + counter.ToString().PadLeft(5, '0') + "#" + numberSequence.Prefix;
             }
             catch (Exception)
             {
@@ -100,7 +100,7 @@ namespace Aby.StockManager.Web.Service
                     _context.SaveChanges();
                 }
 
-                result = counter.ToString().PadLeft(5, '0') + "#" + numberSequence.Prefix;
+                result = DateTime.Now.ToString("yyyyMMdd") + counter.ToString().PadLeft(5, '0') + "#" + numberSequence.Prefix;
             }
             catch (Exception)
             {
