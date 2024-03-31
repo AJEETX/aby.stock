@@ -62,7 +62,7 @@ namespace Aby.StockManager.Service.Transaction
                             storeStock.ProductId = transactionDetailItem.ProductId.Value;
                         }
 
-                        if (model.TransactionTypeId == (int)TransactionType.Sales)
+                        if (model.TransactionTypeId == (int)TransactionType.Inv)
                             storeStock.Stock -= transactionDetailItem.Amount.Value;
                         else
                             storeStock.Stock += transactionDetailItem.Amount.Value;
@@ -231,7 +231,7 @@ namespace Aby.StockManager.Service.Transaction
                         var storeStock = await _unitOfWork.StoreStockRepository.GetByStoreAndProductId(transactionDetail.ProductId, transaction.StoreId);
                         if (storeStock != null)
                         {
-                            if (transaction.TransactionTypeId == (int)TransactionType.Sales)
+                            if (transaction.TransactionTypeId == (int)TransactionType.Inv)
                                 storeStock.Stock += transactionDetail.Amount;
                             else
                                 storeStock.Stock -= transactionDetail.Amount;
@@ -286,7 +286,7 @@ namespace Aby.StockManager.Service.Transaction
                             Data.Entity.StoreStock storeStock = await _unitOfWork.StoreStockRepository.GetByStoreAndProductId(transactionDetailItem.ProductId, entity.StoreId);
                             if (storeStock != null)
                             {
-                                if (model.TransactionTypeId == (int)TransactionType.Sales)
+                                if (model.TransactionTypeId == (int)TransactionType.Inv)
                                     storeStock.Stock += transactionDetailItem.Amount;
                                 else
                                     storeStock.Stock -= transactionDetailItem.Amount;
@@ -312,7 +312,7 @@ namespace Aby.StockManager.Service.Transaction
                                 storeStock.ProductId = transactionDetailItem.ProductId.Value;
                             }
 
-                            if (model.TransactionTypeId == (int)TransactionType.Sales)
+                            if (model.TransactionTypeId == (int)TransactionType.Inv)
                                 storeStock.Stock -= transactionDetailItem.Amount.Value;
                             else
                                 storeStock.Stock += transactionDetailItem.Amount.Value;

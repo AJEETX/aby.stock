@@ -7,12 +7,12 @@ namespace Aby.StockManager.Common.Enums
 {
     public enum TransactionType
     {
-        [Display(Name = "Purchase")]
-        Purchase = 1,
+        [Display(Name = "Receipt")]
+        Receipt = 1,
 
-        [Display(Name = "Sales")]
-        Sales = 2,
-        [Display(Name = "Service")]
-        Service = 3
+        [Display(Name = "Inv")]
+        Inv = 2,
+        [Display(Name = "Svc")]
+        Svc = 3
     }
 }
