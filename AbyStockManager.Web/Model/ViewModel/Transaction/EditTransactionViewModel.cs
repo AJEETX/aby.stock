@@ -10,6 +10,7 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
     public class EditTransactionViewModel : BaseViewModel
     {
         public string PageName { get; set; }
+        public bool Igst { get; set; } = false;
 
         [Required]
         [MaxLength(30)]

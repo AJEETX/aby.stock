@@ -246,12 +246,24 @@ namespace Aby.StockManager.Mapper
                  (vmf.TransactionDetail.Sum(r => (r.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? r.FinalSalePrice : r.PurchasePrice) * r.Amount)))))
                  .ForMember(dm => dm.AmountWithoutGst, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}",
                  vmf.TransactionDetail.Sum(t => t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice) * ((double)100 / ((double)100 + t.TaxRate))))))
-                 .ForMember(dm => dm.CGst, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}",
-                 vmf.TransactionDetail.Sum(t => ((t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice)) - ((t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice) * (100 / (100 + t.TaxRate)) * t.Amount)) / 2
-                 ))))
-                 .ForMember(dm => dm.SGst, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}",
-                 (vmf.TransactionDetail.Sum(t => ((t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice)) - ((t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice) * (100 / (100 + t.TaxRate)) * t.Amount)) / 2
-                 )))));
+                 .ForMember(dm => dm.CGst, vm => vm.MapFrom(vmf => 
+                 string.Format(new CultureInfo("hi-IN"), "{0:c}", !vmf.Igst ?
+                 vmf.TransactionDetail.Sum(t => ((t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? 
+                 t.FinalSalePrice : t.PurchasePrice)) - ((t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? 
+                 t.FinalSalePrice : t.PurchasePrice) * (100 / (100 + t.TaxRate)) * t.Amount)) / 2
+                 ) : 0)))
+                 .ForMember(dm => dm.SGst, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", !vmf.Igst ?
+                 (vmf.TransactionDetail.Sum(t => 
+                 (
+                 (t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice))
+                 - ((t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice) * (100 / (100 + t.TaxRate)) * t.Amount)) / 2
+                 )): 0)))
+                 .ForMember(dm => dm.IGst, vm => vm.MapFrom(vmf => string.Format(new CultureInfo("hi-IN"), "{0:c}", vmf.Igst ?
+                 (vmf.TransactionDetail.Sum(t =>
+                 (
+                 (t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice))
+                 - ((t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice) * (100 / (100 + t.TaxRate)) * t.Amount))
+                 )) : 0)));
 
             CreateMap<TransactionDTO, EditTransactionViewModel>()
                 .ForMember(x => x.TransactionDate, y => y.MapFrom(z => z.TransactionDate.ToString("dd/MM/yyyy")))
@@ -443,5 +455,8 @@ namespace Aby.StockManager.Mapper
 
             #endregion Entity & DTO-
         }
+
+
+
     }
 }

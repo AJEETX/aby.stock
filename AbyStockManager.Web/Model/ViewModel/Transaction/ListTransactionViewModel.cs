@@ -31,5 +31,6 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         public string? AmountWithGst { get; set; }
         public string? CGst { get; set; }
         public string? SGst { get; set; }
+        public string? IGst { get; set; }
     }
 }

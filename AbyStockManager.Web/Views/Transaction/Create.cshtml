@@ -120,13 +120,20 @@
                                 @{
                                     if (Model.TransactionTypeId == 2)
                                     {
-                                        <div class="col-md-6">
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <label asp-for="Igst"></label>
+                                                <input asp-for="Igst" id="igst" style="width:2rem" type="checkbox" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
                                             <div class="form-group">
                                                 <label asp-for="TransactionDate"></label>
                                                 <input readonly asp-for="TransactionDate" type="text" class="form-control datepicker">
                                                 <span asp-validation-for="TransactionDate" class="text-danger"></span>
                                             </div>
                                         </div>
+                                        
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label asp-for="Description">Bill To</label>

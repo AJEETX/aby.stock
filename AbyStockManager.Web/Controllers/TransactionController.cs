@@ -197,6 +197,7 @@ namespace Aby.StockManager.Web.Controllers
                 var serviceResult = await _transactionService.GetTransactionDetailByTransactionId(id);
                 if (serviceResult.IsSucceeded)
                 {
+                    var txn = await _transactionService.GetById(id);
                     //IEnumerable<TransactionDetailViewModel> transactionDetailViewModel = _mapper.Map<IEnumerable<TransactionDetailViewModel>>(serviceResult.TransactionResult);
                     var storeData = _storeService.GetById(1);
 
@@ -215,9 +216,20 @@ namespace Aby.StockManager.Web.Controllers
                     ? r.FinalSalePrice : r.PurchasePrice) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);
                     var totalTax = GrandTotal - subTotal;
 
-                    jsonResultModel.CgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
-                    jsonResultModel.SgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
-                    jsonResultModel.TaxTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax);
+                    if(txn.TransactionResult.Igst)
+                    {
+                        jsonResultModel.IgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax);
+                        jsonResultModel.CgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", 0);
+                        jsonResultModel.SgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", 0);
+                    }
+                    else
+                    {
+                        jsonResultModel.IgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", 0);
+                        jsonResultModel.CgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
+                        jsonResultModel.SgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
+                    }
+                        jsonResultModel.TaxTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax);
+
 
                     jsonResultModel.GrandPlainTotal = "Rs. " + NumberToWords.ConvertAmount(GrandTotal);
                     jsonResultModel.GrandTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", GrandTotal);

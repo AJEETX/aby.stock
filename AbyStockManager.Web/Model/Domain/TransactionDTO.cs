@@ -10,6 +10,7 @@ namespace Aby.StockManager.Model.Domain
         {
             TransactionDetail = new List<TransactionDetailDTO>();
         }
+        public bool Igst { get; set; } = false;
 
         public string TransactionCode { get; set; }
         public string InvoiceNumber { get; set; }

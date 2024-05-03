@@ -63,6 +63,9 @@
                     mDataProp: "CGst"
                 },
                 {
+                    mDataProp: "IGst"
+                },
+                {
                     mDataProp: "Amount"
                 },
                 {
@@ -191,6 +194,7 @@ function detailShow(row, id) {
                 $('#tax-total').text(data.TaxTotal);
                 $('#sgst-total').text(data.SgstTotal);
                 $('#cgst-total').text(data.CgstTotal);
+                $('#igst-total').text(data.IgstTotal);
 
                 $.each(data.Data, function (i, item) {
                     $('#invoice-contact').text(item.Contact);
