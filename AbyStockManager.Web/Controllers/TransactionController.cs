@@ -20,6 +20,7 @@ using Microsoft.CodeAnalysis;
 using AbyStockManager.Web.Common.Extensions;
 using System.Globalization;
 using Aby.StockManager.Web.Service;
+using Humanizer;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -31,6 +32,9 @@ namespace Aby.StockManager.Web.Controllers
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly INumberSequenceService sequenceService;
         private readonly IMapper _mapper;
+
+        private static CultureInfo hindi = new CultureInfo("hi-IN");
+        private static NumberFormatInfo hindiNFO = (NumberFormatInfo) hindi.NumberFormat.Clone();
 
         public TransactionController(IStoreService storeService,
                                      IProductService productService,
@@ -215,25 +219,25 @@ namespace Aby.StockManager.Web.Controllers
                     (r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Inv.ToString().Substring(0, 3))
                     ? r.FinalSalePrice : r.PurchasePrice) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);
                     var totalTax = GrandTotal - subTotal;
-
-                    if(txn.TransactionResult.Igst)
+                    hindiNFO.CurrencySymbol = string.Empty;
+                    if (txn.TransactionResult.Igst)
                     {
-                        jsonResultModel.IgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax);
-                        jsonResultModel.CgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", 0);
-                        jsonResultModel.SgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", 0);
+                        jsonResultModel.IgstTotal = string.Format(hindiNFO, "{0:c}", totalTax);
+                        jsonResultModel.CgstTotal = string.Format(hindiNFO, "{0:c}", 0);
+                        jsonResultModel.SgstTotal = string.Format(hindiNFO, "{0:c}", 0);
                     }
                     else
                     {
-                        jsonResultModel.IgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", 0);
-                        jsonResultModel.CgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
-                        jsonResultModel.SgstTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax / 2);
+                        jsonResultModel.IgstTotal = string.Format(hindiNFO, "{0:c}", 0);
+                        jsonResultModel.CgstTotal = string.Format(hindiNFO, "{0:c}", totalTax / 2);
+                        jsonResultModel.SgstTotal = string.Format(hindiNFO, "{0:c}", totalTax / 2);
                     }
-                        jsonResultModel.TaxTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", totalTax);
+                        jsonResultModel.TaxTotal = string.Format(hindiNFO, "{0:c}", totalTax);
 
 
                     jsonResultModel.GrandPlainTotal = "Rs. " + NumberToWords.ConvertAmount(GrandTotal);
-                    jsonResultModel.GrandTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", GrandTotal);
-                    jsonResultModel.SubTotal = string.Format(new CultureInfo("hi-IN"), "{0:c}", subTotal);
+                    jsonResultModel.GrandTotal = string.Format(hindiNFO, "{0:c}", GrandTotal);
+                    jsonResultModel.SubTotal = string.Format(hindiNFO, "{0:c}", subTotal);
 
                     var isInvoice = serviceResult.TransactionResult.FirstOrDefault(r => r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Inv.ToString().Substring(0, 3)))?.InvoiceNumber;
                     if (string.IsNullOrWhiteSpace(isInvoice))
