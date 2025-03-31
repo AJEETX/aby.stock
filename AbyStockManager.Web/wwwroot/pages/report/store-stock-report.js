@@ -66,20 +66,20 @@
 
             ],
         rowCallback: function (row, data, index) {
-            if (data.Quantity < 2) {
+            if (data.Quantity == 0) {
                 $(row).find('td:eq(1)').append(
                     $("<span>", { "class": "required-indicator" }).text("*")
                 );
-                $(row).find('td:eq(1)').css({ 'color': 'red', 'font-weight': 'bold' });
+                $(row).css({ 'color': 'red', 'font-weight': 'bold' });
             }
-            else if (data.Quantity < 5) {
+            else if (data.Quantity == 1 || data.Quantity == 2) {
                 $(row).find('td:eq(1)').append(
                     $("<span>", { "class": "required-indicator" }).text("*")
                 );
-                $(row).find('td:eq(1)').css({ 'color': '#FFBF00', 'font-weight': 'bold' });
+                $(row).css({ 'color': '#CE760B', 'font-weight': 'bold' });
             }
-            else if (data.Quantity >= 5) {
-                $(row).find('td:eq(1)').css({ 'color': 'green', 'font-weight': 'bold' });
+            else if (data.Quantity >= 3) {
+                $(row).css({ 'color': 'green', 'font-weight': 'bold' });
             }
         },
     });

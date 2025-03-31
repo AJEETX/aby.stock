@@ -213,7 +213,7 @@ namespace Aby.StockManager.Mapper
             CreateMap<TransactionDetailViewModel, TransactionDetailDTO>();
             CreateMap<TransactionDetailDTO, TransactionDetailViewModel>()
                 .ForMember(x => x.Price, vm => vm.MapFrom(
-                    vmf => vmf.InvoiceNumber != null && vmf.InvoiceNumber.Contains(Common.Enums.TransactionType.Inv.ToString().Substring(0, 3)) ? vmf.FinalSalePrice : vmf.PurchasePrice));
+                    vmf => vmf.InvoiceNumber != null && vmf.InvoiceNumber.Contains(Common.Enums.TransactionType.Invoice.ToString().Substring(0, 3)) ? vmf.FinalSalePrice : vmf.PurchasePrice));
 
             CreateMap<SearchExpenseReportViewModel, ExpenseReportDTO>()
                 .ForMember(dm => dm.SearchStartDate, vm => vm.MapFrom(vmf =>
@@ -315,13 +315,13 @@ namespace Aby.StockManager.Mapper
                  .ForMember(dm => dm.ProductFullName, vm => vm.MapFrom(vmf => string.Format("{1} ({0})", vmf.Barcode, vmf.ProductName)))
                  .ForMember(dm => dm.StoreFullName, vm => vm.MapFrom(vmf => string.Format("{1} ({0})", vmf.StoreCode, vmf.StoreName)))
                  .ForMember(dm => dm.ProductPrice, vm => vm.MapFrom(vmf =>
-                 vmf.TransactionCode == Common.Enums.TransactionType.Inv.ToString() ? string.Format(hindiNFO, "{0:c}", (vmf.Price)) :
+                 vmf.TransactionCode == Common.Enums.TransactionType.Invoice.ToString() ? string.Format(hindiNFO, "{0:c}", (vmf.Price)) :
                  string.Format(hindiNFO, "{0:c}", (vmf.PurchasePrice))))
                  .ForMember(dm => dm.ProductPurchasePrice, vm =>
                  vm.MapFrom(vmf => string.Format(hindiNFO, "{0:c}", (vmf.PurchasePrice))))
                  .ForMember(dm => dm.ProductTotalPrice,
                  vm => vm.MapFrom(vmf =>
-                 vmf.TransactionCode == Common.Enums.TransactionType.Inv.ToString() ? string.Format(hindiNFO, "{0:c}", (vmf.Price * vmf.Amount)) :
+                 vmf.TransactionCode == Common.Enums.TransactionType.Invoice.ToString() ? string.Format(hindiNFO, "{0:c}", (vmf.Price * vmf.Amount)) :
                  string.Format(hindiNFO, "{0:c}", (vmf.PurchasePrice * vmf.Amount))))
                  .ForMember(dm => dm.ToStoreFullName, vm =>
                  vm.MapFrom(vmf => !string.IsNullOrEmpty(vmf.ToStoreName) ? string.Format("{1} ({0})", vmf.ToStoreCode, vmf.ToStoreName) : ""))
@@ -411,10 +411,10 @@ namespace Aby.StockManager.Mapper
                 .ForMember(dm => dm.Tax, vm => vm.MapFrom(vmf => vmf.Product != null ?
                 string.Format("{0:P2}", vmf.Product.Tax.Rate / 100) : "--"))
                 .ForMember(dm => dm.UnitPrice, vm => vm.MapFrom(vmf => (vmf.Transaction.InvoiceNumber != null &&
-                vmf.Transaction.InvoiceNumber.Contains(Common.Enums.TransactionType.Inv.ToString().Substring(0, 3)) ? string.Format(hindiNFO, "{0:c}", vmf.FinalSalePrice) :
+                vmf.Transaction.InvoiceNumber.Contains(Common.Enums.TransactionType.Invoice.ToString().Substring(0, 3)) ? string.Format(hindiNFO, "{0:c}", vmf.FinalSalePrice) :
                 string.Format(hindiNFO, "{0:c}", vmf.Product.PurchasePrice))))
                 .ForMember(dm => dm.SubTotalPrice, vm => vm.MapFrom(vmf =>
-                (vmf.Transaction.InvoiceNumber != null && vmf.Transaction.InvoiceNumber.Contains(Common.Enums.TransactionType.Inv.ToString().Substring(0, 3)) ? string.Format(hindiNFO, "{0:c}", (vmf.FinalSalePrice * (100 / (100 + vmf.Product.Tax.Rate)) * vmf.Amount)) :
+                (vmf.Transaction.InvoiceNumber != null && vmf.Transaction.InvoiceNumber.Contains(Common.Enums.TransactionType.Invoice.ToString().Substring(0, 3)) ? string.Format(hindiNFO, "{0:c}", (vmf.FinalSalePrice * (100 / (100 + vmf.Product.Tax.Rate)) * vmf.Amount)) :
                 string.Format(hindiNFO, "{0:c}", (vmf.Product.PurchasePrice * (100 / (100 + vmf.Product.Tax.Rate)) * vmf.Amount)))))
                 .ForMember(dm => dm.Description, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Description : ""))
                 .ForMember(dm => dm.Contact, vm => vm.MapFrom(vmf => vmf.Transaction != null ? vmf.Transaction.Contact : ""))
@@ -445,7 +445,7 @@ namespace Aby.StockManager.Mapper
                  .ForMember(dm => dm.ToStoreCode, vm => vm.MapFrom(vmf => vmf.Transaction.ToStore != null ? vmf.Transaction.ToStore.StoreCode : ""))
                  .ForMember(dm => dm.ToStoreName, vm => vm.MapFrom(vmf => vmf.Transaction.ToStore != null ? vmf.Transaction.ToStore.StoreName : ""))
                  .ForMember(dm => dm.Price, vm =>
-                 vm.MapFrom(vmf => vmf.Transaction.InvoiceNumber.Contains(Common.Enums.TransactionType.Inv.ToString().Substring(0, 3)) ? vmf.FinalSalePrice : vmf.Product.PurchasePrice))
+                 vm.MapFrom(vmf => vmf.Transaction.InvoiceNumber.Contains(Common.Enums.TransactionType.Invoice.ToString().Substring(0, 3)) ? vmf.FinalSalePrice : vmf.Product.PurchasePrice))
                  .ForMember(dm => dm.PurchasePrice, vm => vm.MapFrom(vmf => vmf.Product.PurchasePrice != null ? vmf.Product.PurchasePrice.ToString() : null))
                  .ForMember(dm => dm.TotalPrice, vm => vm.MapFrom(vmf => vmf.Product.SalePrice != null ? (vmf.Product.SalePrice * vmf.Amount).ToString() : null))
                  .ForMember(dm => dm.ProductName, vm => vm.MapFrom(vmf => vmf.Product.ProductName))
