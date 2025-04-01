@@ -100,7 +100,7 @@ namespace Aby.StockManager.Web.Service
                     _context.SaveChanges();
                 }
 
-                result = counter.ToString().PadLeft(5, '0') + "#" + numberSequence.Prefix;
+                result = numberSequence.Prefix +"#"+ counter.ToString().PadLeft(5, '0');
             }
             catch (Exception)
             {
