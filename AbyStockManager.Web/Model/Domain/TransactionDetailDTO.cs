@@ -13,20 +13,20 @@ namespace Aby.StockManager.Model.Domain
         public string ProductName { get; set; }
         public string TransactionDate { get; set; }
         public string TransactionDueDate { get; set; }
-        public string Barcode { get; set; }
-        public string InvoiceNumber { get; set; }
-        public string Tax { get; set; }
-        public string UnitPrice { get; set; }
-        public double Price { get; set; }
-        public double PurchasePrice { get; set; }
-        public double TaxRate { get; set; }
+        public string? Barcode { get; set; }
+        public string? InvoiceNumber { get; set; }
+        public string? Tax { get; set; }
+        public string? UnitPrice { get; set; }
+        public double? Price { get; set; }
+        public double? PurchasePrice { get; set; }
+        public double? TaxRate { get; set; }
 
-        public string SubTotalPrice { get; set; }
-        public string Contact { get; set; }
-        public string Gstin { get; set; }
-        public string Remarks { get; set; }
-        public string Description { get; set; }
-        public string UnitOfMeasureName { get; set; }
-        public string UnitOfMeasureShortName { get; set; }
+        public string? SubTotalPrice { get; set; }
+        public string? Contact { get; set; }
+        public string? Gstin { get; set; }
+        public string? Remarks { get; set; }
+        public string? Description { get; set; }
+        public string? UnitOfMeasureName { get; set; }
+        public string? UnitOfMeasureShortName { get; set; }
     }
 }

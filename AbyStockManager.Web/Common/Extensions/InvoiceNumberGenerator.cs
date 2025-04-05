@@ -11,9 +11,9 @@ namespace AbyStockManager.Web.Common.Extensions
 
         public static string GenerateInvoiceNumber(int typeId)
         {
-            if (typeId == (int)TransactionType.Inv)
+            if (typeId == (int)TransactionType.Invoice)
             {
-                prefix = string.Concat(TransactionType.Inv.ToString().AsSpan(0, 3), DateTime.Now.ToString("yyyyMMdd"), counter.ToString("D3"));
+                prefix = string.Concat(TransactionType.Invoice.ToString().AsSpan(0, 3), DateTime.Now.ToString("yyyyMMdd"), counter.ToString("D3"));
             }
             if (typeId == (int)TransactionType.Receipt)
             {
