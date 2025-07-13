@@ -1,29 +1,30 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.Globalization;
+using System.Linq;
+
 using Aby.StockManager.Data.Entity;
 using Aby.StockManager.Model.Domain;
 using Aby.StockManager.Model.Service;
 using Aby.StockManager.Model.ViewModel.Category;
+using Aby.StockManager.Model.ViewModel.Expense;
+using Aby.StockManager.Model.ViewModel.ExpenseCategory;
 using Aby.StockManager.Model.ViewModel.JsonResult;
 using Aby.StockManager.Model.ViewModel.Product;
 using Aby.StockManager.Model.ViewModel.Report.StoreStock;
 using Aby.StockManager.Model.ViewModel.Report.TransactionDetail;
+using Aby.StockManager.Model.ViewModel.Service;
+using Aby.StockManager.Model.ViewModel.ServiceCategory;
 using Aby.StockManager.Model.ViewModel.Store;
 using Aby.StockManager.Model.ViewModel.Transaction;
 using Aby.StockManager.Model.ViewModel.UnitOfMeasure;
 using Aby.StockManager.Model.ViewModel.User;
-using Elfie.Serialization;
-using System.Globalization;
-using AbyStockManager.Web.Model.ViewModel.Tax;
-using Aby.StockManager.Model.ViewModel.Expense;
+
 using AbyStockManager.Web.Model.ViewModel.Report.StoreStock;
-using Aby.StockManager.Model.ViewModel.ExpenseCategory;
-using Aby.StockManager.Model.ViewModel.ServiceCategory;
-using System.Linq;
-using Aby.StockManager.Model.ViewModel.Service;
+using AbyStockManager.Web.Model.ViewModel.Tax;
+
+using AutoMapper;
+
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Aby.StockManager.Mapper
 {
@@ -250,24 +251,32 @@ namespace Aby.StockManager.Mapper
                  (vmf.TransactionDetail.Sum(r => (r.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? r.FinalSalePrice : r.PurchasePrice) * r.Amount)))))
                  .ForMember(dm => dm.AmountWithoutGst, vm => vm.MapFrom(vmf => string.Format(hindiNFO, "{0:c}",
                  vmf.TransactionDetail.Sum(t => t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice) * ((double)100 / ((double)100 + t.TaxRate))))))
-                 .ForMember(dm => dm.CGst, vm => vm.MapFrom(vmf => 
+                 .ForMember(dm => dm.CGst, vm => vm.MapFrom(vmf =>
                  string.Format(hindiNFO, "{0:c}", !vmf.Igst ?
-                 vmf.TransactionDetail.Sum(t => ((t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? 
-                 t.FinalSalePrice : t.PurchasePrice)) - ((t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? 
+                 vmf.TransactionDetail.Sum(t => ((t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ?
+                 t.FinalSalePrice : t.PurchasePrice)) - ((t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ?
                  t.FinalSalePrice : t.PurchasePrice) * (100 / (100 + t.TaxRate)) * t.Amount)) / 2
                  ) : 0)))
                  .ForMember(dm => dm.SGst, vm => vm.MapFrom(vmf => string.Format(hindiNFO, "{0:c}", !vmf.Igst ?
-                 (vmf.TransactionDetail.Sum(t => 
+                 (vmf.TransactionDetail.Sum(t =>
                  (
                  (t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice))
                  - ((t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice) * (100 / (100 + t.TaxRate)) * t.Amount)) / 2
-                 )): 0)))
+                 )) : 0)))
                  .ForMember(dm => dm.IGst, vm => vm.MapFrom(vmf => string.Format(hindiNFO, "{0:c}", vmf.Igst ?
                  (vmf.TransactionDetail.Sum(t =>
                  (
                  (t.Amount * (t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice))
                  - ((t.InvoiceNumber.Contains("inv", StringComparison.OrdinalIgnoreCase) ? t.FinalSalePrice : t.PurchasePrice) * (100 / (100 + t.TaxRate)) * t.Amount))
-                 )) : 0)));
+                 )) : 0)))
+                 .ForMember(dest => dest.ProductNamesWithQuantities, opt => opt.MapFrom(src =>
+        string.Join(", ", src.TransactionDetail
+            .Where(td => !string.IsNullOrWhiteSpace(td.ProductName) && td.Amount.HasValue)
+            .Select(td => $"{td.ProductName} ({td.Amount})"))))
+                 .ForMember(dest => dest.ProductNamesWithQuantitiesMultiline, opt => opt.MapFrom(src =>
+    string.Join("<br/>", src.TransactionDetail
+        .Where(td => !string.IsNullOrWhiteSpace(td.ProductName) && td.Amount.HasValue)
+        .Select(td => $"{td.ProductName} ({td.Amount}), "))));
 
             CreateMap<TransactionDTO, EditTransactionViewModel>()
                 .ForMember(x => x.TransactionDate, y => y.MapFrom(z => z.TransactionDate.ToString("dd/MM/yyyy")))

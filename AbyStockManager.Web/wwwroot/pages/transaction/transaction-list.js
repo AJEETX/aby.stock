@@ -51,6 +51,12 @@
                     mDataProp: "Description"
                 },
                 {
+                    mDataProp: "ProductNamesWithQuantitiesMultiline",
+                    mRender: function (data, type, row) {
+                        return data; // Return HTML as-is to render <br/>
+                    }
+                },
+                {
                     mDataProp: "AmountWithGst"
                 },
                 {

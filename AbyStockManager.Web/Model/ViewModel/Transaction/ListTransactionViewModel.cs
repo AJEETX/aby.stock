@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 using Aby.StockManager.Model.ViewModel.Base;
 
@@ -32,5 +29,9 @@ namespace Aby.StockManager.Model.ViewModel.Transaction
         public string? CGst { get; set; }
         public string? SGst { get; set; }
         public string? IGst { get; set; }
+        [Display(Name = "Product (quantity) ")]
+        public string ProductNamesWithQuantities { get; set; }  // 👈 New property
+        public string ProductNamesWithQuantitiesMultiline { get; set; }
+
     }
 }
