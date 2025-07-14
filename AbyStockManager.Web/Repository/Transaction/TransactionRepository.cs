@@ -1,12 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+
 using Aby.StockManager.Core.Repository;
 using Aby.StockManager.Data.Context;
 using Aby.StockManager.Repository.Base;
-using System.Linq;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace Aby.StockManager.Repository.Transaction
 {
@@ -38,7 +36,7 @@ namespace Aby.StockManager.Repository.Transaction
                 .ThenInclude(x => x.Product).ToListAsync();
             foreach (var item in data)
             {
-                if (item.TransactionCode.Contains(Common.Enums.TransactionType.Recpt.ToString()))
+                if (item.TransactionCode.Contains(Common.Enums.TransactionType.Receipt.ToString()))
                 {
                     foreach (var item2 in item.TransactionDetail)
                     {

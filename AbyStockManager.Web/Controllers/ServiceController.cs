@@ -8,17 +8,17 @@ using Aby.StockManager.Core.Service;
 using Aby.StockManager.Data.Entity;
 using Aby.StockManager.Model.Domain;
 using Aby.StockManager.Model.Service;
-using Aby.StockManager.Model.ViewModel.Service;
 using Aby.StockManager.Model.ViewModel.JsonResult;
+using Aby.StockManager.Model.ViewModel.Service;
 using Aby.StockManager.Service;
+using Aby.StockManager.Web.Service;
+
+using AbyStockManager.Web.Common.Extensions;
 
 using AutoMapper;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Aby.StockManager.Service.Store;
-using AbyStockManager.Web.Common.Extensions;
-using Aby.StockManager.Web.Service;
 
 namespace AbyStockManager.Web.Controllers
 {
@@ -106,7 +106,7 @@ namespace AbyStockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
-                model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(Aby.StockManager.Common.Enums.TransactionType.Svx.ToString());
+                model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(Aby.StockManager.Common.Enums.TransactionType.Svc.ToString());
                 ServiceReportDTO categoryDTO = _mapper.Map<ServiceReportDTO>(model);
                 var serviceResult = await expenseService.AddAsync(categoryDTO);
                 jsonResultModel = _mapper.Map<JsonResultModel>(serviceResult);

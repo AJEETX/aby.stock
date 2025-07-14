@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
 using Aby.StockManager.Common.Enums;
 using Aby.StockManager.Core.Service;
 using Aby.StockManager.Model.Domain;
 using Aby.StockManager.Model.Service;
 using Aby.StockManager.Model.ViewModel.JsonResult;
 using Aby.StockManager.Model.ViewModel.Transaction;
-using System.Diagnostics;
-using System.IO;
-using Receipt;
-using Microsoft.AspNetCore.Hosting;
-using AbyStockManager.Web.Model.ViewModel.Invoice;
-using Microsoft.CodeAnalysis;
-using AbyStockManager.Web.Common.Extensions;
-using System.Globalization;
 using Aby.StockManager.Web.Service;
-using Humanizer;
+
+using AbyStockManager.Web.Common.Extensions;
+using AbyStockManager.Web.Model.ViewModel.Invoice;
+
+using AutoMapper;
+
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
+
+using Receipt;
 
 namespace Aby.StockManager.Web.Controllers
 {
@@ -34,7 +37,7 @@ namespace Aby.StockManager.Web.Controllers
         private readonly IMapper _mapper;
 
         private static CultureInfo hindi = new CultureInfo("hi-IN");
-        private static NumberFormatInfo hindiNFO = (NumberFormatInfo) hindi.NumberFormat.Clone();
+        private static NumberFormatInfo hindiNFO = (NumberFormatInfo)hindi.NumberFormat.Clone();
 
         public TransactionController(IStoreService storeService,
                                      IProductService productService,
@@ -70,9 +73,9 @@ namespace Aby.StockManager.Web.Controllers
             {
                 model.TransactionCode = TransactionType.Invoice.ToString();
             }
-            if (typeId == (int)TransactionType.Recpt)
+            if (typeId == (int)TransactionType.Receipt)
             {
-                model.TransactionCode = TransactionType.Recpt.ToString();
+                model.TransactionCode = TransactionType.Receipt.ToString();
             }
             var serviceResult = await _storeService.GetAll();
             model.StoreId = serviceResult.TransactionResult.FirstOrDefault().Id.Value;
@@ -91,9 +94,9 @@ namespace Aby.StockManager.Web.Controllers
                     model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(TransactionType.Invoice.ToString());
                     model.TransactionCode = TransactionType.Invoice.ToString();
                 }
-                if (model.TransactionTypeId == (int)TransactionType.Recpt)
+                if (model.TransactionTypeId == (int)TransactionType.Receipt)
                 {
-                    model.TransactionCode = TransactionType.Recpt.ToString();
+                    model.TransactionCode = TransactionType.Receipt.ToString();
                 }
                 TransactionDTO transactionDTO = _mapper.Map<TransactionDTO>(model);
                 var serviceResult = await _transactionService.AddAsync(transactionDTO);
@@ -232,7 +235,7 @@ namespace Aby.StockManager.Web.Controllers
                         jsonResultModel.CgstTotal = string.Format(hindiNFO, "{0:c}", totalTax / 2);
                         jsonResultModel.SgstTotal = string.Format(hindiNFO, "{0:c}", totalTax / 2);
                     }
-                        jsonResultModel.TaxTotal = string.Format(hindiNFO, "{0:c}", totalTax);
+                    jsonResultModel.TaxTotal = string.Format(hindiNFO, "{0:c}", totalTax);
 
 
                     jsonResultModel.GrandPlainTotal = "Rs. " + NumberToWords.ConvertAmount(GrandTotal);
@@ -280,8 +283,8 @@ namespace Aby.StockManager.Web.Controllers
 
         private string GetPageName(int transactionTypeId)
         {
-            if ((int)TransactionType.Recpt == transactionTypeId)
-                return TransactionType.Recpt.ToString();
+            if ((int)TransactionType.Receipt == transactionTypeId)
+                return TransactionType.Receipt.ToString();
             else if ((int)TransactionType.Invoice == transactionTypeId)
                 return TransactionType.Invoice.ToString();
             return TransactionType.Invoice.ToString();

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Aby.StockManager.Common.Enums
 {
     public enum TransactionType
     {
-        [Display(Name = "Recpt")]
-        Recpt = 1,
+        [Display(Name = "Receipt")]
+        Receipt = 1,
 
         [Display(Name = "Invoice")]
         Invoice = 2,
-        [Display(Name = "Svx")]
-        Svx = 3
+        [Display(Name = "Svc")]
+        Svc = 3
     }
 }
