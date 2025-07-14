@@ -51,6 +51,9 @@
                     mDataProp: "ProductName"
                 },
                 {
+                    mDataProp: "Barcode"
+                },
+                {
                     mDataProp: "PurchasePrice"
                 },
                 {

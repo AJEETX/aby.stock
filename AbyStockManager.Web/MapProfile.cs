@@ -276,7 +276,7 @@ namespace Aby.StockManager.Mapper
                  .ForMember(dest => dest.ProductNamesWithQuantitiesMultiline, opt => opt.MapFrom(src =>
     string.Join("<br/>", src.TransactionDetail
         .Where(td => !string.IsNullOrWhiteSpace(td.ProductName) && td.Amount.HasValue)
-        .Select(td => $"{td.ProductName} ({td.Amount}), "))));
+        .Select(td => $"{td.ProductName} ({td.Barcode}) = {td.Amount}, "))));
 
             CreateMap<TransactionDTO, EditTransactionViewModel>()
                 .ForMember(x => x.TransactionDate, y => y.MapFrom(z => z.TransactionDate.ToString("dd/MM/yyyy")))
