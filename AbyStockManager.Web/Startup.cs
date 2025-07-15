@@ -1,7 +1,22 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+using Aby.StockManager.Core.Repository;
+using Aby.StockManager.Core.Service;
+using Aby.StockManager.Core.UnitOfWorks;
+using Aby.StockManager.Data.Context;
+using Aby.StockManager.Repository.Base;
+using Aby.StockManager.Service;
+using Aby.StockManager.Service.Category;
+using Aby.StockManager.Service.Product;
+using Aby.StockManager.Service.Store;
+using Aby.StockManager.Service.StoreStock;
+using Aby.StockManager.Service.Transaction;
+using Aby.StockManager.Service.UnitOfMeasure;
+using Aby.StockManager.Service.User;
+using Aby.StockManager.Web.Service;
+
+using AbyStockManager.Web.Service.Dashboard;
+using AbyStockManager.Web.Service.Tax;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -11,25 +26,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-using Aby.StockManager.Core.Repository;
-using Aby.StockManager.Core.Service;
-using Aby.StockManager.Core.UnitOfWorks;
-using Aby.StockManager.Data.Context;
-using Aby.StockManager.Repository.Base;
-using Aby.StockManager.Service.Category;
-using Aby.StockManager.Service.Product;
-using Aby.StockManager.Service.Store;
-using Aby.StockManager.Service.StoreStock;
-using Aby.StockManager.Service.Transaction;
-using Aby.StockManager.Service.UnitOfMeasure;
-using Aby.StockManager.Service.User;
-using AbyStockManager.Web.Service.Tax;
-using Aby.StockManager.Service;
-using Aby.StockManager.Data.Entity;
-using AbyStockManager.Web.Service;
-using Aby.StockManager.Web.Service;
-using AbyStockManager.Web.Service.Dashboard;
 
 namespace Aby.StockManager.Web
 {
@@ -51,7 +47,7 @@ namespace Aby.StockManager.Web
             //});
 
             services.AddDbContext<EasyStockManagerDbContext>(options =>
-                    options.UseSqlite("Data Source=add-expenses.db"));
+                    options.UseSqlite(Configuration["ConnectionStrings:SqlConStr"].ToString()));
 
             services.AddAutoMapper(c => c.AddProfile<Aby.StockManager.Mapper.MapProfile>(), typeof(Startup));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
