@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Aby.StockManager.Model.ViewModel.JsonResult
+﻿namespace Aby.StockManager.Model.ViewModel.JsonResult
 {
     public class JsonResultModel
     {
@@ -29,6 +25,8 @@ namespace Aby.StockManager.Model.ViewModel.JsonResult
         public string StoreAddress { get; set; }
         public string StoreContact { get; set; }
         public string StoreGstin { get; set; }
+        public string BankAccountNumber { get; set; }
+        public string StoreIfsc { get; set; }
         public string StoreImage { get; set; }
         public string PrintHeader { get; set; } = "Tax Invoice";
         public string PrintBillType { get; set; } = "Invoice";

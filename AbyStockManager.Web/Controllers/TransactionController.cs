@@ -215,6 +215,8 @@ namespace Aby.StockManager.Web.Controllers
                     jsonResultModel.StoreAddress = storeData.Result.TransactionResult.StoreCode;
                     jsonResultModel.StoreContact = storeData.Result.TransactionResult.Contact;
                     jsonResultModel.StoreGstin = storeData.Result.TransactionResult.Gstin;
+                    jsonResultModel.BankAccountNumber = storeData.Result.TransactionResult.BankAccountNumber;
+                    jsonResultModel.StoreIfsc = storeData.Result.TransactionResult.IFSC;
 
                     var GrandTotal = serviceResult.TransactionResult.Sum(r =>
                     (r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3)) ? r.FinalSalePrice : r.PurchasePrice) * r.Amount).Value;

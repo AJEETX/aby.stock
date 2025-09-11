@@ -193,6 +193,8 @@ function detailShow(row, id) {
                 $('#store-address').text(data.StoreAddress);
                 $('#store-contact').text(data.StoreContact);
                 $('#store-gstin').text(data.StoreGstin);
+                $('#store-bank').text(data.BankAccountNumber);
+                $('#store-ifsc').text(data.StoreIfsc);
 
                 $('#amount-total').text(data.SubTotal);
                 $('#grand-total').text(data.GrandTotal);

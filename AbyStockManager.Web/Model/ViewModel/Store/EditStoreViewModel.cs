@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 using Aby.StockManager.Model.ViewModel.Base;
 
@@ -24,6 +21,13 @@ namespace Aby.StockManager.Model.ViewModel.Store
         [MaxLength(15)]
         [Display(Name = "Contact Number")]
         public string Contact { get; set; }
+
+        [MaxLength(20)]
+        [Display(Name = "Bank Account Number")]
+        public string? BankAccountNumber { get; set; }
+        [MaxLength(15)]
+        [Display(Name = "IFSC Code")]
+        public string? IFSC { get; set; }
 
         [MaxLength(15)]
         [Display(Name = "Gstin")]

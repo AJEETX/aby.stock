@@ -50,6 +50,12 @@
                     mDataProp: "Contact"
                 },
                 {
+                    mDataProp: "BankAccountNumber"
+                },
+                {
+                    mDataProp: "IFSC"
+                },
+                {
                     mDataProp: "Gstin"
                 },
                 {
