@@ -215,7 +215,7 @@ function detailShow(row, id) {
                     var count = i + 1;
                     str += '<tr>';
                     str += '<td class="no"> ' + count + ' </td>';
-                    str += '<td class="desc">' + item.ProductName + ' </td>';
+                    str += '<td class="desc">' + item.ProductName + ' (<b>'+item.Barcode+'</b>)</td>';
                     str += '<td class="unit">' + item.UnitPrice + ' </td>';
                     str += '<td  class="qty">' + item.Amount + ' </td>';
                     str += '<td  class="tax">' + item.Tax + ' </td>';

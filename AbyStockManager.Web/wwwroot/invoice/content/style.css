@@ -24,6 +24,13 @@
         right: 0;
         bottom: 0;
     }
+    .modal,
+    .modal-dialog,
+    .modal-content {
+        all: unset !important; /* remove modal restrictions */
+        width: 100% !important;
+        height: auto !important;
+    }
 }
 
 @font-face {
@@ -42,17 +49,6 @@
     text-decoration: none;
 }
 
-.modal body {
-    position: relative;
-    width: 21cm;
-    height: 29.7cm;
-    margin: 0 auto;
-    color: #555555;
-    background: #FFFFFF;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    font-family: SourceSansPro;
-}
 
 .modal header {
     padding: 10px 0;
