@@ -69,9 +69,9 @@ namespace Aby.StockManager.Web.Controllers
             model.PageName = GetPageName(typeId);
             model.StoreList = await GetStoreList();
 
-            if (typeId == (int)TransactionType.Invoice)
+            if (typeId == (int)TransactionType.Bill)
             {
-                model.TransactionCode = TransactionType.Invoice.ToString();
+                model.TransactionCode = TransactionType.Bill.ToString();
             }
             if (typeId == (int)TransactionType.Receipt)
             {
@@ -89,10 +89,10 @@ namespace Aby.StockManager.Web.Controllers
             JsonResultModel jsonResultModel = new JsonResultModel();
             try
             {
-                if (model.TransactionTypeId == (int)TransactionType.Invoice)
+                if (model.TransactionTypeId == (int)TransactionType.Bill)
                 {
-                    model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(TransactionType.Invoice.ToString());
-                    model.TransactionCode = TransactionType.Invoice.ToString();
+                    model.InvoiceNumber = sequenceService.GetInvoiceNumberSequence(TransactionType.Bill.ToString());
+                    model.TransactionCode = TransactionType.Bill.ToString();
                 }
                 if (model.TransactionTypeId == (int)TransactionType.Receipt)
                 {
@@ -219,9 +219,9 @@ namespace Aby.StockManager.Web.Controllers
                     jsonResultModel.StoreIfsc = storeData.Result.TransactionResult.IFSC;
 
                     var GrandTotal = serviceResult.TransactionResult.Sum(r =>
-                    (r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3)) ? r.FinalSalePrice : r.PurchasePrice) * r.Amount).Value;
+                    (r.InvoiceNumber.Contains(TransactionType.Bill.ToString().Substring(0, 3)) ? r.FinalSalePrice : r.PurchasePrice) * r.Amount).Value;
                     var subTotal = Math.Round(serviceResult.TransactionResult.Sum(r =>
-                    (r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3))
+                    (r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Bill.ToString().Substring(0, 3))
                     ? r.FinalSalePrice : r.PurchasePrice) * (100 / (100 + r.TaxRate)) * r.Amount).Value, 2);
                     var totalTax = GrandTotal - subTotal;
                     hindiNFO.CurrencySymbol = string.Empty;
@@ -244,7 +244,7 @@ namespace Aby.StockManager.Web.Controllers
                     jsonResultModel.GrandTotal = string.Format(hindiNFO, "{0:c}", GrandTotal);
                     jsonResultModel.SubTotal = string.Format(hindiNFO, "{0:c}", subTotal);
 
-                    var isInvoice = serviceResult.TransactionResult.FirstOrDefault(r => r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Invoice.ToString().Substring(0, 3)))?.InvoiceNumber;
+                    var isInvoice = serviceResult.TransactionResult.FirstOrDefault(r => r.InvoiceNumber != null && r.InvoiceNumber.Contains(TransactionType.Bill.ToString().Substring(0, 3)))?.InvoiceNumber;
                     if (string.IsNullOrWhiteSpace(isInvoice))
                     {
                         jsonResultModel.PrintHeader = "Tax Receipt";
@@ -287,9 +287,9 @@ namespace Aby.StockManager.Web.Controllers
         {
             if ((int)TransactionType.Receipt == transactionTypeId)
                 return TransactionType.Receipt.ToString();
-            else if ((int)TransactionType.Invoice == transactionTypeId)
-                return TransactionType.Invoice.ToString();
-            return TransactionType.Invoice.ToString();
+            else if ((int)TransactionType.Bill == transactionTypeId)
+                return TransactionType.Bill.ToString();
+            return TransactionType.Bill.ToString();
         }
 
         public async Task<IActionResult> Print(int id = 0)

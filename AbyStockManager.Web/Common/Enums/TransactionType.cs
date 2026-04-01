@@ -8,7 +8,7 @@ namespace Aby.StockManager.Common.Enums
         Receipt = 1,
 
         [Display(Name = "Invoice")]
-        Invoice = 2,
+        Bill = 2,
         [Display(Name = "Svc")]
         Svc = 3
     }
